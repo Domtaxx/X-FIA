@@ -1,0 +1,40 @@
+
+.header{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: flex-end;
+    background-color: red;
+    padding: 15px;
+    height: 10%;
+    
+}
+.contentDiv{
+    min-height: 90%;
+    width: 100%;
+    background-color: blue;
+    display:block;
+}
+.XFIAIcon{
+    min-height: 30px;
+    max-height: 50px;
+    height: 100%;
+    width: auto;
+}
+.accountBar{
+    background-color:red;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: stretch;
+	align-content: stretch;
+    flex-basis: 10%;
+    
+}
+.barIcon{
+    height: 70%;
+    width: auto;
+}
