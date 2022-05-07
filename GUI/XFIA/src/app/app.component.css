@@ -23,18 +23,32 @@
     height: 100%;
     width: auto;
 }
+.menuBar{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+    height: 100%;
+    flex-basis: 10%;
+    
+    
+}
 .accountBar{
     background-color:red;
     display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-between;
+	justify-content: space-around;
 	align-items: stretch;
 	align-content: stretch;
     flex-basis: 10%;
+   
+    
     
 }
 .barIcon{
-    height: 70%;
-    width: auto;
+    transform:scale(1.3);
+ 
 }
