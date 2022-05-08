@@ -1,11 +1,70 @@
 .container{
-    text-align: center;
-    padding: 10%;
+    text-align: left;
+    padding: 5%;
     width: 40%;
     font-family:'Lucida Console';
     background-color:pink;
+    margin: auto;
+    font-size: 2.5vmin;
+}
+.raceForm{
+    overflow-y: auto;
 }
 label{
     text-align:left;
+    
+}
+h1{
+    text-align: center;
+    font-size: 4vmin;
+}
+button{
+    font: size 1.5vmin;
+    padding: 2%;
+}
+input{
+    font-size: 2.5vmin;
+    width: 90%;
+    border-radius: 12px;
+}
+.buttonContainer{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+}
+
+.p25{  
+    flex-basis: 30%;
+    background-color: aliceblue;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+}
+.p75{
+    flex-basis: 55%;
+    background-color: rgb(0, 119, 223);
+    
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: stretch;
+
+    
+}
+.form-group{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+    background-color: blueviolet;
+    margin-top:5%;
+    margin-bottom: 5%;
     
 }

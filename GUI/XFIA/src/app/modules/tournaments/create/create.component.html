@@ -1,32 +1,62 @@
 <div class="container">
-    <form>
+    <form class ="raceForm"(ngSubmit)="submit()">
         <h1>Crear Nuevo Campeonato</h1>
         <div class="form-group">
-            <label>Nombre Campeonato</label>
-            <input type="text" name="Name" class="form-control" ngModel>
+            <div class="p25">
+                <label>Nombre Campeonato</label>
+            </div>
+            <div class="p75">
+                <input type="text" name="Name" class="form-control" ngModel>
+            </div>
+            
+            
         </div>
         <pre></pre>
         <div class="form-group">
-            <label>Fecha Inicio</label>
-            <input type="date" name="dateI" class="form-control" ngModel>
+            <div class="p25">
+                <label>Fecha Inicio</label>
+            </div>
+            <div class="p75">
+                <input type="date" name="dateI" class="form-control" ngModel>
+            </div>
+            
+            
         </div>
         <pre></pre>
         <div class="form-group">
-            <label>Fecha Final</label>
+           <div class="p25">
+                <label>Fecha Final</label>
+            </div>
+           <div class="p75">
             <input type="date" name="dateE" class="form-control" ngModel>
+           </div>
+            
         </div>
         <pre></pre>
         <div class="form-group">
-            <label>Hora Inicio</label>
-            <input type="time" name="timeS" class="form-control" ngModel>
+            <div class="p25">
+                <label>Hora Inicio</label>
+            </div>
+            <div class="p75">
+                <input type="time" name="timeS" class="form-control" ngModel>
+            </div>
+            
         </div>
         <pre></pre>
         <div class="form-group">
-            <label>Hora Final</label>
-            <input type="time" name="timeE" class="form-control" ngModel>
+            <div class="p25">
+                <label>Hora Final</label>
+            </div>
+            <div class="p75">
+                <input type="time" name="timeE" class="form-control" ngModel>
+            </div>
+            
         </div>
         <pre></pre>
-        <button type="submit" class="formButton">Press</button>
+        <div class="buttonContainer">
+            <button type="submit" class="formButton">Press</button>
+        </div>
+        
     </form>
    
 

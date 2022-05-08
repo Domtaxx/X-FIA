@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { FormsModule } from '@angular/forms';
 import { TournamentsRoutingModule } from './tournaments-routing.module';
 import { TournamentsComponent } from './tournaments.component';
 import { CreateComponent } from './create/create.component';
@@ -13,7 +13,8 @@ import { CreateComponent } from './create/create.component';
   ],
   imports: [
     CommonModule,
-    TournamentsRoutingModule
+    TournamentsRoutingModule,
+    FormsModule
   ]
 })
 export class TournamentsModule { }

@@ -12,10 +12,12 @@
     
 }
 .contentDiv{
-    min-height: 90%;
+    height: 90%;
     width: 100%;
     background-color: blue;
     display:block;
+    margin:auto;
+    overflow-y: scroll;
 }
 .XFIAIcon{
     min-height: 30px;
