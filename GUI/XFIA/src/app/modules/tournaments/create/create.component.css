@@ -1,11 +1,19 @@
 .container{
     text-align: left;
-    padding: 5%;
-    width: 40%;
-    font-family:'Lucida Console';
-    background-color:pink;
-    margin: auto;
+    margin-top: 100px;
+    width: 50%;
+    font-family:'Rockwell';
+    font-weight: bold;
+    background-color:white;
+    margin-top: 0%;
+
+    margin-right: auto;
+    margin-left: auto;
     font-size: 2.5vmin;
+
+    border-width: 1px;
+    border-color: gray;
+    border-style:solid;
 }
 .raceForm{
     overflow-y: auto;
@@ -15,17 +23,58 @@ label{
     
 }
 h1{
+    
     text-align: center;
     font-size: 4vmin;
+    font-family:'Rockwell';
+    font-weight: bold;
 }
 button{
-    font: size 1.5vmin;
-    padding: 2%;
+    font-size: 3vmin;
+    width: 30%;
+    padding: 1%;
+    border-radius:14px;
+    background-color: #e10600;
+    color:white;
+}
+button:hover{
+    background-color: rgb(255, 136, 0);
+    
 }
 input{
-    font-size: 2.5vmin;
+    font-size: 3vmin;
     width: 90%;
     border-radius: 12px;
+    font-family:'Rockwell';
+    font-weight: bold;
+    text-align: center;
+    border-style: solid;
+    color:gray;
+}
+input:hover{
+    border-color: black;
+    color:black;
+    
+}
+input::placeholder{
+    color:gray
+}
+
+textarea{
+    width: 90%;
+    height: 20vmin;
+    font-size:2vmin;
+    resize: none;
+    font-family:'Rockwell';
+    font-weight: bold;
+    overflow-y: auto;
+    text-align: left;
+    vertical-align: top;
+    border-radius: 9px;
+    
+}
+textarea:hover{
+    border-color: black;
 }
 .buttonContainer{
     display: flex;
@@ -34,18 +83,19 @@ input{
 	justify-content: center;
 	align-items: stretch;
 	align-content: stretch;
+    margin-bottom: 5%;
 }
 
 .p25{  
     flex-basis: 30%;
-    background-color: aliceblue;
+    background-color: white;
     padding-left: 5%;
     padding-right: 5%;
     text-align: center;
 }
 .p75{
     flex-basis: 55%;
-    background-color: rgb(0, 119, 223);
+    background-color: white;
     
     display: flex;
 	flex-direction: row;
@@ -63,8 +113,8 @@ input{
 	justify-content: space-around;
 	align-items: stretch;
 	align-content: stretch;
-    background-color: blueviolet;
-    margin-top:5%;
-    margin-bottom: 5%;
+    background-color: white;
+    margin-top:3%;
+    margin-bottom: 3%;
     
 }

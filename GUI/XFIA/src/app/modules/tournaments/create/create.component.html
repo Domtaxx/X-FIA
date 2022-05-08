@@ -1,6 +1,8 @@
+<h1>NUEVO CAMPEONATO</h1>
 <div class="container">
+   
     <form class ="raceForm"(ngSubmit)="submit()">
-        <h1>Crear Nuevo Campeonato</h1>
+        
         <div class="form-group">
             <div class="p25">
                 <label>Nombre Campeonato</label>
@@ -53,9 +55,32 @@
             
         </div>
         <pre></pre>
-        <div class="buttonContainer">
-            <button type="submit" class="formButton">Press</button>
+        <div class="form-group">
+            <div class="p25">
+                <label>Presupuesto</label>
+            </div>
+            <div class="p75">
+                <input type="number" name="budget" class="form-control" ngModel placeholder="valor en millones">
+            </div>
+            
+            
         </div>
+        <pre></pre>
+        <div class="form-group">
+            <div class="p25">
+                <label>Reglas Campeonato</label>
+            </div>
+            <div class="p75">
+                <textarea name="rules" class="form-control" id="rules" ngModel></textarea>
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="buttonContainer">
+            <button type="submit" class="formButton">Crear</button>
+        </div>
+        
         
     </form>
    
