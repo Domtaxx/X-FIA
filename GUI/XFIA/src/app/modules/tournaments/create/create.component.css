@@ -1,0 +1,11 @@
+.container{
+    text-align: center;
+    padding: 10%;
+    width: 40%;
+    font-family:'Lucida Console';
+    background-color:pink;
+}
+label{
+    text-align:left;
+    
+}

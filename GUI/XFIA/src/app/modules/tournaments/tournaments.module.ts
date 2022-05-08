@@ -1,15 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CreateTournamentComponent } from './create-tournament/create-tournament.component';
 
+import { TournamentsRoutingModule } from './tournaments-routing.module';
+import { TournamentsComponent } from './tournaments.component';
+import { CreateComponent } from './create/create.component';
 
 
 @NgModule({
   declarations: [
-    CreateTournamentComponent
+    TournamentsComponent,
+    CreateComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    TournamentsRoutingModule
   ]
 })
 export class TournamentsModule { }
