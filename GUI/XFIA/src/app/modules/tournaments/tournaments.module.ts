@@ -5,6 +5,7 @@ import { TournamentsRoutingModule } from './tournaments-routing.module';
 import { TournamentsComponent } from './tournaments.component';
 import { CreateComponent } from './create/create.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 @NgModule({
   declarations: [
     TournamentsComponent,
@@ -14,7 +15,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     TournamentsRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SweetAlert2Module
   ]
 })
 export class TournamentsModule { }

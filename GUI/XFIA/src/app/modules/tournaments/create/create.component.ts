@@ -35,22 +35,23 @@ export class CreateComponent implements OnInit {
     })
   }
   submit(){
-    //var valid=this.tournamentForm.get('tournamentName')?.valid
-    //this.tournamentForm.get('tournamentName')?.hasError('required')
-    //var value=this.tournamentForm.get('tournamentName')?.value
-    //Nombre Campeonato
-    var requiredNameValidator=this.tournamentForm.get('tournamentName')?.hasError('required');
-    var maxLenNameValidator=this.tournamentForm.get('tournamentName')?.hasError('maxLength')
-    if(requiredNameValidator){
-      alert("El nombre del campeonato no puede estar vacio")
+    if(!this.tournamentForm.valid){
+      alert('alguno de los campos indicados no cumple con las reglas, por favor revisar el texto bajo los cuadros')
       return
     }
-    if(maxLenNameValidator){
-      alert('El nombre del campeonato no puede ser mayor a 30 caracteres')
-      return
-    }
+    var initialDate=this.tournamentForm.get('initialDate')?.value
+    var finalDate=this.tournamentForm.get('finalDate')?.value
     console.log("imprimi")
-   // console.log(value)
+    if(initialDate>finalDate){
+      alert("La fecha final debe ser mayor o igual a la fecha inicial")
+    }
+    else if(initialDate==finalDate){
+      var initialTime=this.tournamentForm.get('initialTime')?.value;
+      var finalTime=this.tournamentForm.get('finalTime')?.value;
+      if(initialTime>=finalTime){
+        alert("Si la competencia inicia y termina el mismo dia, la hora inicial debe ser menor a la fecha final")
+      }
+    }
     
   }
   /*
