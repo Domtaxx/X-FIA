@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NetworkService } from 'src/app/services/network.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 @Component({
   selector: 'app-create-tournament',
   templateUrl: './create.component.html',
@@ -15,7 +16,7 @@ export class CreateComponent implements OnInit {
     initialTime: new FormControl('',Validators.required),
     finalTime:new FormControl('',Validators.required),
     budget: new FormControl('',[Validators.required,Validators.min(1)]),
-    rules:new FormControl('',Validators.required)
+    rules:new FormControl('',[Validators.required,Validators.maxLength(1000)])
   });
   lab={
     Name:'tournamentName',
@@ -27,7 +28,7 @@ export class CreateComponent implements OnInit {
     rules:'rules'
 
   }
-  constructor(private backend:NetworkService) { }
+  constructor(private backend:NetworkService,private swal:SweetAlertService) { }
 
   ngOnInit(): void {
     this.tournamentForm.get('tournamentName')?.valueChanges.subscribe(selectedValue=>{
@@ -35,22 +36,27 @@ export class CreateComponent implements OnInit {
     })
   }
   submit(){
-    //var valid=this.tournamentForm.get('tournamentName')?.valid
-    //this.tournamentForm.get('tournamentName')?.hasError('required')
-    //var value=this.tournamentForm.get('tournamentName')?.value
-    //Nombre Campeonato
-    var requiredNameValidator=this.tournamentForm.get('tournamentName')?.hasError('required');
-    var maxLenNameValidator=this.tournamentForm.get('tournamentName')?.hasError('maxLength')
-    if(requiredNameValidator){
-      alert("El nombre del campeonato no puede estar vacio")
+    if(!this.tournamentForm.valid){
+      this.swal.showError("Errores en los campos",'Alguno de los campos indicados no cumple con las reglas, por favor revisar el texto bajo los cuadros')
       return
     }
-    if(maxLenNameValidator){
-      alert('El nombre del campeonato no puede ser mayor a 30 caracteres')
-      return
-    }
+    var initialDate=this.tournamentForm.get('initialDate')?.value
+    var finalDate=this.tournamentForm.get('finalDate')?.value
     console.log("imprimi")
-   // console.log(value)
+    if(initialDate>finalDate){
+      
+      this.swal.showError("Fechas Invalidas","La fecha final debe ser mayor o igual a la fecha inicial")
+      return
+    }
+    else if(initialDate==finalDate){
+      var initialTime=this.tournamentForm.get('initialTime')?.value;
+      var finalTime=this.tournamentForm.get('finalTime')?.value;
+      if(initialTime>=finalTime){
+        this.swal.showError('Errores en las fecha',"Si la competencia inicia y termina el mismo dia, la hora inicial debe ser menor a la fecha final")
+        return
+      }
+      
+    }
     
   }
   /*
