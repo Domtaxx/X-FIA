@@ -8,7 +8,10 @@
                 <label>Nombre Campeonato</label>
             </div>
             <div class="p75">
-                <input type="text" name="Name" class="form-control" formControlName="tournamentName">
+                <input type="text" name="Name" class="form-control" formControlName="tournamentName" >
+                <div class="warning" *ngIf="tournamentForm.get('tournamentName')?.hasError('required')">
+                    El nombre del campeonato no puede ser vacio
+                </div>
             </div>
             
             
@@ -79,7 +82,7 @@
         </div>
         <pre></pre>
         <div class="buttonContainer">
-            <button type="submit" class="formButton" [disabled]="!tournamentForm.valid">Crear</button>
+            <button type="submit" class="formButton" >Crear</button>
         </div>
         
         
