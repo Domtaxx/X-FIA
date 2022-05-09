@@ -15,7 +15,7 @@ export class CreateComponent implements OnInit {
     initialTime: new FormControl('',Validators.required),
     finalTime:new FormControl('',Validators.required),
     budget: new FormControl('',[Validators.required,Validators.min(1)]),
-    rules:new FormControl('',Validators.required)
+    rules:new FormControl('',[Validators.required,Validators.maxLength(1000)])
   });
   lab={
     Name:'tournamentName',
