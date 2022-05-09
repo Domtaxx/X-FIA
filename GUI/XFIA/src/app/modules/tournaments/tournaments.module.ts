@@ -4,8 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { TournamentsRoutingModule } from './tournaments-routing.module';
 import { TournamentsComponent } from './tournaments.component';
 import { CreateComponent } from './create/create.component';
-
-
+import { ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     TournamentsComponent,
@@ -14,7 +13,8 @@ import { CreateComponent } from './create/create.component';
   imports: [
     CommonModule,
     TournamentsRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class TournamentsModule { }
