@@ -6,17 +6,25 @@ import { TournamentsComponent } from './tournaments.component';
 import { CreateComponent } from './create/create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { CreateRaceComponent } from './races/create/create.component';
+import {MatSelectModule} from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatOptionModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     TournamentsComponent,
-    CreateComponent
+    CreateComponent,
+    CreateRaceComponent
   ],
   imports: [
     CommonModule,
     TournamentsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SweetAlert2Module
+    SweetAlert2Module, 
+    MatSelectModule,
+    MatFormFieldModule,
+    MatOptionModule
   ]
 })
 export class TournamentsModule { }
