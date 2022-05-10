@@ -1,0 +1,166 @@
+<h1>Nueva Carrera</h1>
+<div class="container">
+    
+    <form (ngSubmit)="submit()" [formGroup]="raceForm" >
+        <div class="verticalDiv">
+            <div class="raceForm">
+                <div class="half">
+                    <div class="form-group">
+                        
+                        <div class="p25">
+                            <label>Nombre de la carrera</label>
+                        </div>
+                        <div class="p75">
+                            
+                            <input type="text" name="Name" class="form-control" formControlName="raceName" >
+                            <div class="warning" *ngIf="raceForm.get('raceName')?.hasError('required')">
+                                El nombre de la carrera no puede ser vacio
+                            </div>
+                            <div class="warning" *ngIf="raceForm.get('raceName')?.hasError('maxlength')">
+                                Se ha superado el largo máximo
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="p25">
+                            <label>Campeonato</label>
+                        </div>
+                        <div class="p75">
+                            <select class="form-control" formControlName="tournamentName">
+                                
+                                <option *ngFor="let pick of tournaments" [value]="pick" [ngValue]="pick">
+                                    <label>{{pick.nombreCm}}</label>
+                                    <span>{{pick.llave}}</span>
+                                    
+                                </option>
+
+                            </select>
+                            <div class="warning" *ngIf="raceForm.get('tournamentName')?.hasError('required')">
+                                Debe seleccionar algun campeonato
+                            </div>
+                            
+                        </div>
+                        
+                        
+                    </div>
+                    <pre></pre>
+                    <div class="form-group">
+                        
+                        <div class="p25">
+                            <label>Pista</label>
+                        </div>
+                        <div class="p75">
+                            
+                            <input type="text" name="Pista" class="form-control" formControlName="streetName" >
+                            <div class="warning" *ngIf="raceForm.get('streetName')?.hasError('required')">
+                                El nombre de la carrera no puede ser vacio
+                            </div>
+                            <div class="warning" *ngIf="raceForm.get('streetName')?.hasError('maxlength')">
+                                Se ha superado el largo máximo
+                            </div>
+                        </div>
+                        
+                        
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="p25">
+                            <label>Campeonato</label>
+                        </div>
+                        <div class="p75">
+                            <select class="form-control" formControlName="countryName">
+                               
+                                <option *ngFor="let pick of tournaments" [value]="pick" [ngValue]="pick">
+                                    {{ pick }}
+                                </option>
+
+                            </select>
+                            <div class="warning" *ngIf="raceForm.get('countryName')?.hasError('required')">
+                                Debe seleccionar algun campeonato
+                            </div>
+                            
+                        </div>
+                        
+                        
+                    </div>
+                    <pre></pre>
+                   
+        
+                </div>
+                <div class="half">
+                    <div class="form-group">
+                        <div class="p25">
+                            <label>Fecha Inicio</label>
+                        </div>
+                        <div class="p75">
+                            <input type="date" name="dateI" class="form-control" formControlName="initialDate">
+                            <div class="warning" *ngIf="raceForm.get('initialDate')?.hasError('required')">
+                                Es necesario que ingrese la fecha inicial
+                            </div>
+                            
+                        </div>
+                        
+                        
+                    </div>
+                    <pre></pre>
+                    <div class="form-group">
+                       <div class="p25">
+                            <label>Fecha Final</label>
+                        </div>
+                       <div class="p75">
+                        <input type="date" name="dateE" class="form-control" formControlName="finalDate">
+                        <div class="warning" *ngIf="raceForm.get('finalDate')?.hasError('required')">
+                            Es necesario que ingrese la fecha final.
+                        </div>
+                       </div>
+                        
+                    </div>
+                    <pre></pre>
+                    <div class="form-group">
+                        <div class="p25">
+                            <label>Hora Inicio</label>
+                        </div>
+                        <div class="p75">
+                            <input type="time" name="timeS" class="form-control" formControlName="initialTime">
+                            <div class="warning" *ngIf="raceForm.get('initialTime')?.hasError('required')">
+                                Es necesario que ingrese la hora inicial.
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <pre></pre>
+                    <div class="form-group">
+                        <div class="p25">
+                            <label>Hora Final</label>
+                        </div>
+                        <div class="p75">
+                            <input type="time" name="timeE" class="form-control" formControlName="finalTime">
+                            <div class="warning" *ngIf="raceForm.get('finalTime')?.hasError('required')">
+                                Es necesario que ingrese la hora final.
+                            </div>
+                        </div>
+            
+                        
+                    </div>
+                    
+                    <pre></pre>
+                    
+                </div>
+               
+
+            </div>
+            <div class="buttonContainer">
+                <button type="submit" class="formButton" >Crear</button>
+            </div>
+
+        </div>
+       
+        
+        
+    </form>
+   
+
+</div>
