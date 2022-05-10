@@ -18,16 +18,13 @@ export class CreateComponent implements OnInit {
     budget: new FormControl('',[Validators.required,Validators.min(1)]),
     rules:new FormControl('',[Validators.required,Validators.maxLength(1000)])
   });
-  lab={
-    Name:'tournamentName',
-    dateI:'initialDate',
-    dateE:'finalDate',
-    timeS:'initilTime',
-    timeE:'finalTime',
-    budget:'budget',
-    rules:'rules'
-
-  }
+  tournamentName='tournamentName';
+  initialDate='initialDate';
+  finalDate='finalDate';
+  initialTime='initialTime';
+  finalTime='finalTime';
+  budget='budget';
+  rules='rules'
   constructor(private backend:NetworkService,private swal:SweetAlertService) { }
 
   ngOnInit(): void {
@@ -40,8 +37,8 @@ export class CreateComponent implements OnInit {
       this.swal.showError("Errores en los campos",'Alguno de los campos indicados no cumple con las reglas, por favor revisar el texto bajo los cuadros')
       return
     }
-    var initialDate=this.tournamentForm.get('initialDate')?.value
-    var finalDate=this.tournamentForm.get('finalDate')?.value
+    var initialDate=this.tournamentForm.get(this.initialDate)?.value
+    var finalDate=this.tournamentForm.get(this.finalDate)?.value
     console.log("imprimi")
     if(initialDate>finalDate){
       
@@ -49,14 +46,42 @@ export class CreateComponent implements OnInit {
       return
     }
     else if(initialDate==finalDate){
-      var initialTime=this.tournamentForm.get('initialTime')?.value;
-      var finalTime=this.tournamentForm.get('finalTime')?.value;
+      var initialTime=this.tournamentForm.get(this.initialTime)?.value;
+      var finalTime=this.tournamentForm.get(this.finalTime)?.value;
       if(initialTime>=finalTime){
         this.swal.showError('Errores en las fecha',"Si la competencia inicia y termina el mismo dia, la hora inicial debe ser menor a la fecha final")
         return
       }
       
     }
+    var tournamentName=this.tournamentForm.controls[this.tournamentName].value;
+    var iDate=this.tournamentForm.controls[this.initialDate].value;
+    var fDate=this.tournamentForm.controls[this.finalDate].value;
+    var iTime=this.tournamentForm.controls[this.initialTime].value;
+    var fTime=this.tournamentForm.controls[this.finalTime].value;
+    var budget=this.tournamentForm.controls[this.budget].value;
+    var rules=this.tournamentForm.controls[this.rules].value;
+
+    
+    var httpParam={
+      "nombreCm": tournamentName,
+      "fechaDeInicio": iDate,
+      "horaDeInicio": iTime,
+      "fechaDeFin": fDate,
+      "horaDeFin": fTime,
+      "descripcionDeReglas": rules
+    }
+    this.backend.post_request('admin/Campeonato',httpParam).subscribe(
+      (result)=>{
+        this.swal.showSuccess('Exito','Se ha agregado con éxito, la llave generada es '+result)
+        console.log(result)
+
+      },
+      (error)=>{
+        this.swal.showError('No se ha podido procesar la solicitud','No se ha podido agregar el campeonato, recuerde que no es posible que existan dos campeonatos ocurriendo en fechas simultaneas')
+      }
+      
+    )
     
   }
   /*
