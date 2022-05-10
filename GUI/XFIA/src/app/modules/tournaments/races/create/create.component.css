@@ -78,9 +78,6 @@ selec:hover{
 select::placeholder{
     color:gray
 }
-span{
-    color:black
-}
 
 textarea{
     width: 90%;
