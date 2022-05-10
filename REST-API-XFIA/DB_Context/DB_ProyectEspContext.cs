@@ -34,19 +34,16 @@ namespace REST_API_XFIA.DB_Context
         {
             modelBuilder.Entity<Campeonato>(entity =>
             {
-                entity.HasKey(e => e.NombreCm)
-                    .HasName("PK__CAMPEONA__E69225DB057BC79E");
+                entity.HasKey(e => e.Llave)
+                    .HasName("PK__CAMPEONA__8E70B2936774B072");
 
                 entity.ToTable("CAMPEONATO");
 
-                entity.HasIndex(e => e.Llave, "UQ__CAMPEONA__8E70B292050B8562")
+                entity.HasIndex(e => e.Llave, "UQ__CAMPEONA__8E70B29263AD8000")
                     .IsUnique();
 
-                entity.HasIndex(e => e.NombreCm, "UQ__CAMPEONA__E69225DA127E679A")
-                    .IsUnique();
-
-                entity.Property(e => e.NombreCm)
-                    .HasMaxLength(30)
+                entity.Property(e => e.Llave)
+                    .HasMaxLength(6)
                     .IsUnicode(false);
 
                 entity.Property(e => e.DescripcionDeReglas)
@@ -66,28 +63,26 @@ namespace REST_API_XFIA.DB_Context
 
                 entity.Property(e => e.HoraDeInicio).HasColumnName("Hora_de_inicio");
 
-                entity.Property(e => e.Llave)
-                    .HasMaxLength(6)
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
             });
 
             modelBuilder.Entity<Carrera>(entity =>
             {
-                entity.HasKey(e => e.NombreCr)
-                    .HasName("PK__CARRERA__E69225D0083FCDC8");
+                entity.HasKey(e => new { e.Nombre, e.CampeonatoKey })
+                    .HasName("PK__CARRERA__52861B818FED008D");
 
                 entity.ToTable("CARRERA");
 
-                entity.HasIndex(e => e.NombreCr, "UQ__CARRERA__E69225D1622E0CAF")
-                    .IsUnique();
-
-                entity.Property(e => e.NombreCr)
+                entity.Property(e => e.Nombre)
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Campeonato)
-                    .HasMaxLength(30)
-                    .IsUnicode(false);
+                entity.Property(e => e.CampeonatoKey)
+                    .HasMaxLength(6)
+                    .IsUnicode(false)
+                    .HasColumnName("Campeonato_key");
 
                 entity.Property(e => e.FechaDeFin)
                     .HasColumnType("date")
@@ -106,27 +101,35 @@ namespace REST_API_XFIA.DB_Context
                     .IsUnicode(false)
                     .HasColumnName("Nombre_de_pista");
 
-                entity.Property(e => e.Pais).HasColumnType("text");
+                entity.Property(e => e.Pais)
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
 
-                entity.HasOne(d => d.CampeonatoNavigation)
+                entity.HasOne(d => d.CampeonatoKeyNavigation)
                     .WithMany(p => p.Carreras)
-                    .HasForeignKey(d => d.Campeonato)
+                    .HasForeignKey(d => d.CampeonatoKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CARRERA__Campeon__7E37BEF6");
+                    .HasConstraintName("FK__CARRERA__Campeon__4B7734FF");
+
+                entity.HasOne(d => d.PaisNavigation)
+                    .WithMany(p => p.Carreras)
+                    .HasForeignKey(d => d.Pais)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK__CARRERA__Pais__4C6B5938");
             });
 
             modelBuilder.Entity<Paise>(entity =>
             {
-                entity.HasKey(e => e.NombreP)
-                    .HasName("PK__PAISES__8C9681EDEDA66823");
+                entity.HasKey(e => e.Nombre)
+                    .HasName("PK__PAISES__75E3EFCEA834AD4D");
 
                 entity.ToTable("PAISES");
 
-                entity.HasIndex(e => e.NombreP, "UQ__PAISES__8C9681EC45FB0D6C")
+                entity.HasIndex(e => e.Nombre, "UQ__PAISES__75E3EFCF40BA58FD")
                     .IsUnique();
 
-                entity.Property(e => e.NombreP)
-                    .HasMaxLength(20)
+                entity.Property(e => e.Nombre)
+                    .HasMaxLength(30)
                     .IsUnicode(false);
             });
 

@@ -5,6 +5,13 @@ namespace REST_API_XFIA.SQL_Model.Models
 {
     public partial class Paise
     {
-        public string NombreP { get; set; } = null!;
+        public Paise()
+        {
+            Carreras = new HashSet<Carrera>();
+        }
+
+        public string Nombre { get; set; } = null!;
+
+        public virtual ICollection<Carrera> Carreras { get; set; }
     }
 }
