@@ -37,12 +37,13 @@ h1{
     font-weight: bold;
 }
 button{
-    font-size: 3vmin;
+    font-size: 80%;
     width: 7%;
     padding: 1%;
     border-radius:14px;
     background-color: #e10600;
     color:white;
+    text-align: center;
 }
 button:hover{
     background-color: rgb(255, 136, 0);
@@ -57,6 +58,9 @@ input,select{
     text-align: center;
     border-style: solid;
     color:gray;
+}
+option{
+    font-size: 2vmin;
 }
 input:hover{
     border-color: black;
@@ -155,4 +159,7 @@ textarea:hover{
 .mat-select-panel {
     background: red;
 
+}
+.keyLabel{
+    color:black
 }
