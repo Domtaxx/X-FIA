@@ -32,7 +32,9 @@
                             <select class="form-control" formControlName="tournamentName">
                                 
                                 <option *ngFor="let pick of tournaments" [value]="pick" [ngValue]="pick">
-                                    {{ pick }}
+                                    <label>{{pick.nombreCm}}</label>
+                                    <span>{{pick.llave}}</span>
+                                    
                                 </option>
 
                             </select>

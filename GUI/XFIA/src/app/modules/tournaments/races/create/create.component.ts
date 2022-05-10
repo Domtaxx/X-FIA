@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup,FormControl,Validators} from '@angular/forms';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { NetworkService } from 'src/app/services/network.service';
+
 @Component({
   selector: 'app-create-race',
   templateUrl: './create.component.html',
@@ -11,7 +12,7 @@ export class CreateRaceComponent implements OnInit {
 
   constructor(private backend:NetworkService,private swal:SweetAlertService) { }
   countries=[]
-  tournaments=['opcion A','opcion B','opcion C']
+  tournaments=[{nombreCm:'opcion A',llave:'llave A'},{nombreCm:'opcion B',llave:'llave B'}]
   raceForm=new FormGroup({
     raceName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
     tournamentName:new FormControl('',Validators.required),
@@ -23,8 +24,24 @@ export class CreateRaceComponent implements OnInit {
     finalTime:new FormControl('',Validators.required)
   });
   ngOnInit(): void {
+    this.backend.get_request('admin/Campeonato',{}).subscribe((response)=>{
+      
+      
+      for(var i=0;i<response.length;i++){
+        console.log(response[i].nombreCm)
+        var tourn={nombreCm: response[i].nombreCm,
+          llave:response[i].llave
+        }
+        this.tournaments.push(tourn)
+      }
+      this.tournaments = [...this.tournaments]
+    },(error)=>{
+      console.log('estoy en el error')
+      console.log(error)
+    })
   }
   submit(){
+   console.log( this.raceForm.controls['initialDate'].value);
     if(!this.raceForm.valid){
       this.swal.showError("Errores en los campos",'Alguno de los campos indicados no cumple con las reglas, por favor revisar el texto bajo los cuadros')
       return
