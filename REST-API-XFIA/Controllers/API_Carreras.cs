@@ -24,18 +24,18 @@ namespace REST_API_XFIA.Controllers
         [HttpPost]
         public ActionResult add([FromBody] Race race){
             try{
-                Carrera to_add = new Carrera();
-                to_add.Nombre = race.Nombre;
-                to_add.CampeonatoKey = race.CampeonatoKey;
-                to_add.HoraDeInicio = DateTime.Parse(race.horaDeInicio).TimeOfDay;
-                to_add.HoraDeFin = DateTime.Parse(race.horaDeFin).TimeOfDay;
-                to_add.FechaDeInicio = DateTime.Parse(race.fechaDeInicio);
-                to_add.FechaDeFin = DateTime.Parse(race.fechaDeFin);
-                to_add.NombreDePista = race.NombreDePista;
-                to_add.Estado = 0;
-                to_add.Pais = race.Pais;
+                Carrera toAdd = new Carrera();
+                toAdd.Nombre = race.Nombre;
+                toAdd.CampeonatoKey = race.CampeonatoKey;
+                toAdd.HoraDeInicio = DateTime.Parse(race.horaDeInicio).TimeOfDay;
+                toAdd.HoraDeFin = DateTime.Parse(race.horaDeFin).TimeOfDay;
+                toAdd.FechaDeInicio = DateTime.Parse(race.fechaDeInicio);
+                toAdd.FechaDeFin = DateTime.Parse(race.fechaDeFin);
+                toAdd.NombreDePista = race.NombreDePista;
+                toAdd.Estado = 0;
+                toAdd.Pais = race.Pais;
 
-                Db.Carreras.Add(to_add);
+                Db.Carreras.Add(toAdd);
                 Db.SaveChanges();
                 return Ok();
             }catch(Exception e)

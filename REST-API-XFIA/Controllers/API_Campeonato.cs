@@ -33,22 +33,23 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                Campeonato to_add = new Campeonato();
+                Campeonato toAdd = new Campeonato();
                 List<Campeonato> tournaments = Db.Campeonatos.ToList();
                 
                 // filling campeonato to add to data base
-                to_add.Llave = generate_key(tournaments);
-                to_add.Nombre = tournament.nombreCm;
-                to_add.DescripcionDeReglas = tournament.descripcionDeReglas;
-                to_add.HoraDeInicio = DateTime.Parse(tournament.horaDeInicio).TimeOfDay;
-                to_add.HoraDeFin = DateTime.Parse(tournament.horaDeFin).TimeOfDay;
-                to_add.FechaDeInicio = DateTime.Parse(tournament.fechaDeInicio);
-                to_add.FechaDeFin = DateTime.Parse(tournament.fechaDeFin);
-                Db.Campeonatos.Add(to_add);
+                toAdd.Llave = generate_key(tournaments);
+                toAdd.Nombre = tournament.nombreCm;
+                toAdd.DescripcionDeReglas = tournament.descripcionDeReglas;
+                toAdd.HoraDeInicio = DateTime.Parse(tournament.horaDeInicio).TimeOfDay;
+                toAdd.HoraDeFin = DateTime.Parse(tournament.horaDeFin).TimeOfDay;
+                toAdd.FechaDeInicio = DateTime.Parse(tournament.fechaDeInicio);
+                toAdd.FechaDeFin = DateTime.Parse(tournament.fechaDeFin);
+                toAdd.Presupuesto = tournament.presupuesto;
+                Db.Campeonatos.Add(toAdd);
                 Db.SaveChanges();
-                if (tournamentIsInDatabase(to_add.Llave))
+                if (tournamentIsInDatabase(toAdd.Llave))
                 {   
-                    return Ok(JsonConvert.SerializeObject(to_add.Llave));
+                    return Ok(JsonConvert.SerializeObject(toAdd.Llave));
                 }
                 else
                 {

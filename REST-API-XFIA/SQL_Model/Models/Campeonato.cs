@@ -16,6 +16,7 @@ namespace REST_API_XFIA.SQL_Model.Models
         public TimeSpan HoraDeInicio { get; set; }
         public DateTime FechaDeFin { get; set; }
         public TimeSpan HoraDeFin { get; set; }
+        public double Presupuesto { get; set; }
         public string? DescripcionDeReglas { get; set; }
 
         public virtual ICollection<Carrera> Carreras { get; set; }

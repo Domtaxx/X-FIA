@@ -6,6 +6,7 @@ Fecha_de_inicio DATE NOT NULL ,
 Hora_de_inicio TIME NOT NULL,
 Fecha_de_fin DATE NOT NULL ,
 Hora_de_fin TIME NOT NULL,
+Presupuesto float NOT NULL,
 Descripcion_de_reglas VARCHAR(1000),
 PRIMARY KEY(Llave));
 
@@ -41,7 +42,7 @@ VALUES ('ARABIA SAUDI');
 
 
 INSERT INTO "CAMPEONATO"
-VALUES ('QWE123','GP de ARABIA SAUDI',  '2022-03-25', '00:00:00', '2022-03-27', '9:00:00', 'Ver reglas');
+VALUES ('QWE123','GP de ARABIA SAUDI',  '2022-03-25', '00:00:00', '2022-03-27', '9:00:00',1000, 'Ver reglas');
 
 INSERT INTO "CARRERA"
 VALUES ('Street Circuit', 'ARABIA SAUDI',0,'Jeddah', '2022-03-26', '17:00:00', '2022-03-27', '4:00:00', 'QWE123');

@@ -10,5 +10,6 @@
         public String? horaDeFin { get; set; }
         public String? descripcionDeReglas { get; set; }
         public String? llave { get; set; }
+        public double presupuesto { get; set; }
     }
 }
