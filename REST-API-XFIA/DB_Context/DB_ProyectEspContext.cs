@@ -35,11 +35,11 @@ namespace REST_API_XFIA.DB_Context
             modelBuilder.Entity<Campeonato>(entity =>
             {
                 entity.HasKey(e => e.Llave)
-                    .HasName("PK__CAMPEONA__8E70B29320B07AF7");
+                    .HasName("PK__CAMPEONA__8E70B293E5DA5323");
 
                 entity.ToTable("CAMPEONATO");
 
-                entity.HasIndex(e => e.Llave, "UQ__CAMPEONA__8E70B2927F9E6940")
+                entity.HasIndex(e => e.Llave, "UQ__CAMPEONA__8E70B292A63A0402")
                     .IsUnique();
 
                 entity.Property(e => e.Llave)
@@ -71,7 +71,7 @@ namespace REST_API_XFIA.DB_Context
             modelBuilder.Entity<Carrera>(entity =>
             {
                 entity.HasKey(e => new { e.Nombre, e.CampeonatoKey })
-                    .HasName("PK__CARRERA__52861B8134CCAEA2");
+                    .HasName("PK__CARRERA__52861B8150FB26D3");
 
                 entity.ToTable("CARRERA");
 
@@ -109,23 +109,23 @@ namespace REST_API_XFIA.DB_Context
                     .WithMany(p => p.Carreras)
                     .HasForeignKey(d => d.CampeonatoKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CARRERA__Campeon__5E8A0973");
+                    .HasConstraintName("FK__CARRERA__Campeon__690797E6");
 
                 entity.HasOne(d => d.PaisNavigation)
                     .WithMany(p => p.Carreras)
                     .HasForeignKey(d => d.Pais)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__CARRERA__Pais__5F7E2DAC");
+                    .HasConstraintName("FK__CARRERA__Pais__69FBBC1F");
             });
 
             modelBuilder.Entity<Paise>(entity =>
             {
                 entity.HasKey(e => e.Nombre)
-                    .HasName("PK__PAISES__75E3EFCED3A827FE");
+                    .HasName("PK__PAISES__75E3EFCE55DD334F");
 
                 entity.ToTable("PAISES");
 
-                entity.HasIndex(e => e.Nombre, "UQ__PAISES__75E3EFCF9D3CD30F")
+                entity.HasIndex(e => e.Nombre, "UQ__PAISES__75E3EFCFC61E931B")
                     .IsUnique();
 
                 entity.Property(e => e.Nombre)

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace REST_API_XFIA.Controllers
 {
@@ -34,13 +35,25 @@ namespace REST_API_XFIA.Controllers
                 toAdd.NombreDePista = race.NombreDePista;
                 toAdd.Estado = 0;
                 toAdd.Pais = race.Pais;
-
-                Db.Carreras.Add(toAdd);
-                Db.SaveChanges();
-                return Ok();
+                List<Carrera> conflictinRaces = Db.Carreras.Where(c =>
+                                                    (toAdd.FechaDeFin < c.FechaDeFin && toAdd.FechaDeFin > c.FechaDeInicio) ||
+                                                    (toAdd.FechaDeInicio < c.FechaDeFin && toAdd.FechaDeInicio > c.FechaDeInicio) ||
+                                                    (c.FechaDeInicio == toAdd.FechaDeInicio && toAdd.HoraDeInicio <= c.HoraDeFin) ||
+                                                    (c.FechaDeFin == toAdd.FechaDeFin && toAdd.HoraDeFin >= c.HoraDeInicio)
+                                                ).ToList();
+                if (conflictinRaces.Count() == 0)
+                {
+                    Db.Carreras.Add(toAdd);
+                    Db.SaveChanges();
+                    return Ok(JsonConvert.SerializeObject(0));//Se agrego con exito
+                }
+                else
+                {
+                    return BadRequest(JsonConvert.SerializeObject(1));//Fallo de fechas
+                }
             }catch(Exception e)
             {
-                return BadRequest(e);
+                return BadRequest(JsonConvert.SerializeObject(2));//Fallo del servidor
             }
         }
 

@@ -7,6 +7,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace REST_API_XFIA.Controllers
 {
@@ -32,11 +34,9 @@ namespace REST_API_XFIA.Controllers
         public ActionResult add([FromBody] Tournament tournament)
         {
             try
-            {
-                Campeonato toAdd = new Campeonato();
+            {   
                 List<Campeonato> tournaments = Db.Campeonatos.ToList();
-                
-                // filling campeonato to add to data base
+                Campeonato toAdd = new Campeonato();
                 toAdd.Llave = generate_key(tournaments);
                 toAdd.Nombre = tournament.nombreCm;
                 toAdd.DescripcionDeReglas = tournament.descripcionDeReglas;
@@ -45,20 +45,28 @@ namespace REST_API_XFIA.Controllers
                 toAdd.FechaDeInicio = DateTime.Parse(tournament.fechaDeInicio);
                 toAdd.FechaDeFin = DateTime.Parse(tournament.fechaDeFin);
                 toAdd.Presupuesto = tournament.presupuesto;
-                Db.Campeonatos.Add(toAdd);
-                Db.SaveChanges();
-                if (tournamentIsInDatabase(toAdd.Llave))
-                {   
+                
+                List<Campeonato> conflictingTournaments = Db.Campeonatos.Where(t =>
+                                                            (toAdd.FechaDeFin < t.FechaDeFin && toAdd.FechaDeFin > t.FechaDeInicio)||
+                                                            (toAdd.FechaDeInicio < t.FechaDeFin && toAdd.FechaDeInicio > t.FechaDeInicio) ||
+                                                            (t.FechaDeInicio == toAdd.FechaDeInicio && toAdd.HoraDeInicio <= t.HoraDeFin) ||
+                                                            (t.FechaDeFin == toAdd.FechaDeFin && toAdd.HoraDeFin >= t.HoraDeInicio)
+                                                          ).ToList();
+
+                if (conflictingTournaments.Count()==0)
+                {
+                    Db.Campeonatos.Add(toAdd);
+                    Db.SaveChanges();
                     return Ok(JsonConvert.SerializeObject(toAdd.Llave));
                 }
                 else
                 {
-                    return BadRequest("Dates are not valid");
+                    return BadRequest(JsonConvert.SerializeObject(1));
                 }
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(JsonConvert.SerializeObject(2));
             }
         }
         
