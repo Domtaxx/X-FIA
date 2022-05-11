@@ -54,6 +54,16 @@ export class CreateComponent implements OnInit {
       }
       
     }
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = today.getFullYear();
+
+    var currentDate = yyyy + '-' + mm + '-' + dd;
+    if(initialDate<currentDate || finalDate<currentDate){
+      this.swal.showError("Error de fechas",'No es posible agregar carreras en el pasado')
+      return
+    }
     var tournamentName=this.tournamentForm.controls[this.tournamentName].value;
     var iDate=this.tournamentForm.controls[this.initialDate].value;
     var fDate=this.tournamentForm.controls[this.finalDate].value;
@@ -78,21 +88,18 @@ export class CreateComponent implements OnInit {
 
       },
       (error)=>{
-        this.swal.showError('No se ha podido procesar la solicitud','No se ha podido agregar el campeonato, recuerde que no es posible que existan dos campeonatos ocurriendo en fechas simultaneas')
+        var errorCode=error.error;
+        if(errorCode==1){
+          this.swal.showError('No se ha podido procesar la solicitud','No se ha podido agregar el campeonato, recuerde que no es posible que existan dos campeonatos ocurriendo en fechas simultaneas')
+        }
+        else{
+        this.swal.showError('No se ha podido procesar la solicitud','No se ha podido conectar con el servidor')
+        }
       }
       
     )
     
   }
-  /*
-  noValue(event:any){
-    var isEmpty=this.tournamentForm.get('tournamentName')?.hasError('required')
-    if(isEmpty){
-      console.log(event.target.getAttribute('name'))
-      //alert("El espacio no puede estar vacio")
-    }
-    
-  }
-  */
+
 
 }

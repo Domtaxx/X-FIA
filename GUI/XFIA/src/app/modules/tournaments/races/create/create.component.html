@@ -31,8 +31,9 @@
                         <div class="p75">
                             <select class="form-control" formControlName="tournamentName">
                                 
-                                <option *ngFor="let pick of tournaments" [value]="pick" [ngValue]="pick">
+                                <option *ngFor="let pick of tournaments" [value]="pick.llave" [ngValue]="pick.llave">
                                     <label>{{pick.nombreCm}}</label>
+                                    <label> | </label>
                                     <span>{{pick.llave}}</span>
                                     
                                 </option>
@@ -68,12 +69,12 @@
                     <div class="form-group">
                         
                         <div class="p25">
-                            <label>Campeonato</label>
+                            <label>Pais</label>
                         </div>
                         <div class="p75">
                             <select class="form-control" formControlName="countryName">
                                
-                                <option *ngFor="let pick of tournaments" [value]="pick" [ngValue]="pick">
+                                <option *ngFor="let pick of countries" [value]="pick" [ngValue]="pick">
                                     {{ pick }}
                                 </option>
 
