@@ -38,8 +38,8 @@ export class CreateRaceComponent implements OnInit {
       for(var i=0;i<response.length;i++){
         console.log(response[i])
         console.log(response[i].nombreCm)
-        var tourn={nombreCm: response[i].nombre,
-          llave:response[i].llave
+        var tourn={nombreCm: response[i].name,
+          llave:response[i].key
         }
         this.tournaments.push(tourn)
       }
@@ -52,7 +52,7 @@ export class CreateRaceComponent implements OnInit {
       (response)=>{
           console.log("paises");
           for(var i=0;i<response.length;i++){
-            var countryName=response[i].nombre
+            var countryName=response[i].name
             this.countries.push(countryName)
           }
           this.countries=[...this.countries]
@@ -122,8 +122,15 @@ export class CreateRaceComponent implements OnInit {
       },
       (error)=>{
         var errorCode=error.error;
-        if(errorCode==0){
-          this.swal.showError('No se ha podido agregar','no pueden coindicir dos carreras en el tiempo')
+        if(errorCode==1){
+          this.swal.showError('No se ha podido agregar','el nombre indicado ya ha sido usado para otra carrera en el torneo seleccionado')
+        }
+        else if(errorCode==2){
+          this.swal.showError('No se ha podido agregar','recuerde que las fechas de la carrera deben estar dentro de los limites del campeonato')
+         
+        }
+        else if(errorCode==3){
+            this.swal.showError('No se ha podido agregar','Ya existen carreras activas en el periodo indicado')
         }
         else{
           this.swal.showError('No se ha podido agregar','Error con el servidor')
