@@ -16,14 +16,14 @@ namespace REST_API_XFIA.Controllers
     [Route("Admin/Campeonato")]
     public class API_Campeonato : Controller
     {
-        private static DB_ProyectEspContext Db = new DB_ProyectEspContext();
+        private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         private static Random random = new Random();
         [HttpGet]
         public ActionResult listAll()
         {
             try
             {
-                return Ok(Db.Campeonatos.ToList());
+                return Ok(Db.Tournaments.ToList());
             }
             catch (Exception e)
             {
@@ -31,33 +31,32 @@ namespace REST_API_XFIA.Controllers
             }
         }
         [HttpPost]
-        public ActionResult add([FromBody] Tournament tournament)
+        public ActionResult add([FromBody] Data_structures.Tournament tournament)
         {
             try
             {   
-                List<Campeonato> tournaments = Db.Campeonatos.ToList();
-                Campeonato toAdd = new Campeonato();
-                toAdd.Llave = generate_key(tournaments);
-                toAdd.Nombre = tournament.nombreCm;
-                toAdd.DescripcionDeReglas = tournament.descripcionDeReglas;
-                toAdd.HoraDeInicio = DateTime.Parse(tournament.horaDeInicio).TimeOfDay;
-                toAdd.HoraDeFin = DateTime.Parse(tournament.horaDeFin).TimeOfDay;
-                toAdd.FechaDeInicio = DateTime.Parse(tournament.fechaDeInicio);
-                toAdd.FechaDeFin = DateTime.Parse(tournament.fechaDeFin);
-                toAdd.Presupuesto = tournament.presupuesto;
-                
-                List<Campeonato> conflictingTournaments = Db.Campeonatos.Where(t =>
-                                                            (toAdd.FechaDeFin < t.FechaDeFin && toAdd.FechaDeFin > t.FechaDeInicio)||
-                                                            (toAdd.FechaDeInicio < t.FechaDeFin && toAdd.FechaDeInicio > t.FechaDeInicio) ||
-                                                            (t.FechaDeInicio == toAdd.FechaDeInicio && toAdd.HoraDeInicio <= t.HoraDeFin) ||
-                                                            (t.FechaDeFin == toAdd.FechaDeFin && toAdd.HoraDeFin >= t.HoraDeInicio)
+                List<SQL_Model.Models.Tournament> tournaments = Db.Tournaments.ToList();
+                SQL_Model.Models.Tournament toAdd = new SQL_Model.Models.Tournament();
+                toAdd.Key = generate_key(tournaments);
+                toAdd.Name = tournament.nombreCm;
+                toAdd.Rules = tournament.descripcionDeReglas;
+                toAdd.InitialHour = DateTime.Parse(tournament.horaDeInicio).TimeOfDay;
+                toAdd.FinalHour = DateTime.Parse(tournament.horaDeFin).TimeOfDay;
+                toAdd.InitialDate = DateTime.Parse(tournament.fechaDeInicio);
+                toAdd.FinalDate = DateTime.Parse(tournament.fechaDeFin);
+                toAdd.Budget = tournament.presupuesto;
+                List<SQL_Model.Models.Tournament> conflictingTournaments = Db.Tournaments.Where(t =>
+                                                            (toAdd.FinalDate < t.FinalDate && toAdd.FinalDate > t.InitialDate) ||
+                                                            (toAdd.InitialDate < t.FinalDate && toAdd.InitialDate > t.InitialDate) ||
+                                                            (t.InitialDate == toAdd.InitialDate && toAdd.InitialHour <= t.FinalHour) ||
+                                                            (t.FinalDate == toAdd.FinalDate && toAdd.FinalHour >= t.InitialHour)
                                                           ).ToList();
 
                 if (conflictingTournaments.Count()==0)
                 {
-                    Db.Campeonatos.Add(toAdd);
+                    Db.Tournaments.Add(toAdd);
                     Db.SaveChanges();
-                    return Ok(JsonConvert.SerializeObject(toAdd.Llave));
+                    return Ok(JsonConvert.SerializeObject(toAdd.Key));
                 }
                 else
                 {
@@ -72,7 +71,7 @@ namespace REST_API_XFIA.Controllers
         
         private bool tournamentIsInDatabase(string key)
         {
-            Campeonato tournamentTested = Db.Campeonatos.Find(key);
+            SQL_Model.Models.Tournament tournamentTested = Db.Tournaments.Find(key);
             if (tournamentTested == null)
             {
                 return false;
@@ -82,7 +81,7 @@ namespace REST_API_XFIA.Controllers
                 return true;
             }
         }
-        private string generate_key(List<Campeonato> tournaments)
+        private string generate_key(List<SQL_Model.Models.Tournament> tournaments)
         {
              string key = RandomString(6);
              while(verifyIfKeyIsNotRepeated(key, tournaments))
@@ -98,10 +97,10 @@ namespace REST_API_XFIA.Controllers
                 .Select(s => s[random.Next(s.Length)]).ToArray());
         }
         
-        private bool verifyIfKeyIsNotRepeated(string key, List<Campeonato> tournaments) {
-            foreach (Campeonato tournament in tournaments)
+        private bool verifyIfKeyIsNotRepeated(string key, List<SQL_Model.Models.Tournament> tournaments) {
+            foreach (SQL_Model.Models.Tournament tournament in tournaments)
             {
-                if (tournament.Llave == key)
+                if (tournament.Key == key)
                 {
                     return true;
                 }
