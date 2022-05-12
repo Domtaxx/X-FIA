@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>REST_API_XFIA</RootNamespace>
+    <UserSecretsId>66f0c2ab-3b49-4832-90d2-57b5ddf21760</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
