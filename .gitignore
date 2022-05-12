@@ -60,3 +60,15 @@ e2e/*.map
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/angular,visualstudiocode
+
+REST-API-XFIA/.vs/REST-API-XFIA/v17/
+
+REST-API-XFIA/.vs/REST-API-XFIA/DesignTimeBuild/
+
+REST-API-XFIA/bin/Debug/net6.0/
+
+REST-API-XFIA/bin/Release/net6.0/
+
+REST-API-XFIA/obj/Debug/net6.0/
+
+REST-API-XFIA/obj/
