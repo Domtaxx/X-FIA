@@ -30,8 +30,8 @@ namespace REST_API_XFIA.Controllers
                 toAdd.TournamentKey = race.CampeonatoKey;
                 toAdd.InitialHour = DateTime.Parse(race.horaDeInicio).TimeOfDay;
                 toAdd.FinalHour = DateTime.Parse(race.horaDeFin).TimeOfDay;
-                toAdd.InitialDate = DateTime.Parse(race.fechaDeInicio);
-                toAdd.FinalDate = DateTime.Parse(race.fechaDeFin);
+                toAdd.InitialDate = DateTime.Parse(DateTime.Parse(race.fechaDeInicio).ToString("yyyy-MM-dd"));
+                toAdd.FinalDate = DateTime.Parse(DateTime.Parse(race.fechaDeFin).ToString("yyyy-MM-dd"));
                 toAdd.TrackName = race.NombreDePista;
                 toAdd.State = 0;
                 toAdd.Country = race.Pais;

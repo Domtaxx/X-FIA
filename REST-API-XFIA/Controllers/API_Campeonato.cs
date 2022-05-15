@@ -42,8 +42,8 @@ namespace REST_API_XFIA.Controllers
                 toAdd.Rules = tournament.descripcionDeReglas;
                 toAdd.InitialHour = DateTime.Parse(tournament.horaDeInicio).TimeOfDay;
                 toAdd.FinalHour = DateTime.Parse(tournament.horaDeFin).TimeOfDay;
-                toAdd.InitialDate = DateTime.Parse(tournament.fechaDeInicio);
-                toAdd.FinalDate = DateTime.Parse(tournament.fechaDeFin);
+                toAdd.InitialDate = DateTime.Parse(DateTime.Parse(tournament.fechaDeInicio).ToString("yyyy-MM-dd"));
+                toAdd.FinalDate = DateTime.Parse(DateTime.Parse(tournament.fechaDeFin).ToString("yyyy-MM-dd"));
                 toAdd.Budget = tournament.presupuesto;
                 List<SQL_Model.Models.Tournament> conflictingTournaments = Db.Tournaments.Where(t =>
                                                             (toAdd.FinalDate < t.FinalDate && toAdd.FinalDate > t.InitialDate) ||
