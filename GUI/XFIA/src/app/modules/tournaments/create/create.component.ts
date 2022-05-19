@@ -3,8 +3,12 @@ import { FormGroup,FormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NetworkService } from 'src/app/services/network.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { alertMessages } from 'src/app/const/messages';
+import { dateValidations } from 'src/app/validations/dateValidations';
+import { invalid } from '@angular/compiler/src/render3/view/util';
+import { appSettings } from 'src/app/const/appSettings';
 @Component({
-  selector: 'app-create-tournament',
+  selector: 'app-create-tournament', 
   templateUrl: './create.component.html',
   styleUrls: ['./create.component.css']
 })
@@ -25,34 +29,22 @@ export class CreateComponent implements OnInit {
   finalTime='finalTime';
   budget='budget';
   rules='rules'
+  errorCode={
+    simultaneousTournament:1
+  }
   constructor(private backend:NetworkService,private swal:SweetAlertService) { }
 
   ngOnInit(): void {
-    this.tournamentForm.get('tournamentName')?.valueChanges.subscribe(selectedValue=>{
-      console.log(selectedValue)
-    })
+ 
   }
+  /*
+  input: NA
+  output: NA
+  This funcion in called when the form its summited, checks for input mistakes and makes the http request to add the tournamente
+  */
   submit(){
-    if(!this.tournamentForm.valid){
-      this.swal.showError("Errores en los campos",'Alguno de los campos indicados no cumple con las reglas, por favor revisar el texto bajo los cuadros')
+    if(!this.validateInput()){
       return
-    }
-    var initialDate=this.tournamentForm.get(this.initialDate)?.value
-    var finalDate=this.tournamentForm.get(this.finalDate)?.value
-    console.log("imprimi")
-    if(initialDate>finalDate){
-      
-      this.swal.showError("Fechas Invalidas","La fecha final debe ser mayor o igual a la fecha inicial")
-      return
-    }
-    else if(initialDate==finalDate){
-      var initialTime=this.tournamentForm.get(this.initialTime)?.value;
-      var finalTime=this.tournamentForm.get(this.finalTime)?.value;
-      if(initialTime>=finalTime){
-        this.swal.showError('Errores en las fecha',"Si la competencia inicia y termina el mismo dia, la hora inicial debe ser menor a la fecha final")
-        return
-      }
-      
     }
     var tournamentName=this.tournamentForm.controls[this.tournamentName].value;
     var iDate=this.tournamentForm.controls[this.initialDate].value;
@@ -64,35 +56,65 @@ export class CreateComponent implements OnInit {
 
     
     var httpParam={
-      "nombreCm": tournamentName,
-      "fechaDeInicio": iDate,
-      "horaDeInicio": iTime,
-      "fechaDeFin": fDate,
-      "horaDeFin": fTime,
-      "descripcionDeReglas": rules
+      nombreCm: tournamentName,
+      fechaDeInicio: iDate,
+      horaDeInicio: iTime,
+      fechaDeFin: fDate,
+      horaDeFin: fTime,
+      descripcionDeReglas: rules
     }
-    this.backend.post_request('admin/Campeonato',httpParam).subscribe(
-      (result)=>{
-        this.swal.showSuccess('Exito','Se ha agregado con éxito, la llave generada es '+result)
-        console.log(result)
+    this.backend.post_request(appSettings.tournamentRoute,httpParam).subscribe( // tournament post request
+      (result)=>{//sucess case
+        this.tournamentForm.reset()
+        this.swal.showSuccess(alertMessages.rejected,alertMessages.sucessTournament+result)
 
       },
       (error)=>{
-        this.swal.showError('No se ha podido procesar la solicitud','No se ha podido agregar el campeonato, recuerde que no es posible que existan dos campeonatos ocurriendo en fechas simultaneas')
+        var errorCode=error.error;
+        console.log(errorCode)
+        if(errorCode==this.errorCode.simultaneousTournament){ //a tournament already exists in those dates
+          this.showError(alertMessages.rejected,alertMessages.simultaneousTournaments)
+        }
+        else{//server error
+        this.showError(alertMessages.rejected,alertMessages.serverInterrupt)
+        }
       }
       
     )
     
   }
-  /*
-  noValue(event:any){
-    var isEmpty=this.tournamentForm.get('tournamentName')?.hasError('required')
-    if(isEmpty){
-      console.log(event.target.getAttribute('name'))
-      //alert("El espacio no puede estar vacio")
+  
+
+  validateInput():boolean{
+    if(!this.tournamentForm.valid){
+      this.showError(alertMessages.invalidFieldsHeader,alertMessages.invalidFieldsBody)
+      return false;
     }
+    var initialDate=this.tournamentForm.get(this.initialDate)?.value
+    var finalDate=this.tournamentForm.get(this.finalDate)?.value
+    if(dateValidations.inThePast(initialDate) || dateValidations.inThePast(finalDate)){ //check that neither of the dates are on the past
+      this.showError(alertMessages.rejectedDateHeader,alertMessages.inThePast)
+      return false;
+    }
+    if(!dateValidations.continousDate(initialDate,finalDate)){//check finaldate is after initial date
+      console.log(alertMessages.invalidDateElapse)
+      this.showError(alertMessages.rejectedDateHeader,alertMessages.invalidDateElapse);
+      return false;
+    }
+    var initialTime=this.tournamentForm.get(this.initialTime)?.value;
+    var finalTime=this.tournamentForm.get(this.finalTime)?.value;
+    if(!dateValidations.continousTime(initialDate,finalDate,initialTime,finalTime)){//if finaldate and initial date are on the same day, check for the initial and final time
+      this.showError(alertMessages.rejectedDateHeader,alertMessages.invalidTimeElapsed);
+      return false;
+      
+    }
+   
     
+    return true;
   }
-  */
+  showError(header:string,body:string){
+    this.swal.showError(header,body)
+  }
+
 
 }
