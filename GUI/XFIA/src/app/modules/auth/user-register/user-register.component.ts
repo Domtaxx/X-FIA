@@ -1,4 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup,FormControl } from '@angular/forms';
+import { Validators } from '@angular/forms';
+import { NetworkService } from 'src/app/services/network.service';
+import { SweetAlertService } from 'src/app/services/sweet-alert.service';
+import { alertMessages } from 'src/app/const/messages';
+import { dateValidations } from 'src/app/validations/dateValidations';
+import { invalid } from '@angular/compiler/src/render3/view/util';
+import { appSettings } from 'src/app/const/appSettings';
 
 @Component({
   selector: 'app-user-register',
@@ -7,9 +15,43 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserRegisterComponent implements OnInit {
 
-  constructor() { }
+  userRegisterForm=new FormGroup({
+    userName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
+    email:new FormControl('',[Validators.required,Validators.email,Validators.maxLength(256)]),
+    password:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*)*')]),
+    confirmPassword:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*)*')]),
+    teamName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
+    countryName:new FormControl('',[Validators.required]),
+    image:new FormControl('',[Validators.required])
+  });
+  showPass1=false;
+  showPass2=false;
+  countries:string[]=["hola"]
+
+ 
+  errorCode={
+    simultaneousTournament:1
+  }
+  constructor(private backend:NetworkService,private swal:SweetAlertService) { }
 
   ngOnInit(): void {
+ 
   }
+  /*
+  input: NA
+  output: NA
+  This funcion in called when the form its summited, checks for input mistakes and makes the http request to add the tournamente
+  */
+  submit(){}
+
+  chageVisibilityPass1(){
+    this.showPass1=!this.showPass1;
+  }
+  chageVisibilityPass2(){
+    this.showPass2=!this.showPass2;
+  }
+  
+
+
 
 }

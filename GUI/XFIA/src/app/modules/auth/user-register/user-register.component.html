@@ -1,1 +1,205 @@
-<p>user-register works!</p>
+<h1>Registro Usuario
+
+</h1>
+<div class="container">
+   
+    <form class ="registerForm"(ngSubmit)="submit()"  [formGroup]="userRegisterForm" >
+
+
+        
+        <div class="form-group">
+            
+            
+            <div class="p25">
+                <label>Nombre Usuario</label>
+            </div>
+            <div class="p75">
+                
+                <input type="text" name="Name" class="form-control" formControlName="userName" >
+                <div class="warning" *ngIf="userRegisterForm.get('userName')?.hasError('required')">
+                    El nombre de usuario no puede ser vacio
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('userName')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+            
+            
+            <div class="p25">
+                <label>Correo Electrónico</label>
+            </div>
+            <div class="p75">
+                
+                <input type="email" name="Name" class="form-control" formControlName="email" >
+                <div class="warning" *ngIf="userRegisterForm.get('email')?.hasError('required')">
+                    El nombre de usuario no puede ser vacio
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('email')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('email')?.hasError('email')">
+                    El valor ingresado no es un valor valido
+                </div>
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+            
+            
+            <div class="p25">
+                <label>Contraseña</label>
+            </div>
+            <div class="p75">
+                
+                <div class="passwordInput">
+                    <input [type]="showPass1 ? 'text' :'password'" name="Name" class="form-control" formControlName="password" >
+                    <button class="passwordButton" *ngIf="showPass1" (click)="chageVisibilityPass1()">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                    <button class="passwordButton" *ngIf="!showPass1" (click)="chageVisibilityPass1()">
+                        <mat-icon>visibility_off</mat-icon>
+                    </button>
+                </div>
+                
+                <div class="warning" *ngIf="userRegisterForm.get('password')?.hasError('required')">
+                    El nombre de usuario no puede ser vacio
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('password')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('password')?.hasError('minlength')">
+                    No se ha alcanzado el limite minimo
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('password')?.hasError('pattern')">
+                    Solo se permiten caracteres alfanumericos
+                </div>
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+         <pre></pre>
+        <div class="form-group">
+            
+            
+            <div class="p25">
+                <label>Confirme Contraseña</label>
+            </div>
+            <div class="p75">
+                
+                <div class="passwordInput">
+                    <input [type]="showPass2 ? 'text' :'password'" name="Name" class="form-control" formControlName="confirmPassword" >
+                    <button class="passwordButton" *ngIf="showPass2" (click)="chageVisibilityPass2()">
+                        <mat-icon>visibility</mat-icon>
+                    </button>
+                    <button class="passwordButton" *ngIf="!showPass2" (click)="chageVisibilityPass2()">
+                        <mat-icon>visibility_off</mat-icon>
+                    </button>
+                </div>
+   
+                <div class="warning" *ngIf="userRegisterForm.get('confirmPassword')?.hasError('required')">
+                    El nombre de usuario no puede ser vacio
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('confirmPassword')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('confirmPassword')?.hasError('minlength')">
+                    No se ha alcanzado el limite minimo
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('confirmPassword')?.hasError('pattern')">
+                    Solo se permiten caracteres alfanumericos
+                </div>
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+            
+            
+            <div class="p25">
+                <label>Nombre Escuderia</label>
+            </div>
+            <div class="p75">
+                
+                <input type="text" name="Name" class="form-control" formControlName="teamName" >
+                <div class="warning" *ngIf="userRegisterForm.get('teamName')?.hasError('required')">
+                    El nombre de usuario no puede ser vacio
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('teamName')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+            </div>
+
+           
+            
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+                        
+            <div class="p25">
+                <label>Pais</label>
+            </div>
+            <div class="p75">
+                <select class="form-control" formControlName="countryName">
+                   
+                    <option class="selectOption" *ngFor="let pick of countries" [value]="pick" [ngValue]="pick">
+                        {{ pick }}
+                    </option>
+
+                </select>
+                <div class="warning" *ngIf="userRegisterForm.get('countryName')?.hasError('required')">
+                    Debe seleccionar algun campeonato
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="fileCenter">
+            <div class="verticalFormGroup">
+            
+                
+                <label>Suba un archivo</label>
+                <div class="inputSpace">
+                    <mat-icon id="camera">photo_camera</mat-icon>
+                    <input type="file" name="Name" class="inputImage" formControlName="image" accept=".png,.jpg">
+                    
+                    
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('image')?.hasError('required')">
+                    Se debe de agregar el archivo
+                </div>
+                
+                
+               
+               
+    
+               
+                
+                
+            </div>
+
+
+        </div>
+       
+        <pre></pre>
+        
+        <div class="buttonContainer">
+            <button type="submit" class="formButton" >Crear</button>
+        </div>
+        
+        
+    </form>
+   
+
+</div>
