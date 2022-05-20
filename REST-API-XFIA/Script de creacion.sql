@@ -9,19 +9,22 @@ Budget float NOT NULL,
 Rules VARCHAR(1000),
 PRIMARY KEY([Key]));
 
-
 CREATE TABLE COUNTRY(
 [Name] VARCHAR(30) NOT NULL UNIQUE,
 PRIMARY KEY ([Name]));
- 
+
 Create Table [USER](
-[Firstname] varchar(30) not null,
-[Lastname] varchar(30) not null,
+Firstname varchar(30) not null,
+Lastname varchar(30) not null,
 [Password] varchar(256) not null,
+InitialDate DATE NOT NULL ,
 Email varchar(30) unique,
-Country varchar(30) not null,
+TeamsName varchar(30) not null,
+TeamsBudget float not null,
+TeamsLogo varchar(256) not null,
+CountryName varchar(30) not null,
 PRIMARY KEY (Email),
-FOREIGN KEY (Country) REFERENCES Country([Name]));
+FOREIGN KEY (CountryName) REFERENCES Country([Name])); 
 
 CREATE TABLE RACE(
 [Name] VARCHAR(30) NOT NULL,
@@ -43,6 +46,43 @@ TournamentKey varchar(6),
 Primary KEY (UserEmail,TournamentKey),
 FOREIGN KEY (TournamentKey) REFERENCES Tournament ([Key]),
 FOREIGN KEY (UserEmail) REFERENCES dbo.[User](Email));
+
+Create Table REALTEAMS(
+[Name] varchar(30) not null,
+Price float not null,
+Photo varchar(256) not null,
+PRIMARY KEY ([Name]),
+);
+
+Create Table SUBTEAMS(
+ID int NOT NULL IDENTITY,
+[Name] varchar(30) not null,
+Budget float NOT NULL,
+UserEmail varchar(30) not null,
+RealTeamsName varchar(30) not null,
+PRIMARY KEY (ID),
+FOREIGN KEY (UserEmail) REFERENCES [USER](Email),
+FOREIGN KEY (RealTeamsName) REFERENCES REALTEAMS([Name]));
+
+Create Table PILOT(
+ID int NOT NULL IDENTITY,
+Firstname varchar(30) not null,
+Lastname varchar(30) not null,
+Price float not null,
+Logo varchar(256) not null,
+CountryName varchar(30) not null,
+SubTeamsID int NOT NULL,
+RealTeamsName varchar(30) not null,
+PRIMARY KEY (ID),
+FOREIGN KEY (CountryName) REFERENCES Country([Name]),
+FOREIGN KEY (SubTeamsID) REFERENCES SUBTEAMS(ID),
+FOREIGN KEY (RealTeamsName) REFERENCES REALTEAMS([Name]));
+
+Create Table HAS_PILOT(
+SubTeamsID int NOT NULL,
+PilotID int NOT NULL,
+PRIMARY KEY (SubTeamsID , PilotID));
+
 
 INSERT INTO COUNTRY
 VALUES ('FRANCIA');

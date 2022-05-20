@@ -3,13 +3,12 @@
     public class Tournament
     {
 
-        public String? nombreCm { get; set; }
-        public String? fechaDeInicio { get; set; }
-        public String? horaDeInicio { get; set; }
-        public String? fechaDeFin { get; set; }
-        public String? horaDeFin { get; set; }
-        public String? descripcionDeReglas { get; set; }
-        public String? llave { get; set; }
-        public double presupuesto { get; set; }
+        public String? nombreCm { get; set; } = null!;
+        public String? fechaDeInicio { get; set; } = null!;
+        public String? horaDeInicio { get; set; } = null!;
+        public String? fechaDeFin { get; set; } = null!;
+        public String? horaDeFin { get; set; } = null!;
+        public String? descripcionDeReglas { get; set; } = null!;
+        public double presupuesto { get; set; } 
     }
 }

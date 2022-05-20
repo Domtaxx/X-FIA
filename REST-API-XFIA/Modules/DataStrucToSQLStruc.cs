@@ -33,7 +33,19 @@ namespace REST_API_XFIA.Modules
             toAdd.Country = race.Pais;
             return toAdd;
         }
-        
+
+        public static SQL_Model.Models.User fillSQLUser(Data_structures.User user) {
+            SQL_Model.Models.User toAdd = new SQL_Model.Models.User();
+            toAdd.CountryName = user.CountryName;
+            toAdd.TeamsName = user.TeamsName;
+            toAdd.Password = user.Password;
+            toAdd.Firstname = user.Firstname;
+            toAdd.Lastname = user.Lastname;
+            toAdd.Email = user.Email;
+            toAdd.TeamsLogo = user.TeamsLogo;
+            return toAdd;
+        }
+
         public static DateTime parseDate(string toParse)
         {
             return DateTime.Parse(DateTime.Parse(toParse).ToString("yyyy-MM-dd"));
