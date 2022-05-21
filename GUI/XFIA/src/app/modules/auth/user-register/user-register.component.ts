@@ -54,7 +54,7 @@ export class UserRegisterComponent implements OnInit {
   onFileUploaded(fileEvent:any){
     const file: File = fileEvent.target.files[0];
     if(!fileValidations.checkImage(file)){
-      this.showError("error","formato de archivo incompatible")
+      this.showError(alertMessages.rejectedImageFileHeader,alertMessages.rejectedImageFileBody)
     }
 
 
@@ -62,6 +62,9 @@ export class UserRegisterComponent implements OnInit {
   showError(header:string,body:string){
     this.swal.showError(header,body);
 
+  }
+  showSucess(header:string,body:string){
+    this.swal.showSuccess(header,body);
   }
 
 
