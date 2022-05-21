@@ -4,9 +4,8 @@ import { Validators } from '@angular/forms';
 import { NetworkService } from 'src/app/services/network.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { alertMessages } from 'src/app/const/messages';
-import { dateValidations } from 'src/app/validations/dateValidations';
-import { invalid } from '@angular/compiler/src/render3/view/util';
 import { appSettings } from 'src/app/const/appSettings';
+import { fileValidations } from 'src/app/validations/fileValidation';
 
 @Component({
   selector: 'app-user-register',
@@ -26,6 +25,7 @@ export class UserRegisterComponent implements OnInit {
   });
   showPass1=false;
   showPass2=false;
+  fileUploaded=false;
   countries:string[]=["hola"]
 
  
@@ -35,6 +35,7 @@ export class UserRegisterComponent implements OnInit {
   constructor(private backend:NetworkService,private swal:SweetAlertService) { }
 
   ngOnInit(): void {
+   
  
   }
   /*
@@ -50,7 +51,18 @@ export class UserRegisterComponent implements OnInit {
   chageVisibilityPass2(){
     this.showPass2=!this.showPass2;
   }
-  
+  onFileUploaded(fileEvent:any){
+    const file: File = fileEvent.target.files[0];
+    if(!fileValidations.checkImage(file)){
+      this.showError("error","formato de archivo incompatible")
+    }
+
+
+  }
+  showError(header:string,body:string){
+    this.swal.showError(header,body);
+
+  }
 
 
 

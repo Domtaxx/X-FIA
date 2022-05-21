@@ -9,6 +9,7 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
+import {MatInputModule} from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatFormFieldModule,
     MatOptionModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule
   ]
 })
 export class AuthModule { }

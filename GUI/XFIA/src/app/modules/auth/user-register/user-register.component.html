@@ -171,10 +171,10 @@
                 
                 <label>Suba un archivo</label>
                 <div class="inputSpace">
-                    <mat-icon id="camera">photo_camera</mat-icon>
-                    <input type="file" name="Name" class="inputImage" formControlName="image" accept=".png,.jpg">
-                    
-                    
+  
+                   
+                    <input *ngIf="fileUploaded" type="file" name="Name" (change)="onFileUploaded($event)" formControlName="image" class="inputImage" accept=".png,.jpg">
+        
                 </div>
                 <div class="warning" *ngIf="userRegisterForm.get('image')?.hasError('required')">
                     Se debe de agregar el archivo
