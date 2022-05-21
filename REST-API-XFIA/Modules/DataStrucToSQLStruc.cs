@@ -1,4 +1,5 @@
 ﻿using REST_API_XFIA.DB_Context;
+using REST_API_XFIA.Modules.Service;
 
 namespace REST_API_XFIA.Modules
 {
@@ -34,7 +35,7 @@ namespace REST_API_XFIA.Modules
             return toAdd;
         }
 
-        public static SQL_Model.Models.User fillSQLUser(Data_structures.User user) {
+        public static SQL_Model.Models.User fillSQLUser(Data_structures.User user, IStorageService _storageService) {
             SQL_Model.Models.User toAdd = new SQL_Model.Models.User();
             toAdd.CountryName = user.CountryName;
             toAdd.TeamsName = user.TeamsName;
@@ -42,7 +43,7 @@ namespace REST_API_XFIA.Modules
             toAdd.Firstname = user.Firstname;
             toAdd.Lastname = user.Lastname;
             toAdd.Email = user.Email;
-            toAdd.TeamsLogo = user.TeamsLogo;
+            toAdd.TeamsLogo = _storageService.Upload(user.TeamsLogo);
             return toAdd;
         }
 

@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using REST_API_XFIA.DB_Context;
 using REST_API_XFIA.Modules;
+using REST_API_XFIA.Modules.Service;
 
 namespace REST_API_XFIA.Controllers
 {
@@ -9,6 +10,12 @@ namespace REST_API_XFIA.Controllers
     public class APIUsers : Controller
     {
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
+        private readonly IStorageService _storageService;
+
+        public APIUsers(IStorageService storageService) {
+            _storageService = storageService;
+        }
+
         [HttpGet]
         public ActionResult listAllUsers()
         {
@@ -17,12 +24,11 @@ namespace REST_API_XFIA.Controllers
 
         [Route("Agregar")]
         [HttpPost]
-        public ActionResult AddUser([FromBody]Data_structures.User user) { 
-            SQL_Model.Models.User toAdd = DataStrucToSQLStruc.fillSQLUser(user);
+        public ActionResult AddUser([FromForm]Data_structures.User user) { 
+            SQL_Model.Models.User toAdd = DataStrucToSQLStruc.fillSQLUser(user,_storageService);
             Db.Add(toAdd);
             Db.SaveChanges();
             return Ok(JsonConvert.SerializeObject("Exito"));
         }
-
     }
 }
