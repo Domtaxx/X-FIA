@@ -14,7 +14,7 @@ import { fileValidations } from 'src/app/validations/fileValidation';
 })
 export class UserRegisterComponent implements OnInit {
 
-  userRegisterForm=new FormGroup({
+    userRegisterForm=new FormGroup({
     userName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
     email:new FormControl('',[Validators.required,Validators.email,Validators.maxLength(256)]),
     password:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*)*')]),

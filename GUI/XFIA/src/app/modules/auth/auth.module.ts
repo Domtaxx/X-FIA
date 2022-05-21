@@ -10,10 +10,12 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatOptionModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
-
+import { FullRegisterComponent } from './full-register/full-register.component';
+import {MatStepperModule} from '@angular/material/stepper';
 @NgModule({
   declarations: [
-    UserRegisterComponent
+    UserRegisterComponent,
+    FullRegisterComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,8 @@ import {MatInputModule} from '@angular/material/input';
     MatFormFieldModule,
     MatOptionModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    MatStepperModule
   ]
 })
 export class AuthModule { }

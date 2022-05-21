@@ -1,0 +1,10 @@
+
+.fullDiv{
+    background-color: white;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+::ng-deep .mat-horizontal-stepper-content[aria-expanded="false"] {
+    width: 0px !important;
+  }
