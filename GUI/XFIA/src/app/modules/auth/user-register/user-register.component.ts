@@ -32,7 +32,7 @@ export class UserRegisterComponent implements OnInit {
   errorCode={
     simultaneousTournament:1
   }
-  constructor(private backend:NetworkService,private swal:SweetAlertService) { }
+  constructor(private swal:SweetAlertService) { }
 
   ngOnInit(): void {
    

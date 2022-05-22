@@ -3,12 +3,12 @@
 <div class="fullDiv">
     <div class="stepperDiv">
         <mat-horizontal-stepper [linear]="false" #stepper>
-            <mat-step  [stepControl]="userInfo.userRegisterForm" label="Soy 1">
+            <mat-step  [stepControl]="userInfo.userRegisterForm" label="Datos usuario">
                 <app-user-register #userInfo></app-user-register>
                 <button  (click)="action()"></button>
             </mat-step>
-            <mat-step [stepControl]="userInfo1.userRegisterForm" class="step" label="Soy 2">
-                <app-user-register #userInfo1></app-user-register>
+            <mat-step [stepControl]="team1.teamForm" label="Equipo 1" >
+                <app-register-team #team1></app-register-team>
             </mat-step>
             
         </mat-horizontal-stepper>

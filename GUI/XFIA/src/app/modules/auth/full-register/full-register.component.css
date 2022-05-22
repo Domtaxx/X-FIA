@@ -3,6 +3,11 @@
     background-color: white;
     padding-left: 20%;
     padding-right: 20%;
+    min-height: 100%;
+    overflow-y: auto;
+}
+.stepperDiv{
+    min-height: 100%;
 }
 
 ::ng-deep .mat-horizontal-stepper-content[aria-expanded="false"] {

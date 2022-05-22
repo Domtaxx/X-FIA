@@ -12,10 +12,14 @@ import { MatIconModule } from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import { FullRegisterComponent } from './full-register/full-register.component';
 import {MatStepperModule} from '@angular/material/stepper';
+import { RegisterTeamComponent } from './register-team/register-team.component';
+import {MatButtonModule} from '@angular/material/button';
+
 @NgModule({
   declarations: [
     UserRegisterComponent,
-    FullRegisterComponent
+    FullRegisterComponent,
+    RegisterTeamComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +32,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatOptionModule,
     MatIconModule,
     MatInputModule,
-    MatStepperModule
+    MatStepperModule,
+    MatButtonModule
   ]
 })
 export class AuthModule { }
