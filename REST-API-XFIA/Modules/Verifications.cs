@@ -167,6 +167,14 @@ namespace REST_API_XFIA.Modules
             }
             return false;
         }
+        public static bool VerifyIfTournamentsActiveOrFuture()
+        {
+            List<SQL_Model.Models.Tournament> tournaments = (List<SQL_Model.Models.Tournament>)Db.Tournaments.Where(T => T.InitialDate >= DateTime.Now).ToList();
+            if (tournaments.Count()>0) {
+                return false;
+            }
+            return true;
+        }
 
     }
 }

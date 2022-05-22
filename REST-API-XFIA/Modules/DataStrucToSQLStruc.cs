@@ -76,6 +76,11 @@ namespace REST_API_XFIA.Modules
             return subteams;
         }
 
+        public static SQL_Model.Models.Tournament GetActiveTournament()
+        {
+            return Db.Tournaments.FirstOrDefault(T => T.InitialDate >= DateTime.Now);
+        }
+
         public static DateTime parseDate(string toParse)
         {
             return DateTime.Parse(DateTime.Parse(toParse).ToString("yyyy-MM-dd"));
