@@ -27,7 +27,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(4);
             }
         }
         [HttpPost]

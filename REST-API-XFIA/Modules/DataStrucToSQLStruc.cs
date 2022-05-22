@@ -35,7 +35,7 @@ namespace REST_API_XFIA.Modules
             return toAdd;
         }
 
-        public static SQL_Model.Models.User fillSQLUser(Data_structures.User user, IStorageService _storageService) {
+        public static SQL_Model.Models.User fillSQLUser(Data_structures.AllUserInfo user, IStorageService _storageService) {
             SQL_Model.Models.User toAdd = new SQL_Model.Models.User();
             toAdd.CountryName = user.CountryName;
             toAdd.TeamsName = user.TeamsName;
@@ -45,6 +45,35 @@ namespace REST_API_XFIA.Modules
             toAdd.Email = user.Email;
             toAdd.TeamsLogo = _storageService.Upload(user.TeamsLogo);
             return toAdd;
+        }
+        public static List<SQL_Model.Models.Subteam> fillSubteams(Data_structures.AllUserInfo userInfo)
+        {
+            List<SQL_Model.Models.Subteam> subteams = new List<SQL_Model.Models.Subteam>();
+            SQL_Model.Models.Subteam team1 = new SQL_Model.Models.Subteam();
+            SQL_Model.Models.Subteam team2 = new SQL_Model.Models.Subteam();
+
+            team1.RealTeamsName = userInfo.Car1;
+            team1.Name = userInfo.NameSubteam1;
+            team1.UserEmail = userInfo.Email;
+            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot1Subteam1).Single());
+            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot2Subteam1).Single());
+            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot3Subteam1).Single());
+            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot4Subteam1).Single());
+            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot5Subteam1).Single());
+
+            team2.RealTeamsName = userInfo.Car2;
+            team2.Name = userInfo.NameSubteam2;
+            team2.UserEmail = userInfo.Email;
+            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot1Subteam2).Single());
+            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot2Subteam2).Single());
+            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot3Subteam2).Single());
+            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot4Subteam2).Single());
+            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot5Subteam2).Single());
+
+            subteams.Add(team1);
+            subteams.Add(team2);
+
+            return subteams;
         }
 
         public static DateTime parseDate(string toParse)

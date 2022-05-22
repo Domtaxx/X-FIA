@@ -13,15 +13,28 @@ namespace REST_API_XFIA.Controllers
         [HttpGet]
         public ActionResult ListAll()
         {
-            return Ok(JsonConvert.SerializeObject(Db.Pilots.ToList()));
+            try {
+                return Ok(JsonConvert.SerializeObject(Db.Pilots.ToList().OrderBy(p => p.Lastname)));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
         }
 
         [Route("Pilotos/Pages")]
         [HttpGet]
         public ActionResult ListPilotByPage(int page, int amountByPage)
         {
-            List<SQL_Model.Models.Pilot> pilotList = Verifications.getPilotSubList(Db.Pilots.ToList(),page,amountByPage);
-            return Ok(JsonConvert.SerializeObject(pilotList));
+            try
+            {
+                List<SQL_Model.Models.Pilot> pilotList = Verifications.getPilotSubList(Db.Pilots.ToList(), page, amountByPage);
+                return Ok(JsonConvert.SerializeObject(pilotList));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
         }
 
         

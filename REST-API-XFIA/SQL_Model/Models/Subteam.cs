@@ -12,12 +12,12 @@ namespace REST_API_XFIA.SQL_Model.Models
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
-        public double Budget { get; set; }
         public string UserEmail { get; set; } = null!;
         public string RealTeamsName { get; set; } = null!;
 
         public virtual Realteam RealTeamsNameNavigation { get; set; } = null!;
         public virtual User UserEmailNavigation { get; set; } = null!;
+
         public virtual ICollection<Pilot> Pilots { get; set; }
     }
 }

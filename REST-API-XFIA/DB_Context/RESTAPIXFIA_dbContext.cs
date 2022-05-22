@@ -18,7 +18,6 @@ namespace REST_API_XFIA.DB_Context
         }
 
         public virtual DbSet<Country> Countries { get; set; } = null!;
-        public virtual DbSet<HasPilot> HasPilots { get; set; } = null!;
         public virtual DbSet<Pilot> Pilots { get; set; } = null!;
         public virtual DbSet<Race> Races { get; set; } = null!;
         public virtual DbSet<Realteam> Realteams { get; set; } = null!;
@@ -40,28 +39,16 @@ namespace REST_API_XFIA.DB_Context
             modelBuilder.Entity<Country>(entity =>
             {
                 entity.HasKey(e => e.Name)
-                    .HasName("PK__COUNTRY__737584F73C3A9158");
+                    .HasName("PK__COUNTRY__737584F71FE6E6F4");
 
                 entity.ToTable("COUNTRY");
 
-                entity.HasIndex(e => e.Name, "UQ__COUNTRY__737584F6E8D6AB24")
+                entity.HasIndex(e => e.Name, "UQ__COUNTRY__737584F693150D41")
                     .IsUnique();
 
                 entity.Property(e => e.Name)
                     .HasMaxLength(30)
                     .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<HasPilot>(entity =>
-            {
-                entity.HasKey(e => new { e.SubTeamsId, e.PilotId })
-                    .HasName("PK__HAS_PILO__0F71292FB176F4EE");
-
-                entity.ToTable("HAS_PILOT");
-
-                entity.Property(e => e.SubTeamsId).HasColumnName("SubTeamsID");
-
-                entity.Property(e => e.PilotId).HasColumnName("PilotID");
             });
 
             modelBuilder.Entity<Pilot>(entity =>
@@ -82,39 +69,28 @@ namespace REST_API_XFIA.DB_Context
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Logo)
-                    .HasMaxLength(256)
-                    .IsUnicode(false);
+                entity.Property(e => e.Photo).IsUnicode(false);
 
                 entity.Property(e => e.RealTeamsName)
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.SubTeamsId).HasColumnName("SubTeamsID");
-
                 entity.HasOne(d => d.CountryNameNavigation)
                     .WithMany(p => p.Pilots)
                     .HasForeignKey(d => d.CountryName)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PILOT__CountryNa__5D95E53A");
+                    .HasConstraintName("FK__PILOT__CountryNa__345EC57D");
 
                 entity.HasOne(d => d.RealTeamsNameNavigation)
                     .WithMany(p => p.Pilots)
                     .HasForeignKey(d => d.RealTeamsName)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PILOT__RealTeams__5F7E2DAC");
-
-                entity.HasOne(d => d.SubTeams)
-                    .WithMany(p => p.Pilots)
-                    .HasForeignKey(d => d.SubTeamsId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__PILOT__SubTeamsI__5E8A0973");
+                    .HasConstraintName("FK__PILOT__RealTeams__3552E9B6");
             });
 
             modelBuilder.Entity<Race>(entity =>
             {
                 entity.HasKey(e => new { e.Name, e.TournamentKey })
-                    .HasName("PK__RACE__D54A887E55C20213");
+                    .HasName("PK__RACE__D54A887EBE6E66AA");
 
                 entity.ToTable("RACE");
 
@@ -142,19 +118,19 @@ namespace REST_API_XFIA.DB_Context
                     .WithMany(p => p.Races)
                     .HasForeignKey(d => d.Country)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RACE__Country__51300E55");
+                    .HasConstraintName("FK__RACE__Country__27F8EE98");
 
                 entity.HasOne(d => d.TournamentKeyNavigation)
                     .WithMany(p => p.Races)
                     .HasForeignKey(d => d.TournamentKey)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__RACE__Tournament__503BEA1C");
+                    .HasConstraintName("FK__RACE__Tournament__2704CA5F");
             });
 
             modelBuilder.Entity<Realteam>(entity =>
             {
                 entity.HasKey(e => e.Name)
-                    .HasName("PK__REALTEAM__737584F773FD1AA6");
+                    .HasName("PK__REALTEAM__737584F727832C05");
 
                 entity.ToTable("REALTEAMS");
 
@@ -162,9 +138,7 @@ namespace REST_API_XFIA.DB_Context
                     .HasMaxLength(30)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Photo)
-                    .HasMaxLength(256)
-                    .IsUnicode(false);
+                entity.Property(e => e.Photo).IsUnicode(false);
             });
 
             modelBuilder.Entity<Subteam>(entity =>
@@ -189,23 +163,40 @@ namespace REST_API_XFIA.DB_Context
                     .WithMany(p => p.Subteams)
                     .HasForeignKey(d => d.RealTeamsName)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SUBTEAMS__RealTe__5AB9788F");
+                    .HasConstraintName("FK__SUBTEAMS__RealTe__3B0BC30C");
 
                 entity.HasOne(d => d.UserEmailNavigation)
                     .WithMany(p => p.Subteams)
                     .HasForeignKey(d => d.UserEmail)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__SUBTEAMS__UserEm__59C55456");
+                    .HasConstraintName("FK__SUBTEAMS__UserEm__3A179ED3");
+
+                entity.HasMany(d => d.Pilots)
+                    .WithMany(p => p.SubTeams)
+                    .UsingEntity<Dictionary<string, object>>(
+                        "HasPilot",
+                        l => l.HasOne<Pilot>().WithMany().HasForeignKey("PilotId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__HAS_PILOT__Pilot__40C49C62"),
+                        r => r.HasOne<Subteam>().WithMany().HasForeignKey("SubTeamsId").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__HAS_PILOT__SubTe__3FD07829"),
+                        j =>
+                        {
+                            j.HasKey("SubTeamsId", "PilotId").HasName("PK__HAS_PILO__0F71292F4D262DDE");
+
+                            j.ToTable("HAS_PILOT");
+
+                            j.IndexerProperty<int>("SubTeamsId").HasColumnName("SubTeamsID");
+
+                            j.IndexerProperty<int>("PilotId").HasColumnName("PilotID");
+                        });
             });
 
             modelBuilder.Entity<Tournament>(entity =>
             {
                 entity.HasKey(e => e.Key)
-                    .HasName("PK__TOURNAME__C41E028825FF2673");
+                    .HasName("PK__TOURNAME__C41E028874A29F40");
 
                 entity.ToTable("TOURNAMENT");
 
-                entity.HasIndex(e => e.Key, "UQ__TOURNAME__C41E028973927EE4")
+                entity.HasIndex(e => e.Key, "UQ__TOURNAME__C41E0289A7FE25F2")
                     .IsUnique();
 
                 entity.Property(e => e.Key)
@@ -228,11 +219,11 @@ namespace REST_API_XFIA.DB_Context
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.Email)
-                    .HasName("PK__USER__A9D1053540EEDA8A");
+                    .HasName("PK__USER__A9D10535124FD5E2");
 
                 entity.ToTable("USER");
 
-                entity.HasIndex(e => e.Email, "UQ__USER__A9D105347E00C3BA")
+                entity.HasIndex(e => e.Email, "UQ__USER__A9D1053475402906")
                     .IsUnique();
 
                 entity.Property(e => e.Email)
@@ -265,19 +256,19 @@ namespace REST_API_XFIA.DB_Context
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.CountryName)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__USER__CountryNam__4D5F7D71");
+                    .HasConstraintName("FK__USER__CountryNam__24285DB4");
 
                 entity.HasMany(d => d.TournamentKeys)
                     .WithMany(p => p.UserEmails)
                     .UsingEntity<Dictionary<string, object>>(
-                        "UserTournament",
-                        l => l.HasOne<Tournament>().WithMany().HasForeignKey("TournamentKey").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__UserTourn__Tourn__540C7B00"),
-                        r => r.HasOne<User>().WithMany().HasForeignKey("UserEmail").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__UserTourn__UserE__55009F39"),
+                        "Publicleague",
+                        l => l.HasOne<Tournament>().WithMany().HasForeignKey("TournamentKey").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__PUBLICLEA__Tourn__2AD55B43"),
+                        r => r.HasOne<User>().WithMany().HasForeignKey("UserEmail").OnDelete(DeleteBehavior.ClientSetNull).HasConstraintName("FK__PUBLICLEA__UserE__2BC97F7C"),
                         j =>
                         {
-                            j.HasKey("UserEmail", "TournamentKey").HasName("PK__UserTour__AE5C817002F83E80");
+                            j.HasKey("UserEmail", "TournamentKey").HasName("PK__PUBLICLE__AE5C8170058F20E5");
 
-                            j.ToTable("UserTournaments");
+                            j.ToTable("PUBLICLEAGUE");
 
                             j.IndexerProperty<string>("UserEmail").HasMaxLength(30).IsUnicode(false);
 

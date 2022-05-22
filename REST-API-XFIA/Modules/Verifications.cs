@@ -136,6 +136,37 @@ namespace REST_API_XFIA.Modules
             }
             return RealTeamsInPage;
         }
+        public static bool VerifyIfUserHasAccount(Data_structures.AllUserInfo userInfo)
+        {
+            var usersWithSameEmail = Db.Users.Where(U => U.Email == userInfo.Email).ToList();
+            if (usersWithSameEmail.Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool VerifyIfTeamNameIsRepeated(Data_structures.AllUserInfo userInfo)
+        {
+            var invalidTeams = Db.Users.Where(U => U.TeamsName == userInfo.TeamsName ).ToList();
+            if(invalidTeams.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool VerifyIfSubTeamsNamesAreRepeated(Data_structures.AllUserInfo userInfo)
+        {
+            if(userInfo.NameSubteam1 == userInfo.NameSubteam2)
+            {
+                return true;
+            }
+            var invalidteams = Db.Subteams.Where(St => St.UserEmail == userInfo.Email && (St.Name == userInfo.NameSubteam1 || St.Name == userInfo.NameSubteam2)).ToList();
+            if (invalidteams.Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
 
     }
 }

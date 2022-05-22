@@ -11,7 +11,14 @@ namespace REST_API_XFIA.Controllers
         [HttpGet]
         public ActionResult ListAll()
         {
-            return Ok(JsonConvert.SerializeObject(Db.Realteams.ToList()));
+            try
+            {
+                return Ok(JsonConvert.SerializeObject(Db.Realteams.ToList()));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
         }
     }
 }

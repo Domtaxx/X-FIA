@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using REST_API_XFIA.DB_Context;
 using REST_API_XFIA.Modules;
@@ -19,16 +20,62 @@ namespace REST_API_XFIA.Controllers
         [HttpGet]
         public ActionResult listAllUsers()
         {
-            return Ok(Db.Users.ToList());
+            try
+            {
+                return Ok(Db.Users.ToList());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
         }
 
         [Route("Agregar")]
         [HttpPost]
-        public ActionResult AddUser([FromForm]Data_structures.User user) { 
-            SQL_Model.Models.User toAdd = DataStrucToSQLStruc.fillSQLUser(user,_storageService);
-            Db.Add(toAdd);
-            Db.SaveChanges();
-            return Ok(JsonConvert.SerializeObject("Exito"));
+        public ActionResult AddUser([FromForm]Data_structures.AllUserInfo allInfo) {
+            try
+            {
+                if (Verifications.VerifyIfUserHasAccount(allInfo))
+                {
+                    return BadRequest(1);
+                }
+                if (Verifications.VerifyIfTeamNameIsRepeated(allInfo))
+                {
+                    return BadRequest(2);
+                }
+                if (Verifications.VerifyIfSubTeamsNamesAreRepeated(allInfo)){
+                    return BadRequest(3);
+                }
+                SQL_Model.Models.User toAdd = DataStrucToSQLStruc.fillSQLUser(allInfo, _storageService);
+                Db.Users.Add(toAdd);
+                Db.SaveChanges();
+
+                List<SQL_Model.Models.Subteam> subteams = DataStrucToSQLStruc.fillSubteams(allInfo);
+                Db.Subteams.Add(subteams[0]);
+                Db.Subteams.Add(subteams[1]);
+                Db.SaveChanges();
+
+                return Ok(0);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
+        }
+
+        [Route("SubEquipos")]
+        [HttpGet]
+        public IActionResult Get(string email)
+        {
+            try
+            {
+                return Ok(JsonConvert.SerializeObject(Db.Subteams.Where(st => st.UserEmail == email).Include(st => st.Pilots)));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
+            
         }
     }
 }
