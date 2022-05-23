@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using REST_API_XFIA.DB_Context;
 using REST_API_XFIA.Modules;
@@ -14,7 +15,7 @@ namespace REST_API_XFIA.Controllers
         public ActionResult ListAll()
         {
             try {
-                return Ok(JsonConvert.SerializeObject(Db.Pilots.ToList().OrderBy(p => p.Lastname)));
+                return Ok(JsonConvert.SerializeObject(Db.Pilots.Include(P=>P.CountryNameNavigation).Include(P=>P.RealTeamsNameNavigation).ToList().OrderBy(p => p.Lastname)));
             }
             catch (Exception e)
             {
