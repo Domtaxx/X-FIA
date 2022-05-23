@@ -22,4 +22,7 @@ export interface  totalBudget{
     budget:number;
     leftBudget:number;
 }
+export interface country{
+    name:string;
+}
 

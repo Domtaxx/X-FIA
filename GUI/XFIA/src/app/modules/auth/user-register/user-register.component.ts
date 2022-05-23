@@ -8,7 +8,9 @@ import { appSettings } from 'src/app/const/appSettings';
 import { fileValidations } from 'src/app/validations/fileValidation';
 import { matchPassword } from 'src/app/validations/customFieldValidations';
 import { fileProcessFuncion } from 'src/app/functions/fileprocess';
+import { country } from 'src/app/interface/interfaces';
 @Component({
+  
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
   styleUrls: ['./user-register.component.css']
@@ -28,16 +30,17 @@ export class UserRegisterComponent implements OnInit {
   showPass1=false;
   showPass2=false;
   fileUploaded=false;
-  countries:string[]=["hola"]
+  countries:string[]=[]
   image?:string="";
 
  
   errorCode={
     simultaneousTournament:1
   }
-  constructor(private swal:SweetAlertService) { }
+  constructor(private swal:SweetAlertService,private backend:NetworkService) { }
 
   ngOnInit(): void {
+    this.getCountries()
    
  
   }
@@ -87,6 +90,18 @@ export class UserRegisterComponent implements OnInit {
   resetImage(){
     this.userRegisterForm.controls['image'].reset();
     this.fileUploaded=false;
+  }
+  getCountries(){
+    this.backend.get_request(appSettings.countryRoute,{}).subscribe(
+      (result:country[])=>{
+        var countriesNames=[];
+        for(var i=0;i<result.length;i++){
+          countriesNames.push(result[i].name)
+        }
+        this.countries=countriesNames;
+        this.countries=[...this.countries]
+      }
+    )
   }
 
 

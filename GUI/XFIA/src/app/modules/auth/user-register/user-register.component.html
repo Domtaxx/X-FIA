@@ -37,7 +37,7 @@
                 
                 <input type="email" name="Name" class="form-control" formControlName="email" >
                 <div class="warning" *ngIf="userRegisterForm.get('email')?.hasError('required')">
-                    El nombre de usuario no puede ser vacio
+                    El correo no puede ser vacio
                 </div>
                 <div class="warning" *ngIf="userRegisterForm.get('email')?.hasError('maxlength')">
                     Se ha superado el largo máximo
@@ -69,7 +69,7 @@
                 </div>
                 
                 <div class="warning" *ngIf="userRegisterForm.get('password')?.hasError('required')">
-                    El nombre de usuario no puede ser vacio
+                    La contraseña no puede ser vacia
                 </div>
                 <div class="warning" *ngIf="userRegisterForm.get('password')?.hasError('maxlength')">
                     Se ha superado el largo máximo
@@ -105,7 +105,7 @@
                 </div>
    
                 <div class="warning" *ngIf="userRegisterForm.get('confirmPassword')?.hasError('required')">
-                    El nombre de usuario no puede ser vacio
+                    La contraseña no puede ser vacia
                 </div>
                 <div class="warning" *ngIf="userRegisterForm.get('confirmPassword')?.hasError('maxlength')">
                     Se ha superado el largo máximo
@@ -115,6 +115,9 @@
                 </div>
                 <div class="warning" *ngIf="userRegisterForm.get('confirmPassword')?.hasError('pattern')">
                     Solo se permiten caracteres alfanumericos
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.hasError('noMatch')">
+                    Las contraseñas no coinciden
                 </div>
             </div>
             
@@ -131,7 +134,7 @@
                 
                 <input type="text" name="Name" class="form-control" formControlName="teamName" >
                 <div class="warning" *ngIf="userRegisterForm.get('teamName')?.hasError('required')">
-                    El nombre de usuario no puede ser vacio
+                    El nombre de la escuderia no puede ser vacio
                 </div>
                 <div class="warning" *ngIf="userRegisterForm.get('teamName')?.hasError('maxlength')">
                     Se ha superado el largo máximo
@@ -157,7 +160,7 @@
 
                 </select>
                 <div class="warning" *ngIf="userRegisterForm.get('countryName')?.hasError('required')">
-                    Debe seleccionar algun campeonato
+                    Debe seleccionar algun Pais
                 </div>
                 
             </div>

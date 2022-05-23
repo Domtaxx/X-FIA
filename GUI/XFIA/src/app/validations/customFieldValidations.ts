@@ -3,7 +3,7 @@ import { totalBudget } from '../interface/interfaces';
 export function matchPassword(fieldName1:string,fieldName2:string){
     return (control:AbstractControl):ValidationErrors|null =>{
         if(control.get(fieldName1)?.value!=control.get(fieldName2)?.value){
-            return {noMatch:control}
+            return {noMatch:true}
         }
         else return null;
     }
@@ -18,7 +18,7 @@ export function pilotsDoesntMatch(numberOfPilots:number){
             (a,b)=>a-b
         );
         if(matchInOrderedArray(pilotArray)){
-            return{noMatch:control}
+            return{repitedPilot:true}
         }
         return null;
     }
@@ -36,7 +36,7 @@ function matchInOrderedArray(array:any[]):boolean{
 export function overBudget(budget:totalBudget){
     return (control:AbstractControl)=>{
         if(budget.leftBudget<0){
-            return {noMatch:control}
+            return {overBudget:true}
         }
         else return null;
     }
