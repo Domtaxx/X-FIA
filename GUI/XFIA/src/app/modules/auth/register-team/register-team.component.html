@@ -1,0 +1,103 @@
+
+
+<div class="container">
+  
+    <div class="formDivContainer">
+    
+    <input id="teamName" type="text" value="Equipo 1" formControlName="teamName">
+    <h2 style="margin-top: 5%;">Presupuesto restante</h2>
+    <h1 [ngStyle]="outBudget?{'color':'red'}:{'color':'green'}">{{cost.leftBudget+" Millones"}}</h1>
+    <h2 style="color:black">{{memberArray[memberIndex]}}</h2>
+        <form class ="registerForm"(ngSubmit)="null" [formGroup]="teamForm" >
+        
+            <div class="formDiv">
+                <div class="buttonShiftArea">
+                    <button class="btnLeft" aria-label="left" (click)="indexDown()">
+                        <mat-icon  class="buttonIcon" [inline]="true">
+                            keyboard_double_arrow_left
+                        </mat-icon>
+                    
+                     </button>
+    
+                </div>
+                
+    
+                <div class="memberSelector">
+                    
+                    
+                    <mat-form-field appearance="fill" >
+                        <mat-label>{{inputHintArray[memberIndex]}}
+                        </mat-label>
+                        <mat-select *ngIf="memberIndex==pilot1Index"  formControlName="pilot1" (valueChange)="onChangedInput($event)" >
+                          <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                            {{pilot.Firstname+" "+pilot.Lastname}}
+                          </mat-option>
+                        </mat-select>
+                        <mat-select *ngIf="memberIndex==pilot2Index" formControlName="pilot2" (valueChange)="onChangedInput($event)">
+                            <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                              {{pilot.Firstname+" "+pilot.Lastname}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-select *ngIf="memberIndex==pilot3Index" formControlName="pilot3" (valueChange)="onChangedInput($event)">
+                            <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                              {{pilot.Firstname+" "+pilot.Lastname}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-select *ngIf="memberIndex==pilot4Index" formControlName="pilot4" (valueChange)="onChangedInput($event)">
+                            <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                              {{pilot.Firstname+" "+pilot.Lastname}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-select *ngIf="memberIndex==pilot5Index" formControlName="pilot5" (valueChange)="onChangedInput($event)">
+                            <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                              {{pilot.Firstname+" "+pilot.Lastname}}
+                            </mat-option>
+                          </mat-select>
+                          <mat-select *ngIf="memberIndex==carIndex" formControlName="car" (valueChange)="onChangedInput($event)">
+                            <mat-option *ngFor='let car of availableCars' value={{car.Name}} >
+                              {{car.Name}}
+                            </mat-option>
+                          </mat-select>
+                      </mat-form-field>
+                    <div class="card">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="currentCountryImage" *ngIf="memberIndex<carIndex">
+                            <h3>{{currentName}}</h3>
+                            <img class="logo" [src]="currentTeamImage" *ngIf="memberIndex<carIndex">
+                        </div>
+                        
+                        <img class='image' [src]="currentImage">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +currentPrice+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                   
+                </div>
+                <div class="buttonShiftArea">
+                    <button class="btnRight" aria-label="right" (click)="indexUp()">
+                        <mat-icon  class="buttonIcon" [inline]="true">
+                            keyboard_double_arrow_right
+                        </mat-icon>
+                    
+                </button>
+               
+    
+                </div>
+                
+    
+            </div>
+    
+    
+    
+            
+        </form>
+    </div>
+    
+   
+
+</div>
