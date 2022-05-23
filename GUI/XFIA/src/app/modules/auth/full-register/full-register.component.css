@@ -13,3 +13,29 @@
 ::ng-deep .mat-horizontal-stepper-content[aria-expanded="false"] {
     width: 0px !important;
   }
+
+.StepBar{
+    
+    width: 100%;
+    background-color: red;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+	align-content: center;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.buttonStep{
+    
+    height: 7vh;
+    width: 20%;
+    border-radius: 20px;
+    background-color:#223593 ;
+    font-size: medium;
+    color: white;
+    font-weight: bold;
+    font-family:'Rockwell';
+}

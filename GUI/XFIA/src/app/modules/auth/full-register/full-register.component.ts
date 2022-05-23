@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UserRegisterComponent } from '../user-register/user-register.component';
 import { RegisterTeamComponent } from '../register-team/register-team.component';
+import { MatStepper } from '@angular/material/stepper';
 @Component({
   selector: 'app-full-register',
   templateUrl: './full-register.component.html',
@@ -14,9 +15,17 @@ export class FullRegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  action(){
+  submit(){
     console.log(this.userForm.userRegisterForm.controls['userName'].value);
 
+  }
+  
+  goBack(stepper: MatStepper){
+    stepper.previous();
+}
+
+  goForward(stepper: MatStepper){
+      stepper.next();
   }
 
 

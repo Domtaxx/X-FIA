@@ -5,13 +5,25 @@
         <mat-horizontal-stepper [linear]="true" #stepper>
             <mat-step  [stepControl]="userInfo.userRegisterForm" label="Datos usuario">
                 <app-user-register #userInfo></app-user-register>
-                <button  (click)="action()"></button>
+                <div class="StepBar">
+                    <button disabled style="opacity: 0;"  class="buttonStep">Atrás</button>
+                    <button  class="buttonStep"(click)="goForward(stepper)">Siguiente</button>
+                </div>
+                
             </mat-step>
             <mat-step [stepControl]="team1.teamForm" label="Equipo 1" >
                 <app-register-team #team1></app-register-team>
+                <div class="StepBar">
+                    <button  class="buttonStep"(click)="goBack(stepper)">Atrás</button>
+                    <button  class="buttonStep"(click)="goForward(stepper)">Siguiente</button>
+                </div>
             </mat-step>
             <mat-step [stepControl]="team2.teamForm" label="Equipo 2" >
                 <app-register-team #team2></app-register-team>
+                <div class="StepBar">
+                    <button  class="buttonStep"(click)="goBack(stepper)">Atrás</button>
+                    <button  class="buttonStep"(click)="submit()">Finalizar</button>
+                </div>
             </mat-step>
             
         </mat-horizontal-stepper>
