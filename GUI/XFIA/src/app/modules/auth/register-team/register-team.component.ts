@@ -26,6 +26,8 @@ export class RegisterTeamComponent implements OnInit {
   currentImage?:string;
   currentName?:string;
   currentPrice?:number;
+  currentCountryImage?:string;
+  currentTeamImage?:string;
   outBudget:boolean;
   cost:totalBudget={
     budget:0,
@@ -38,6 +40,7 @@ export class RegisterTeamComponent implements OnInit {
   pilot5Index=4;
   carIndex=5;
   teamForm= new FormGroup({
+    teamName:new FormControl('',[Validators.required]),
     pilot1:new FormControl('',[Validators.required]),
     pilot2:new FormControl('',[Validators.required]),
     pilot3:new FormControl('',[Validators.required]),
@@ -72,9 +75,11 @@ export class RegisterTeamComponent implements OnInit {
     this.availablePilots=[];
     this.availableCars=[];
     this.currentImage=appSettings.defaultPilotPhotoRoute;
+    this.currentCountryImage=appSettings.defaultCountryPhoto;
+    this.currentTeamImage=appSettings.defaultTeamPhoto;
     
     
-    this.currentName=""
+    this.currentName=appSettings.defaultPilotName;
     this.currentPrice=0;
     this.outBudget=false;
     
@@ -83,8 +88,9 @@ export class RegisterTeamComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cost.budget=23
-    this.cost.leftBudget=23;
+    this.cost.budget=0
+    this.cost.leftBudget=0;
+    this.getBudget();
     this.getCars();
     this.getRunners();
 
@@ -105,17 +111,22 @@ export class RegisterTeamComponent implements OnInit {
   }
   updateMetadata(){
     this.currentImage=appSettings.defaultPilotPhotoRoute;
-    this.currentName=""
+    this.currentCountryImage=appSettings.defaultCountryPhoto;
+    this.currentTeamImage=appSettings.defaultTeamPhoto;
     this.currentPrice=0;
     if(this.memberIndex<this.carIndex){
+      this.currentName=appSettings.defaultPilotName;
       if(this.selectedPilots.get(this.memberIndex)!=undefined){
         var currentPilot=this.selectedPilots.get(this.memberIndex);
         this.currentImage= currentPilot?.Photo;
         this.currentName=currentPilot?.Firstname+ " "+ currentPilot?.Lastname;
         this.currentPrice=currentPilot?.Price;
+        this.currentCountryImage=currentPilot?.CountryNameNavigation.Photo;
+        this.currentTeamImage=currentPilot?.RealTeamsNameNavigation.Logo
       }
     }
     else{
+      this.currentName=appSettings.defaultCarName;
       if(this.selectedCar!=undefined){
         this.currentImage=this.selectedCar.Photo;
         this.currentName=this.selectedCar.Name;
@@ -142,6 +153,16 @@ export class RegisterTeamComponent implements OnInit {
 
       }
     )
+  }
+  getBudget(){
+    this.backend.get_request(appSettings.currentBudgetRoute,{}).subscribe(
+      (sucess)=>{
+        this.cost.budget=sucess;
+        this.cost.leftBudget=sucess;
+        
+      }
+    )
+
   }
   onChangedInput(value:any){
    if(this.memberIndex<this.memberArray.length-1){

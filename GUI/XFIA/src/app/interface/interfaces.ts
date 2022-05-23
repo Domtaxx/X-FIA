@@ -10,7 +10,17 @@ export interface pilotInterface{
     Lastname:string;
     Photo:string;
     Price:number;
-    RealTeamsName:string;
+    CountryNameNavigation:pilotContry
+    RealTeamsNameNavigation:pilotTeam
+
+}
+interface pilotContry{
+    Name:string;
+    Photo:string;
+}
+interface pilotTeam{
+    Name:string;
+    Logo:string;
 }
 export interface carInterface{
     Name:string;

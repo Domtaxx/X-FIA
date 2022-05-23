@@ -1,10 +1,13 @@
-<h1 style="color: #6F0025;">Equipo 1</h1>
+
 
 <div class="container">
+  
+    <div class="formDivContainer">
+    
+    <input id="teamName" type="text" value="Equipo 1" formControlName="teamName">
     <h2 style="margin-top: 5%;">Presupuesto restante</h2>
     <h1 [ngStyle]="outBudget?{'color':'red'}:{'color':'green'}">{{cost.leftBudget+" Millones"}}</h1>
     <h2 style="color:black">{{memberArray[memberIndex]}}</h2>
-    <div class="formDivContainer">
         <form class ="registerForm"(ngSubmit)="null" [formGroup]="teamForm" >
         
             <div class="formDiv">
@@ -57,13 +60,21 @@
                           </mat-select>
                       </mat-form-field>
                     <div class="card">
+                      
                         <div class="cardHeader">
+                            <img class="flag" [src]="currentCountryImage" *ngIf="memberIndex<carIndex">
                             <h3>{{currentName}}</h3>
+                            <img class="logo" [src]="currentTeamImage" *ngIf="memberIndex<carIndex">
                         </div>
+                        
                         <img class='image' [src]="currentImage">
+                        
+                        
                         <div class="cardDown">
                             <h3>{{"Precio: " +currentPrice+" M"}}</h3>
                         </div>
+                        
+                      
                     </div>
                    
                 </div>
