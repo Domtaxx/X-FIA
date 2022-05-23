@@ -24,4 +24,8 @@ export class alertMessages{
     public static invalidFieldsBody='Alguno de los campos indicados no cumple con las reglas, por favor revisar el texto bajo los cuadros'
 
 
+    //File Error
+    public static rejectedImageFileHeader="Formato Incompatible"
+    public static rejectedImageFileBody="Solo estan permitidos los archivos .jpg y .png"
+
 }

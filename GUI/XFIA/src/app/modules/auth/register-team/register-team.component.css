@@ -1,0 +1,144 @@
+.container{
+    text-align: left;
+ 
+    font-family:'Rockwell';
+    font-weight: bold;
+    background-color:white;
+
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 2.5vmin;
+    height: 100%;
+   
+
+    
+    
+}
+.formDivContainer{
+    padding-top: 7%;
+    padding-bottom: 7%;
+    margin-bottom: 5vh;
+
+}
+.registerForm{
+   margin-top:5vh
+}
+
+
+.formDiv{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-evenly;
+	align-items: center;
+	align-content: stretch;
+    height: 55vh;
+ 
+}
+.memberSelector{
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+    width: 35%;
+}
+.buttonIcon{
+    font-size: 8vw;
+    color:#6F0025;
+  
+    
+}
+.buttonIcon:hover{
+    color:red;
+}
+
+.buttonShiftArea{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: center;
+	align-content: stretch;
+
+  
+
+}
+
+.btnLeft,.btnRight{
+    background-color: white;
+    border-width: 0px;
+}
+
+.image{
+    border-style: solid;
+    border-color:black;
+    border-width:2px;
+    height: 35vh;
+    border-width: 0px;
+}
+label{
+    text-align:left;
+    
+}
+h1{
+    
+    text-align: center;
+    font-size: 4vmin;
+    font-family:'Rockwell';
+    font-weight: bold;
+}
+#teamName{
+    display: block;
+    font-size: 4vmin;
+    font-family:'Rockwell';
+    font-weight: bold;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+h2{
+    
+    text-align: center;
+    font-family:'Rockwell';
+    font-weight: bold;
+}
+h3{
+    text-align: center;
+    font-family:'times new roman';
+    font-weight: bold;  
+    font-size: larger;  
+}
+
+.card{
+    display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: stretch;
+	align-content: stretch;
+    padding-top: 2vh;
+   
+    
+}
+.cardHeader,.cardDown{
+    height: 5%;
+    border-color: black;
+    border-width: 0px;
+    border-style: solid;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+}
+.flag{
+
+    width: 4vw;
+}
+.logo{
+
+    width:5vw ;
+}

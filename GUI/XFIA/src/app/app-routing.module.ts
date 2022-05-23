@@ -7,7 +7,9 @@ const routes: Routes = [
     path: 'tournaments',
     loadChildren: () => import('./modules/tournaments/tournaments.module').then(m => m.TournamentsModule)
   },
-  {path:'',redirectTo:'/tournaments',pathMatch:'full'}
+  {path:'',redirectTo:'/tournaments',pathMatch:'full'},
+  {path:'auth',
+  loadChildren:()=>import('./modules/auth/auth.module').then(m=>m.AuthModule)}
  
 ];
 
