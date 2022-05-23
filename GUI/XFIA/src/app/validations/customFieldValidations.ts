@@ -1,4 +1,5 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms'
+import { totalBudget } from '../interface/interfaces';
 export function matchPassword(fieldName1:string,fieldName2:string){
     return (control:AbstractControl):ValidationErrors|null =>{
         if(control.get(fieldName1)?.value!=control.get(fieldName2)?.value){
@@ -29,5 +30,15 @@ function matchInOrderedArray(array:any[]):boolean{
         if(array[i]==array[i+1])return true;
     }
     return false;
+
+}
+
+export function overBudget(budget:totalBudget){
+    return (control:AbstractControl)=>{
+        if(budget.leftBudget<0){
+            return {noMatch:control}
+        }
+        else return null;
+    }
 
 }

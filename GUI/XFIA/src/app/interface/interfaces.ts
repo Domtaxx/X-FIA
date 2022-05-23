@@ -18,4 +18,8 @@ export interface carInterface{
     Photo:string;
 
 }
+export interface  totalBudget{
+    budget:number;
+    leftBudget:number;
+}
 

@@ -8,6 +8,8 @@ import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { budgedCalc } from 'src/app/calc/budgetCalc';
 import { appColor } from 'src/app/const/appSettings';
 import { pilotsDoesntMatch } from 'src/app/validations/customFieldValidations';
+import{overBudget} from 'src/app/validations/customFieldValidations'
+import { totalBudget } from 'src/app/interface/interfaces';
 @Component({
   selector: 'app-register-team',
   templateUrl: './register-team.component.html',
@@ -24,9 +26,11 @@ export class RegisterTeamComponent implements OnInit {
   currentImage?:string;
   currentName?:string;
   currentPrice?:number;
-  budget:number;
-  leftBudget:number;
   outBudget:boolean;
+  cost:totalBudget={
+    budget:0,
+    leftBudget:0
+  };
   pilot1Index=0;
   pilot2Index=1;
   pilot3Index=2;
@@ -42,7 +46,7 @@ export class RegisterTeamComponent implements OnInit {
     car: new FormControl('',Validators.required)
 
   },
-  {validators:[pilotsDoesntMatch(5)]}
+  {validators:[pilotsDoesntMatch(5),overBudget(this.cost)]}
   )
   
   
@@ -68,8 +72,8 @@ export class RegisterTeamComponent implements OnInit {
     this.availablePilots=[];
     this.availableCars=[];
     this.currentImage=appSettings.defaultPilotPhotoRoute;
-    this.budget=0;
-    this.leftBudget=0;
+    
+    
     this.currentName=""
     this.currentPrice=0;
     this.outBudget=false;
@@ -79,8 +83,8 @@ export class RegisterTeamComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.budget=20;
-    this.leftBudget=this.budget;
+    this.cost.budget=23
+    this.cost.leftBudget=23;
     this.getCars();
     this.getRunners();
 
@@ -140,22 +144,24 @@ export class RegisterTeamComponent implements OnInit {
     )
   }
   onChangedInput(value:any){
-   console.log(value)
    if(this.memberIndex<this.memberArray.length-1){
      
       var chosenPilot=this.availablePilots.filter((item)=> item.Id==value)[0]
       this.selectedPilots.set(this.memberIndex,chosenPilot)
    }
    else{
-     this.selectedCar=this.availableCars.filter(item=>item.Name=value)[0]
+     this.selectedCar=this.availableCars.filter(item=>item.Name==value)[0]
    }
+   
    this.updateMetadata();
    this.updateBudget()
+   
   }
   updateBudget(){
    var currentValue=budgedCalc.calculateTeamCost(this.selectedPilots,this.selectedCar);
-   this.leftBudget=this.budget-currentValue;
-   this.outBudget=this.leftBudget<0;
+   var leftBudget=this.cost?.budget-currentValue;
+   this.outBudget=leftBudget<0;
+   this.cost.leftBudget=leftBudget;
   }
 
 }

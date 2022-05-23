@@ -2,7 +2,7 @@
 
 <div class="container">
     <h2 style="margin-top: 5%;">Presupuesto restante</h2>
-    <h1 [ngStyle]="outBudget?{'color':'red'}:{'color':'green'}">{{leftBudget+" Millones"}}</h1>
+    <h1 [ngStyle]="outBudget?{'color':'red'}:{'color':'green'}">{{cost.leftBudget+" Millones"}}</h1>
     <h2 style="color:black">{{memberArray[memberIndex]}}</h2>
     <div class="formDivContainer">
         <form class ="registerForm"(ngSubmit)="null" [formGroup]="teamForm" >
