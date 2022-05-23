@@ -25,4 +25,9 @@ export class NetworkService {
     var http_params = new HttpParams({ fromObject: Params });
     return this.http.delete(this.serverIp + url, { params: http_params });
   }
+  post_request_multipart(url:string,Params:any){
+    return this.http.post(this.serverIp + url, Params,{headers:{
+      'Content-Type': 'file'
+    }});
+  }
 }
