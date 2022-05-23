@@ -73,7 +73,8 @@
 img{
     border-style: solid;
     border-color:gray;
-    border-width:2px
+    border-width:2px;
+    height: 35vh;
 }
 label{
     text-align:left;

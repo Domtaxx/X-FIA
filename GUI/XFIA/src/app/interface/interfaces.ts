@@ -12,3 +12,10 @@ export interface pilotInterface{
     Price:number;
     RealTeamsName:string;
 }
+export interface carInterface{
+    Name:string;
+    Price:number;
+    Photo:string;
+
+}
+

@@ -15,6 +15,7 @@ import {MatStepperModule} from '@angular/material/stepper';
 import { RegisterTeamComponent } from './register-team/register-team.component';
 import {MatButtonModule} from '@angular/material/button';
 
+
 @NgModule({
   declarations: [
     UserRegisterComponent,
@@ -33,7 +34,8 @@ import {MatButtonModule} from '@angular/material/button';
     MatIconModule,
     MatInputModule,
     MatStepperModule,
-    MatButtonModule
+    MatButtonModule,
+
   ]
 })
 export class AuthModule { }
