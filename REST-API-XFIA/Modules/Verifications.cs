@@ -92,5 +92,89 @@ namespace REST_API_XFIA.Modules
             return true;
         }
 
+        public static List<SQL_Model.Models.Pilot> getPilotSubList(List<SQL_Model.Models.Pilot> pilots, int page, int amountByPage)
+        {
+            List<SQL_Model.Models.Pilot> pilotsInPage = new List<SQL_Model.Models.Pilot>();
+            int actualPage = 0;
+            for (int i=0; i<pilots.Count-1 ;i++)
+            {
+                if(i%amountByPage == 0)
+                {
+                    actualPage++;
+                }
+                
+                if(actualPage == page)
+                {
+                    pilotsInPage.Add(pilots[i]);
+                }else if(actualPage > page)
+                {
+                    break;
+                }
+            }
+            return pilotsInPage;
+        }
+
+        public static List<SQL_Model.Models.Realteam> getRealTeamsSubList(List<SQL_Model.Models.Realteam> RealTeams, int page, int amountByPage)
+        {
+            List<SQL_Model.Models.Realteam> RealTeamsInPage = new List<SQL_Model.Models.Realteam>();
+            int actualPage = 0;
+            for (int i = 0; i < RealTeams.Count - 1; i++)
+            {
+                if (i % amountByPage == 0)
+                {
+                    actualPage++;
+                }
+
+                if (actualPage == page)
+                {
+                    RealTeamsInPage.Add(RealTeams[i]);
+                }
+                else if (actualPage > page)
+                {
+                    break;
+                }
+            }
+            return RealTeamsInPage;
+        }
+        public static bool VerifyIfUserHasAccount(Data_structures.AllUserInfo userInfo)
+        {
+            var usersWithSameEmail = Db.Users.Where(U => U.Email == userInfo.Email).ToList();
+            if (usersWithSameEmail.Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool VerifyIfTeamNameIsRepeated(Data_structures.AllUserInfo userInfo)
+        {
+            var invalidTeams = Db.Users.Where(U => U.TeamsName == userInfo.TeamsName ).ToList();
+            if(invalidTeams.Count > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool VerifyIfSubTeamsNamesAreRepeated(Data_structures.AllUserInfo userInfo)
+        {
+            if(userInfo.NameSubteam1 == userInfo.NameSubteam2)
+            {
+                return true;
+            }
+            var invalidteams = Db.Subteams.Where(St => St.UserEmail == userInfo.Email && (St.Name == userInfo.NameSubteam1 || St.Name == userInfo.NameSubteam2)).ToList();
+            if (invalidteams.Count() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+        public static bool VerifyIfTournamentsActiveOrFuture()
+        {
+            List<SQL_Model.Models.Tournament> tournaments = (List<SQL_Model.Models.Tournament>)Db.Tournaments.Where(T => T.InitialDate >= DateTime.Now).ToList();
+            if (tournaments.Count()>0) {
+                return false;
+            }
+            return true;
+        }
+
     }
 }

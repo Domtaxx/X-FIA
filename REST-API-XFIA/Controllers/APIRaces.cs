@@ -19,7 +19,13 @@ namespace REST_API_XFIA.Controllers
         [HttpGet]
         public ActionResult listAll()
         {
-            return Ok(Db.Races.ToList());
+            try {
+                return Ok(Db.Races.ToList());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
         }
 
         [Route("Admin/Carreras")]
