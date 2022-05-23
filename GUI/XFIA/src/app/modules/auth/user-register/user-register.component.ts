@@ -6,7 +6,8 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { alertMessages } from 'src/app/const/messages';
 import { appSettings } from 'src/app/const/appSettings';
 import { fileValidations } from 'src/app/validations/fileValidation';
-
+import { matchPassword } from 'src/app/validations/customFieldValidations';
+import { fileProcessFuncion } from 'src/app/functions/fileprocess';
 @Component({
   selector: 'app-user-register',
   templateUrl: './user-register.component.html',
@@ -22,11 +23,13 @@ export class UserRegisterComponent implements OnInit {
     teamName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
     countryName:new FormControl('',[Validators.required]),
     image:new FormControl('',[Validators.required])
-  });
+  }
+  ,{validators:[matchPassword('password','confirmPassword')]});
   showPass1=false;
   showPass2=false;
   fileUploaded=false;
   countries:string[]=["hola"]
+  image?:string="";
 
  
   errorCode={
@@ -53,9 +56,11 @@ export class UserRegisterComponent implements OnInit {
   }
   onFileUploaded(fileEvent:any){
     const file: File = fileEvent.target.files[0];
+    console.log(file)
     if(!fileValidations.checkImage(file)){
       this.showError(alertMessages.rejectedImageFileHeader,alertMessages.rejectedImageFileBody)
     }
+    else this.loadFile(file);
 
 
   }
@@ -65,6 +70,23 @@ export class UserRegisterComponent implements OnInit {
   }
   showSucess(header:string,body:string){
     this.swal.showSuccess(header,body);
+  }
+  loadFile(file:File){
+    this.fileUploaded=true;
+   
+   fileProcessFuncion(file,(value)=>{
+     this.setImage(value);
+   })
+
+  }
+
+  setImage(img:string){
+    this.image=img;
+    console.log(this.image)
+  }
+  resetImage(){
+    this.userRegisterForm.controls['image'].reset();
+    this.fileUploaded=false;
   }
 
 

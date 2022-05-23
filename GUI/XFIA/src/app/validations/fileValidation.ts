@@ -1,5 +1,5 @@
 export class fileValidations{
-    static allowedImgExtension:string[]=['png','jpg'];
+    static allowedImgExtension:string[]=['png','jpeg'];
     static allowedDataExtension:string[]=[]
 
     public static checkImage(file:any):boolean{

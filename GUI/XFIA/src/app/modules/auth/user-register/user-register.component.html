@@ -173,9 +173,13 @@
                 <div class="inputSpace">
   
                    
-                    <input *ngIf="fileUploaded" type="file" name="Name" (change)="onFileUploaded($event)" formControlName="image" class="inputImage" accept=".png,.jpg">
+                    <input *ngIf="!fileUploaded" type="file" name="Name" (change)="onFileUploaded($event)" formControlName="image" class="inputImage" accept=".png,.jpg">
+                    <img *ngIf="fileUploaded" src={{image}}>
+                   
+                    
         
                 </div>
+                <button (click)="resetImage()"id="resetButton" *ngIf="fileUploaded" > reiniciar</button>
                 <div class="warning" *ngIf="userRegisterForm.get('image')?.hasError('required')">
                     Se debe de agregar el archivo
                 </div>
@@ -194,9 +198,7 @@
        
         <pre></pre>
         
-        <div class="buttonContainer">
-            <button type="submit" class="formButton" >Crear</button>
-        </div>
+       
         
         
     </form>

@@ -1,7 +1,7 @@
 import { AbstractControl, ValidationErrors } from '@angular/forms'
 export function matchPassword(fieldName1:string,fieldName2:string){
     return (control:AbstractControl):ValidationErrors|null =>{
-        if(control.get(fieldName1)!=control.get(fieldName2)){
+        if(control.get(fieldName1)?.value!=control.get(fieldName2)?.value){
             return {noMatch:control}
         }
         else return null;
