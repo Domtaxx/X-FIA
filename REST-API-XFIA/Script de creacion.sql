@@ -159,14 +159,13 @@ Values(2,5)
 
 go 
 
-create PROCEDURE dbo.uspInsertIntoHasPilot 
+alter PROCEDURE dbo.uspInsertIntoHasPilot 
 	@pilotId int, 
 	@subTeamId int
 AS
+begin
+	Set nocount on
 	insert into HAS_PILOT Values(@subTeamId,@pilotId)
 	select * from SUBTEAMS
+end
 GO
-
-exec dbo.uspInsertIntoHasPilot 1, 1
-
-select * from HAS_PILOT

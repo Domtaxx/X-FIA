@@ -1,10 +1,11 @@
-﻿using REST_API_XFIA.DB_Context;
+﻿using REST_API_XFIA.Data_structures;
+using REST_API_XFIA.DB_Context;
 namespace REST_API_XFIA.Modules
 {
     public class Verifications
     {        
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
-        public static bool IfKeyIsNotRepeatedInDB(string key, List<SQL_Model.Models.Tournament> tournaments)
+        public static bool IfKeyIsRepeatedInDB(string key, List<SQL_Model.Models.Tournament> tournaments)
         {
             foreach (SQL_Model.Models.Tournament tournament in tournaments)
             {
@@ -36,8 +37,10 @@ namespace REST_API_XFIA.Modules
             List<SQL_Model.Models.Tournament> conflictingTournaments = Db.Tournaments.Where(t =>
                                                         (finalDay < t.FinalDate && finalDay > t.InitialDate) ||
                                                         (initialDay < t.FinalDate && initialDay > t.InitialDate) ||
-                                                        (t.InitialDate == initialDay && initialHour <= t.FinalHour) ||
-                                                        (t.FinalDate == finalDay && finalHour >= t.InitialHour)).ToList();
+                                                        (t.InitialDate == finalDay && finalHour >= t.InitialHour) ||
+                                                        (t.FinalDate == initialDay && initialHour <= t.FinalHour)||
+                                                        (t.FinalDate == finalDay && finalHour == t.FinalHour) ||
+                                                        (t.InitialDate == initialDay && initialHour == t.InitialHour)).ToList();
             if (conflictingTournaments.Count() > 0)
             {
                 return true;
@@ -46,7 +49,6 @@ namespace REST_API_XFIA.Modules
         }
         public static bool IfRacesAtSameTime(string iniDay, string iniHour, string finDay, string finHour)
         {
-
             DateTime initialDate = DataStrucToSQLStruc.parseDate(iniDay);
             TimeSpan initialHour = DataStrucToSQLStruc.parseTime(iniHour);
             DateTime finalDate = DataStrucToSQLStruc.parseDate(finDay);
@@ -54,9 +56,10 @@ namespace REST_API_XFIA.Modules
             List<SQL_Model.Models.Race> conflictingRaces = Db.Races.Where(c =>
                                                     (finalDate < c.FinalDate && finalDate > c.InitialDate) ||
                                                     (initialDate < c.FinalDate && initialDate > c.InitialDate) ||
-                                                    (c.InitialDate == initialDate && initialHour <= c.FinalHour) ||
-                                                    (c.FinalDate == finalDate && finalHour >= c.InitialHour)
-                                                ).ToList();
+                                                    (c.InitialDate == finalDate && finalHour >= c.InitialHour) ||
+                                                    (c.FinalDate == initialDate && initialHour <= c.FinalHour)||
+                                                    (c.FinalDate == finalDate && finalHour == c.FinalHour) ||
+                                                    (c.InitialDate == initialDate && initialHour == c.InitialHour)).ToList();
             if (conflictingRaces.Count() > 0)
             {
                 return true;
@@ -92,50 +95,6 @@ namespace REST_API_XFIA.Modules
             return true;
         }
 
-        public static List<SQL_Model.Models.Pilot> getPilotSubList(List<SQL_Model.Models.Pilot> pilots, int page, int amountByPage)
-        {
-            List<SQL_Model.Models.Pilot> pilotsInPage = new List<SQL_Model.Models.Pilot>();
-            int actualPage = 0;
-            for (int i=0; i<pilots.Count-1 ;i++)
-            {
-                if(i%amountByPage == 0)
-                {
-                    actualPage++;
-                }
-                
-                if(actualPage == page)
-                {
-                    pilotsInPage.Add(pilots[i]);
-                }else if(actualPage > page)
-                {
-                    break;
-                }
-            }
-            return pilotsInPage;
-        }
-
-        public static List<SQL_Model.Models.Realteam> getRealTeamsSubList(List<SQL_Model.Models.Realteam> RealTeams, int page, int amountByPage)
-        {
-            List<SQL_Model.Models.Realteam> RealTeamsInPage = new List<SQL_Model.Models.Realteam>();
-            int actualPage = 0;
-            for (int i = 0; i < RealTeams.Count - 1; i++)
-            {
-                if (i % amountByPage == 0)
-                {
-                    actualPage++;
-                }
-
-                if (actualPage == page)
-                {
-                    RealTeamsInPage.Add(RealTeams[i]);
-                }
-                else if (actualPage > page)
-                {
-                    break;
-                }
-            }
-            return RealTeamsInPage;
-        }
         public static bool VerifyIfUserHasAccount(Data_structures.AllUserInfo userInfo)
         {
             var usersWithSameEmail = Db.Users.Where(U => U.Email == userInfo.Email).ToList();
@@ -156,7 +115,7 @@ namespace REST_API_XFIA.Modules
         }
         public static bool VerifyIfSubTeamsNamesAreRepeated(Data_structures.AllUserInfo userInfo)
         {
-            if(userInfo.NameSubteam1 == userInfo.NameSubteam2)
+            if(userInfo.NameSubteam1.CompareTo(userInfo.NameSubteam2) == 0)
             {
                 return true;
             }
