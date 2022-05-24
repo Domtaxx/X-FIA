@@ -1,4 +1,5 @@
-﻿using REST_API_XFIA.DB_Context;
+﻿using Microsoft.EntityFrameworkCore;
+using REST_API_XFIA.DB_Context;
 using REST_API_XFIA.Modules.Service;
 
 namespace REST_API_XFIA.Modules
@@ -40,8 +41,7 @@ namespace REST_API_XFIA.Modules
             toAdd.CountryName = user.CountryName;
             toAdd.TeamsName = user.TeamsName;
             toAdd.Password = user.Password;
-            toAdd.Firstname = user.Firstname;
-            toAdd.Lastname = user.Lastname;
+            toAdd.Username = user.Username;
             toAdd.Email = user.Email;
             toAdd.TeamsLogo = _storageService.Upload(user.TeamsLogo);
             return toAdd;
@@ -51,24 +51,20 @@ namespace REST_API_XFIA.Modules
             List<SQL_Model.Models.Subteam> subteams = new List<SQL_Model.Models.Subteam>();
             SQL_Model.Models.Subteam team1 = new SQL_Model.Models.Subteam();
             SQL_Model.Models.Subteam team2 = new SQL_Model.Models.Subteam();
-
+            List<SQL_Model.Models.Subteam> lastId = Db.Subteams.OrderByDescending(ST => ST.Id).ToList();
+            
+            team1.Id = lastId[0].Id + 1;
             team1.RealTeamsName = userInfo.Car1;
             team1.Name = userInfo.NameSubteam1;
             team1.UserEmail = userInfo.Email;
-            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot1Subteam1).Single());
-            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot2Subteam1).Single());
-            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot3Subteam1).Single());
-            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot4Subteam1).Single());
-            team1.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot5Subteam1).Single());
+            
+            
 
+            team2.Id = lastId[0].Id + 2;
             team2.RealTeamsName = userInfo.Car2;
             team2.Name = userInfo.NameSubteam2;
             team2.UserEmail = userInfo.Email;
-            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot1Subteam2).Single());
-            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot2Subteam2).Single());
-            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot3Subteam2).Single());
-            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot4Subteam2).Single());
-            team2.Pilots.Add(Db.Pilots.Where(p => p.Id == userInfo.pilot5Subteam2).Single());
+            
 
             subteams.Add(team1);
             subteams.Add(team2);
@@ -76,9 +72,75 @@ namespace REST_API_XFIA.Modules
             return subteams;
         }
 
+        public static void fillHasPilots(Data_structures.AllUserInfo userInfo, SQL_Model.Models.Subteam subTeam1, SQL_Model.Models.Subteam subTeam2)
+        {
+            subTeam1.Pilots = new List<SQL_Model.Models.Pilot>();
+            subTeam2.Pilots = new List<SQL_Model.Models.Pilot>();
+            IQueryable<SQL_Model.Models.Subteam> subteams1 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot1Subteam1}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams2 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot2Subteam1}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams3 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot3Subteam1}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams4 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot4Subteam1}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams5 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot5Subteam1}").AsNoTracking();
+
+            IQueryable<SQL_Model.Models.Subteam> subteams6 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot1Subteam2}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams7 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot2Subteam2}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams8 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot3Subteam2}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams9 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot4Subteam2}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams10 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot5Subteam2}").AsNoTracking();
+
+            Db.SaveChanges();
+            return;
+        }
+
+        public static List<SQL_Model.Models.Pilot> getPilotSubList(List<SQL_Model.Models.Pilot> pilots, int page, int amountByPage)
+        {
+            List<SQL_Model.Models.Pilot> pilotsInPage = new List<SQL_Model.Models.Pilot>();
+            int actualPage = 0;
+            for (int i = 0; i < pilots.Count - 1; i++)
+            {
+                if (i % amountByPage == 0)
+                {
+                    actualPage++;
+                }
+
+                if (actualPage == page)
+                {
+                    pilotsInPage.Add(pilots[i]);
+                }
+                else if (actualPage > page)
+                {
+                    break;
+                }
+            }
+            return pilotsInPage;
+        }
+
+        public static List<SQL_Model.Models.Realteam> getRealTeamsSubList(List<SQL_Model.Models.Realteam> RealTeams, int page, int amountByPage)
+        {
+            List<SQL_Model.Models.Realteam> RealTeamsInPage = new List<SQL_Model.Models.Realteam>();
+            int actualPage = 0;
+            for (int i = 0; i < RealTeams.Count - 1; i++)
+            {
+                if (i % amountByPage == 0)
+                {
+                    actualPage++;
+                }
+
+                if (actualPage == page)
+                {
+                    RealTeamsInPage.Add(RealTeams[i]);
+                }
+                else if (actualPage > page)
+                {
+                    break;
+                }
+            }
+            return RealTeamsInPage;
+        }
+
         public static SQL_Model.Models.Tournament GetActiveTournament()
         {
-            return Db.Tournaments.FirstOrDefault(T => T.InitialDate >= DateTime.Now);
+            return Db.Tournaments.FirstOrDefault(tour => tour.InitialDate > DateTime.Today || (tour.InitialDate == DateTime.Today && tour.InitialHour >= DateTime.Now.TimeOfDay));
         }
 
         public static DateTime parseDate(string toParse)

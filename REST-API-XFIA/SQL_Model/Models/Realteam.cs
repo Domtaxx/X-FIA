@@ -16,8 +16,7 @@ namespace REST_API_XFIA.SQL_Model.Models
         public double Price { get; set; }
         public string Photo { get; set; } = null!;
         public string Logo { get; set; } = null!;
-
-        [JsonIgnore] 
+        [JsonIgnore]
         public virtual ICollection<Pilot> Pilots { get; set; }
         [JsonIgnore]
         public virtual ICollection<Subteam> Subteams { get; set; }
