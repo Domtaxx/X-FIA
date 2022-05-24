@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "~13.3.0",
     "@angular/router": "~13.3.0",
     "@sweetalert2/ngx-sweetalert2": "^11.0.0",
+    "crypto-js": "^4.1.1",
+    "js-sha256": "^0.9.0",
     "rxjs": "~7.5.0",
     "sweetalert2": "^11.4.12",
     "tslib": "^2.3.0",

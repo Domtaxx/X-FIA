@@ -1,4 +1,8 @@
 
+export interface alertMessage{
+    header:string;
+    body:string;
+}
 export interface tournamentInterface{
     nombreCm:string;
     llave:string

@@ -22,8 +22,17 @@ export class alertMessages{
     public static inThePast="No es posible seleccionar fechas en el pasado"
     public static invalidFieldsHeader="Errores en los campos";
     public static invalidFieldsBody='Alguno de los campos indicados no cumple con las reglas, por favor revisar el texto bajo los cuadros'
-
-
+    //File user register
+    public static rejectedTeamTabHeader="No se puede avanzar"
+    public static rejectedTeamTabBody="Existen campos con errores, por favor revise el texto en rojo"
+    public static allowedTeamCreation="Se ha agregado el usuario con exito"
+    public static accountAlreadyExists="El correo indicado ya tiene una cuenta asociada"
+    public static teamAlreadyExists="Ya existe una escuderia con el nombre indicado"
+    public static repeatedSubName="El nombre de ambos equipos no puede ser el mismo"
+    public static emptyPilots="Existen Pilotos Vacios";
+    public static reapetedPilots="Existen Pilotos Repetidos";
+    public static emptyCar="Debe seleccionar un auto"
+    public static outBoundBudget="Presupuesto Fuera de Rango"
     //File Error
     public static rejectedImageFileHeader="Formato Incompatible"
     public static rejectedImageFileBody="Solo estan permitidos los archivos .jpg y .png"

@@ -187,5 +187,24 @@ export class RegisterTeamComponent implements OnInit {
    this.outBudget=leftBudget<0;
    this.cost.leftBudget=leftBudget;
   }
+  hasBudgetError():boolean{
+   return this.teamForm.hasError('overBudget')
+    
+  }
+  hasRepitedPilots():boolean{
+    return this.teamForm.hasError('repitedPilot')
+  }
+  hasEmptyPilots():boolean{
+    for(var i=1;i<=5;i++){
+      var errorRequired=this.teamForm.get('pilot'+i)?.hasError('required');
+      if(errorRequired){
+        return true
+      }
+    }
+    return false;
+  }
+  hasEmptyCar():boolean{
+    return this.teamForm.controls['car'].hasError('required')
+  }
 
 }
