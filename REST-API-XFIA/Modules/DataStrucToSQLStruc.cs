@@ -76,18 +76,17 @@ namespace REST_API_XFIA.Modules
         {
             subTeam1.Pilots = new List<SQL_Model.Models.Pilot>();
             subTeam2.Pilots = new List<SQL_Model.Models.Pilot>();
+            IQueryable<SQL_Model.Models.Subteam> subteams1 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot1Subteam1}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams2 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot2Subteam1}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams3 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot3Subteam1}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams4 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot4Subteam1}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams5 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot5Subteam1}").AsNoTracking();
 
-            IQueryable<SQL_Model.Models.Subteam> subteams1 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot1Subteam1}");
-            IQueryable<SQL_Model.Models.Subteam> subteams2 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot2Subteam1}");
-            IQueryable<SQL_Model.Models.Subteam> subteams3 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot3Subteam1}");
-            IQueryable<SQL_Model.Models.Subteam> subteams4 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot4Subteam1}");
-            IQueryable<SQL_Model.Models.Subteam> subteams5 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot5Subteam1}");
-
-            IQueryable<SQL_Model.Models.Subteam> subteams6 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot1Subteam2}");
-            IQueryable<SQL_Model.Models.Subteam> subteams7 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot2Subteam2}");
-            IQueryable<SQL_Model.Models.Subteam> subteams8 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot3Subteam2}");
-            IQueryable<SQL_Model.Models.Subteam> subteams9 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot4Subteam2}");
-            IQueryable<SQL_Model.Models.Subteam> subteams10 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot5Subteam2}");
+            IQueryable<SQL_Model.Models.Subteam> subteams6 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot1Subteam2}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams7 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot2Subteam2}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams8 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot3Subteam2}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams9 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot4Subteam2}").AsNoTracking();
+            IQueryable<SQL_Model.Models.Subteam> subteams10 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot5Subteam2}").AsNoTracking();
 
             Db.SaveChanges();
             return;

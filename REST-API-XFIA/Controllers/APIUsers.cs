@@ -44,7 +44,7 @@ namespace REST_API_XFIA.Controllers
                     return BadRequest(2);
                 }
                 if (Verifications.VerifyIfSubTeamsNamesAreRepeated(allInfo)){
-                    return BadRequest(JsonConvert.SerializeObject(allInfo));
+                    return BadRequest(3);
                 }
                 SQL_Model.Models.User toAdd = DataStrucToSQLStruc.fillSQLUser(allInfo, _storageService);
                 Db.Users.Add(toAdd);
@@ -54,14 +54,11 @@ namespace REST_API_XFIA.Controllers
                 Db.SaveChanges();
                 
                 DataStrucToSQLStruc.fillHasPilots(allInfo, subteams[0], subteams[1]);
-
-                
-
                 return Ok(0);
             }
             catch (Exception e)
             {
-                return BadRequest(JsonConvert.SerializeObject(allInfo));
+                return BadRequest(e.Message);
             }
         }
 
