@@ -40,7 +40,7 @@ export class RegisterTeamComponent implements OnInit {
   pilot5Index=4;
   carIndex=5;
   teamForm= new FormGroup({
-    teamName:new FormControl('',[Validators.required]),
+    teamName:new FormControl('Equipo',[Validators.required]),
     pilot1:new FormControl('',[Validators.required]),
     pilot2:new FormControl('',[Validators.required]),
     pilot3:new FormControl('',[Validators.required]),
@@ -123,6 +123,8 @@ export class RegisterTeamComponent implements OnInit {
         this.currentPrice=currentPilot?.Price;
         this.currentCountryImage=currentPilot?.CountryNameNavigation.Photo;
         this.currentTeamImage=currentPilot?.RealTeamsNameNavigation.Logo
+        console.log(this.currentCountryImage);
+        console.log(this.currentTeamImage)
       }
     }
     else{
@@ -141,6 +143,7 @@ export class RegisterTeamComponent implements OnInit {
     this.backend.get_request(appSettings.everyPilotRoute,{}).subscribe(
       (sucess:pilotInterface[])=>{
         this.availablePilots=sucess;
+        console.log(sucess)
         this.availablePilots=[...this.availablePilots]
       }
     )

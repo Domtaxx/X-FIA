@@ -35,4 +35,30 @@ export interface  totalBudget{
 export interface country{
     name:string;
 }
+export interface userRegisterInterface{
+    Username:string;
+    Password:string;
+    Email:string;
+    TeamsName:string;
+    TeamsLogo?:File;
+    CountryName:string;
+    NameSubteam1:string;
+    Car1:string;
+    pilot1Subteam1:number;
+    pilot2Subteam1:number;
+    pilot3Subteam1:number;
+    pilot4Subteam1:number;
+    pilot5Subteam1:number;
+    NameSubteam2:string;
+    Car2:string;
+    pilot1Subteam2:number;
+    pilot2Subteam2:number;
+    pilot3Subteam2:number;
+    pilot4Subteam2:number;
+    pilot5Subteam2:number;
+
+
+
+
+}
 

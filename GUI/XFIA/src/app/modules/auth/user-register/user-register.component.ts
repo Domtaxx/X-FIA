@@ -32,6 +32,7 @@ export class UserRegisterComponent implements OnInit {
   fileUploaded=false;
   countries:string[]=[]
   image?:string="";
+  imageFile?:File;
 
  
   errorCode={
@@ -59,6 +60,7 @@ export class UserRegisterComponent implements OnInit {
   }
   onFileUploaded(fileEvent:any){
     const file: File = fileEvent.target.files[0];
+    this.imageFile=file;
     console.log(file)
     if(!fileValidations.checkImage(file)){
       this.showError(alertMessages.rejectedImageFileHeader,alertMessages.rejectedImageFileBody)
