@@ -160,11 +160,6 @@ namespace REST_API_XFIA.Modules
             {
                 return true;
             }
-            var invalidteams = Db.Subteams.Where(St => St.UserEmail == userInfo.Email && (St.Name == userInfo.NameSubteam1 || St.Name == userInfo.NameSubteam2)).ToList();
-            if (invalidteams.Count() > 0)
-            {
-                return true;
-            }
             return false;
         }
         public static bool VerifyIfTournamentsActiveOrFuture()
