@@ -92,11 +92,7 @@ export class RegisterTeamComponent implements OnInit {
     description: function called when the view starts, ask the network module to get data required to show
     */
   ngOnInit(): void {
-    this.cost.budget=0
-    this.cost.leftBudget=0;
-    this.getBudget();
-    this.getCars();
-    this.getRunners();
+    this.resetData()
 
   }
   /*
@@ -270,4 +266,18 @@ export class RegisterTeamComponent implements OnInit {
     return this.teamForm.controls['car'].hasError('required')
   }
 
+  resetData(){
+    this.memberIndex=0;
+    this.selectedPilots=new Map()
+    this.selectedCar=undefined;
+    this.getBudget()
+    this.getCars()
+    this.getRunners()
+    this.currentImage=appSettings.defaultPilotPhotoRoute;
+    this.currentCountryImage=appSettings.defaultCountryPhoto;
+    this.currentTeamImage=appSettings.defaultTeamPhoto;
+    this.currentName=appSettings.defaultPilotName;
+    this.currentPrice=0;
+    this.outBudget=false;
+  }
 }

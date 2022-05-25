@@ -41,7 +41,7 @@ export class UserRegisterComponent implements OnInit {
   constructor(private swal:SweetAlertService,private backend:NetworkService) { }
 
   ngOnInit(): void {
-    this.getCountries()
+    this.resetData()
    
  
   }
@@ -148,6 +148,15 @@ export class UserRegisterComponent implements OnInit {
         this.countries=[...this.countries]
       }
     )
+  }
+
+  resetData(){
+    this.showPass1=false;
+    this.showPass2=false;
+    this.fileUploaded=false;
+    this.getCountries()
+     this.image="";
+    this.imageFile=undefined;
   }
 
 

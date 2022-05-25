@@ -86,6 +86,9 @@ export class FullRegisterComponent implements OnInit {
   handleSucess(result:any){
     this.swal.showSuccess(alertMessages.successHeader,alertMessages.allowedTeamCreation)
     this.stepper.reset();
+    this.team1.resetData()
+    this.team2.resetData()
+    this.userForm.resetData()
   }
   /*
   input:result of the request
