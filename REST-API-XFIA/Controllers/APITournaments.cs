@@ -37,7 +37,7 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.Tournament toAdd = DataStrucToSQLStruc.fillSQLTournament(t);
-                if (!Verifications.IfTournamentAtSameTime(t.fechaDeInicio, t.horaDeInicio, t.fechaDeFin, t.horaDeFin))
+                if (Verifications.IfTournamentAtSameTime(t.fechaDeInicio, t.horaDeInicio, t.fechaDeFin, t.horaDeFin))
                 {
                     return BadRequest(JsonConvert.SerializeObject(1));
                 }

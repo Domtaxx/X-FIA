@@ -29,7 +29,7 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                List<SQL_Model.Models.Pilot> pilotList = Verifications.getPilotSubList(Db.Pilots.ToList(), page, amountByPage);
+                List<SQL_Model.Models.Pilot> pilotList = DataStrucToSQLStruc.getPilotSubList(Db.Pilots.ToList(), page, amountByPage);
                 return Ok(JsonConvert.SerializeObject(pilotList));
             }
             catch (Exception e)

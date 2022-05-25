@@ -15,7 +15,6 @@ namespace REST_API_XFIA.SQL_Model.Models
 
         public string Name { get; set; } = null!;
         public string Photo { get; set; } = null!;
-
         [JsonIgnore]
         public virtual ICollection<Pilot> Pilots { get; set; }
         [JsonIgnore]
