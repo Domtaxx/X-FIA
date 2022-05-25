@@ -25,27 +25,40 @@ export class FullRegisterComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  /*
+  input:none
+  output:none
+  description: function called when the userRegister its summited
+  */
   submit(){
-    if(!this.team2.teamForm.valid){
+    if(!this.team2.teamForm.valid){ //verifies if the team2 form fulfull all the validations
       this.showTeamError(this.team2)
       return;
     }
-    this.makeRequest();
+    this.makeRequest();//makes the request to add a user
     
 
   }
-  
+  /*
+  input: the mat-stepper of the form stepper
+  output: none
+  description: tries to go back in the stepper
+  */
   goBack(stepper: MatStepper){
     
     stepper.previous();
 }
-
+  /*
+  input: the mat-stepper of the form stepper
+  output: none
+  description: tries to go forwar to the next form
+  */
   goForward(stepper: MatStepper){
     const currentIndex=stepper.selectedIndex
     stepper.next();
-    if(currentIndex==stepper.selectedIndex){
+    if(currentIndex==stepper.selectedIndex){//checks if is on the team request
       if(currentIndex==1){
-        this.showTeamError(this.team1)
+        this.showTeamError(this.team1)//ask to show a error in the form
       }
       else{
         this.showCantAdvanceMessage()
@@ -53,17 +66,33 @@ export class FullRegisterComponent implements OnInit {
       
     }
   }
+  /*
+  input: none
+  output: none
+  description: gets the data and makes the request to the server
+  */
   makeRequest(){
-    const requestBody:userRegisterInterface=userRegisterRequest(this.userForm,this.team1,this.team2)
+    const requestBody:userRegisterInterface=userRegisterRequest(this.userForm,this.team1,this.team2)//get the data to send the request
     this.backend.post_request_multipart(appSettings.userRegisterRoute,requestBody).subscribe(
-      (sucess)=>{this.handleSucess(sucess)},
-      (error)=>{this.handleMistake(error)}
+      (sucess)=>{this.handleSucess(sucess)},//sucess case
+      (error)=>{this.handleMistake(error)} //error case
     )
   }
+  /*
+  input:the result of the request
+  output:none
+  description: handles the sucess case, show the sucess message
+  */
   handleSucess(result:any){
     this.swal.showSuccess(alertMessages.successHeader,alertMessages.allowedTeamCreation)
     this.stepper.reset();
   }
+  /*
+  input:result of the request
+  output:none
+  description: handles the mistake case, get the message to 
+  the specific error code
+  */
   handleMistake(result:any){
     var message=userRegisterMessage(result.error);
     if(message?.header!=undefined && message.body!=undefined){
@@ -74,9 +103,19 @@ export class FullRegisterComponent implements OnInit {
     
 
   }
+  /*
+  input: none
+  output: none
+  description: show the error message when cant go from a step to another
+  */
   showCantAdvanceMessage(){
     this.swal.showError(alertMessages.rejectedTeamTabHeader,alertMessages.rejectedTeamTabBody);
   }
+  /*
+  input: the current team screen
+  output: none
+  description: shows the error in the team form to advance to the next step
+  */
   showTeamError(team:RegisterTeamComponent){
     
     if(team.hasEmptyPilots()){

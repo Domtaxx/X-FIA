@@ -30,7 +30,6 @@ export function userRegisterRequest(user:UserRegisterComponent,team1:RegisterTea
         pilot5Subteam2:team2Form.controls['pilot5'].value,
 
     }
-    console.log(registerRequest)
     return registerRequest;
 
 }
