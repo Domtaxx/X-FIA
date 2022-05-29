@@ -3,6 +3,9 @@ import { FormGroup,FormControl,Validators} from '@angular/forms';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { tournamentInterface } from 'src/app/interface/interfaces';
+import { appSettings } from 'src/app/const/appSettings';
+import { dateValidations } from 'src/app/validations/dateValidations';
+import { alertMessages } from 'src/app/const/messages';
 @Component({
   selector: 'app-create-race',
   templateUrl: './create.component.html',
@@ -31,6 +34,11 @@ export class CreateRaceComponent implements OnInit {
   finalDate='finalDate';
   initialTime='initialTime';
   finalTime='finalTime';
+  errorCodes={
+    duplicatedName:1,
+    outboundDate:2,
+    simultaneousRaces:3
+  }
   /*
   input: NA
   output:NA
@@ -38,7 +46,7 @@ export class CreateRaceComponent implements OnInit {
   In this case, it is in charge of obtaining the values ​​for the country input and the championship input.
   */
   ngOnInit(): void {
-    this.backend.get_request('admin/Campeonato',{}).subscribe((response)=>{//request to get tournaments
+    this.backend.get_request(appSettings.tournamentRoute,{}).subscribe((response)=>{//request to get tournaments
       
       
       for(var i=0;i<response.length;i++){
@@ -51,12 +59,10 @@ export class CreateRaceComponent implements OnInit {
       }
       this.tournaments = [...this.tournaments]
     },(error)=>{
-      console.log('estoy en el error')
-      console.log(error)
     })
-    this.backend.get_request('Pais',{}).subscribe(//request to update countries
+    this.backend.get_request(appSettings.countryRoute,{}).subscribe(//request to update countries
       (response)=>{
-          console.log("paises");
+  
           for(var i=0;i<response.length;i++){
             var countryName=response[i].name
             this.countries.push(countryName)
@@ -72,39 +78,7 @@ export class CreateRaceComponent implements OnInit {
   as in empty spaces or dates
   */
   submit(){
-   console.log( this.raceForm.controls['initialDate'].value);
-    if(!this.raceForm.valid){//empty input, max length, min value and other input values validation
-      this.swal.showError("Errores en los campos",'Alguno de los campos indicados no cumple con las reglas, por favor revisar el texto bajo los cuadros')
-      return
-    }
-    var initialDate=this.raceForm.get('initialDate')?.value
-    var finalDate=this.raceForm.get('finalDate')?.value
-    console.log("imprimi")
-    if(initialDate>finalDate){// compares the start date with the end date, in such a way that it is consistent
-      
-      this.swal.showError("Fechas Invalidas","La fecha final debe ser mayor o igual a la fecha inicial")
-      return
-    }
-    else if(initialDate==finalDate){//if both initial and final date are on the same date, checks the initial and final time
-      var initialTime=this.raceForm.get('initialTime')?.value;
-      var finalTime=this.raceForm.get('finalTime')?.value;
-      if(initialTime>=finalTime){
-        this.swal.showError('Errores en las fecha',"Si la competencia inicia y termina el mismo dia, la hora inicial debe ser menor a la fecha final")
-        return
-      }
-      
-    }
-    var today = new Date();
-    var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
-    var yyyy = today.getFullYear();
-
-    var currentDate = yyyy + '-' + mm + '-' + dd;
-    if(initialDate<currentDate || finalDate<currentDate){//Verifica que las fechas indicadas no esten en el pasado
-      this.swal.showError("Error de fechas",'No es posible agregar carreras en el pasado')
-      return
-    }
-    
+    if(!this.validations())return;//if the validation conditions are not meet, end the method
     var raceName=this.raceForm.controls[this.raceName].value;
     var tournamentName=this.raceForm.controls[this.tournamentName].value;
     var streenName=this.raceForm.controls[this.streetName].value;
@@ -115,44 +89,74 @@ export class CreateRaceComponent implements OnInit {
     var fTime=this.raceForm.controls[this.finalTime].value;
 
     var httpParams={
-      "nombre": raceName,
-      "pais": countryName,
-      "estado": 0,
-      "nombreDePista": streenName,
-      "fechaDeInicio": iDate,
-      "horaDeInicio": iTime,
-      "fechaDeFin": fDate,
-      "horaDeFin": fTime,
-      "campeonatoKey": tournamentName
+      nombre: raceName,
+      pais: countryName,
+      estado: 0,
+      nombreDePista: streenName,
+      fechaDeInicio: iDate,
+      horaDeInicio: iTime,
+      fechaDeFin: fDate,
+      horaDeFin: fTime,
+      campeonatoKey: tournamentName
     }
    
     
-    this.backend.post_request('Admin/Carreras',httpParams).subscribe(//races post
+    this.backend.post_request(appSettings.adminRaceRoute,httpParams).subscribe(//races post
       (result)=>{ //caso de exito
         this.raceForm.reset()
-        this.swal.showSuccess('Se ha agregado corrrectamente',
-        'La carrera ha sido agregada al campeonato seleccionado' )
+        this.swal.showSuccess(alertMessages.successHeader,
+        alertMessages.raceSuccess )
         
       },
       (error)=>{
         var errorCode=error.error;
-        if(errorCode==1){//race name already exists
-          this.swal.showError('No se ha podido agregar','el nombre indicado ya ha sido usado para otra carrera en el torneo seleccionado')
+        if(errorCode==this.errorCodes.duplicatedName){//race name already exists
+          this.swal.showError(alertMessages.rejected,alertMessages.duplicatedRaceName)
         }
-        else if(errorCode==2){//race dates outbounds of the tournament dates
-          this.swal.showError('No se ha podido agregar','recuerde que las fechas de la carrera deben estar dentro de los limites del campeonato')
+        else if(errorCode==this.errorCodes.outboundDate){//race dates outbounds of the tournament dates
+          this.swal.showError(alertMessages.rejected,alertMessages.outsideBoundsRace)
          
         }
-        else if(errorCode==3){//there are races in the dates already
-            this.swal.showError('No se ha podido agregar','Ya existen carreras activas en el periodo indicado')
+        else if(errorCode==this.errorCodes.simultaneousRaces){//there are races in the dates already
+            this.swal.showError(alertMessages.rejected,alertMessages.simultaneousRace)
         }
         else{//server error
-          this.swal.showError('No se ha podido agregar','Error con el servidor')
+          this.swal.showError(alertMessages.rejected,alertMessages.serverInterrupt)
         }
         
       }
     )
     
+  }
+  validations():boolean{
+    
+    if(!this.raceForm.valid){//empty input, max length, min value and other input values validation
+      this.showError(alertMessages.invalidFieldsHeader,alertMessages.invalidFieldsBody)
+      return false
+    }
+    var initialDate=this.raceForm.get(this.initialDate)?.value
+    var finalDate=this.raceForm.get(this.finalDate)?.value
+    if(dateValidations.inThePast(initialDate)|| dateValidations.inThePast(finalDate)){//Verifica que las fechas indicadas no esten en el pasado
+      this.showError(alertMessages.rejectedDateHeader,alertMessages.inThePast)
+      return false
+    }
+    if(!dateValidations.continousDate(initialDate,finalDate)){// compares the start date with the end date, in such a way that it is consistent
+      
+      this.showError(alertMessages.rejectedDateHeader,alertMessages.invalidDateElapse)
+      return false;
+    }
+    var initialTime=this.raceForm.get(this.initialTime)?.value;
+    var finalTime=this.raceForm.get(this.finalTime)?.value;
+    if(!dateValidations.continousTime(initialDate,finalDate,initialTime,finalTime)){//if both initial and final date are on the same date, checks the initial and final time
+
+      this.showError(alertMessages.rejectedDateHeader,alertMessages.invalidTimeElapsed)
+      return false
+    }
+    
+    return true
+  }
+  showError(header:string,body:string){
+    this.swal.showError(header,body)
   }
   
 

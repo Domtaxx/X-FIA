@@ -8,6 +8,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { TournamentsModule } from './modules/tournaments/tournaments.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NetworkService } from './services/network.service';
+
 @NgModule({
   declarations: [
     AppComponent

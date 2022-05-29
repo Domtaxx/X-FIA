@@ -46,6 +46,7 @@ namespace REST_API_XFIA.Tests
             Assert.True(Verifications.IfTournamentAtSameTime("2022-03-25", "0:00:00", "2022-03-27", "09:00:00"));
             Assert.True(Verifications.IfTournamentAtSameTime("2022-03-27", "8:00:00", "2022-03-29", "10:00:00"));
             Assert.True(Verifications.IfTournamentAtSameTime("2022-03-23", "8:00:00", "2022-03-25", "00:00:00"));
+            Assert.False(Verifications.IfTournamentAtSameTime("27-01-2038", "12:00:00", "29-01-2038", "12:00:00"));
         }
         [Fact]
         public void IfRacesAtSameTimeTestInvalidDates()
