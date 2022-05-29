@@ -98,6 +98,9 @@ VALUES ('QWE123','GP de ARABIA SAUDI',  '2022-03-25', '00:00:00', '2022-03-27', 
 INSERT INTO TOURNAMENT
 VALUES ('QWE125','GP de Francia',  '2022-10-25', '00:00:00', '2022-12-27', '9:00:00',23, 'Ver reglas');
 
+INSERT INTO TOURNAMENT
+VALUES ('QWE126','GP de Francia',  '2030-10-25', '00:00:00', '2030-12-27', '9:00:00',23, 'Ver reglas');
+
 INSERT INTO Race
 VALUES ('Street Circuit', 'ARABIA SAUDI',0,'Jeddah', '2022-03-26', '17:00:00', '2022-03-27', '4:00:00', 'QWE123');
 
@@ -168,4 +171,54 @@ begin
 	insert into HAS_PILOT Values(@subTeamId,@pilotId)
 	select * from SUBTEAMS
 end
+GO
+
+Create TRIGGER AfterINSERTUser on [dbo].[USER]
+after INSERT 
+AS 
+BEGIN
+SET NOCOUNT on;
+select T.[KEY], ROW_NUMBER() over(ORDER BY T.[KEY]) as ROW into TempTable
+from [dbo].[TOURNAMENT] as T where T.[InitialDate]> CONVERT(DATE, GETDATE()) OR T.[InitialDate] = CONVERT(DATE, GETDATE()) and T.[InitialHour] > CONVERT(TIME, GETDATE())
+DECLARE @COUNTER INT = (SELECT MAX(ROW) FROM TempTable);
+DECLARE @ROW INT;
+WHILE (@COUNTER != 0)
+begin
+	SELECT @ROW = ROW
+    FROM TempTable
+    WHERE ROW = @COUNTER
+    ORDER BY ROW DESC
+
+	Insert into [dbo].[PublicLeague]([UserEmail], TournamentKey) values ((select Email from INSERTED), (Select [Key] from TempTable where ROW = @ROW))
+
+	SET @COUNTER = @ROW -1
+
+end
+drop table TempTable
+END
+GO
+
+Create TRIGGER AfterINSERTTournament on [dbo].TOURNAMENT
+after INSERT 
+AS 
+BEGIN
+SET NOCOUNT on;
+select U.[Email], ROW_NUMBER() over(ORDER BY U.[Email]) as ROW into TempTable
+from [dbo].[USER] as U
+DECLARE @COUNTER INT = (SELECT MAX(ROW) FROM TempTable);
+DECLARE @ROW INT;
+WHILE (@COUNTER != 0)
+begin
+	SELECT @ROW = ROW
+    FROM TempTable
+    WHERE ROW = @COUNTER
+    ORDER BY ROW DESC
+
+	Insert into [dbo].[PublicLeague](TournamentKey, [UserEmail]) values ((select [Key] from INSERTED), (Select Email from TempTable where ROW = @ROW))
+
+	SET @COUNTER = @ROW -1
+
+end
+drop table TempTable
+END
 GO
