@@ -2,41 +2,14 @@
 using REST_API_XFIA.DB_Context;
 using REST_API_XFIA.Modules.Service;
 
-namespace REST_API_XFIA.Modules
+namespace REST_API_XFIA.Modules.Mappers
 {
-    public class DataStrucToSQLStruc
+    public class UserMapper
     {
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
-        public static SQL_Model.Models.Tournament fillSQLTournament(Data_structures.Tournament tournament)
-        {
-            List<SQL_Model.Models.Tournament> tournaments = Db.Tournaments.ToList();
-            SQL_Model.Models.Tournament toAdd = new SQL_Model.Models.Tournament();
-            toAdd.Key = CodeGenerator.generate_key(tournaments);
-            toAdd.Name = tournament.nombreCm;
-            toAdd.Rules = tournament.descripcionDeReglas;
-            toAdd.InitialHour = parseTime(tournament.horaDeInicio);
-            toAdd.FinalHour = parseTime(tournament.horaDeFin);
-            toAdd.InitialDate = parseDate(tournament.fechaDeInicio);
-            toAdd.FinalDate = parseDate(tournament.fechaDeFin);
-            toAdd.Budget = tournament.presupuesto;
-            return toAdd;
-        }
-        public static SQL_Model.Models.Race fillSQLRace(Data_structures.Race race)
-        {
-            SQL_Model.Models.Race toAdd = new SQL_Model.Models.Race();
-            toAdd.Name = race.Nombre;
-            toAdd.TournamentKey = race.CampeonatoKey;
-            toAdd.InitialHour = DateTime.Parse(race.horaDeInicio).TimeOfDay;
-            toAdd.FinalHour = DateTime.Parse(race.horaDeFin).TimeOfDay;
-            toAdd.InitialDate = DateTime.Parse(DateTime.Parse(race.fechaDeInicio).ToString("yyyy-MM-dd"));
-            toAdd.FinalDate = DateTime.Parse(DateTime.Parse(race.fechaDeFin).ToString("yyyy-MM-dd"));
-            toAdd.TrackName = race.NombreDePista;
-            toAdd.State = 0;
-            toAdd.Country = race.Pais;
-            return toAdd;
-        }
 
-        public static SQL_Model.Models.User fillSQLUser(Data_structures.AllUserInfo user, IStorageService _storageService) {
+        public static SQL_Model.Models.User fillSQLUser(Data_structures.AllUserInfo user, IStorageService _storageService)
+        {
             SQL_Model.Models.User toAdd = new SQL_Model.Models.User();
             toAdd.CountryName = user.CountryName;
             toAdd.TeamsName = user.TeamsName;
@@ -52,19 +25,19 @@ namespace REST_API_XFIA.Modules
             SQL_Model.Models.Subteam team1 = new SQL_Model.Models.Subteam();
             SQL_Model.Models.Subteam team2 = new SQL_Model.Models.Subteam();
             List<SQL_Model.Models.Subteam> lastId = Db.Subteams.OrderByDescending(ST => ST.Id).ToList();
-            
+
             team1.Id = lastId[0].Id + 1;
             team1.RealTeamsName = userInfo.Car1;
             team1.Name = userInfo.NameSubteam1;
             team1.UserEmail = userInfo.Email;
-            
-            
+
+
 
             team2.Id = lastId[0].Id + 2;
             team2.RealTeamsName = userInfo.Car2;
             team2.Name = userInfo.NameSubteam2;
             team2.UserEmail = userInfo.Email;
-            
+
 
             subteams.Add(team1);
             subteams.Add(team2);
@@ -90,67 +63,6 @@ namespace REST_API_XFIA.Modules
 
             Db.SaveChanges();
             return;
-        }
-
-        public static List<SQL_Model.Models.Pilot> getPilotSubList(List<SQL_Model.Models.Pilot> pilots, int page, int amountByPage)
-        {
-            List<SQL_Model.Models.Pilot> pilotsInPage = new List<SQL_Model.Models.Pilot>();
-            int actualPage = 0;
-            for (int i = 0; i < pilots.Count - 1; i++)
-            {
-                if (i % amountByPage == 0)
-                {
-                    actualPage++;
-                }
-
-                if (actualPage == page)
-                {
-                    pilotsInPage.Add(pilots[i]);
-                }
-                else if (actualPage > page)
-                {
-                    break;
-                }
-            }
-            return pilotsInPage;
-        }
-
-        public static List<SQL_Model.Models.Realteam> getRealTeamsSubList(List<SQL_Model.Models.Realteam> RealTeams, int page, int amountByPage)
-        {
-            List<SQL_Model.Models.Realteam> RealTeamsInPage = new List<SQL_Model.Models.Realteam>();
-            int actualPage = 0;
-            for (int i = 0; i < RealTeams.Count - 1; i++)
-            {
-                if (i % amountByPage == 0)
-                {
-                    actualPage++;
-                }
-
-                if (actualPage == page)
-                {
-                    RealTeamsInPage.Add(RealTeams[i]);
-                }
-                else if (actualPage > page)
-                {
-                    break;
-                }
-            }
-            return RealTeamsInPage;
-        }
-
-        public static SQL_Model.Models.Tournament GetActiveTournament()
-        {
-            return Db.Tournaments.FirstOrDefault(tour => tour.InitialDate > DateTime.Today || (tour.InitialDate == DateTime.Today && tour.InitialHour >= DateTime.Now.TimeOfDay));
-        }
-
-        public static DateTime parseDate(string toParse)
-        {
-            return DateTime.Parse(DateTime.Parse(toParse).ToString("yyyy-MM-dd"));
-        }
-
-        public static TimeSpan parseTime(string toParse)
-        {
-            return DateTime.Parse(toParse).TimeOfDay;
         }
     }
 }

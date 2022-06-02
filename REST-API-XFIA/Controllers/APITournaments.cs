@@ -9,7 +9,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.Collections;
-using REST_API_XFIA.Modules;
+using REST_API_XFIA.Modules.BuisnessRules;
+using REST_API_XFIA.Modules.Mappers;
+using REST_API_XFIA.Modules.Fetcher;
 
 namespace REST_API_XFIA.Controllers
 {
@@ -18,6 +20,7 @@ namespace REST_API_XFIA.Controllers
     public class APITournaments : Controller
     {
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
+        IAddingRules rules = new TournamentVerifications();
         [HttpGet]
         public ActionResult listAll()
         {
@@ -36,10 +39,11 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                SQL_Model.Models.Tournament toAdd = DataStrucToSQLStruc.fillSQLTournament(t);
-                if (Verifications.IfTournamentAtSameTime(t.fechaDeInicio, t.horaDeInicio, t.fechaDeFin, t.horaDeFin))
+                SQL_Model.Models.Tournament toAdd = TournamentMapper.fillSQLTournament(t);
+                int MsgCode = rules.IsValid(toAdd);
+                if (MsgCode != 0)
                 {
-                    return BadRequest(JsonConvert.SerializeObject(1));
+                    return BadRequest(JsonConvert.SerializeObject(MsgCode));
                 }
 
                 Db.Tournaments.Add(toAdd);
@@ -57,11 +61,11 @@ namespace REST_API_XFIA.Controllers
         public ActionResult GetActiveTournamentBudget()
         {
             try{
-                if (Verifications.VerifyIfTournamentsActiveOrFuture())
+                if (TournamentVerifications.VerifyIfTournamentsActiveOrFuture())
                 {
                     return BadRequest(JsonConvert.SerializeObject(1));
                 }
-                SQL_Model.Models.Tournament ActiveTournament = DataStrucToSQLStruc.GetActiveTournament();
+                SQL_Model.Models.Tournament ActiveTournament = TournamentFetcher.GetActiveTournament();
                 return Ok(JsonConvert.SerializeObject(ActiveTournament.Budget));
             }catch(Exception e)
             {
