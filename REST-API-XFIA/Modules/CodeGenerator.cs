@@ -9,7 +9,7 @@ namespace REST_API_XFIA.Modules
         public static string generate_key(List<SQL_Model.Models.Tournament> tournaments)
         {
             string key = RandomString(6);
-            while (Verifications.IfKeyIsRepeatedInDB(key, tournaments))
+            while (TournamentVerifications.IfKeyIsRepeatedInDB(key, tournaments))
             {
                 key = RandomString(6);
             }
