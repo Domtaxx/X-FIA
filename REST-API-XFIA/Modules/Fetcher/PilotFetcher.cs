@@ -1,4 +1,4 @@
-﻿using REST_API_XFIA.DB_Context;
+﻿using REST_API_XFIA.SQL_Model.DB_Context;
 
 namespace REST_API_XFIA.Modules.Fetcher
 {
