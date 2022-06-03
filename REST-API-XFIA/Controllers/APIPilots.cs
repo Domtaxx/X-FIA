@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using REST_API_XFIA.DB_Context;
+using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.Modules.Fetcher;
 using REST_API_XFIA.Modules.Mappers;
 
