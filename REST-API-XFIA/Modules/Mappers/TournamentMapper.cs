@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using REST_API_XFIA.DB_Context;
+using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.Modules.Service;
 
 namespace REST_API_XFIA.Modules.Mappers
