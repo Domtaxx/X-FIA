@@ -71,12 +71,12 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             
         }
 
-        int IAddingRules.IsValid(User user)
+        int IAddingRules.IsValid(SQL_Model.Models.Tournament tour)
         {
             throw new NotImplementedException();
         }
 
-        int IAddingRules.IsValid(SQL_Model.Models.Tournament tour)
+        int IAddingRules.IsValid(AllUserInfo user)
         {
             throw new NotImplementedException();
         }

@@ -17,6 +17,7 @@ namespace REST_API_XFIA.SQL_Model.Models
         public string Photo { get; set; } = null!;
         public string CountryName { get; set; } = null!;
         public string? RealTeamsName { get; set; }
+        public int? Points { get; set; }
 
         public virtual Country CountryNameNavigation { get; set; } = null!;
         public virtual Realteam? RealTeamsNameNavigation { get; set; }

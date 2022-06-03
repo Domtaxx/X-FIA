@@ -56,11 +56,6 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             return true;
         }
 
-        int IAddingRules.IsValid(User user)
-        {
-            throw new NotImplementedException();
-        }
-
         int IAddingRules.IsValid(SQL_Model.Models.Tournament tour)
         {
             if (IfTournamentAtSameTime(tour.InitialDate, tour.InitialHour, tour.FinalDate, tour.FinalHour))
@@ -71,6 +66,11 @@ namespace REST_API_XFIA.Modules.BuisnessRules
         }
 
         int IAddingRules.IsValid(SQL_Model.Models.Race race)
+        {
+            throw new NotImplementedException();
+        }
+
+        int IAddingRules.IsValid(AllUserInfo user)
         {
             throw new NotImplementedException();
         }

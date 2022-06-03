@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using REST_API_XFIA.DB_Context;
+using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.SQL_Model.Models;
 using REST_API_XFIA.Data_structures;
 using System;
