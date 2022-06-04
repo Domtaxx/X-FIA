@@ -111,7 +111,7 @@ export class SweetAlertService {
     });
   }
 
-  public inputTextSwal(title:string,confirmButtonText:string,callback:(data:string)=>boolean){
+  public inputTextSwal(title:string,confirmButtonText:string,callback:(data:string)=>void){
     Swal.fire({
       title: title,
       input: 'text',
@@ -127,5 +127,6 @@ export class SweetAlertService {
       },
       allowOutsideClick: () => !Swal.isLoading()
     })
+    
   }
 }
