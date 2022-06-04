@@ -21,6 +21,7 @@ Email varchar(30) unique,
 TeamsName varchar(30) not null,
 TeamsLogo varchar(MAX) not null,
 CountryName varchar(30) not null,
+PrivateLeagueName varchar(30),
 PRIMARY KEY (Email),
 FOREIGN KEY (CountryName) REFERENCES Country([Name])); 
 
@@ -45,11 +46,22 @@ Primary KEY (UserEmail,TournamentKey),
 FOREIGN KEY (TournamentKey) REFERENCES Tournament ([Key]),
 FOREIGN KEY (UserEmail) REFERENCES dbo.[User](Email));
 
+
+Create Table [PRIVATELEAGUE](
+OwnerEmail varchar(30),
+TournamentKey varchar(6),
+[Name] varchar(30),
+maxUser int,
+Primary KEY ([Name]),
+FOREIGN KEY (TournamentKey) REFERENCES Tournament ([Key]),
+FOREIGN KEY (OwnerEmail) REFERENCES dbo.[User](Email));
+
 Create Table REALTEAMS(
 [Name] varchar(30) not null,
 Price float not null,
 Photo varchar(MAX) not null,
 Logo varchar(MAX) not null,
+Points int,
 PRIMARY KEY ([Name]),
 );
 
@@ -70,6 +82,7 @@ Price float not null,
 Photo varchar(MAX) not null,
 CountryName varchar(30) not null,
 RealTeamsName varchar(30),
+Points int,
 PRIMARY KEY (ID),
 FOREIGN KEY (CountryName) REFERENCES Country([Name]),
 FOREIGN KEY (RealTeamsName) REFERENCES REALTEAMS([Name]));
@@ -81,6 +94,10 @@ PRIMARY KEY (SubTeamsID , PilotID),
 FOREIGN KEY (SubTeamsID) REFERENCES SUBTEAMS(id),
 FOREIGN KEY (PilotID) REFERENCES PILOT(id)
 );
+
+Alter table [USER]
+add constraint PrivateLeague_User_key
+FOREIGN KEY (PrivateLeagueName) REFERENCES [PRIVATELEAGUE]([Name]);
 
 
 INSERT INTO COUNTRY
@@ -105,32 +122,32 @@ INSERT INTO Race
 VALUES ('Street Circuit', 'ARABIA SAUDI',0,'Jeddah', '2022-03-26', '17:00:00', '2022-03-27', '4:00:00', 'QWE123');
 
 INSERT INTO dbo.[User]
-VALUES('Briwag','3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e','briwag88@hotmail.com','Los tornados locos','https://xfiaonline.blob.core.windows.net/images/logo prueba.png','FRANCIA')
+VALUES('Briwag','3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e','briwag88@hotmail.com','Los tornados locos','https://xfiaonline.blob.core.windows.net/images/logo prueba.png','FRANCIA',null)
 
 Insert into PUBLICLEAGUE
 Values('briwag88@hotmail.com','QWE123')
 
 Insert into REALTEAMS
-Values('Redbull', 6, 'https://xfiaonline.blob.core.windows.net/images/Redbull carro.png','https://xfiaonline.blob.core.windows.net/images/redbull_logo.png')
+Values('Redbull', 6, 'https://xfiaonline.blob.core.windows.net/images/Redbull carro.png','https://xfiaonline.blob.core.windows.net/images/redbull_logo.png',0)
 Insert into REALTEAMS
-Values('Mclaren', 5, 'https://xfiaonline.blob.core.windows.net/images/Mclaren carro.png','https://xfiaonline.blob.core.windows.net/images/Mclaren_logo.png')
+Values('Mclaren', 5, 'https://xfiaonline.blob.core.windows.net/images/Mclaren carro.png','https://xfiaonline.blob.core.windows.net/images/Mclaren_logo.png',0)
 Insert into REALTEAMS
-Values('Alpine', 7, 'https://xfiaonline.blob.core.windows.net/images/Alpine carro.png','https://xfiaonline.blob.core.windows.net/images/Alpine_logo.png')
+Values('Alpine', 7, 'https://xfiaonline.blob.core.windows.net/images/Alpine carro.png','https://xfiaonline.blob.core.windows.net/images/Alpine_logo.png',0)
 
 Insert into PILOT
-Values('Fernando', 'Alonso', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
+Values('Fernando', 'Alonso', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine',0)
 
 Insert into PILOT
-Values('Sebastian', 'Vettel', 5,'https://xfiaonline.blob.core.windows.net/images/Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')
+Values('Sebastian', 'Vettel', 5,'https://xfiaonline.blob.core.windows.net/images/Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull',0)
 
 Insert into PILOT
-Values('Daniel', 'Ricciardo', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren')
+Values('Daniel', 'Ricciardo', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren',0)
 
 Insert into PILOT
-Values('Sergio', 'Perez', 7,'https://xfiaonline.blob.core.windows.net/images/Piloto Sergio Perez redbull.png','FRANCIA','Redbull')
+Values('Sergio', 'Perez', 7,'https://xfiaonline.blob.core.windows.net/images/Piloto Sergio Perez redbull.png','FRANCIA','Redbull',0)
 
 Insert into PILOT
-Values('Lando', 'Norris', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
+Values('Lando', 'Norris', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Lando Norris McLaren.png','FRANCIA','Mclaren',0)
 
 insert into SUBTEAMS
 Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull')

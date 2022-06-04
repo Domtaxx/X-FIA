@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using REST_API_XFIA.DB_Context;
-using REST_API_XFIA.Modules;
+using REST_API_XFIA.SQL_Model.DB_Context;
+using REST_API_XFIA.Modules.Fetcher;
+using REST_API_XFIA.Modules.Mappers;
 
 namespace REST_API_XFIA.Controllers
 {
@@ -15,7 +16,10 @@ namespace REST_API_XFIA.Controllers
         public ActionResult ListAll()
         {
             try {
-                return Ok(JsonConvert.SerializeObject(Db.Pilots.Include(P=>P.CountryNameNavigation).Include(P=>P.RealTeamsNameNavigation).ToList().OrderBy(p => p.Lastname)));
+                return Ok(
+                            JsonConvert.SerializeObject(Db.Pilots.Include(P => P.CountryNameNavigation).Include(P => P.RealTeamsNameNavigation).ToList().OrderBy(p => p.Lastname), Formatting.Indented,
+                            new JsonSerializerSettings{PreserveReferencesHandling = PreserveReferencesHandling.Objects})
+                          );
             }
             catch (Exception e)
             {
@@ -29,7 +33,7 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                List<SQL_Model.Models.Pilot> pilotList = DataStrucToSQLStruc.getPilotSubList(Db.Pilots.ToList(), page, amountByPage);
+                List<SQL_Model.Models.Pilot> pilotList = PilotFetcher.getPilotSubList(Db.Pilots.ToList(), page, amountByPage);
                 return Ok(JsonConvert.SerializeObject(pilotList));
             }
             catch (Exception e)

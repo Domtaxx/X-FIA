@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace REST_API_XFIA.SQL_Model.Models
@@ -8,6 +7,7 @@ namespace REST_API_XFIA.SQL_Model.Models
     {
         public User()
         {
+            Privateleagues = new HashSet<Privateleague>();
             Subteams = new HashSet<Subteam>();
             TournamentKeys = new HashSet<Tournament>();
         }
@@ -18,11 +18,13 @@ namespace REST_API_XFIA.SQL_Model.Models
         public string TeamsName { get; set; } = null!;
         public string TeamsLogo { get; set; } = null!;
         public string CountryName { get; set; } = null!;
+        public string? PrivateLeagueName { get; set; }
 
         public virtual Country CountryNameNavigation { get; set; } = null!;
-        [JsonIgnore]
+        public virtual Privateleague? PrivateLeagueNameNavigation { get; set; }
+        public virtual ICollection<Privateleague> Privateleagues { get; set; }
         public virtual ICollection<Subteam> Subteams { get; set; }
-        [JsonIgnore]
+
         public virtual ICollection<Tournament> TournamentKeys { get; set; }
     }
 }

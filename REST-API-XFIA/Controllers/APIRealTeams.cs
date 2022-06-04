@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using REST_API_XFIA.DB_Context;
+using REST_API_XFIA.SQL_Model.DB_Context;
 namespace REST_API_XFIA.Controllers
 {
     public class APIRealTeams : Controller
@@ -13,7 +13,10 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                return Ok(JsonConvert.SerializeObject(Db.Realteams.ToList()));
+                return Ok(
+                            JsonConvert.SerializeObject(Db.Realteams.ToList(), Formatting.Indented,
+                            new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects })
+                          );
             }
             catch (Exception e)
             {

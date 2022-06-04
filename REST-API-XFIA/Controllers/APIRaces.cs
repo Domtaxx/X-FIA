@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using REST_API_XFIA.DB_Context;
+using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.SQL_Model.Models;
 using REST_API_XFIA.Data_structures;
 using System;
@@ -7,13 +7,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using REST_API_XFIA.Modules;
+using REST_API_XFIA.Modules.BuisnessRules;
+using REST_API_XFIA.Modules.Mappers;
 
 namespace REST_API_XFIA.Controllers
 {
     public class APIRaces : Controller
     {
-
+        IAddingRules rules = new RaceVerifications();
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         [Route("Admin/Carreras")]
         [HttpGet]
@@ -32,25 +33,15 @@ namespace REST_API_XFIA.Controllers
         [HttpPost]
         public ActionResult add([FromBody] Data_structures.Race r){
             try{
-                SQL_Model.Models.Race toAdd = Modules.DataStrucToSQLStruc.fillSQLRace(r);
-                if (Verifications.IfRacesAtSameTime(r.fechaDeInicio,r.horaDeInicio,r.fechaDeFin,r.horaDeFin))
+                SQL_Model.Models.Race toAdd = RaceMapper.fillSQLRace(r);
+                int MsgCode = rules.IsValid(toAdd);
+                if (MsgCode != 0)
                 {
-                    return BadRequest(JsonConvert.SerializeObject(3));// There is another race at the same time
+                    return BadRequest(JsonConvert.SerializeObject(MsgCode));
                 }
-                
-                if (Verifications.raceWithNameExists(toAdd.Name, toAdd.TournamentKey))
-                {
-                    return BadRequest(JsonConvert.SerializeObject(1));// Object already in data base
-                }
-
-                if (Verifications.raceIsNotInChampDates(toAdd))
-                {
-                    return BadRequest(JsonConvert.SerializeObject(2));// Race is outside tournamnet dates
-                }
-
                 Db.Races.Add(toAdd);
                 Db.SaveChanges();
-                return Ok(JsonConvert.SerializeObject(0));// Added succesfully
+                return Ok(JsonConvert.SerializeObject(MsgCode));// Added succesfully
             }catch(Exception e)
             {
                 return BadRequest(JsonConvert.SerializeObject(4));//Server failed

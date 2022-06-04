@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace REST_API_XFIA.SQL_Model.Models
@@ -15,11 +14,9 @@ namespace REST_API_XFIA.SQL_Model.Models
 
         public string Name { get; set; } = null!;
         public string Photo { get; set; } = null!;
-        [JsonIgnore]
+
         public virtual ICollection<Pilot> Pilots { get; set; }
-        [JsonIgnore]
         public virtual ICollection<Race> Races { get; set; }
-        [JsonIgnore]
         public virtual ICollection<User> Users { get; set; }
     }
 }
