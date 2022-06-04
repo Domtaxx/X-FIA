@@ -43,6 +43,7 @@
 	align-items: stretch;
 	align-content: stretch;
     width: 35%;
+    margin-top: 2vh;
 }
 .buttonIcon{
     font-size: 8vw;
@@ -89,7 +90,7 @@ h1{
     font-family:'Rockwell';
     font-weight: bold;
 }
-#teamName{
+.teamName{
     display: block;
     font-size: 4vmin;
     font-family:'Rockwell';

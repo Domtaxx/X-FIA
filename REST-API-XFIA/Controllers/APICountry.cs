@@ -11,7 +11,14 @@ namespace REST_API_XFIA.Controllers
         [HttpGet]
         public ActionResult listAllCountrys()
         {
-            return Ok(Db.Countries.ToList());
+            try
+            {
+                return Ok(Db.Countries.ToList());
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
         }
     }
 }

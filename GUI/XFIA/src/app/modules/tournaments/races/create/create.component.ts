@@ -78,7 +78,7 @@ export class CreateRaceComponent implements OnInit {
   as in empty spaces or dates
   */
   submit(){
-    if(!this.validations)return;//if the validation conditions are not meet, end the method
+    if(!this.validations())return;//if the validation conditions are not meet, end the method
     var raceName=this.raceForm.controls[this.raceName].value;
     var tournamentName=this.raceForm.controls[this.tournamentName].value;
     var streenName=this.raceForm.controls[this.streetName].value;

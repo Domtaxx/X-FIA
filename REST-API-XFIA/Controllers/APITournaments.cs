@@ -27,16 +27,17 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return BadRequest(4);
             }
         }
+
         [HttpPost]
         public ActionResult add([FromBody] Data_structures.Tournament t)
         {
             try
             {
                 SQL_Model.Models.Tournament toAdd = DataStrucToSQLStruc.fillSQLTournament(t);
-                if (!Verifications.IfTournamentAtSameTime(t.fechaDeInicio, t.horaDeInicio, t.fechaDeFin, t.horaDeFin))
+                if (Verifications.IfTournamentAtSameTime(t.fechaDeInicio, t.horaDeInicio, t.fechaDeFin, t.horaDeFin))
                 {
                     return BadRequest(JsonConvert.SerializeObject(1));
                 }
@@ -48,6 +49,23 @@ namespace REST_API_XFIA.Controllers
             catch (Exception e)
             {
                 return BadRequest(JsonConvert.SerializeObject(2));
+            }
+        }
+
+        [HttpGet]
+        [Route("Admin/Campeonato/Budget")]
+        public ActionResult GetActiveTournamentBudget()
+        {
+            try{
+                if (Verifications.VerifyIfTournamentsActiveOrFuture())
+                {
+                    return BadRequest(JsonConvert.SerializeObject(1));
+                }
+                SQL_Model.Models.Tournament ActiveTournament = DataStrucToSQLStruc.GetActiveTournament();
+                return Ok(JsonConvert.SerializeObject(ActiveTournament.Budget));
+            }catch(Exception e)
+            {
+                return BadRequest(JsonConvert.SerializeObject(4));
             }
         }
     }

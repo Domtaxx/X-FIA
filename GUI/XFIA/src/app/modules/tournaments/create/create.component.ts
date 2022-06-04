@@ -61,12 +61,14 @@ export class CreateComponent implements OnInit {
       horaDeInicio: iTime,
       fechaDeFin: fDate,
       horaDeFin: fTime,
+      presupuesto:budget,
       descripcionDeReglas: rules
     }
+    console.log(httpParam)
     this.backend.post_request(appSettings.tournamentRoute,httpParam).subscribe( // tournament post request
       (result)=>{//sucess case
         this.tournamentForm.reset()
-        this.swal.showSuccess(alertMessages.rejected,alertMessages.sucessTournament+result)
+        this.swal.showSuccess(alertMessages.successHeader,alertMessages.sucessTournament+result)
 
       },
       (error)=>{

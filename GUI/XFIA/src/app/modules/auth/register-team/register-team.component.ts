@@ -40,7 +40,7 @@ export class RegisterTeamComponent implements OnInit {
   pilot5Index=4;
   carIndex=5;
   teamForm= new FormGroup({
-    teamName:new FormControl('',[Validators.required]),
+    teamName:new FormControl('Equipo',[Validators.required]),
     pilot1:new FormControl('',[Validators.required]),
     pilot2:new FormControl('',[Validators.required]),
     pilot3:new FormControl('',[Validators.required]),
@@ -86,15 +86,20 @@ export class RegisterTeamComponent implements OnInit {
     
 
   }
-
+    /*
+    input:none
+    output:none
+    description: function called when the view starts, ask the network module to get data required to show
+    */
   ngOnInit(): void {
-    this.cost.budget=0
-    this.cost.leftBudget=0;
-    this.getBudget();
-    this.getCars();
-    this.getRunners();
+    this.resetData()
 
   }
+  /*
+  input:none
+  ouput:none
+  description: makes the shift right between the team members
+  */
   indexUp(){
     this.memberIndex++;
     if(this.memberIndex>=this.memberArray.length){
@@ -102,6 +107,11 @@ export class RegisterTeamComponent implements OnInit {
     }
     this.updateMetadata()
   }
+  /*
+  input:none
+  output:none
+  description: makes the shift left beetween the team members
+  */
   indexDown(){
     this.memberIndex--;
     if(this.memberIndex<0){
@@ -109,6 +119,11 @@ export class RegisterTeamComponent implements OnInit {
     }
     this.updateMetadata()
   }
+  /*
+  input:none
+  output:none
+  description: update the information(name, price, photo) of the current member
+  */
   updateMetadata(){
     this.currentImage=appSettings.defaultPilotPhotoRoute;
     this.currentCountryImage=appSettings.defaultCountryPhoto;
@@ -123,6 +138,8 @@ export class RegisterTeamComponent implements OnInit {
         this.currentPrice=currentPilot?.Price;
         this.currentCountryImage=currentPilot?.CountryNameNavigation.Photo;
         this.currentTeamImage=currentPilot?.RealTeamsNameNavigation.Logo
+        console.log(this.currentCountryImage);
+        console.log(this.currentTeamImage)
       }
     }
     else{
@@ -136,15 +153,25 @@ export class RegisterTeamComponent implements OnInit {
     
     
   }
-
+  /*
+  input:none
+  output:none
+  description:ask the network module to get the data of the available piltos
+  */
   getRunners(){
     this.backend.get_request(appSettings.everyPilotRoute,{}).subscribe(
       (sucess:pilotInterface[])=>{
         this.availablePilots=sucess;
+        console.log(sucess)
         this.availablePilots=[...this.availablePilots]
       }
     )
   }
+   /*
+  input:none
+  output:none
+  description:ask the network module to get the data of the available cars
+  */
   getCars(){
     this.backend.get_request(appSettings.carsRoute,{}).subscribe(
       (sucess:carInterface[])=>{
@@ -154,6 +181,11 @@ export class RegisterTeamComponent implements OnInit {
       }
     )
   }
+   /*
+  input:none
+  output:none
+  description:ask the network module to get the data of budget of the tournament
+  */
   getBudget(){
     this.backend.get_request(appSettings.currentBudgetRoute,{}).subscribe(
       (sucess)=>{
@@ -164,6 +196,11 @@ export class RegisterTeamComponent implements OnInit {
     )
 
   }
+  /*
+  input: value of the input gotten
+  output: none
+  description: get the value when the member input changes, and call the method to update the metadata
+  */
   onChangedInput(value:any){
    if(this.memberIndex<this.memberArray.length-1){
      
@@ -178,11 +215,69 @@ export class RegisterTeamComponent implements OnInit {
    this.updateBudget()
    
   }
+  /*
+  input:none
+  output:none
+  description: updates the budget given the current team members
+  */
   updateBudget(){
    var currentValue=budgedCalc.calculateTeamCost(this.selectedPilots,this.selectedCar);
    var leftBudget=this.cost?.budget-currentValue;
    this.outBudget=leftBudget<0;
    this.cost.leftBudget=leftBudget;
   }
+  /*
+  input:none
+  output: boolean 
+  description: verifies if the form has the overBudget error
+  */
+  hasBudgetError():boolean{
+   return this.teamForm.hasError('overBudget')
+    
+  }
+  /*
+  input:none
+  output: boolean 
+  description: verifies if the form has the hasRepitedPilots error
+  */
+  hasRepitedPilots():boolean{
+    return this.teamForm.hasError('repitedPilot')
+  }
+  /*
+  input:none
+  output: boolean 
+  description: verifies if the form has the hasEmptyPilots error
+  */
+  hasEmptyPilots():boolean{
+    for(var i=1;i<=5;i++){
+      var errorRequired=this.teamForm.get('pilot'+i)?.hasError('required');
+      if(errorRequired){
+        return true
+      }
+    }
+    return false;
+  }
+   /*
+  input:none
+  output: boolean 
+  description: verifies if the form has the hasEmptyCar error
+  */
+  hasEmptyCar():boolean{
+    return this.teamForm.controls['car'].hasError('required')
+  }
 
+  resetData(){
+    this.memberIndex=0;
+    this.selectedPilots=new Map()
+    this.selectedCar=undefined;
+    this.getBudget()
+    this.getCars()
+    this.getRunners()
+    this.currentImage=appSettings.defaultPilotPhotoRoute;
+    this.currentCountryImage=appSettings.defaultCountryPhoto;
+    this.currentTeamImage=appSettings.defaultTeamPhoto;
+    this.currentName=appSettings.defaultPilotName;
+    this.currentPrice=0;
+    this.outBudget=false;
+  }
 }

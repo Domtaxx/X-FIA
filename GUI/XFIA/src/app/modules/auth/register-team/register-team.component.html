@@ -4,12 +4,12 @@
   
     <div class="formDivContainer">
     
-    <input id="teamName" type="text" value="Equipo 1" formControlName="teamName">
-    <h2 style="margin-top: 5%;">Presupuesto restante</h2>
-    <h1 [ngStyle]="outBudget?{'color':'red'}:{'color':'green'}">{{cost.leftBudget+" Millones"}}</h1>
-    <h2 style="color:black">{{memberArray[memberIndex]}}</h2>
+    
         <form class ="registerForm"(ngSubmit)="null" [formGroup]="teamForm" >
-        
+          <input class="teamName" class="teamName" type="text" formControlName="teamName">
+          <h2 style="margin-top: 5%;">Presupuesto restante</h2>
+          <h1 [ngStyle]="outBudget?{'color':'red'}:{'color':'green'}">{{cost.leftBudget+" Millones"}}</h1>
+          <h2 style="color:black">{{memberArray[memberIndex]}}</h2>
             <div class="formDiv">
                 <div class="buttonShiftArea">
                     <button class="btnLeft" aria-label="left" (click)="indexDown()">

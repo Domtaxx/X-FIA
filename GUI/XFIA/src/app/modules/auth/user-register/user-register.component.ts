@@ -32,6 +32,7 @@ export class UserRegisterComponent implements OnInit {
   fileUploaded=false;
   countries:string[]=[]
   image?:string="";
+  imageFile?:File;
 
  
   errorCode={
@@ -40,7 +41,7 @@ export class UserRegisterComponent implements OnInit {
   constructor(private swal:SweetAlertService,private backend:NetworkService) { }
 
   ngOnInit(): void {
-    this.getCountries()
+    this.resetData()
    
  
   }
@@ -50,15 +51,31 @@ export class UserRegisterComponent implements OnInit {
   This funcion in called when the form its summited, checks for input mistakes and makes the http request to add the tournamente
   */
   submit(){}
-
+  /*
+  ouput: none
+  input:none
+  description: Change the visibility for the password 1, if was visible, it hides it and the other way around
+  */
   chageVisibilityPass1(){
     this.showPass1=!this.showPass1;
   }
+  /*
+  ouput: none
+  input:none
+  description: Change the visibility for the password 2, if was visible, it hides it and the other way around
+  */
   chageVisibilityPass2(){
     this.showPass2=!this.showPass2;
   }
+  /*
+  input: file
+  output: none
+  description: event called when a file its entered in the file input, it asked the file to be procesed to be
+  show in the view
+  */
   onFileUploaded(fileEvent:any){
     const file: File = fileEvent.target.files[0];
+    this.imageFile=file;
     console.log(file)
     if(!fileValidations.checkImage(file)){
       this.showError(alertMessages.rejectedImageFileHeader,alertMessages.rejectedImageFileBody)
@@ -67,13 +84,28 @@ export class UserRegisterComponent implements OnInit {
 
 
   }
+  /*
+  input: header message and body message
+  output: none
+  description: ask the swal module to show the message with the information given
+  */
   showError(header:string,body:string){
     this.swal.showError(header,body);
 
   }
+  /*
+  input: header message and body message
+  output: none
+  description: ask the swal module to show the message with the information given
+  */
   showSucess(header:string,body:string){
     this.swal.showSuccess(header,body);
   }
+  /*
+  input:file
+  output:none
+  description: function called to get the processed file
+  */
   loadFile(file:File){
     this.fileUploaded=true;
    
@@ -82,15 +114,29 @@ export class UserRegisterComponent implements OnInit {
    })
 
   }
-
+/*
+  input:string url
+  output:none
+  description: sets the image to be shown
+  */
   setImage(img:string){
     this.image=img;
     console.log(this.image)
   }
+  /*
+  input:none
+  output:none
+  description: resets the image making available to upload again
+  */
   resetImage(){
     this.userRegisterForm.controls['image'].reset();
     this.fileUploaded=false;
   }
+  /*
+  input:none
+  output:none
+  description: ask the network service to get the countries
+  */
   getCountries(){
     this.backend.get_request(appSettings.countryRoute,{}).subscribe(
       (result:country[])=>{
@@ -102,6 +148,15 @@ export class UserRegisterComponent implements OnInit {
         this.countries=[...this.countries]
       }
     )
+  }
+
+  resetData(){
+    this.showPass1=false;
+    this.showPass2=false;
+    this.fileUploaded=false;
+    this.getCountries()
+     this.image="";
+    this.imageFile=undefined;
   }
 
 
