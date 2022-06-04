@@ -20,8 +20,8 @@ export class UserRegisterComponent implements OnInit {
     userRegisterForm=new FormGroup({
     userName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
     email:new FormControl('',[Validators.required,Validators.email,Validators.maxLength(256)]),
-    password:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*)*')]),
-    confirmPassword:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*)*')]),
+    password:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*)*([a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*)*')]),
+    confirmPassword:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*)*([a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*)*')]),
     teamName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
     countryName:new FormControl('',[Validators.required]),
     image:new FormControl('',[Validators.required])
