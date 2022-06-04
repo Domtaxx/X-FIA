@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import{leagueMemberInterface} from 'src/app/interface/interfaces'
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { publicLeagueRankingService } from 'src/app/dataProviderServices/publicLeagueRanking';
-import { getLocaleDateFormat } from '@angular/common';
+import { privateLeagueCreateService } from 'src/app/dataProviderServices/privateLeagueCreate';
+
 @Component({
   selector: 'app-public-league-ranking',
   templateUrl: './public-league-ranking.component.html',
@@ -13,7 +14,7 @@ export class PublicLeagueRankingComponent implements OnInit {
   displayedColumns=['Posicion','Usuario','Escuderia','Equipo','Puntaje'];
   page!:number;
   playersTeam:leagueMemberInterface[]=[];
-  constructor(private dataManagement:publicLeagueRankingService) { }
+  constructor(private dataManagement:publicLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService) { }
 
   ngOnInit(): void {
     const object={
@@ -30,11 +31,11 @@ export class PublicLeagueRankingComponent implements OnInit {
     for(var i=0;i<2;i++){
       this.playersTeam.push(object)
     }
-    this.getData();
+    //this.getData();
     
   }
   getData(){
-    this.getData();
+    this.getRankingInfo();
     this.getPlayersTeamInfo();
   }
 
@@ -64,6 +65,9 @@ export class PublicLeagueRankingComponent implements OnInit {
       }
 
     );
+  }
+  joinPrivateLeague(){
+    this.privateLeagueService.joinLeague()
   }
 
 }

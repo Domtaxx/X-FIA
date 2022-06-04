@@ -83,5 +83,8 @@ export interface leagueMemberInterface{
     puntaje:number;
 }
 
-
+export interface privateLeagueJoinMember{
+    email:string|null;
+    code:string|null;
+}
 

@@ -1,3 +1,3 @@
 export class localStorageNames{
-    public static username='username';
+    public static email='email';
 }
