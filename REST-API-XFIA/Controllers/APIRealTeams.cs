@@ -13,7 +13,10 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                return Ok(JsonConvert.SerializeObject(Db.Realteams.ToList()));
+                return Ok(
+                            JsonConvert.SerializeObject(Db.Realteams.ToList(), Formatting.Indented,
+                            new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects })
+                          );
             }
             catch (Exception e)
             {

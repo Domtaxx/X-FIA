@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace REST_API_XFIA.SQL_Model.Models
@@ -22,6 +23,7 @@ namespace REST_API_XFIA.SQL_Model.Models
         public virtual Country CountryNameNavigation { get; set; } = null!;
         public virtual Realteam? RealTeamsNameNavigation { get; set; }
 
+        [JsonIgnore]
         public virtual ICollection<Subteam> SubTeams { get; set; }
     }
 }
