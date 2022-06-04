@@ -33,6 +33,10 @@ export class alertMessages{
     public static reapetedPilots="Existen Pilotos Repetidos";
     public static emptyCar="Debe seleccionar un auto"
     public static outBoundBudget="Presupuesto Fuera de Rango"
+
+    //create private league
+    public static privateLeagueCreateHeader='Crear Liga Privada';
+    public static privateAcceptCreate="Aceptar";
     //File Error
     public static rejectedImageFileHeader="Formato Incompatible"
     public static rejectedImageFileBody="Solo estan permitidos los archivos .jpg y .png"
