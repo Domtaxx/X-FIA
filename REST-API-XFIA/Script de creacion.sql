@@ -50,6 +50,7 @@ FOREIGN KEY (UserEmail) REFERENCES dbo.[User](Email));
 Create Table [PRIVATELEAGUE](
 OwnerEmail varchar(30),
 TournamentKey varchar(6),
+PrivateLeagueKey varchar(6),
 [Name] varchar(30),
 maxUser int,
 Primary KEY ([Name]),
