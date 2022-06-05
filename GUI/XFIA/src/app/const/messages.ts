@@ -33,6 +33,14 @@ export class alertMessages{
     public static reapetedPilots="Existen Pilotos Repetidos";
     public static emptyCar="Debe seleccionar un auto"
     public static outBoundBudget="Presupuesto Fuera de Rango"
+
+    //create private league
+    public static privateLeagueCreateHeader='Crear Liga Privada';
+    public static privateAcceptCreate="Aceptar";
+
+    public static privateLeagueCreatedBody="Su liga privada ha sido creada con exito, El código de la liga es"
+    public static privateLeagueFormatErrorHeader="La llave no cumple con las condiciones"
+    public static privateLeagueFormatErrorBody="Recuerde que debe indicar una llave alfanúmerica con 12 digitos de largo"
     //File Error
     public static rejectedImageFileHeader="Formato Incompatible"
     public static rejectedImageFileBody="Solo estan permitidos los archivos .jpg y .png"
