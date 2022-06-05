@@ -75,3 +75,16 @@ export interface userRegisterInterface{
 
 }
 
+export interface leagueMemberInterface{
+    posicion:number;
+    usuario:string;
+    escuderia:string;
+    equipo:string;
+    puntaje:number;
+}
+
+export interface privateLeagueJoinMember{
+    email:string|null;
+    code:string|null;
+}
+

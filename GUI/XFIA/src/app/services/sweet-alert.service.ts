@@ -110,4 +110,23 @@ export class SweetAlertService {
       cancelButtonText: cancelText,
     });
   }
+
+  public inputTextSwal(title:string,confirmButtonText:string,callback:(data:string)=>void){
+    Swal.fire({
+      title: title,
+      input: 'text',
+      inputAttributes: {
+        autocapitalize: 'off'
+      },
+      showCancelButton: true,
+      confirmButtonText: confirmButtonText,
+      showLoaderOnConfirm: true,
+      preConfirm: (login) => {
+        callback(login);
+        return true;
+      },
+      allowOutsideClick: () => !Swal.isLoading()
+    })
+    
+  }
 }
