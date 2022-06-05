@@ -41,6 +41,7 @@ export class alertMessages{
     public static privateLeagueCreatedBody="Su liga privada ha sido creada con exito, El código de la liga es"
     public static privateLeagueFormatErrorHeader="La llave no cumple con las condiciones"
     public static privateLeagueFormatErrorBody="Recuerde que debe indicar una llave alfanúmerica con 12 digitos de largo"
+    public static privateLeagueLeaveSucessBody='Ha abandonado la liga con éxito'
     //File Error
     public static rejectedImageFileHeader="Formato Incompatible"
     public static rejectedImageFileBody="Solo estan permitidos los archivos .jpg y .png"

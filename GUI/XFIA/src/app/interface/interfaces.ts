@@ -88,3 +88,9 @@ export interface privateLeagueJoinMember{
     code:string|null;
 }
 
+export interface privateLeagueInfo{
+    key:string;
+    maxUser:number;
+    state:boolean;
+}
+
