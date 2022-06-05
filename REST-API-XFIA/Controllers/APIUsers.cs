@@ -65,7 +65,7 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 return Ok(
-                            JsonConvert.SerializeObject(Db.Subteams.Where(st => st.UserEmail == email).Include(st => st.Pilots), Formatting.Indented,
+                            JsonConvert.SerializeObject(Db.Subteams.Where(st => st.UserEmail == email).Include(st => st.HasPilots).ThenInclude(HP=>HP.Pilot), Formatting.Indented,
                             new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects })
                           ); 
             }

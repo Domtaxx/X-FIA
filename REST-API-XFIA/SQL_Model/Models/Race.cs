@@ -5,6 +5,12 @@ namespace REST_API_XFIA.SQL_Model.Models
 {
     public partial class Race
     {
+        public Race()
+        {
+            PilotRaces = new HashSet<PilotRace>();
+            RealTeamRaces = new HashSet<RealTeamRace>();
+        }
+
         public string Name { get; set; } = null!;
         public string Country { get; set; } = null!;
         public int State { get; set; }
@@ -17,5 +23,7 @@ namespace REST_API_XFIA.SQL_Model.Models
 
         public virtual Country CountryNavigation { get; set; } = null!;
         public virtual Tournament TournamentKeyNavigation { get; set; } = null!;
+        public virtual ICollection<PilotRace> PilotRaces { get; set; }
+        public virtual ICollection<RealTeamRace> RealTeamRaces { get; set; }
     }
 }

@@ -13,11 +13,12 @@ namespace REST_API_XFIA.Controllers
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         [Route("PublicLeague")]
         [HttpGet]
-        public ActionResult listAll()
+        public ActionResult listByPage()
         {
             try
             {
-                return Ok(Db.Races.ToList());
+                
+                return Ok();
             }
             catch (Exception e)
             {

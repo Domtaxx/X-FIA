@@ -7,17 +7,18 @@ namespace REST_API_XFIA.SQL_Model.Models
     {
         public Subteam()
         {
-            Pilots = new HashSet<Pilot>();
+            HasPilots = new HashSet<HasPilot>();
         }
 
         public int Id { get; set; }
         public string Name { get; set; } = null!;
         public string UserEmail { get; set; } = null!;
         public string RealTeamsName { get; set; } = null!;
+        public DateTime? CreationDate { get; set; }
+        public TimeSpan? CreationHour { get; set; }
 
         public virtual Realteam RealTeamsNameNavigation { get; set; } = null!;
         public virtual User UserEmailNavigation { get; set; } = null!;
-
-        public virtual ICollection<Pilot> Pilots { get; set; }
+        public virtual ICollection<HasPilot> HasPilots { get; set; }
     }
 }

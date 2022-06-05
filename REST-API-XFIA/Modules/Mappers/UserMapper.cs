@@ -47,8 +47,8 @@ namespace REST_API_XFIA.Modules.Mappers
 
         public static void fillHasPilots(Data_structures.AllUserInfo userInfo, SQL_Model.Models.Subteam subTeam1, SQL_Model.Models.Subteam subTeam2)
         {
-            subTeam1.Pilots = new List<SQL_Model.Models.Pilot>();
-            subTeam2.Pilots = new List<SQL_Model.Models.Pilot>();
+            //subTeam1.Pilots = new List<SQL_Model.Models.Pilot>();
+            //subTeam2.Pilots = new List<SQL_Model.Models.Pilot>();
             IQueryable<SQL_Model.Models.Subteam> subteams1 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot1Subteam1}").AsNoTracking();
             IQueryable<SQL_Model.Models.Subteam> subteams2 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot2Subteam1}").AsNoTracking();
             IQueryable<SQL_Model.Models.Subteam> subteams3 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot3Subteam1}").AsNoTracking();

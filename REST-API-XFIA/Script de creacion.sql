@@ -50,6 +50,7 @@ FOREIGN KEY (UserEmail) REFERENCES dbo.[User](Email));
 Create Table [PRIVATELEAGUE](
 OwnerEmail varchar(30),
 TournamentKey varchar(6),
+PrivateLeagueKey varchar(6),
 [Name] varchar(30),
 maxUser int,
 Primary KEY ([Name]),
@@ -61,7 +62,6 @@ Create Table REALTEAMS(
 Price float not null,
 Photo varchar(MAX) not null,
 Logo varchar(MAX) not null,
-Points int,
 PRIMARY KEY ([Name]),
 );
 
@@ -70,6 +70,8 @@ ID int NOT NULL,
 [Name] varchar(30) not null,
 UserEmail varchar(30) not null,
 RealTeamsName varchar(30) not null,
+CreationDate Date,
+CreationHour Time,
 PRIMARY KEY (ID),
 FOREIGN KEY (UserEmail) REFERENCES [USER](Email),
 FOREIGN KEY (RealTeamsName) REFERENCES REALTEAMS([Name]));
@@ -82,7 +84,6 @@ Price float not null,
 Photo varchar(MAX) not null,
 CountryName varchar(30) not null,
 RealTeamsName varchar(30),
-Points int,
 PRIMARY KEY (ID),
 FOREIGN KEY (CountryName) REFERENCES Country([Name]),
 FOREIGN KEY (RealTeamsName) REFERENCES REALTEAMS([Name]));
@@ -90,9 +91,30 @@ FOREIGN KEY (RealTeamsName) REFERENCES REALTEAMS([Name]));
 Create Table HAS_PILOT(
 SubTeamsID int NOT NULL,
 PilotID int NOT NULL,
+dummyData int,
 PRIMARY KEY (SubTeamsID , PilotID),
 FOREIGN KEY (SubTeamsID) REFERENCES SUBTEAMS(id),
 FOREIGN KEY (PilotID) REFERENCES PILOT(id)
+);
+
+Create Table PilotRace(
+PilotID int NOT NULL,
+[Name] VARCHAR(30) NOT NULL,
+TournamentKey VARCHAR(6) not null,
+points int,
+PRIMARY KEY ([Name], TournamentKey, PilotID),
+FOREIGN KEY (PilotID) REFERENCES PILOT(id),
+FOREIGN KEY ([Name], TournamentKey) REFERENCES RACE([Name],TournamentKey)
+);
+
+Create Table RealTeamRace(
+RealTeamName varchar(30) NOT NULL,
+[Name] VARCHAR(30) NOT NULL,
+TournamentKey VARCHAR(6) not null,
+points int,
+PRIMARY KEY (RealTeamName, TournamentKey, [Name]),
+FOREIGN KEY (RealTeamName) REFERENCES RealTeams([Name]),
+FOREIGN KEY ([Name], TournamentKey) REFERENCES RACE([Name],TournamentKey)
 );
 
 Alter table [USER]
@@ -128,54 +150,54 @@ Insert into PUBLICLEAGUE
 Values('briwag88@hotmail.com','QWE123')
 
 Insert into REALTEAMS
-Values('Redbull', 6, 'https://xfiaonline.blob.core.windows.net/images/Redbull carro.png','https://xfiaonline.blob.core.windows.net/images/redbull_logo.png',0)
+Values('Redbull', 6, 'https://xfiaonline.blob.core.windows.net/images/Redbull carro.png','https://xfiaonline.blob.core.windows.net/images/redbull_logo.png')
 Insert into REALTEAMS
-Values('Mclaren', 5, 'https://xfiaonline.blob.core.windows.net/images/Mclaren carro.png','https://xfiaonline.blob.core.windows.net/images/Mclaren_logo.png',0)
+Values('Mclaren', 5, 'https://xfiaonline.blob.core.windows.net/images/Mclaren carro.png','https://xfiaonline.blob.core.windows.net/images/Mclaren_logo.png')
 Insert into REALTEAMS
-Values('Alpine', 7, 'https://xfiaonline.blob.core.windows.net/images/Alpine carro.png','https://xfiaonline.blob.core.windows.net/images/Alpine_logo.png',0)
+Values('Alpine', 7, 'https://xfiaonline.blob.core.windows.net/images/Alpine carro.png','https://xfiaonline.blob.core.windows.net/images/Alpine_logo.png')
 
 Insert into PILOT
-Values('Fernando', 'Alonso', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine',0)
+Values('Fernando', 'Alonso', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
 
 Insert into PILOT
-Values('Sebastian', 'Vettel', 5,'https://xfiaonline.blob.core.windows.net/images/Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull',0)
+Values('Sebastian', 'Vettel', 5,'https://xfiaonline.blob.core.windows.net/images/Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')
 
 Insert into PILOT
-Values('Daniel', 'Ricciardo', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren',0)
+Values('Daniel', 'Ricciardo', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren')
 
 Insert into PILOT
-Values('Sergio', 'Perez', 7,'https://xfiaonline.blob.core.windows.net/images/Piloto Sergio Perez redbull.png','FRANCIA','Redbull',0)
+Values('Sergio', 'Perez', 7,'https://xfiaonline.blob.core.windows.net/images/Piloto Sergio Perez redbull.png','FRANCIA','Redbull')
 
 Insert into PILOT
-Values('Lando', 'Norris', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Lando Norris McLaren.png','FRANCIA','Mclaren',0)
+Values('Lando', 'Norris', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
 
 insert into SUBTEAMS
-Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull')
+Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-03-25','00:00:01')
 
 insert into SUBTEAMS
-Values(2,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine')
+Values(2,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2022-03-25','00:00:01')
 
 insert into HAS_PILOT
-Values(1,1)
+Values(1,1,0)
 insert into HAS_PILOT
-Values(1,2)
+Values(1,2,0)
 insert into HAS_PILOT
-Values(1,3)
+Values(1,3,0)
 insert into HAS_PILOT
-Values(1,4)
+Values(1,4,0)
 insert into HAS_PILOT
-Values(1,5)
+Values(1,5,0)
 
 insert into HAS_PILOT
-Values(2,1)
+Values(2,1,0)
 insert into HAS_PILOT
-Values(2,2)
+Values(2,2,0)
 insert into HAS_PILOT
-Values(2,3)
+Values(2,3,0)
 insert into HAS_PILOT
-Values(2,4)
+Values(2,4,0)
 insert into HAS_PILOT
-Values(2,5)
+Values(2,5,0)
 
 go 
 
@@ -185,7 +207,7 @@ alter PROCEDURE dbo.uspInsertIntoHasPilot
 AS
 begin
 	Set nocount on
-	insert into HAS_PILOT Values(@subTeamId,@pilotId)
+	insert into HAS_PILOT Values(@subTeamId,@pilotId,0)
 	select * from SUBTEAMS
 end
 GO
