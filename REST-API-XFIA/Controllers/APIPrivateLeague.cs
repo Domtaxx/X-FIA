@@ -23,7 +23,7 @@ namespace REST_API_XFIA.Controllers
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         
         [HttpPost]
-        public ActionResult add([FromBody] Data_structures.PrivateLeague privateLeague)
+        public ActionResult addPrivateLeague([FromBody] Data_structures.PrivateLeague privateLeague)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace REST_API_XFIA.Controllers
                 }
                 Db.Privateleagues.Add(toAdd);
                 Db.SaveChanges();
-                return Ok(JsonConvert.SerializeObject(toAdd));
+                return Ok(false);
             }
             catch(Exception e)
             {
@@ -43,19 +43,59 @@ namespace REST_API_XFIA.Controllers
         }
 
         [HttpDelete]
-        public ActionResult deleteUser(string userEmail)
+        public ActionResult deleteUserFromPrivateLeague(string userEmail)
         {
             SQL_Model.Models.User user = Db.Users.Find(userEmail);
+            SQL_Model.Models.Privateleague privateLeague;
             if (user != null)
             {
+                string privateLeagueName = user.PrivateLeagueName;
+                privateLeague = Db.Privateleagues.Find(privateLeagueName);
+
                 user.PrivateLeagueName = null;
                 Db.Users.Update(user);
                 Db.SaveChanges();
-                return Ok(JsonConvert.SerializeObject(user));
+                List<SQL_Model.Models.User> users;
+                users = Db.Users.Where(U => U.PrivateLeagueName==privateLeagueName).ToList();
+                return Ok(PrivateLeagueVerification.privateLeagueIsActive(users));
+                
             }
             else
             {
                 return BadRequest(JsonConvert.SerializeObject(2));
+            }
+            
+        }
+
+        [HttpPut]
+        public ActionResult addUserToPrivateLeague([FromBody] Data_structures.UserToPrivateLeague userToPrivateLeague)
+        {
+            return Ok(0);
+            SQL_Model.Models.User user = Db.Users.Find(userToPrivateLeague.userEmail);
+            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Where(P => P.PrivateLeagueKey == userToPrivateLeague.privateLeagueKey).Single();
+            if (privateLeague != null)
+            {
+                user.PrivateLeagueName = privateLeague.Name;
+                Db.Users.Update(user);
+                Db.SaveChanges();
+                List<SQL_Model.Models.User> users;
+                users = Db.Users.Where(U => U.PrivateLeagueName == privateLeague.Name).ToList();
+                return Ok(PrivateLeagueVerification.privateLeagueIsActive(users));
+            }
+        }
+        [HttpGet]
+        public ActionResult getAllPrivateLeagueMembers(string privateLeagueName)
+        {
+            try
+            {
+                List<SQL_Model.Models.User> users;
+                users = Db.Users.Where(U => U.PrivateLeagueName == privateLeagueName).ToList();
+
+                return Ok(JsonConvert.SerializeObject(users));
+            }
+            catch
+            {
+                return BadRequest(2);
             }
             
         }

@@ -33,6 +33,18 @@ namespace REST_API_XFIA.Modules.BuisnessRules
                 return true;
             }
         }
+
+        public static bool privateLeagueIsActive(List<SQL_Model.Models.User> usersInPrivateLeague)
+        {
+            if (usersInPrivateLeague.Count < 5)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 
 }
