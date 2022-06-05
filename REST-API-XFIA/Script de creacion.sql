@@ -121,6 +121,7 @@ Alter table [USER]
 add constraint PrivateLeague_User_key
 FOREIGN KEY (PrivateLeagueName) REFERENCES [PRIVATELEAGUE]([Name]);
 
+Insert into RealTeamRace values ('Redbull', );
 
 INSERT INTO COUNTRY
 VALUES ('FRANCIA','https://xfiaonline.blob.core.windows.net/images/bandera_francia.jpg');
@@ -161,6 +162,10 @@ Values('Mclaren', 5, 'https://xfiaonline.blob.core.windows.net/images/Mclaren ca
 Insert into REALTEAMS
 Values('Alpine', 7, 'https://xfiaonline.blob.core.windows.net/images/Alpine carro.png','https://xfiaonline.blob.core.windows.net/images/Alpine_logo.png')
 
+Insert into RealTeamRace values ('Redbull', 'Street Circuit', 'QWE123', 5);
+Insert into RealTeamRace values ('Mclaren', 'Street Circuit', 'QWE123', 6);
+Insert into RealTeamRace values ('Alpine', 'Street Circuit', 'QWE123', 4);
+
 Insert into PILOT
 Values('Fernando', 'Alonso', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
 
@@ -177,10 +182,29 @@ Insert into PILOT
 Values('Lando', 'Norris', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
 
 insert into SUBTEAMS
-Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-03-25','00:00:01')
+Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-03-25','00:00:00')
 
 insert into SUBTEAMS
-Values(2,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2022-03-25','00:00:01')
+Values(2,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2022-03-25','00:00:00')
+
+insert into SUBTEAMS
+Values(3,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-10-25','00:00:00')
+
+insert into SUBTEAMS
+Values(4,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2022-10-25','00:00:00')
+
+insert into SUBTEAMS
+Values(5,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2030-10-25','00:00:00')
+
+insert into SUBTEAMS
+Values(6,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2030-10-25','00:00:00')
+
+Insert into PilotRace values (1, 'Street Circuit', 'QWE123', 5);
+Insert into PilotRace values (2, 'Street Circuit', 'QWE123', 4);
+Insert into PilotRace values (3, 'Street Circuit', 'QWE123', 3);
+Insert into PilotRace values (4, 'Street Circuit', 'QWE123', 2);
+Insert into PilotRace values (5, 'Street Circuit', 'QWE123', 1);
+
 
 insert into HAS_PILOT
 Values(1,1,0)

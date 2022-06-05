@@ -69,7 +69,7 @@ namespace REST_API_XFIA.Modules.Fetcher
             AllPublicLeagueRes = AllPublicLeagueRes.OrderByDescending(PLR => PLR.Points).ToList();
             for(int i = 0; i < AllPublicLeagueRes.Count(); i++)
             {
-                AllPublicLeagueRes[i].Position = (uint)i;
+                AllPublicLeagueRes[i].Position = (uint)i+1;
             }
             return AllPublicLeagueRes;
         }

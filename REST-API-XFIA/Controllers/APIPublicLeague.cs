@@ -17,7 +17,7 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
-                List<Data_structures.PublicLeagueResponse> res = PublicLeagueFetcher.getPublicLeagueList(tour, amountByPage, page);
+                List<Data_structures.PublicLeagueResponse> res = PublicLeagueFetcher.getPublicLeagueList(tour, page, amountByPage);
                 
                 return Ok(JsonConvert.SerializeObject(res));
             }
