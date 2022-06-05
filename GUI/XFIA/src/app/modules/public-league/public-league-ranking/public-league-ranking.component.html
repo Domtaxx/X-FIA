@@ -37,13 +37,13 @@
         <button class="enterButton" mat-raised-button color="warn" (click)="joinPrivateLeague()">Ingresar Liga Privada</button>
         <div class="shiftBar">
             <button class="shiftArea">
-                <mat-icon  class="arrowButton" [inline]="true">
+                <mat-icon  class="arrowButton" [inline]="true" (click)="leftPage()">
                     keyboard_double_arrow_left
                 </mat-icon>
             </button>
-            <label>1</label>
+            <label>{{pageNumber+1}}</label>
             <button class="shiftArea">
-                <mat-icon  class="arrowButton" [inline]="true">
+                <mat-icon  class="arrowButton" [inline]="true" (click)="rightPage()">
                     keyboard_double_arrow_right
                 </mat-icon>
             </button>
@@ -51,7 +51,7 @@
 
         </div>
         <div class="playerNumber">
-            <label>Cantidad Participantes</label>
+            <label>{{'Cantidad Participantes: '+userAmount}}</label>
         </div>
     </div>
     

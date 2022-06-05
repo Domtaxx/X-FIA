@@ -10,8 +10,14 @@ export class publicLeagueRankingService {
     constructor(private backend:NetworkService){}
 
 
-    public getMembers(sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:(member:leagueMemberInterface[])=>void){
-        this.backend.get_request(appSettings.publicLeagueRankingRoute,{}).subscribe(
+    public getMembers(pageNumber:number,ElementPerPage:number,sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:(member:leagueMemberInterface[])=>void){
+        
+        const params={
+            page:pageNumber,
+            ElementPerPage:ElementPerPage
+
+        }
+        this.backend.get_request(appSettings.publicLeagueRankingRoute,params).subscribe(
             (success:leagueMemberInterface[])=>{
               sucessCallback(success)
             },
@@ -34,6 +40,25 @@ export class publicLeagueRankingService {
           )
      
     }
+    public getMaxPage(itemPerPage:number,callback:(pageNumber:number)=>void){
+      this.backend.get_request(appSettings.publicLeagueMaxPage,{amountByPage:itemPerPage}).subscribe(
+        (sucess)=>{
+          callback(sucess)
+        },
+        (error)=>{
+          callback(0);
+        }
+      )
+    }
+
+    public getUserAmount(callback:(users:number)=>void){
+      this.backend.get_request(appSettings.publicLeagueUserAmount,{}).subscribe(
+        (sucess:number)=>{
+          callback(sucess);
+        }
+      )
+    }
+    
 
 
 }
