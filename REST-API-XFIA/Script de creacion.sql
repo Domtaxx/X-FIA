@@ -149,6 +149,11 @@ VALUES('Briwag','3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93
 Insert into PUBLICLEAGUE
 Values('briwag88@hotmail.com','QWE123')
 
+Insert into PUBLICLEAGUE
+Values('briwag88@hotmail.com','QWE125')
+Insert into PUBLICLEAGUE
+Values('briwag88@hotmail.com','QWE126')
+
 Insert into REALTEAMS
 Values('Redbull', 6, 'https://xfiaonline.blob.core.windows.net/images/Redbull carro.png','https://xfiaonline.blob.core.windows.net/images/redbull_logo.png')
 Insert into REALTEAMS

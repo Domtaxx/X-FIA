@@ -49,7 +49,9 @@ namespace REST_API_XFIA.Controllers
                 Db.Subteams.AddRange(subteams);
                 Db.SaveChanges();
                 
-                UserMapper.fillHasPilots(allInfo, subteams[0], subteams[1]);
+                var pilotConex = UserMapper.fillHasPilots(allInfo, subteams[0].Id, subteams[1].Id);
+                Db.HasPilots.AddRange(pilotConex);
+                Db.SaveChanges();
                 return Ok(MsgCode);
             }
             catch (Exception e)

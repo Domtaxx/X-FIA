@@ -43,9 +43,9 @@ namespace REST_API_XFIA.Controllers
         }
 
         [HttpDelete]
-        public ActionResult deleteUser(Data_structures.BasicUserInfo basicUserInfo)
+        public ActionResult deleteUser(string userEmail)
         {
-            SQL_Model.Models.User user = Db.Users.Find(basicUserInfo.Email);
+            SQL_Model.Models.User user = Db.Users.Find(userEmail);
             if (user != null)
             {
                 user.PrivateLeagueName = null;
