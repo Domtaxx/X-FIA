@@ -1,4 +1,5 @@
-﻿using REST_API_XFIA.SQL_Model.DB_Context;
+﻿using Microsoft.EntityFrameworkCore;
+using REST_API_XFIA.SQL_Model.DB_Context;
 namespace REST_API_XFIA.Modules.Fetcher
 {
     public class TournamentFetcher
@@ -35,7 +36,26 @@ namespace REST_API_XFIA.Modules.Fetcher
             return res;
         }
 
-
+        public static SQL_Model.Models.Tournament GetTournament(string tournamentKey)
+        {
+            SQL_Model.Models.Tournament tour;
+            if (tournamentKey == null)
+            {
+                tour = TournamentFetcher.GetActiveTournament();
+                tour = Db.Tournaments.Include(t => t.UserEmails)
+                                     .Include(t => t.Races)
+                                     .Where(t => t.Key == tour.Key)
+                                     .Single();
+            }
+            else
+            {
+                tour = Db.Tournaments.Include(t => t.UserEmails)
+                                     .Include(t => t.Races)
+                                     .Where(t => t.Key == tournamentKey)
+                                     .Single();
+            }
+            return tour;
+        }
         private static List<SQL_Model.Models.Tournament> TourSameDate(DateTime date, List<SQL_Model.Models.Tournament> tournaments)
         {
             var sameDateTournaments = new List<SQL_Model.Models.Tournament>();

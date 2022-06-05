@@ -10,15 +10,16 @@ namespace REST_API_XFIA.Controllers
     
     public class APIPublicLeague : Controller
     {
-        private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         [Route("PublicLeague")]
         [HttpGet]
         public ActionResult listByPage(string tournamentKey, int amountByPage, int page)
         {
             try
             {
+                SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
+                List<Data_structures.PublicLeagueResponse> res = PublicLeagueFetcher.getPublicLeagueList(tour, amountByPage, page);
                 
-                return Ok();
+                return Ok(JsonConvert.SerializeObject(res));
             }
             catch (Exception e)
             {
@@ -31,7 +32,8 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-
+                SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
+                List<Data_structures.PublicLeagueResponse> res = null;
                 return Ok();
             }
             catch (Exception e)
@@ -46,20 +48,11 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                SQL_Model.Models.Tournament Temp;
+                SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
                 int amount = 0;
                 int residue = 0;
-                if (tournamentKey == null)
-                {
-                    Temp = TournamentFetcher.GetActiveTournament();
-                    Temp = Db.Tournaments.Include(t => t.UserEmails).Where(t => t.Key == Temp.Key).Single();
-                }
-                else
-                {
-                    Temp = Db.Tournaments.Include(t => t.UserEmails).Where(t => t.Key == tournamentKey).Single();
-                }
-                amount = Temp.UserEmails.Count() / amountByPage;
-                residue = Temp.UserEmails.Count() % amountByPage;
+                amount = tour.UserEmails.Count() / amountByPage;
+                residue = tour.UserEmails.Count() % amountByPage;
                 if (residue > 0)
                 {
                     amount++;
@@ -77,18 +70,9 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                SQL_Model.Models.Tournament Temp;
+                SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
                 int amount = 0;
-                if (tournamentKey == null)
-                {
-                    Temp = TournamentFetcher.GetActiveTournament();
-                    Temp = Db.Tournaments.Include(t => t.UserEmails).Where(t => t.Key == Temp.Key).Single();
-                }
-                else
-                {
-                    Temp = Db.Tournaments.Include(t=>t.UserEmails).Where(t=>t.Key == tournamentKey).Single();
-                }
-                amount = Temp.UserEmails.Count();
+                amount = tour.UserEmails.Count();
                 return Ok(JsonConvert.SerializeObject(amount));
             }
             catch (Exception e)
@@ -96,6 +80,7 @@ namespace REST_API_XFIA.Controllers
                 return BadRequest(4);
             }
         }
+        
 
     }
 }
