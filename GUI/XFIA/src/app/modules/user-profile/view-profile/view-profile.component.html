@@ -1,0 +1,256 @@
+<div class="mainDiv">
+    <div class="header">
+        <div class="headerSub">
+            <label class="title">Usuario</label>
+            <label class="subTitle">{{username}}</label>
+            
+        </div>
+        <div class="headerSub">
+            <label class="title">Escuderia</label>
+            <label class="subTitle">{{teamName}}</label>
+        </div>
+        <div class="headerSub">
+            <div class="logoHeader">
+                <img class='logoImg' [src]="teamLogo">
+            </div>
+        </div>
+
+    </div>
+    <mat-tab-group class="tabGroup"   mat-stretch-tabs>
+        <mat-tab [label]="subteam1Name" class="tab">
+            <div class="body">
+                <div class="halfMembers">
+                    <div class="card" *ngIf="pilots1[0]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots1[0].CountryNameNavigation.Photo">
+                            <h3>{{pilots1[0].Firstname +" "+pilots1[0].Lastname}}</h3>
+                            <img class="logo" [src]="pilots1[0].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots1[0].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots1[0].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="pilots1[1]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots1[1].CountryNameNavigation.Photo">
+                            <h3>{{pilots1[1].Firstname +" "+pilots1[1].Lastname}}</h3>
+                            <img class="logo" [src]="pilots1[1].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots1[1].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots1[1].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="pilots1[2]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots1[2].CountryNameNavigation.Photo">
+                            <h3>{{pilots1[2].Firstname +" "+pilots1[2].Lastname}}</h3>
+                            <img class="logo" [src]="pilots1[2].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots1[2].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots1[2].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                   
+                    
+
+                </div>
+                <div class="halfMembers">
+                    <div class="card" *ngIf="pilots2[3]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots1[3].CountryNameNavigation.Photo">
+                            <h3>{{pilots1[3].Firstname +" "+pilots1[3].Lastname}}</h3>
+                            <img class="logo" [src]="pilots1[3].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots1[3].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots1[3].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="pilots1[4]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots1[4].CountryNameNavigation.Photo">
+                            <h3>{{pilots1[4].Firstname +" "+pilots1[4].Lastname}}</h3>
+                            <img class="logo" [src]="pilots1[4].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots1[4].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots1[4].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="pilots1[5]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots1[5].CountryNameNavigation.Photo">
+                            <h3>{{pilots1[5].Firstname +" "+pilots1[5].Lastname}}</h3>
+                            <img class="logo" [src]="pilots1[5].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots1[5].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots1[5].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+
+                </div>
+                
+
+            </div>
+        </mat-tab>
+        <mat-tab [label]="subteam2Name" class="tab">
+            <div class="body">
+                <div class="halfMembers">
+                    <div class="card" *ngIf="pilots2[0]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots2[0].CountryNameNavigation.Photo">
+                            <h3>{{pilots2[0].Firstname +" "+pilots2[0].Lastname}}</h3>
+                            <img class="logo" [src]="pilots2[0].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots2[0].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots2[0].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="pilots2[1]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots2[1].CountryNameNavigation.Photo">
+                            <h3>{{pilots2[1].Firstname +" "+pilots2[1].Lastname}}</h3>
+                            <img class="logo" [src]="pilots2[1].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots2[1].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots2[1].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="pilots2[2]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots2[2].CountryNameNavigation.Photo">
+                            <h3>{{pilots2[2].Firstname +" "+pilots2[2].Lastname}}</h3>
+                            <img class="logo" [src]="pilots2[2].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots2[2].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots2[2].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                   
+                    
+
+                </div>
+                <div class="halfMembers">
+                    <div class="card" *ngIf="pilots2[3]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots2[3].CountryNameNavigation.Photo">
+                            <h3>{{pilots2[3].Firstname +" "+pilots2[3].Lastname}}</h3>
+                            <img class="logo" [src]="pilots2[3].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots2[3].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots2[3].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="pilots2[4]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots2[4].CountryNameNavigation.Photo">
+                            <h3>{{pilots2[4].Firstname +" "+pilots2[4].Lastname}}</h3>
+                            <img class="logo" [src]="pilots2[4].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots2[4].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots2[4].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="pilots2[5]!=undefined">
+                      
+                        <div class="cardHeader">
+                            <img class="flag" [src]="pilots2[5].CountryNameNavigation.Photo">
+                            <h3>{{pilots2[5].Firstname +" "+pilots2[5].Lastname}}</h3>
+                            <img class="logo" [src]="pilots2[5].RealTeamsNameNavigation.Logo">
+                        </div>
+                        
+                        <img class='image' [src]="pilots2[5].Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +pilots2[5].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+
+                </div>
+                
+
+            </div>
+        </mat-tab>
+
+    </mat-tab-group>
+    
+
+</div>

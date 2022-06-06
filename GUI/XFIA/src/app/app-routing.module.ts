@@ -14,6 +14,10 @@ const routes: Routes = [
   {
     path:'privateLeague',
     loadChildren:()=>import('./modules/private-league/private-league.module').then(m=>m.PrivateLeagueModule)
+  },
+  {
+    path:'profile',
+    loadChildren:()=>import('./modules/user-profile/user-profile.module').then(m=>m.UserProfileModule)
   }
  
 ];

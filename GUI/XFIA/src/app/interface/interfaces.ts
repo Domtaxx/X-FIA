@@ -94,3 +94,15 @@ export interface privateLeagueInfo{
     state:boolean;
 }
 
+export interface userInterface{
+    Username:string;
+    TeamsName:string;
+    TeamsLogo:string;
+    Subteams:subTeam[];
+}
+
+interface subTeam{
+    Name:string;
+    Pilots:pilotInterface[];
+    RealTeamsNameNavigation:carInterface;
+}
