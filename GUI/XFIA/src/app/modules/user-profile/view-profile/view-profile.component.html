@@ -2,22 +2,22 @@
     <div class="header">
         <div class="headerSub">
             <label class="title">Usuario</label>
-            <label class="subTitle">hola 2</label>
+            <label class="subTitle">{{username}}</label>
             
         </div>
         <div class="headerSub">
             <label class="title">Escuderia</label>
-            <label class="subTitle">hola 2</label>
+            <label class="subTitle">{{teamName}}</label>
         </div>
         <div class="headerSub">
             <div class="logoHeader">
-                <img class='logoImg'src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4TbVHBMhcMe7YHn8y-co08xkMSVNeP76ecWylZAJgv2EBEg6f2XRK6q-XJ8LmcjraDzI&usqp=CAU">
+                <img class='logoImg' [src]="teamLogo">
             </div>
         </div>
 
     </div>
     <mat-tab-group class="tabGroup"   mat-stretch-tabs>
-        <mat-tab label="Equipo 1" class="tab">
+        <mat-tab [label]="subteam1Name" class="tab">
             <div class="body">
                 <div class="halfMembers">
                     
@@ -30,10 +30,10 @@
 
             </div>
         </mat-tab>
-        <mat-tab label="Equipo 2" class="tab">
+        <mat-tab [label]="subteam2Name" class="tab">
             <div class="body">
                 <div class="halfMembers">
-                    <div class="card" *ngIf="false">
+                    <div class="card" *ngIf="pilots2[0]!=undefined">
                       
                         <div class="cardHeader">
                             <img class="flag" [src]="pilots2[0].CountryNameNavigation.Photo">
@@ -50,146 +50,7 @@
                         
                       
                     </div>
-                    <div class="card" *ngIf="true">
-                      
-                        <div class="cardHeader">
-                            <img class="flag" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                            <div class="cardTitle">
-                                <h3>Maria Falacio</h3>
-                            </div>
-                            
-                            <img class="logo" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                        </div>
-                        
-                        <img class='image' src="https://cdn11.bigcommerce.com/s-h1jjeo/images/stencil/1280x1280/products/10864/97529/T8021%20(2)__26052.1377486296.jpg?c=2">
-                        
-                        
-                        <div class="cardDown">
-                            <h3>{{"Precio: " +'200'+" M"}}</h3>
-                        </div>
-                        
-                      
-                    </div>
-                    <div class="card" *ngIf="true">
-                      
-                        <div class="cardHeader">
-                            <img class="flag" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                            <div class="cardTitle">
-                                <h3>Maria Falacio</h3>
-                            </div>
-                            
-                            <img class="logo" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                        </div>
-                        
-                        <img class='image' src="https://cdn11.bigcommerce.com/s-h1jjeo/images/stencil/1280x1280/products/10864/97529/T8021%20(2)__26052.1377486296.jpg?c=2">
-                        
-                        
-                        <div class="cardDown">
-                            <h3>{{"Precio: " +'200'+" M"}}</h3>
-                        </div>
-                        
-                      
-                    </div>
-                    <div class="card" *ngIf="true">
-                      
-                        <div class="cardHeader">
-                            <img class="flag" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                            <div class="cardTitle">
-                                <h3>Maria Falacio</h3>
-                            </div>
-                            
-                            <img class="logo" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                        </div>
-                        
-                        <img class='image' src="https://cdn11.bigcommerce.com/s-h1jjeo/images/stencil/1280x1280/products/10864/97529/T8021%20(2)__26052.1377486296.jpg?c=2">
-                        
-                        
-                        <div class="cardDown">
-                            <h3>{{"Precio: " +'200'+" M"}}</h3>
-                        </div>
-                        
-                      
-                    </div>
-
-                </div>
-                <div class="halfMembers">
-                    <div class="card" *ngIf="false">
-                      
-                        <div class="cardHeader">
-                            <img class="flag" [src]="pilots2[0].CountryNameNavigation.Photo">
-                            <h3>{{pilots2[0].Firstname +" "pilots2[0].Lastname}</h3>
-                            <img class="logo" [src]="pilots2[0].RealTeamsNameNavigation.Logo">
-                        </div>
-                        
-                        <img class='image' [src]="pilots2[0].Photo">
-                        
-                        
-                        <div class="cardDown">
-                            <h3>{{"Precio: " +pilots2[0].Price+" M"}}</h3>
-                        </div>
-                        
-                      
-                    </div>
-                    <div class="card" *ngIf="true">
-                      
-                        <div class="cardHeader">
-                            <img class="flag" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                            <div class="cardTitle">
-                                <h3>Maria Falacio</h3>
-                            </div>
-                            
-                            <img class="logo" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                        </div>
-                        
-                        <img class='image' src="https://cdn11.bigcommerce.com/s-h1jjeo/images/stencil/1280x1280/products/10864/97529/T8021%20(2)__26052.1377486296.jpg?c=2">
-                        
-                        
-                        <div class="cardDown">
-                            <h3>{{"Precio: " +'200'+" M"}}</h3>
-                        </div>
-                        
-                      
-                    </div>
-                    <div class="card" *ngIf="true">
-                      
-                        <div class="cardHeader">
-                            <img class="flag" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                            <div class="cardTitle">
-                                <h3>Maria Falacio</h3>
-                            </div>
-                            
-                            <img class="logo" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                        </div>
-                        
-                        <img class='image' src="https://cdn11.bigcommerce.com/s-h1jjeo/images/stencil/1280x1280/products/10864/97529/T8021%20(2)__26052.1377486296.jpg?c=2">
-                        
-                        
-                        <div class="cardDown">
-                            <h3>{{"Precio: " +'200'+" M"}}</h3>
-                        </div>
-                        
-                      
-                    </div>
-                    <div class="card" *ngIf="true">
-                      
-                        <div class="cardHeader">
-                            <img class="flag" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                            <div class="cardTitle">
-                                <h3>Maria Falacio</h3>
-                            </div>
-                            
-                            <img class="logo" src="https://media.istockphoto.com/vectors/french-flag-or-france-vector-id166055079?k=20&m=166055079&s=612x612&w=0&h=wkV3PG40EWoobviR5B3U_vLDanIdZSx_HqGG1UPYfxQ=">
-                        </div>
-                        
-                        <img class='image' src="https://cdn11.bigcommerce.com/s-h1jjeo/images/stencil/1280x1280/products/10864/97529/T8021%20(2)__26052.1377486296.jpg?c=2">
-                        
-                        
-                        <div class="cardDown">
-                            <h3>{{"Precio: " +'200'+" M"}}</h3>
-                        </div>
-                        
-                      
-                    </div>
+                    
 
                 </div>
 
