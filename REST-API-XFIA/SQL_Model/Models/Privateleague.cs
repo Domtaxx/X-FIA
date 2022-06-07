@@ -12,6 +12,7 @@ namespace REST_API_XFIA.SQL_Model.Models
 
         public string? OwnerEmail { get; set; }
         public string? TournamentKey { get; set; }
+        public string? PrivateLeagueKey { get; set; }
         public string Name { get; set; } = null!;
         public int? MaxUser { get; set; }
 

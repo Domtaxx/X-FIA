@@ -48,7 +48,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
         }
         public static bool VerifyIfTournamentsActiveOrFuture()
         {
-            List<SQL_Model.Models.Tournament> tournaments = Db.Tournaments.Where(T => T.InitialDate >= DateTime.Now).ToList();
+            List<SQL_Model.Models.Tournament> tournaments = Db.Tournaments.Where(T => T.InitialDate > DateTime.Now || T.InitialDate == DateTime.Now && T.InitialHour > DateTime.Now.TimeOfDay).ToList();
             if (tournaments.Count() > 0)
             {
                 return false;
@@ -71,6 +71,11 @@ namespace REST_API_XFIA.Modules.BuisnessRules
         }
 
         int IAddingRules.IsValid(AllUserInfo user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int IsValid(Privateleague privateleague)
         {
             throw new NotImplementedException();
         }

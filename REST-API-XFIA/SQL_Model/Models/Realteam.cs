@@ -8,6 +8,7 @@ namespace REST_API_XFIA.SQL_Model.Models
         public Realteam()
         {
             Pilots = new HashSet<Pilot>();
+            RealTeamRaces = new HashSet<RealTeamRace>();
             Subteams = new HashSet<Subteam>();
         }
 
@@ -15,9 +16,9 @@ namespace REST_API_XFIA.SQL_Model.Models
         public double Price { get; set; }
         public string Photo { get; set; } = null!;
         public string Logo { get; set; } = null!;
-        public int? Points { get; set; }
 
         public virtual ICollection<Pilot> Pilots { get; set; }
+        public virtual ICollection<RealTeamRace> RealTeamRaces { get; set; }
         public virtual ICollection<Subteam> Subteams { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.Modules.Service;
+using REST_API_XFIA.Modules.Fetcher;
 
 namespace REST_API_XFIA.Modules.Mappers
 {
@@ -21,6 +22,7 @@ namespace REST_API_XFIA.Modules.Mappers
         }
         public static List<SQL_Model.Models.Subteam> fillSubteams(Data_structures.AllUserInfo userInfo)
         {
+            var ActiveTournament = TournamentFetcher.GetActiveTournament();
             List<SQL_Model.Models.Subteam> subteams = new List<SQL_Model.Models.Subteam>();
             SQL_Model.Models.Subteam team1 = new SQL_Model.Models.Subteam();
             SQL_Model.Models.Subteam team2 = new SQL_Model.Models.Subteam();
@@ -30,6 +32,8 @@ namespace REST_API_XFIA.Modules.Mappers
             team1.RealTeamsName = userInfo.Car1;
             team1.Name = userInfo.NameSubteam1;
             team1.UserEmail = userInfo.Email;
+            team1.CreationHour = ActiveTournament.InitialHour;
+            team1.CreationDate = ActiveTournament.InitialDate;
 
 
 
@@ -37,7 +41,8 @@ namespace REST_API_XFIA.Modules.Mappers
             team2.RealTeamsName = userInfo.Car2;
             team2.Name = userInfo.NameSubteam2;
             team2.UserEmail = userInfo.Email;
-
+            team2.CreationHour = ActiveTournament.InitialHour;
+            team2.CreationDate = ActiveTournament.InitialDate;
 
             subteams.Add(team1);
             subteams.Add(team2);
@@ -45,24 +50,58 @@ namespace REST_API_XFIA.Modules.Mappers
             return subteams;
         }
 
-        public static void fillHasPilots(Data_structures.AllUserInfo userInfo, SQL_Model.Models.Subteam subTeam1, SQL_Model.Models.Subteam subTeam2)
+        public static List<SQL_Model.Models.HasPilot> fillHasPilots(Data_structures.AllUserInfo userInfo, int subTeam1, int subTeam2)
         {
-            subTeam1.Pilots = new List<SQL_Model.Models.Pilot>();
-            subTeam2.Pilots = new List<SQL_Model.Models.Pilot>();
-            IQueryable<SQL_Model.Models.Subteam> subteams1 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot1Subteam1}").AsNoTracking();
-            IQueryable<SQL_Model.Models.Subteam> subteams2 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot2Subteam1}").AsNoTracking();
-            IQueryable<SQL_Model.Models.Subteam> subteams3 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot3Subteam1}").AsNoTracking();
-            IQueryable<SQL_Model.Models.Subteam> subteams4 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot4Subteam1}").AsNoTracking();
-            IQueryable<SQL_Model.Models.Subteam> subteams5 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam1.Id}, @pilotId = {userInfo.pilot5Subteam1}").AsNoTracking();
+            List<SQL_Model.Models.HasPilot> PilotConex = new List<SQL_Model.Models.HasPilot>();
+            var pilot1 = new SQL_Model.Models.HasPilot();
+            var pilot2 = new SQL_Model.Models.HasPilot();
+            var pilot3 = new SQL_Model.Models.HasPilot();
+            var pilot4 = new SQL_Model.Models.HasPilot();
+            var pilot5 = new SQL_Model.Models.HasPilot();
+            
+            var pilot6 = new SQL_Model.Models.HasPilot();
+            var pilot7 = new SQL_Model.Models.HasPilot();
+            var pilot8 = new SQL_Model.Models.HasPilot();
+            var pilot9 = new SQL_Model.Models.HasPilot();
+            var pilot10 = new SQL_Model.Models.HasPilot();
 
-            IQueryable<SQL_Model.Models.Subteam> subteams6 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot1Subteam2}").AsNoTracking();
-            IQueryable<SQL_Model.Models.Subteam> subteams7 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot2Subteam2}").AsNoTracking();
-            IQueryable<SQL_Model.Models.Subteam> subteams8 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot3Subteam2}").AsNoTracking();
-            IQueryable<SQL_Model.Models.Subteam> subteams9 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot4Subteam2}").AsNoTracking();
-            IQueryable<SQL_Model.Models.Subteam> subteams10 = Db.Subteams.FromSqlInterpolated($"exec dbo.uspInsertIntoHasPilot @subTeamId = {subTeam2.Id}, @pilotId = {userInfo.pilot5Subteam2}").AsNoTracking();
+            pilot1.PilotId = userInfo.pilot1Subteam1;
+            pilot2.PilotId = userInfo.pilot2Subteam1;
+            pilot3.PilotId = userInfo.pilot3Subteam1;
+            pilot4.PilotId = userInfo.pilot4Subteam1;
+            pilot5.PilotId = userInfo.pilot5Subteam1;
 
-            Db.SaveChanges();
-            return;
+            pilot6.PilotId = userInfo.pilot1Subteam2;
+            pilot7.PilotId = userInfo.pilot2Subteam2;
+            pilot8.PilotId = userInfo.pilot3Subteam2;
+            pilot9.PilotId = userInfo.pilot4Subteam2;
+            pilot10.PilotId = userInfo.pilot5Subteam2;
+
+            pilot1.SubTeamsId = subTeam1;
+            pilot2.SubTeamsId = subTeam1;
+            pilot3.SubTeamsId = subTeam1;
+            pilot4.SubTeamsId = subTeam1;
+            pilot5.SubTeamsId = subTeam1;
+
+            pilot6.SubTeamsId = subTeam2;
+            pilot7.SubTeamsId = subTeam2;
+            pilot8.SubTeamsId = subTeam2;
+            pilot9.SubTeamsId = subTeam2;
+            pilot10.SubTeamsId = subTeam2;
+
+
+            PilotConex.Add(pilot1);
+            PilotConex.Add(pilot2);
+            PilotConex.Add(pilot3);
+            PilotConex.Add(pilot4);
+            PilotConex.Add(pilot5);
+            PilotConex.Add(pilot6);
+            PilotConex.Add(pilot7);
+            PilotConex.Add(pilot8);
+            PilotConex.Add(pilot9);
+            PilotConex.Add(pilot10);
+
+            return PilotConex;
         }
     }
 }

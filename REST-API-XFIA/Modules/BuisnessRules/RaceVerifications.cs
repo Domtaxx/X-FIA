@@ -80,6 +80,11 @@ namespace REST_API_XFIA.Modules.BuisnessRules
         {
             throw new NotImplementedException();
         }
+
+        int IAddingRules.IsValid(Privateleague privateleague)
+        {
+            throw new NotImplementedException();
+        }
     }
      
 }

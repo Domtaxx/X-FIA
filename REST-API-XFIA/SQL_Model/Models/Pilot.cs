@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace REST_API_XFIA.SQL_Model.Models
@@ -8,7 +7,8 @@ namespace REST_API_XFIA.SQL_Model.Models
     {
         public Pilot()
         {
-            SubTeams = new HashSet<Subteam>();
+            HasPilots = new HashSet<HasPilot>();
+            PilotRaces = new HashSet<PilotRace>();
         }
 
         public int Id { get; set; }
@@ -18,12 +18,10 @@ namespace REST_API_XFIA.SQL_Model.Models
         public string Photo { get; set; } = null!;
         public string CountryName { get; set; } = null!;
         public string? RealTeamsName { get; set; }
-        public int? Points { get; set; }
 
         public virtual Country CountryNameNavigation { get; set; } = null!;
         public virtual Realteam? RealTeamsNameNavigation { get; set; }
-
-        [JsonIgnore]
-        public virtual ICollection<Subteam> SubTeams { get; set; }
+        public virtual ICollection<HasPilot> HasPilots { get; set; }
+        public virtual ICollection<PilotRace> PilotRaces { get; set; }
     }
 }

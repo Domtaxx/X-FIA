@@ -4,7 +4,8 @@ select * from [Has_pilot]
 select * from RealTeams
 select * from Tournament
 
-
+Drop Table PilotRace
+Drop Table RealTeamRace
 ALTER TABLE [USER] DROP Constraint PrivateLeague_User_key;
 Drop Table PRIVATELEAGUE
 Drop Table Has_pilot
