@@ -67,7 +67,8 @@ namespace REST_API_XFIA.Controllers
             
         }
 
-        [HttpPut]
+        [HttpPost]
+        [Route("User/PrivateLeague/NewMember")]
         public ActionResult addUserToPrivateLeague([FromBody] Data_structures.UserToPrivateLeague userToPrivateLeague)
         {
             return Ok(0);
