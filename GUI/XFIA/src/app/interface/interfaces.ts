@@ -75,3 +75,34 @@ export interface userRegisterInterface{
 
 }
 
+export interface leagueMemberInterface{
+    Position:number;
+    UserName:string;
+    TeamName:string;
+    SubteamName:string;
+    Points:number;
+}
+
+export interface privateLeagueJoinMember{
+    email:string|null;
+    code:string|null;
+}
+
+export interface privateLeagueInfo{
+    key:string;
+    maxUser:number;
+    state:boolean;
+}
+
+export interface userInterface{
+    Username:string;
+    TeamsName:string;
+    TeamsLogo:string;
+    Subteams:subTeam[];
+}
+
+interface subTeam{
+    Name:string;
+    Pilots:pilotInterface[];
+    RealTeamsNameNavigation:carInterface;
+}

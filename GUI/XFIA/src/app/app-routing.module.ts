@@ -9,7 +9,16 @@ const routes: Routes = [
   },
   {path:'',redirectTo:'/tournaments',pathMatch:'full'},
   {path:'auth',
-  loadChildren:()=>import('./modules/auth/auth.module').then(m=>m.AuthModule)}
+  loadChildren:()=>import('./modules/auth/auth.module').then(m=>m.AuthModule)}, 
+  {path:'publicLeague',loadChildren:()=>import('./modules/public-league/public-league.module').then(m=>m.PublicLeagueModule)},
+  {
+    path:'privateLeague',
+    loadChildren:()=>import('./modules/private-league/private-league.module').then(m=>m.PrivateLeagueModule)
+  },
+  {
+    path:'profile',
+    loadChildren:()=>import('./modules/user-profile/user-profile.module').then(m=>m.UserProfileModule)
+  }
  
 ];
 

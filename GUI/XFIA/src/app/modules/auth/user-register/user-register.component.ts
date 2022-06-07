@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { UntypedFormGroup,UntypedFormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NetworkService } from 'src/app/services/network.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
@@ -17,14 +17,14 @@ import { country } from 'src/app/interface/interfaces';
 })
 export class UserRegisterComponent implements OnInit {
 
-    userRegisterForm=new FormGroup({
-    userName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
-    email:new FormControl('',[Validators.required,Validators.email,Validators.maxLength(256)]),
-    password:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*)*')]),
-    confirmPassword:new FormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*)*')]),
-    teamName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
-    countryName:new FormControl('',[Validators.required]),
-    image:new FormControl('',[Validators.required])
+    userRegisterForm=new UntypedFormGroup({
+    userName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
+    email:new UntypedFormControl('',[Validators.required,Validators.email,Validators.maxLength(256)]),
+    password:new UntypedFormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*)*([a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*)*')]),
+    confirmPassword:new UntypedFormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*)*([a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*)*')]),
+    teamName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
+    countryName:new UntypedFormControl('',[Validators.required]),
+    image:new UntypedFormControl('',[Validators.required])
   }
   ,{validators:[matchPassword('password','confirmPassword')]});
   showPass1=false;

@@ -34,3 +34,14 @@ export function userRegisterMessage(errorCode:any):alertMessage|undefined{
     }
     return message;
 }
+
+export function privateLeagueLeaveError(errorCode:any){
+    var header:string='';
+    var body:string='';
+    const message:alertMessage={
+        header:header,
+        body:body
+    }
+    return message;
+    
+}

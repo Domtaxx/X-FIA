@@ -1,12 +1,12 @@
-import { FormGroup } from "@angular/forms";
+import { UntypedFormGroup } from "@angular/forms";
 import { userRegisterInterface } from "../interface/interfaces";
 import { RegisterTeamComponent } from "../modules/auth/register-team/register-team.component";
 import { UserRegisterComponent } from "../modules/auth/user-register/user-register.component";
 import { sha256, sha224 } from 'js-sha256';
 export function userRegisterRequest(user:UserRegisterComponent,team1:RegisterTeamComponent,team2:RegisterTeamComponent):userRegisterInterface{
-    const userForm:FormGroup=user.userRegisterForm;
-    const team1Form:FormGroup=team1.teamForm;
-    const team2Form:FormGroup=team2.teamForm;
+    const userForm:UntypedFormGroup=user.userRegisterForm;
+    const team1Form:UntypedFormGroup=team1.teamForm;
+    const team2Form:UntypedFormGroup=team2.teamForm;
     var registerRequest:userRegisterInterface={
         Username:userForm.controls['userName'].value,
         Password: sha256(userForm.controls['password'].value),

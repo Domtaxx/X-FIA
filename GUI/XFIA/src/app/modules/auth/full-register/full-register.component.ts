@@ -10,7 +10,7 @@ import { appSettings } from 'src/app/const/appSettings';
 import { userRegisterMessage } from 'src/app/errorCodeHandler/errorHandler';
 import { alertMessage } from 'src/app/interface/interfaces';
 import { alertMessages } from 'src/app/const/messages';
-import { temporaryAllocator } from '@angular/compiler/src/render3/view/util';
+
 @Component({
   selector: 'app-full-register',
   templateUrl: './full-register.component.html',
