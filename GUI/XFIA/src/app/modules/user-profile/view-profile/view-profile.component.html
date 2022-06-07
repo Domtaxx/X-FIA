@@ -127,6 +127,23 @@
                         
                       
                     </div>
+                    <div class="card" *ngIf="car1!=undefined">
+                      
+                        <div class="cardHeader">
+                        
+                             <h3>{{car1.Name}}</h3>
+                            
+                        </div>
+                        
+                        <img class='image' [src]="car1.Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +car1.Price}}</h3>
+                        </div>
+                        
+                      
+                    </div>
 
                 </div>
                 
@@ -239,6 +256,23 @@
                         
                         <div class="cardDown">
                             <h3>{{"Precio: " +pilots2[5].Price+" M"}}</h3>
+                        </div>
+                        
+                      
+                    </div>
+                    <div class="card" *ngIf="car1!=undefined">
+                      
+                        <div class="cardHeader">
+                        
+                             <h3>{{car1.Name}}</h3>
+                            
+                        </div>
+                        
+                        <img class='image' [src]="car1.Photo">
+                        
+                        
+                        <div class="cardDown">
+                            <h3>{{"Precio: " +car1.Price}}</h3>
                         </div>
                         
                       
