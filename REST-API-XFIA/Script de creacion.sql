@@ -121,7 +121,7 @@ Alter table [USER]
 add constraint PrivateLeague_User_key
 FOREIGN KEY (PrivateLeagueName) REFERENCES [PRIVATELEAGUE]([Name]);
 
-Insert into RealTeamRace values ('Redbull', );
+
 
 INSERT INTO COUNTRY
 VALUES ('FRANCIA','https://xfiaonline.blob.core.windows.net/images/bandera_francia.jpg');
@@ -206,6 +206,7 @@ Insert into PilotRace values (4, 'Street Circuit', 'QWE123', 2);
 Insert into PilotRace values (5, 'Street Circuit', 'QWE123', 1);
 
 
+
 insert into HAS_PILOT
 Values(1,1,0)
 insert into HAS_PILOT
@@ -228,19 +229,7 @@ Values(2,4,0)
 insert into HAS_PILOT
 Values(2,5,0)
 
-go 
-
-alter PROCEDURE dbo.uspInsertIntoHasPilot 
-	@pilotId int, 
-	@subTeamId int
-AS
-begin
-	Set nocount on
-	insert into HAS_PILOT Values(@subTeamId,@pilotId,0)
-	select * from SUBTEAMS
-end
-GO
-
+go
 Create TRIGGER AfterINSERTUser on [dbo].[USER]
 after INSERT 
 AS 

@@ -30,8 +30,11 @@ namespace REST_API_XFIA.Controllers
                 SQL_Model.Models.Privateleague toAdd = PrivateLeagueMapper.fillSQLPrivateLeague(privateLeague);
                 if (PrivateLeagueVerification.privateLeagueIsInDatabase(toAdd.Name))
                 {
-                    return BadRequest();
+                    return BadRequest(1); //Private league name is already in use
                 }
+                SQL_Model.Models.User user = Db.Users.Find(privateLeague.ownerEmail);
+                user.PrivateLeagueName = privateLeague.name;
+                Db.Update(user);
                 Db.Privateleagues.Add(toAdd);
                 Db.SaveChanges();
                 return Ok(false);
@@ -89,10 +92,14 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                SQL_Model.Models.Users user = Db.Users.Find(userEmail);
+                SQL_Model.Models.User user = Db.Users.Find(userEmail);
+                if(user.PrivateLeagueName == null)
+                {
+                    return BadRequest(1);//the user doesn't  belong to any private league
+                }
                 SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Find(user.PrivateLeagueName);
                 SQL_Model.Models.Tournament tournament = TournamentFetcher.GetTournament(privateLeague.TournamentKey);
-                List<Data_structures.PublicLeagueResponse> res = PrivateLeagueFetcher.getEveryoneInList(privateLeague.privateLeagueName, tournament);
+                List<Data_structures.PublicLeagueResponse> res = PrivateLeagueFetcher.getEveryoneInList(privateLeague.Name, tournament);
                 return Ok(JsonConvert.SerializeObject(res));
             }
             catch
