@@ -84,12 +84,14 @@ namespace REST_API_XFIA.Controllers
             }
         }
         [HttpGet]
-        public ActionResult getAllPrivateLeagueMembers(string privateLeagueName, string tournamentKey)
+        public ActionResult getAllPrivateLeagueMembers(string userEmail)
         {
             try
             {
-                SQL_Model.Models.Tournament tournament = TournamentFetcher.GetTournament(tournamentKey);
-                List<Data_structures.PublicLeagueResponse> res = PrivateLeagueFetcher.getEveryoneInList(privateLeagueName, tournament);
+                SQL_Model.Models.Users user = Db.Users.Find(userEmail);
+                SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Find(user.PrivateLeagueName);
+                SQL_Model.Models.Tournament tournament = TournamentFetcher.GetTournament(privateLeague.TournamentKey);
+                List<Data_structures.PublicLeagueResponse> res = PrivateLeagueFetcher.getEveryoneInList(privateLeague.privateLeagueName, tournament);
                 return Ok(JsonConvert.SerializeObject(res));
             }
             catch
