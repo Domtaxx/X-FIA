@@ -33,8 +33,8 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
-                List<Data_structures.PublicLeagueResponse> res = null;
-                return Ok();
+                List<Data_structures.PublicLeagueResponse> res = PublicLeagueFetcher.getUserPublicLeague(tour, userEmail);
+                return Ok(JsonConvert.SerializeObject(res));
             }
             catch (Exception e)
             {
@@ -51,8 +51,8 @@ namespace REST_API_XFIA.Controllers
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
                 int amount = 0;
                 int residue = 0;
-                amount = tour.UserEmails.Count() / amountByPage;
-                residue = tour.UserEmails.Count() % amountByPage;
+                amount = (tour.UserEmails.Count()*2) / amountByPage;
+                residue = (tour.UserEmails.Count() * 2) % amountByPage;
                 if (residue > 0)
                 {
                     amount++;
@@ -72,7 +72,7 @@ namespace REST_API_XFIA.Controllers
             {
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
                 int amount = 0;
-                amount = tour.UserEmails.Count();
+                amount = tour.UserEmails.Count()*2;
                 return Ok(JsonConvert.SerializeObject(amount));
             }
             catch (Exception e)
