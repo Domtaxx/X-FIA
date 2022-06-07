@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl } from '@angular/forms';
+import { UntypedFormGroup,UntypedFormControl } from '@angular/forms';
 import { Validators } from '@angular/forms';
 import { NetworkService } from 'src/app/services/network.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { alertMessages } from 'src/app/const/messages';
 import { dateValidations } from 'src/app/validations/dateValidations';
-import { invalid } from '@angular/compiler/src/render3/view/util';
+
 import { appSettings } from 'src/app/const/appSettings';
 @Component({
   selector: 'app-create-tournament', 
@@ -13,14 +13,14 @@ import { appSettings } from 'src/app/const/appSettings';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  tournamentForm=new FormGroup({
-    tournamentName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
-    initialDate:new FormControl('',Validators.required),
-    finalDate: new FormControl('',Validators.required),
-    initialTime: new FormControl('',Validators.required),
-    finalTime:new FormControl('',Validators.required),
-    budget: new FormControl('',[Validators.required,Validators.min(1)]),
-    rules:new FormControl('',[Validators.required,Validators.maxLength(1000)])
+  tournamentForm=new UntypedFormGroup({
+    tournamentName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
+    initialDate:new UntypedFormControl('',Validators.required),
+    finalDate: new UntypedFormControl('',Validators.required),
+    initialTime: new UntypedFormControl('',Validators.required),
+    finalTime:new UntypedFormControl('',Validators.required),
+    budget: new UntypedFormControl('',[Validators.required,Validators.min(1)]),
+    rules:new UntypedFormControl('',[Validators.required,Validators.maxLength(1000)])
   });
   tournamentName='tournamentName';
   initialDate='initialDate';

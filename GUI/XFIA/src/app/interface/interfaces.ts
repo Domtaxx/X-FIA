@@ -76,11 +76,11 @@ export interface userRegisterInterface{
 }
 
 export interface leagueMemberInterface{
-    posicion:number;
-    usuario:string;
-    escuderia:string;
-    equipo:string;
-    puntaje:number;
+    Position:number;
+    UserName:string;
+    TeamName:string;
+    SubteamName:string;
+    Points:number;
 }
 
 export interface privateLeagueJoinMember{

@@ -93,5 +93,7 @@
       }
     }
   },
-  "defaultProject": "XFIA"
+  "cli": {
+    "analytics": false
+  }
 }

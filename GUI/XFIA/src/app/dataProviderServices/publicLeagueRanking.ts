@@ -3,6 +3,7 @@ import { leagueMemberInterface } from '../interface/interfaces';
 import { NetworkService } from '../services/network.service';
 import { appSettings } from '../const/appSettings';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,39 +15,48 @@ export class publicLeagueRankingService {
         
         const params={
             page:pageNumber,
-            ElementPerPage:ElementPerPage
+            amountByPage:ElementPerPage
 
         }
         this.backend.get_request(appSettings.publicLeagueRankingRoute,params).subscribe(
             (success:leagueMemberInterface[])=>{
+              console.log(success)
               sucessCallback(success)
             },
             (error)=>{
-              faillureCallback([])
+              //faillureCallback([])
+              this.getMembers(pageNumber,ElementPerPage,sucessCallback,faillureCallback);
             
             }
           )
      
     }
-    public getPlayersTeam(sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:(member:leagueMemberInterface[])=>void){
-        this.backend.get_request(appSettings.publicLeaguePlayerTeamsRoute,{}).subscribe(
-            (success:leagueMemberInterface[])=>{
+    public getPlayersTeam(sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:()=>void){
+        
+      //const user=getData(localStorageNames.email);
+      const user='briwag88@hotmail.com'
+        this.backend.get_request(appSettings.publicLeaguePlayerTeamsRoute,{userEmail:user}).subscribe(
+            (success)=>{
+              console.log('player team')
               sucessCallback(success)
+  
             },
-            (error)=>{
-              faillureCallback([])
+            ()=>{
+              this.getPlayersTeam(sucessCallback,faillureCallback)
             
             }
           )
      
     }
     public getMaxPage(itemPerPage:number,callback:(pageNumber:number)=>void){
-      this.backend.get_request(appSettings.publicLeagueMaxPage,{amountByPage:itemPerPage}).subscribe(
-        (sucess)=>{
+      this.backend.get_request('PublicLeague/MaxPages',{amountByPage:itemPerPage}).subscribe(
+        (sucess:any)=>{
           callback(sucess)
+          console.log(sucess)
         },
-        (error)=>{
-          callback(0);
+        ()=>{
+          
+          this.getMaxPage(itemPerPage,callback)
         }
       )
     }
@@ -55,6 +65,9 @@ export class publicLeagueRankingService {
       this.backend.get_request(appSettings.publicLeagueUserAmount,{}).subscribe(
         (sucess:number)=>{
           callback(sucess);
+        },
+        ()=>{
+         this.getUserAmount(callback)
         }
       )
     }

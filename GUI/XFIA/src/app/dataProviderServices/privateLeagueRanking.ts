@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { leagueMemberInterface } from '../interface/interfaces';
 import { NetworkService } from '../services/network.service';
 import { appSettings } from '../const/appSettings';
-import { splitAtPeriod } from '@angular/compiler/src/util';
 import { localStorageNames } from '../const/localStorageNames';
 import { getData } from '../functions/browserDataInfo';
 import { privateLeagueInfo } from '../interface/interfaces';

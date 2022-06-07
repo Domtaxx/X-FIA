@@ -5,6 +5,8 @@ import { publicLeagueRankingService } from 'src/app/dataProviderServices/publicL
 import { privateLeagueCreateService } from 'src/app/dataProviderServices/privateLeagueCreate';
 
 
+
+
 @Component({
   selector: 'app-public-league-ranking',
   templateUrl: './public-league-ranking.component.html',
@@ -19,19 +21,16 @@ export class PublicLeagueRankingComponent implements OnInit {
   userAmount!:number;
   playersTeam:leagueMemberInterface[]=[];
   constructor(private dataManagement:publicLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService) {
-    this.pageNumber=0;
-    this.elementPerPage=11;
-    this.maxPage=5;
+    this.pageNumber=1;
+    this.elementPerPage=10;
+    this.maxPage=0;
     this.userAmount=0;
-   }
-
-  ngOnInit(): void {
     const object={
-      posicion:1,
-      usuario:'Martin',
-      escuderia:'Perritos',
-      equipo:'Vida',
-      puntaje:1000,
+      Position:1,
+      UserName:'Martin',
+      TeamName:'Perritos',
+      SubteamName:'Vida',
+      Points:1000,
       }
      
     for(var i=0;i<100;i++){
@@ -40,25 +39,40 @@ export class PublicLeagueRankingComponent implements OnInit {
     for(var i=0;i<2;i++){
       this.playersTeam.push(object)
     }
-    //this.getData();
+    this.getData();
+    
+   }
+
+  ngOnInit(): void {
+    
     
   }
   getData(){
-    //this.getRankingInfo();
-    //this.getPlayersTeamInfo();
-    //this.getMaxPage();
-    //this.getUserAmount();
+    try{
+      this.getRankingInfo();
+      this.getMaxPage();
+    
+    this.getPlayersTeamInfo();
+    
+    this.getUserAmount();
+    }
+    catch(e){
+
+    }
+    
   }
 
   getRankingInfo(){
     this.dataManagement.getMembers(this.pageNumber,this.elementPerPage,
       (leagueMembers:leagueMemberInterface[])=>{
         this.tableDataSource=leagueMembers;
-        this.tableDataSource=[...this.tableDataSource];
+    
+        console.log('dataSource');
+        console.log(this.tableDataSource)
       },
       ()=>{
         this.tableDataSource=[];
-        this.tableDataSource=[...this.tableDataSource];
+ 
       }
     );
     
@@ -69,6 +83,8 @@ export class PublicLeagueRankingComponent implements OnInit {
       (playerTeams:leagueMemberInterface[])=>{
           this.playersTeam=playerTeams;
           this.playersTeam=[...this.playersTeam];
+          console.log('team')
+          console.log(this.playersTeam)
       },
       ()=>{
         this.playersTeam=[];
@@ -79,8 +95,11 @@ export class PublicLeagueRankingComponent implements OnInit {
   }
   getMaxPage(){
     this.dataManagement.getMaxPage(this.elementPerPage,
-      (maxPage:number)=>{
-        this.maxPage=maxPage;
+      (maxPages:number)=>{
+        this.maxPage=maxPages;
+        console.log('max page')
+        console.log(this.maxPage)
+      
       }
       )
   }
@@ -103,7 +122,7 @@ export class PublicLeagueRankingComponent implements OnInit {
 
   }
   leftPage(){
-    if(this.pageNumber-1>=0){
+    if(this.pageNumber-1>=1){
       this.pageNumber-=1;
       this.getData();
     }

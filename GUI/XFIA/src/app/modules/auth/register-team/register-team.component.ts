@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
-import { FormGroup,FormControl, Validators } from '@angular/forms';
+import { UntypedFormGroup,UntypedFormControl, Validators } from '@angular/forms';
 import { carInterface, pilotInterface } from 'src/app/interface/interfaces';
 import { NetworkService } from 'src/app/services/network.service';
 import { appSettings } from 'src/app/const/appSettings';
-import { ValueConverter } from '@angular/compiler/src/render3/view/template';
+
 import { budgedCalc } from 'src/app/calc/budgetCalc';
 import { appColor } from 'src/app/const/appSettings';
 import { pilotsDoesntMatch } from 'src/app/validations/customFieldValidations';
@@ -39,14 +39,14 @@ export class RegisterTeamComponent implements OnInit {
   pilot4Index=3;
   pilot5Index=4;
   carIndex=5;
-  teamForm= new FormGroup({
-    teamName:new FormControl('Equipo',[Validators.required]),
-    pilot1:new FormControl('',[Validators.required]),
-    pilot2:new FormControl('',[Validators.required]),
-    pilot3:new FormControl('',[Validators.required]),
-    pilot4:new FormControl('',[Validators.required]),
-    pilot5:new FormControl('',[Validators.required]),
-    car: new FormControl('',Validators.required)
+  teamForm= new UntypedFormGroup({
+    teamName:new UntypedFormControl('Equipo',[Validators.required]),
+    pilot1:new UntypedFormControl('',[Validators.required]),
+    pilot2:new UntypedFormControl('',[Validators.required]),
+    pilot3:new UntypedFormControl('',[Validators.required]),
+    pilot4:new UntypedFormControl('',[Validators.required]),
+    pilot5:new UntypedFormControl('',[Validators.required]),
+    car: new UntypedFormControl('',Validators.required)
 
   },
   {validators:[pilotsDoesntMatch(5),overBudget(this.cost)]}

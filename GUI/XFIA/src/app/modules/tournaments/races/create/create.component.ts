@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl,Validators} from '@angular/forms';
+import { UntypedFormGroup,UntypedFormControl,Validators} from '@angular/forms';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { NetworkService } from 'src/app/services/network.service';
 import { tournamentInterface } from 'src/app/interface/interfaces';
@@ -16,15 +16,15 @@ export class CreateRaceComponent implements OnInit {
   constructor(private backend:NetworkService,private swal:SweetAlertService) { }
   countries:string[]=[]
   tournaments:tournamentInterface[]=[]
-  raceForm=new FormGroup({
-    raceName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
-    tournamentName:new FormControl('',Validators.required),
-    streetName:new FormControl('',[Validators.required,Validators.maxLength(30)]),
-    countryName:new FormControl('',Validators.required),
-    initialDate:new FormControl('',Validators.required),
-    finalDate: new FormControl('',Validators.required),
-    initialTime: new FormControl('',Validators.required),
-    finalTime:new FormControl('',Validators.required)
+  raceForm=new UntypedFormGroup({
+    raceName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
+    tournamentName:new UntypedFormControl('',Validators.required),
+    streetName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
+    countryName:new UntypedFormControl('',Validators.required),
+    initialDate:new UntypedFormControl('',Validators.required),
+    finalDate: new UntypedFormControl('',Validators.required),
+    initialTime: new UntypedFormControl('',Validators.required),
+    finalTime:new UntypedFormControl('',Validators.required)
   });
   raceName='raceName';
   tournamentName='tournamentName';

@@ -22,11 +22,11 @@ export class PrivateLeagueRankingComponent implements OnInit {
 
   ngOnInit(): void {
     const object={
-      posicion:1,
-      usuario:'Martin',
-      escuderia:'Perritos',
-      equipo:'Vida',
-      puntaje:1000,
+      Position:1,
+      UserName:'Martin',
+      TeamName:'Perritos',
+      SubteamName:'Vida',
+      Points:1000,
       }
       
     for(var i=0;i<100;i++){

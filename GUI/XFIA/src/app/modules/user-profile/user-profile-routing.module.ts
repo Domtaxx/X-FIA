@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 const routes: Routes = [
 {path:'view',component:ViewProfileComponent},
-{path:'',redirectTo:'/view'}
+{path:' ',redirectTo:'/view'}
 
 ];
 

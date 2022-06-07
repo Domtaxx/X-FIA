@@ -7,9 +7,9 @@ export class appSettings{
     public static carsRoute='Escuderias/Todos';
     public static userRegisterRoute='Usuario/Agregar';
     public static currentBudgetRoute='Admin/Campeonato/Admin/Campeonato/Budget';
-    public static publicLeagueRankingRoute="";
+    public static publicLeagueRankingRoute="PublicLeague";
     public static privateLeagueRankingRoute="";
-    public static publicLeaguePlayerTeamsRoute="";
+    public static publicLeaguePlayerTeamsRoute="User/PublicLeague";
     public static publicLeagueMaxPage="PublicLeague/MaxPages";
     public static publicLeagueUserAmount='PublicLeague/UserAmount';
     public static privateLeagueJoinRoute='';
