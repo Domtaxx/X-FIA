@@ -9,3 +9,10 @@
 
     </ul>
   </nav>
+
+  <form [formGroup]="LoginForm" >
+    <label>Email</label>
+    <input type="text" formControlName="userEmail">
+  
+    <button (click)="log()">Login</button>
+  </form>

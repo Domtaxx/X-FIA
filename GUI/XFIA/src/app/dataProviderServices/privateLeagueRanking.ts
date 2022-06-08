@@ -15,8 +15,8 @@ export class privateLeagueRankingService {
 
 
     public getMembers(sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:(member:leagueMemberInterface[])=>void){
-      //const email=getData(localStorageNames.email);
-      const email='briwag88@hotmail.com'
+      const email=getData(localStorageNames.email);
+      //const email='briwag88@hotmail.com'
       this.backend.get_request(appSettings.privateLeagueRankingRoute,{userEmail:email}).subscribe(
           (success:leagueMemberInterface[])=>{
             console.log(success)
@@ -30,8 +30,8 @@ export class privateLeagueRankingService {
      
     }
     public getPrivateLeagueInfo(sucessCallback:(key:privateLeagueInfo)=>void){
-      //const email=getData(localStorageNames.email);
-      const email='briwag88@hotmail.com'
+      const email=getData(localStorageNames.email);
+      //const email='briwag88@hotmail.com'
       this.backend.get_request(appSettings.privateLeagueKeyRoute,{userEmail:email}).subscribe(
         (sucess:privateLeagueInfo)=>{
           console.log(sucess)
@@ -44,7 +44,7 @@ export class privateLeagueRankingService {
     }
     public leaveLeague(sucessCallback:()=>void,faillureCallback:(message:alertMessage)=>void){
       const email=getData(localStorageNames.email);
-      this.backend.get_request(appSettings.privateLeagueLeaveRoute,{email:email}).subscribe(
+      this.backend.delete_request(appSettings.privateLeagueLeaveRoute,{userEmail:email}).subscribe(
         ()=>{
           sucessCallback();
         },

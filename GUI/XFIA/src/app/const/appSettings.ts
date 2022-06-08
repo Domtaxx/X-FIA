@@ -14,7 +14,7 @@ export class appSettings{
     public static publicLeagueUserAmount='PublicLeague/UserAmount';
     public static privateLeagueJoinRoute='User/PrivateLeague/User/PrivateLeague/NewMember';
     public static privateLeagueKeyRoute='User/PrivateLeague/League';
-    public static privateLeagueLeaveRoute='';
+    public static privateLeagueLeaveRoute='User/PrivateLeague';
     public static profileUserGet="Usuario/Unico";
     public static defaultPilotPhotoRoute="../../../../assets/images/pilotAvatar.png";
     public static defaultTeamPhoto="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzA0-6IViHaCiSlUgHkF0FPlVgwoH2WydjxA&usqp=CAU";
