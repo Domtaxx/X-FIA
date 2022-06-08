@@ -4,6 +4,7 @@ import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { privateLeagueRankingService } from 'src/app/dataProviderServices/privateLeagueRanking';
 import { privateLeagueCreateService } from 'src/app/dataProviderServices/privateLeagueCreate';
 import { privateLeagueInfo } from 'src/app/interface/interfaces';
+import { alertMessages } from 'src/app/const/messages';
 
 @Component({
   selector: 'app-private-league-ranking',
@@ -14,9 +15,6 @@ export class PrivateLeagueRankingComponent implements OnInit {
 
   tableDataSource:leagueMemberInterface[]=[];
   displayedColumns=['Posicion','Usuario','Escuderia','Equipo','Puntaje'];
-  state!:string;
-  leagueKey!:string;
-  maxMember!:number;
   leagueInfo!:privateLeagueInfo;
   constructor(private dataManagement:privateLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService) { }
 
@@ -37,8 +35,9 @@ export class PrivateLeagueRankingComponent implements OnInit {
     
   }
   getData(){
-    //this.getRankingInfo();
+    this.getRankingInfo();
     this.leagueInfo={
+      name:'Liga Privada',
       key:'asdlfsdf44',
       maxUser:600,
       state: true
@@ -70,12 +69,21 @@ export class PrivateLeagueRankingComponent implements OnInit {
   }
 
   leavePrivateLeague(){
-    this.dataManagement.leaveLeague(
-      ()=>{},
-      (message:alertMessage)=>{
-        this.failureMessage(message)
+
+    this.swal.optionSwal('Quieres Salir?','Recuerda que al salir perderas el puntaje','Cancelar','Aceptar').then(
+      (result)=>{
+        if(!result.isConfirmed)return;
+        this.dataManagement.leaveLeague(
+          ()=>{
+            this.sucessMessage(alertMessages.successHeader,alertMessages.privateLeagueLeaveSucessBody)
+          },
+          (message:alertMessage)=>{
+            this.failureMessage(message)
+          }
+        )
       }
     )
+   
   }
   sucessMessage(header:string,body:string){
     this.swal.showSuccess(header,body);

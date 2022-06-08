@@ -4,7 +4,7 @@ import { PrivateLeagueRankingComponent } from './private-league-ranking/private-
 
 const routes: Routes = [
 {path:'ranking',component:PrivateLeagueRankingComponent},
-{path:'',redirectTo:'/ranking'}
+{path:' ',redirectTo:'/ranking'}
 
 ];
 

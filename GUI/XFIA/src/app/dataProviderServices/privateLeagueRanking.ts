@@ -15,29 +15,30 @@ export class privateLeagueRankingService {
 
 
     public getMembers(sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:(member:leagueMemberInterface[])=>void){
-        this.backend.get_request(appSettings.privateLeagueRankingRoute,{}).subscribe(
-            (success:leagueMemberInterface[])=>{
-              sucessCallback(success)
-            },
-            (error)=>{
-              faillureCallback([])
-            
-            }
-          )
+      //const email=getData(localStorageNames.email);
+      const email='briwag88@hotmail.com'
+      this.backend.get_request(appSettings.privateLeagueRankingRoute,{userEmail:email}).subscribe(
+          (success:leagueMemberInterface[])=>{
+            console.log(success)
+            sucessCallback(success)
+          },
+          (error)=>{
+            this.getMembers(sucessCallback,faillureCallback);
+          
+          }
+        )
      
     }
     public getPrivateLeagueInfo(sucessCallback:(key:privateLeagueInfo)=>void){
-      const email=getData(localStorageNames.email);
-      this.backend.get_request(appSettings.privateLeagueKeyRoute,{email:email}).subscribe(
+      //const email=getData(localStorageNames.email);
+      const email='briwag88@hotmail.com'
+      this.backend.get_request(appSettings.privateLeagueKeyRoute,{userEmail:email}).subscribe(
         (sucess:privateLeagueInfo)=>{
+          console.log(sucess)
           sucessCallback(sucess);
         },
         ()=>{
-          sucessCallback({
-            key:'',
-            maxUser:0,
-            state:false,
-          });
+          this.getPrivateLeagueInfo(sucessCallback)
         }
       )
     }

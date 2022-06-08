@@ -1,3 +1,5 @@
+
+
 //interface of messages
 export interface alertMessage{
     header:string;
@@ -89,6 +91,7 @@ export interface privateLeagueJoinMember{
 }
 
 export interface privateLeagueInfo{
+    name:string;
     key:string;
     maxUser:number;
     state:boolean;

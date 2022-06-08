@@ -8,12 +8,12 @@ export class appSettings{
     public static userRegisterRoute='Usuario/Agregar';
     public static currentBudgetRoute='Admin/Campeonato/Admin/Campeonato/Budget';
     public static publicLeagueRankingRoute="PublicLeague";
-    public static privateLeagueRankingRoute="";
+    public static privateLeagueRankingRoute="/User/PrivateLeague";
     public static publicLeaguePlayerTeamsRoute="User/PublicLeague";
     public static publicLeagueMaxPage="PublicLeague/MaxPages";
     public static publicLeagueUserAmount='PublicLeague/UserAmount';
-    public static privateLeagueJoinRoute='';
-    public static privateLeagueKeyRoute='';
+    public static privateLeagueJoinRoute='User/PrivateLeague/User/PrivateLeague/NewMember';
+    public static privateLeagueKeyRoute='User/PrivateLeague/League';
     public static privateLeagueLeaveRoute='';
     public static profileUserGet="Usuario/Unico";
     public static defaultPilotPhotoRoute="../../../../assets/images/pilotAvatar.png";

@@ -36,8 +36,8 @@ export function userRegisterMessage(errorCode:any):alertMessage|undefined{
 }
 
 export function privateLeagueLeaveError(errorCode:any){
-    var header:string='';
-    var body:string='';
+    var header:string='No se pudo dejar';
+    var body:string='Falta codigo de error';
     const message:alertMessage={
         header:header,
         body:body
@@ -45,3 +45,4 @@ export function privateLeagueLeaveError(errorCode:any){
     return message;
     
 }
+
