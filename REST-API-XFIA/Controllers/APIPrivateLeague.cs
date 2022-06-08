@@ -108,5 +108,25 @@ namespace REST_API_XFIA.Controllers
             }
             
         }
+        [Route("League")]
+        [HttpGet]
+        public ActionResult getPrivateLeague(string userEmail)
+        {
+            try
+            {
+                SQL_Model.Models.User user = Db.Users.Find(userEmail);
+                if (user.PrivateLeagueName == null)
+                {
+                    return BadRequest(1);//the user doesn't  belong to any private league
+                }
+                var res = PrivateLeagueFetcher.GetPrivateleagueData(userEmail);
+                return Ok(JsonConvert.SerializeObject(res));
+            }
+            catch
+            {
+                return BadRequest(2);
+            }
+
+        }
     }
 }

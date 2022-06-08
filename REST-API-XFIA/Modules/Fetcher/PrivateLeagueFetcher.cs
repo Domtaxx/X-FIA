@@ -16,7 +16,7 @@ namespace REST_API_XFIA.Modules.Fetcher
             foreach (SQL_Model.Models.User user in users)
             {
                 PublicLeagueResponse data;
-                List<SQL_Model.Models.Subteam> subTeams = Db.Subteams.Where(st => st.UserEmail == user.Email).ToList();
+                List<SQL_Model.Models.Subteam> subTeams = Db.Subteams.Where(st => st.UserEmail == user.Email && st.CreationDate == tournament.InitialDate && st.CreationHour == tournament.InitialHour).ToList();
                 foreach (SQL_Model.Models.Subteam subTeam in subTeams)
                 {
                     data = new PublicLeagueResponse();
@@ -36,6 +36,22 @@ namespace REST_API_XFIA.Modules.Fetcher
             }
             return AllPrivateLeagueRes;
         }
+        public static Data_structures.PrivateLeague GetPrivateleagueData(string userEmail)
+        {
+            SQL_Model.Models.Privateleague privateLeague = Db.Users.Include(U => U.PrivateLeagueNameNavigation).ThenInclude(PRL => PRL.Users).Where(U => U.Email.Equals(userEmail)).Single().PrivateLeagueNameNavigation;
+            var data = new Data_structures.PrivateLeague();
+
+            data.name = privateLeague.Name;
+            data.key = "" + privateLeague.TournamentKey + privateLeague.PrivateLeagueKey;
+            data.ownerEmail = privateLeague.OwnerEmail;
+            data.maxUser = privateLeague.MaxUser;
+            data.state = false;
+            if (data.maxUser > 5)
+            {
+                data.state = true;
+            }
+            return data;
+        }
         private static uint sumPoints(List<SQL_Model.Models.HasPilot> pilots, SQL_Model.Models.Realteam car, List<SQL_Model.Models.Race> races)
         {
             uint points = 0;
@@ -50,5 +66,7 @@ namespace REST_API_XFIA.Modules.Fetcher
             return points;
         }
     }
+
+
 }
 

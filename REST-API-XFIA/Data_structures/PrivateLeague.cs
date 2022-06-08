@@ -4,8 +4,10 @@
     {
 
         public String? name { get; set; } = null!;
+        public String? key { get; set; } = null!;
         public String? ownerEmail { get; set; } = null!;
         public int? maxUser { get; set; } = null!;
+        public bool? state { get; set; }
 
     }
 }
