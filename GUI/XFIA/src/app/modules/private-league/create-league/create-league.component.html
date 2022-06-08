@@ -1,0 +1,36 @@
+<div class="mainDiv">
+    <h1>
+        Crear Liga Privada
+    </h1>
+    <form class="form">
+        <div class="row">
+            <div class="thirty">
+                <label>Nombre</label>
+            </div>
+            <div class="seventy">
+                <input type="text">
+    
+            </div>
+        </div>
+        <div class="row">
+            <div class="thirty">
+                <label>Numero de Participantes</label>
+            </div>
+            <div class="seventy">
+                <select size="1" >
+                    <option *ngFor="let member of memberNumber" value={{member}}>
+                        {{member}}
+                    </option>
+                </select>
+    
+            </div>
+        </div>
+    </form>
+    <mat-icon style="font-size: 6vh;"class="material-symbols-outlined">warning</mat-icon>
+    <p>
+        La liga privada se creará en estado inactivo <br> hasta que haya un mínimo de 5 miembros
+    </p>
+    <button  mat-raised-button color="warn" class="createButton">Crear</button>
+   
+
+</div>

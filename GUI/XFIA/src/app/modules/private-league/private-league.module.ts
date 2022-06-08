@@ -5,17 +5,20 @@ import { PrivateLeagueRoutingModule } from './private-league-routing.module';
 import {MatTableModule} from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
-
+import { CreateLeagueComponent } from './create-league/create-league.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
 @NgModule({
   declarations: [
-    PrivateLeagueRankingComponent
+    PrivateLeagueRankingComponent,
+    CreateLeagueComponent
   ],
   imports: [
     CommonModule,
     PrivateLeagueRoutingModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule
   ]
 })
 export class PrivateLeagueModule { }
