@@ -52,7 +52,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             return true;
         }
 
-        public int IsValid(SQL_Model.Models.Race race)
+        public static int IsValid(SQL_Model.Models.Race race)
         {
             if (IfRacesAtSameTime(race.InitialDate, race.InitialHour, race.FinalDate, race.FinalHour))
             {

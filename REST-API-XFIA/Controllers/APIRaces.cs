@@ -14,7 +14,6 @@ namespace REST_API_XFIA.Controllers
 {
     public class APIRaces : Controller
     {
-        IAddingRules rules = new RaceVerifications();
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         [Route("Admin/Carreras")]
         [HttpGet]
@@ -34,7 +33,7 @@ namespace REST_API_XFIA.Controllers
         public ActionResult add([FromBody] Data_structures.Race r){
             try{
                 SQL_Model.Models.Race toAdd = RaceMapper.fillSQLRace(r);
-                int MsgCode = rules.IsValid(toAdd);
+                int MsgCode = RaceVerifications.IsValid(toAdd);
                 if (MsgCode != 0)
                 {
                     return BadRequest(JsonConvert.SerializeObject(MsgCode));

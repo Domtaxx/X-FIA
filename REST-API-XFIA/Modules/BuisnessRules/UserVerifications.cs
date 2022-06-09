@@ -35,7 +35,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             return false;
         }
 
-        int IsValid(AllUserInfo user)
+        public static int IsValid(AllUserInfo user)
         {
             if (VerifyIfUserHasAccount(user))
             {

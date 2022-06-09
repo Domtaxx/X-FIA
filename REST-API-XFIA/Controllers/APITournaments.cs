@@ -20,7 +20,6 @@ namespace REST_API_XFIA.Controllers
     public class APITournaments : Controller
     {
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
-        IAddingRules rules = new TournamentVerifications();
         [HttpGet]
         public ActionResult listAll()
         {
@@ -40,7 +39,7 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.Tournament toAdd = TournamentMapper.fillSQLTournament(t);
-                int MsgCode = rules.IsValid(toAdd);
+                int MsgCode = TournamentVerifications.IsValid(toAdd);
                 if (MsgCode != 0)
                 {
                     return BadRequest(JsonConvert.SerializeObject(MsgCode));

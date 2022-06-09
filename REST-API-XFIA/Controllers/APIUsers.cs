@@ -11,7 +11,6 @@ namespace REST_API_XFIA.Controllers
     [Route("Usuario")]
     public class APIUsers : Controller
     {
-        IAddingRules rules = new UserVerifications();
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         private readonly IStorageService _storageService;
 
@@ -37,7 +36,7 @@ namespace REST_API_XFIA.Controllers
         public ActionResult AddUser([FromForm]Data_structures.AllUserInfo allInfo) {
             try
             {
-                int MsgCode = rules.IsValid(allInfo);
+                int MsgCode = UserVerifications.IsValid(allInfo);
                 if (MsgCode != 0)
                 {
                     return BadRequest(JsonConvert.SerializeObject(MsgCode));

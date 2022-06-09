@@ -56,7 +56,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             return true;
         }
 
-        int IsValid(SQL_Model.Models.Tournament tour)
+        public static int IsValid(SQL_Model.Models.Tournament tour)
         {
             if (IfTournamentAtSameTime(tour.InitialDate, tour.InitialHour, tour.FinalDate, tour.FinalHour))
             {
