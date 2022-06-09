@@ -229,6 +229,51 @@ Values(2,4,0)
 insert into HAS_PILOT
 Values(2,5,0)
 
+insert into HAS_PILOT
+Values(3,1,0)
+insert into HAS_PILOT
+Values(3,2,0)
+insert into HAS_PILOT
+Values(3,3,0)
+insert into HAS_PILOT
+Values(3,4,0)
+insert into HAS_PILOT
+Values(3,5,0)
+
+insert into HAS_PILOT
+Values(4,1,0)
+insert into HAS_PILOT
+Values(4,2,0)
+insert into HAS_PILOT
+Values(4,3,0)
+insert into HAS_PILOT
+Values(4,4,0)
+insert into HAS_PILOT
+Values(4,5,0)
+
+insert into HAS_PILOT
+Values(5,1,0)
+insert into HAS_PILOT
+Values(5,2,0)
+insert into HAS_PILOT
+Values(5,3,0)
+insert into HAS_PILOT
+Values(5,4,0)
+insert into HAS_PILOT
+Values(5,5,0)
+
+insert into HAS_PILOT
+Values(6,1,0)
+insert into HAS_PILOT
+Values(6,2,0)
+insert into HAS_PILOT
+Values(6,3,0)
+insert into HAS_PILOT
+Values(6,4,0)
+insert into HAS_PILOT
+Values(6,5,0)
+
+
 go
 Create TRIGGER AfterINSERTUser on [dbo].[USER]
 after INSERT 
