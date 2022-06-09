@@ -18,7 +18,7 @@ namespace REST_API_XFIA.Controllers
             try {
                 return Ok(
                             JsonConvert.SerializeObject(Db.Pilots.Include(P => P.CountryNameNavigation).Include(P => P.RealTeamsNameNavigation).ToList().OrderBy(p => p.Lastname), Formatting.Indented,
-                            new JsonSerializerSettings{PreserveReferencesHandling = PreserveReferencesHandling.Objects})
+                            new JsonSerializerSettings{ReferenceLoopHandling = ReferenceLoopHandling.Ignore})
                           );
             }
             catch (Exception e)

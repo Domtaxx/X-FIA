@@ -2,7 +2,7 @@
 {
     public class UserToPrivateLeague
     {
-        public string? userEmail = null!;
-        public string? privateLeagueKey = null!;
+        public string? userEmail { get; set; } = null!;
+        public string? privateLeagueKey { get; set; } = null!;
     }
 }

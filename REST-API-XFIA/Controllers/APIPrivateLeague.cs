@@ -37,7 +37,8 @@ namespace REST_API_XFIA.Controllers
                 Db.Update(user);
                 Db.Privateleagues.Add(toAdd);
                 Db.SaveChanges();
-                return Ok(false);
+                string fullPrivateLeagueKey = toAdd.TournamentKey + toAdd.PrivateLeagueKey;
+                return Ok(fullPrivateLeagueKey);
             }
             catch(Exception e)
             {
@@ -60,7 +61,7 @@ namespace REST_API_XFIA.Controllers
                 Db.SaveChanges();
                 List<SQL_Model.Models.User> users;
                 users = Db.Users.Where(U => U.PrivateLeagueName==privateLeagueName).ToList();
-                return Ok(PrivateLeagueVerification.privateLeagueIsActive(users));
+                return Ok(PrivateLeagueVerification.privateLeagueIsActive(privateLeagueName));
                 
             }
             else
@@ -74,9 +75,11 @@ namespace REST_API_XFIA.Controllers
         [Route("User/PrivateLeague/NewMember")]
         public ActionResult addUserToPrivateLeague([FromBody] Data_structures.UserToPrivateLeague userToPrivateLeague)
         {
-            return Ok(0);
+            
             SQL_Model.Models.User user = Db.Users.Find(userToPrivateLeague.userEmail);
-            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Where(P => P.PrivateLeagueKey == userToPrivateLeague.privateLeagueKey).Single();
+            String publickey = userToPrivateLeague.privateLeagueKey.Substring(0, 6);
+            String privatekey = userToPrivateLeague.privateLeagueKey.Substring(6, 6);
+            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Where(P => P.PrivateLeagueKey == privatekey && P.TournamentKey==publickey).Single();
             if (privateLeague != null)
             {
                 user.PrivateLeagueName = privateLeague.Name;
@@ -84,8 +87,9 @@ namespace REST_API_XFIA.Controllers
                 Db.SaveChanges();
                 List<SQL_Model.Models.User> users;
                 users = Db.Users.Where(U => U.PrivateLeagueName == privateLeague.Name).ToList();
-                return Ok(PrivateLeagueVerification.privateLeagueIsActive(users));
+                return Ok(PrivateLeagueVerification.privateLeagueIsActive(privateLeague.Name));
             }
+            return Ok(0);
         }
         [HttpGet]
         public ActionResult getAllPrivateLeagueMembers(string userEmail)

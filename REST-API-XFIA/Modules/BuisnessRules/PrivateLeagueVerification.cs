@@ -34,9 +34,11 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             }
         }
 
-        public static bool privateLeagueIsActive(List<SQL_Model.Models.User> usersInPrivateLeague)
+        public static bool privateLeagueIsActive(string privateLeagueName)
         {
-            if (usersInPrivateLeague.Count < 5)
+            List<SQL_Model.Models.User> users;
+            users = Db.Users.Where(U => U.PrivateLeagueName == privateLeagueName).ToList();
+            if (users.Count < 5)
             {
                 return false;
             }
@@ -45,6 +47,8 @@ namespace REST_API_XFIA.Modules.BuisnessRules
                 return true;
             }
         }
+
+        
     }
 
 }
