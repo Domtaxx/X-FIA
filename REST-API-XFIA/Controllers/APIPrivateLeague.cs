@@ -22,15 +22,17 @@ namespace REST_API_XFIA.Controllers
     {
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         
+
         [HttpPost]
         public ActionResult addPrivateLeague([FromBody] Data_structures.PrivateLeague privateLeague)
         {
             try
             {
                 SQL_Model.Models.Privateleague toAdd = PrivateLeagueMapper.fillSQLPrivateLeague(privateLeague);
-                if (PrivateLeagueVerification.privateLeagueIsInDatabase(toAdd.Name))
+                int msgCode = PrivateLeagueVerification.isValid(toAdd);
+                if (msgCode != 0)
                 {
-                    return BadRequest(1); //Private league name is already in use
+                    return BadRequest(JsonConvert.SerializeObject(msgCode));
                 }
                 SQL_Model.Models.User user = Db.Users.Find(privateLeague.ownerEmail);
                 user.PrivateLeagueName = privateLeague.name;
@@ -51,23 +53,20 @@ namespace REST_API_XFIA.Controllers
         {
             SQL_Model.Models.User user = Db.Users.Find(userEmail);
             SQL_Model.Models.Privateleague privateLeague;
-            if (user != null)
+            int msgCode = PrivateLeagueVerification.isValidDelete(userEmail);
+            if (msgCode != 0)
             {
-                string privateLeagueName = user.PrivateLeagueName;
-                privateLeague = Db.Privateleagues.Find(privateLeagueName);
+                return BadRequest(JsonConvert.SerializeObject(msgCode));
+            }
+            string privateLeagueName = user.PrivateLeagueName;
+            privateLeague = Db.Privateleagues.Find(privateLeagueName);
 
-                user.PrivateLeagueName = null;
-                Db.Users.Update(user);
-                Db.SaveChanges();
-                List<SQL_Model.Models.User> users;
-                users = Db.Users.Where(U => U.PrivateLeagueName==privateLeagueName).ToList();
-                return Ok(PrivateLeagueVerification.privateLeagueIsActive(privateLeagueName));
-                
-            }
-            else
-            {
-                return BadRequest(JsonConvert.SerializeObject(2));
-            }
+            user.PrivateLeagueName = null;
+            Db.Users.Update(user);
+            Db.SaveChanges();
+            List<SQL_Model.Models.User> users;
+            users = Db.Users.Where(U => U.PrivateLeagueName==privateLeagueName).ToList();
+            return Ok(PrivateLeagueVerification.privateLeagueIsActive(privateLeagueName));
             
         }
 
@@ -75,20 +74,22 @@ namespace REST_API_XFIA.Controllers
         [Route("User/PrivateLeague/NewMember")]
         public ActionResult addUserToPrivateLeague([FromBody] Data_structures.UserToPrivateLeague userToPrivateLeague)
         {
-            
+            int msgCode = PrivateLeagueVerification.isValid(userToPrivateLeague);
+            if (msgCode != 0)
+            {
+                return BadRequest(JsonConvert.SerializeObject(msgCode));
+            }
             SQL_Model.Models.User user = Db.Users.Find(userToPrivateLeague.userEmail);
             String publickey = userToPrivateLeague.privateLeagueKey.Substring(0, 6);
             String privatekey = userToPrivateLeague.privateLeagueKey.Substring(6, 6);
             SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Where(P => P.PrivateLeagueKey == privatekey && P.TournamentKey==publickey).Single();
-            if (privateLeague != null)
-            {
-                user.PrivateLeagueName = privateLeague.Name;
-                Db.Users.Update(user);
-                Db.SaveChanges();
-                List<SQL_Model.Models.User> users;
-                users = Db.Users.Where(U => U.PrivateLeagueName == privateLeague.Name).ToList();
-                return Ok(PrivateLeagueVerification.privateLeagueIsActive(privateLeague.Name));
-            }
+            user.PrivateLeagueName = privateLeague.Name;
+            Db.Users.Update(user);
+            Db.SaveChanges();
+            List<SQL_Model.Models.User> users;
+            users = Db.Users.Where(U => U.PrivateLeagueName == privateLeague.Name).ToList();
+            return Ok(PrivateLeagueVerification.privateLeagueIsActive(privateLeague.Name));
+            
             return Ok(0);
         }
         [HttpGet]
@@ -97,9 +98,10 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.User user = Db.Users.Find(userEmail);
-                if(user.PrivateLeagueName == null)
+                int msgCode = PrivateLeagueVerification.isValid(userEmail);
+                if (msgCode != 0)
                 {
-                    return BadRequest(1);//the user doesn't  belong to any private league
+                    return BadRequest(JsonConvert.SerializeObject(msgCode));
                 }
                 SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Find(user.PrivateLeagueName);
                 SQL_Model.Models.Tournament tournament = TournamentFetcher.GetTournament(privateLeague.TournamentKey);
@@ -119,9 +121,10 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.User user = Db.Users.Find(userEmail);
-                if (user.PrivateLeagueName == null)
+                int msgCode = PrivateLeagueVerification.isValid(userEmail);
+                if (msgCode != 0)
                 {
-                    return BadRequest(1);//the user doesn't  belong to any private league
+                    return BadRequest(JsonConvert.SerializeObject(msgCode));
                 }
                 var res = PrivateLeagueFetcher.GetPrivateleagueData(userEmail);
                 return Ok(JsonConvert.SerializeObject(res));
