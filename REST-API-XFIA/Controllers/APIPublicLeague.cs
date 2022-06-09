@@ -4,12 +4,14 @@ using Newtonsoft.Json;
 using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.Modules.Fetcher;
 using REST_API_XFIA.Modules.Mappers;
+using REST_API_XFIA.Modules.BuisnessRules;
 
 namespace REST_API_XFIA.Controllers
 {
     
     public class APIPublicLeague : Controller
     {
+        private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         [Route("PublicLeague")]
         [HttpGet]
         public ActionResult listByPage(string tournamentKey, int amountByPage, int page)
@@ -17,6 +19,12 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
+
+                var errCode = PublicLeagueVerification.verifyPublicLeagueValid(tour, amountByPage, page);
+                if (errCode != 0)
+                {
+                    return BadRequest(errCode);
+                }
                 List<Data_structures.PublicLeagueResponse> res = PublicLeagueFetcher.getPublicLeagueList(tour, page, amountByPage);
                 
                 return Ok(JsonConvert.SerializeObject(res));
@@ -32,7 +40,13 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
+                
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
+                var errCode = PublicLeagueVerification.verifyUserPublicLeagueValid(tour, userEmail, Db.Users.ToList());
+                if (errCode != 0)
+                {
+                    return BadRequest(errCode);
+                }
                 List<Data_structures.PublicLeagueResponse> res = PublicLeagueFetcher.getUserPublicLeague(tour, userEmail);
                 return Ok(JsonConvert.SerializeObject(res));
             }
@@ -49,6 +63,11 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
+                if (PublicLeagueVerification.VerifyIfTournamentNotValidAndNumValid(tour, amountByPage))
+                {
+                    return BadRequest(1);
+                }
+
                 int amount = 0;
                 int residue = 0;
                 amount = (tour.UserEmails.Count()*2) / amountByPage;
@@ -71,6 +90,10 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
+                if (PublicLeagueVerification.VerifyIfTournamentNotValid(tour))
+                {
+                    return BadRequest(1);
+                }
                 int amount = 0;
                 amount = tour.UserEmails.Count()*2;
                 return Ok(JsonConvert.SerializeObject(amount));

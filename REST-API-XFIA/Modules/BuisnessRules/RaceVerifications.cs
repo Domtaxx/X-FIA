@@ -5,7 +5,7 @@ using REST_API_XFIA.SQL_Model.Models;
 
 namespace REST_API_XFIA.Modules.BuisnessRules
 {
-    public class RaceVerifications : IAddingRules
+    public class RaceVerifications 
     {
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         public static bool IfRacesAtSameTime(DateTime iniDay, TimeSpan iniHour, DateTime finDay, TimeSpan finHour)
@@ -69,21 +69,6 @@ namespace REST_API_XFIA.Modules.BuisnessRules
                 return 2;// Race is outside tournamnet dates
             }return 0;
             
-        }
-
-        int IAddingRules.IsValid(SQL_Model.Models.Tournament tour)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IAddingRules.IsValid(AllUserInfo user)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IAddingRules.IsValid(Privateleague privateleague)
-        {
-            throw new NotImplementedException();
         }
     }
      
