@@ -2,6 +2,7 @@
 using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.Modules.Mappers;
 using REST_API_XFIA.SQL_Model.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace REST_API_XFIA.Modules.BuisnessRules
 {
@@ -49,9 +50,9 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             }
         }
 
-        public static bool userAlreadyHasPrivateLeague(string userEmail)
+        public static bool userAlreadyHasPrivateLeague(SQL_Model.Models.User user)
         {
-            SQL_Model.Models.User user = Db.Users.Where(U=>U.Email.Equals(userEmail)).Single();
+  
             if (user.PrivateLeagueName == null)
             {
                 return false;
@@ -90,14 +91,13 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             }
         }
 
-        public static int isValidDelete(string userEmail) //for deleting user from private league
+        public static int isValidDelete(SQL_Model.Models.User user) //for deleting user from private league
         {
-            SQL_Model.Models.User user = Db.Users.Find(userEmail);
-            if (!PrivateLeagueVerification.userExistsInDB(userEmail))
+            if (!PrivateLeagueVerification.userExistsInDB(user.Email))
             {
                 return 5; //User is not logged in
             }
-            if (!userAlreadyHasPrivateLeague(userEmail))
+            if (!userAlreadyHasPrivateLeague(user))
             {
                 return 12; //User doesn't belong to any private league
             }
@@ -114,7 +114,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             {
                 return 5; //User is not logged in
             }
-            if (PrivateLeagueVerification.userAlreadyHasPrivateLeague(privateLeague.OwnerEmail))
+            if (PrivateLeagueVerification.userAlreadyHasPrivateLeague(Db.Users.Find(privateLeague.OwnerEmail)))
             {
                 return 3; //User has already a private league
             }
@@ -129,12 +129,12 @@ namespace REST_API_XFIA.Modules.BuisnessRules
 
         public static int isValid(Data_structures.UserToPrivateLeague userToPrivateLeague)//for adding new member
         {
-            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Find(userToPrivateLeague.userEmail);
+            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Include(PRL => PRL.Users).Where(PRL => PRL.PrivateLeagueKey == userToPrivateLeague.privateLeagueKey.Substring(6,6)).Single();
             if (!PrivateLeagueVerification.userExistsInDB(userToPrivateLeague.userEmail))
             {
                 return 5; //User is not logged in
             }
-            if (PrivateLeagueVerification.userAlreadyHasPrivateLeague(userToPrivateLeague.userEmail))
+            if (PrivateLeagueVerification.userAlreadyHasPrivateLeague(Db.Users.Find(userToPrivateLeague.userEmail)))
             {
                 return 3; //User has already a private league
             }
@@ -146,13 +146,13 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             return 0;
         }
 
-        public static int isValid(string userEmail) //for getting private league and its members
+        public static int isValid(SQL_Model.Models.User user) //for getting private league and its members
         {
-            if (!PrivateLeagueVerification.userExistsInDB(userEmail))
+            if (!PrivateLeagueVerification.userExistsInDB(user.Email))
             {
                 return 5; //User is not logged in
             }
-            if (!userAlreadyHasPrivateLeague(userEmail))
+            if (!userAlreadyHasPrivateLeague(user))
             {
                 return 12; //User doesn't belong to any private league
             }

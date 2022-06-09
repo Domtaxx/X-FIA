@@ -53,7 +53,7 @@ namespace REST_API_XFIA.Controllers
         {
             SQL_Model.Models.User user = Db.Users.Find(userEmail);
             SQL_Model.Models.Privateleague privateLeague;
-            int msgCode = PrivateLeagueVerification.isValidDelete(userEmail);
+            int msgCode = PrivateLeagueVerification.isValidDelete(user);
             if (msgCode != 0)
             {
                 return BadRequest(JsonConvert.SerializeObject(msgCode));
@@ -86,11 +86,8 @@ namespace REST_API_XFIA.Controllers
             user.PrivateLeagueName = privateLeague.Name;
             Db.Users.Update(user);
             Db.SaveChanges();
-            List<SQL_Model.Models.User> users;
-            users = Db.Users.Where(U => U.PrivateLeagueName == privateLeague.Name).ToList();
             return Ok(PrivateLeagueVerification.privateLeagueIsActive(privateLeague.Name));
             
-            return Ok(0);
         }
         [HttpGet]
         public ActionResult getAllPrivateLeagueMembers(string userEmail)
@@ -98,7 +95,7 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.User user = Db.Users.Find(userEmail);
-                int msgCode = PrivateLeagueVerification.isValid(userEmail);
+                int msgCode = PrivateLeagueVerification.isValid(user);
                 if (msgCode != 0)
                 {
                     return BadRequest(JsonConvert.SerializeObject(msgCode));
@@ -121,7 +118,7 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 SQL_Model.Models.User user = Db.Users.Find(userEmail);
-                int msgCode = PrivateLeagueVerification.isValid(userEmail);
+                int msgCode = PrivateLeagueVerification.isValid(user);
                 if (msgCode != 0)
                 {
                     return BadRequest(JsonConvert.SerializeObject(msgCode));

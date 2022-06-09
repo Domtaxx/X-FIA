@@ -1,5 +1,5 @@
 export class appSettings{
-    public static apiEndpoint='https://rest-api-xfia.azurewebsites.net/'
+    public static apiEndpoint='https://localhost:7282/'
     public static tournamentRoute='admin/Campeonato';
     public static countryRoute='Pais';
     public static adminRaceRoute='Admin/Carreras';
@@ -8,7 +8,7 @@ export class appSettings{
     public static userRegisterRoute='Usuario/Agregar';
     public static currentBudgetRoute='Admin/Campeonato/Admin/Campeonato/Budget';
     public static publicLeagueRankingRoute="PublicLeague";
-    public static privateLeagueRankingRoute="/User/PrivateLeague";
+    public static privateLeagueRankingRoute="User/PrivateLeague";
     public static publicLeaguePlayerTeamsRoute="User/PublicLeague";
     public static publicLeagueMaxPage="PublicLeague/MaxPages";
     public static publicLeagueUserAmount='PublicLeague/UserAmount';

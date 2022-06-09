@@ -15,8 +15,7 @@ export class userProfileProviderService {
     
 
     getProfileData(callback:(user:userInterface)=>void){
-        //const email=getData(localStorageNames.email)
-        const email='briwag88@hotmail.com';
+        const email=getData(localStorageNames.email)
         this.backend.get_request(appSettings.profileUserGet,{userEmail:email}).subscribe(
             (sucess:userInterface)=>{
                 console.log(sucess)

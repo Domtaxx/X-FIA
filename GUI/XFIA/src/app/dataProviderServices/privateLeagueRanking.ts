@@ -28,6 +28,7 @@ export class privateLeagueRankingService {
             sucessCallback(success)
           },
           (error)=>{
+            console.log(error)
           const code=error.error;
           if(code==5 || code==12){
             this.noInLeagueError(code)
@@ -62,7 +63,7 @@ export class privateLeagueRankingService {
           sucessCallback();
         },
         (code:any)=>{
-          console.log(code.error)
+          console.log(code)
           const message=privateLeagueLeaveError(code.error)
           faillureCallback(message);
         }
