@@ -5,7 +5,7 @@ using REST_API_XFIA.SQL_Model.Models;
 
 namespace REST_API_XFIA.Modules.BuisnessRules
 {
-    public class UserVerifications: IAddingRules
+    public class UserVerifications
     {
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         public static bool VerifyIfUserHasAccount(AllUserInfo userInfo)
@@ -35,7 +35,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             return false;
         }
 
-        int IAddingRules.IsValid(AllUserInfo user)
+        int IsValid(AllUserInfo user)
         {
             if (VerifyIfUserHasAccount(user))
             {
@@ -49,21 +49,6 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             {
                 return 3;
             }return 0;
-        }
-
-        int IAddingRules.IsValid(SQL_Model.Models.Tournament tour)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IAddingRules.IsValid(SQL_Model.Models.Race race)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int IsValid(Privateleague privateleague)
-        {
-            throw new NotImplementedException();
         }
     }
 }

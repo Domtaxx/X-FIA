@@ -5,7 +5,7 @@ using REST_API_XFIA.SQL_Model.Models;
 
 namespace REST_API_XFIA.Modules.BuisnessRules
 {
-    public class TournamentVerifications : IAddingRules
+    public class TournamentVerifications 
     {
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         public static bool IfKeyIsRepeatedInDB(string key, List<SQL_Model.Models.Tournament> tournaments)
@@ -56,28 +56,13 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             return true;
         }
 
-        int IAddingRules.IsValid(SQL_Model.Models.Tournament tour)
+        int IsValid(SQL_Model.Models.Tournament tour)
         {
             if (IfTournamentAtSameTime(tour.InitialDate, tour.InitialHour, tour.FinalDate, tour.FinalHour))
             {
                 return 1;
             }
             return 0;
-        }
-
-        int IAddingRules.IsValid(SQL_Model.Models.Race race)
-        {
-            throw new NotImplementedException();
-        }
-
-        int IAddingRules.IsValid(AllUserInfo user)
-        {
-            throw new NotImplementedException();
-        }
-
-        public int IsValid(Privateleague privateleague)
-        {
-            throw new NotImplementedException();
         }
     }
 }
