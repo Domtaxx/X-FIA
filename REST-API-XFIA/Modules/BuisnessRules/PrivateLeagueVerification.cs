@@ -24,7 +24,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
         public static bool privateLeagueIsInDatabase(string key)
         {
             String privatekey = key.Substring(6, 6);
-            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Find(privatekey);
+            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Where(PL=>PL.PrivateLeagueKey.Equals(privatekey)).Single();
             if (privateLeague == null)
             {
                 return false;
@@ -51,7 +51,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
 
         public static bool userAlreadyHasPrivateLeague(string userEmail)
         {
-            SQL_Model.Models.User user = Db.Users.Find(userEmail);
+            SQL_Model.Models.User user = Db.Users.Where(U=>U.Email.Equals(userEmail)).Single();
             if (user.PrivateLeagueName == null)
             {
                 return false;
