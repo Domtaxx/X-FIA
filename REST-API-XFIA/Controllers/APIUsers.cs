@@ -5,6 +5,7 @@ using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.Modules.BuisnessRules;
 using REST_API_XFIA.Modules.Mappers;
 using REST_API_XFIA.Modules.Service;
+using REST_API_XFIA.Modules.Fetcher;
 
 namespace REST_API_XFIA.Controllers
 {
@@ -30,7 +31,24 @@ namespace REST_API_XFIA.Controllers
                 return BadRequest(4);
             }
         }
+        [Route("Unico")]
+        [HttpGet]
+        public ActionResult GetUsers(string userEmail)
+        {
+            try
+            {
+                var User = Db.Users.Include(U => U.CountryNameNavigation).Where(U => U.Email == userEmail).Single();
+                var res = UserMapper.fillUserResponse(User, SubTeamFetcher.getSubTeamsLatest(userEmail));
 
+                return Ok(JsonConvert.SerializeObject(res, Formatting.Indented,
+                            new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+                         );
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
+        }
         [Route("Agregar")]
         [HttpPost]
         public ActionResult AddUser([FromForm]Data_structures.AllUserInfo allInfo) {

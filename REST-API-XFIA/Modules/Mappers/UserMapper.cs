@@ -103,5 +103,70 @@ namespace REST_API_XFIA.Modules.Mappers
 
             return PilotConex;
         }
+        public static Data_structures.UserResponse fillUserResponse(SQL_Model.Models.User user, List<SQL_Model.Models.Subteam> subteams)
+        {
+            Data_structures.UserResponse response = new Data_structures.UserResponse();
+            response.Username = user.Username;
+            response.TeamsName = user.TeamsName;
+            response.CountryName = user.CountryName;
+            response.CountryNameNavigation = user.CountryNameNavigation;
+            response.CountryNameNavigation.Users = null;
+            response.CountryNameNavigation.Pilots = null;
+            response.PrivateLeagueName = user.PrivateLeagueName;
+            response.TeamsLogo = user.TeamsLogo;
+            response.Subteams = new List<Data_structures.SubTeam>();
+
+            foreach (SQL_Model.Models.Subteam subteam in subteams)
+            {
+                Data_structures.SubTeam temp = new Data_structures.SubTeam();
+                temp.Pilots = new List<SQL_Model.Models.Pilot>();
+                temp.Name = subteam.Name;
+                temp.RealTeamsNameNavigation = subteam.RealTeamsNameNavigation;
+                temp.RealTeamsNameNavigation.Pilots = null;
+                temp.RealTeamsNameNavigation.Subteams = null;
+                temp.CreationHour = subteam.CreationHour;
+                temp.CreationDate = subteam.CreationDate;
+
+                var pilot1 = subteam.HasPilots.ToList()[0].Pilot;
+                pilot1.HasPilots = null;
+                pilot1.RealTeamsNameNavigation.Pilots = null;
+                pilot1.RealTeamsNameNavigation.Subteams = null;
+                pilot1.CountryNameNavigation.Pilots = null;
+
+                var pilot2 = subteam.HasPilots.ToList()[1].Pilot;
+                pilot2.HasPilots = null;
+                pilot2.RealTeamsNameNavigation.Pilots = null;
+                pilot2.RealTeamsNameNavigation.Subteams = null;
+                pilot2.CountryNameNavigation.Pilots = null;
+
+                var pilot3 = subteam.HasPilots.ToList()[2].Pilot;
+                pilot3.HasPilots = null;
+                pilot3.RealTeamsNameNavigation.Pilots = null;
+                pilot3.RealTeamsNameNavigation.Subteams = null;
+                pilot3.CountryNameNavigation.Pilots = null;
+
+                var pilot4 = subteam.HasPilots.ToList()[3].Pilot;
+                pilot4.HasPilots = null;
+                pilot4.RealTeamsNameNavigation.Pilots = null;
+                pilot4.RealTeamsNameNavigation.Subteams = null;
+                pilot4.CountryNameNavigation.Pilots = null;
+
+                var pilot5 = subteam.HasPilots.ToList()[4].Pilot;
+                pilot5.HasPilots = null;
+                pilot5.RealTeamsNameNavigation.Pilots = null;
+                pilot5.RealTeamsNameNavigation.Subteams = null;
+                pilot5.CountryNameNavigation.Pilots = null;
+
+                temp.Pilots.Add(pilot1);
+                temp.Pilots.Add(pilot2);
+                temp.Pilots.Add(pilot3);
+                temp.Pilots.Add(pilot4);
+                temp.Pilots.Add(pilot5);
+                response.Subteams.Add(temp);
+            }
+
+            return response;
+        }
     }
+    
 }
