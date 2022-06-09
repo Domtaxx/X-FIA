@@ -1,7 +1,7 @@
 <div class="mainDiv">
     <div class="leagueHeader">
         
-        <label id="leagueTitle">Liga Privada</label>
+        <label id="leagueTitle">{{leagueInfo.name}}</label>
         <label id="leagueKey">{{'#'+leagueInfo.key}}</label>
         <div class="state">
             <label id="stateText">Estado</label>
@@ -15,23 +15,23 @@
         <table class="table" mat-table [dataSource]="tableDataSource">
             <ng-container matColumnDef="Posicion">
                 <th mat-header-cell *matHeaderCellDef> Posicion. </th>
-                <td mat-cell *matCellDef="let element"> {{element.posicion}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.Position}} </td>
             </ng-container>
             <ng-container matColumnDef="Usuario">
                 <th mat-header-cell *matHeaderCellDef> Usuario </th>
-                <td mat-cell *matCellDef="let element"> {{element.usuario}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.UserName}} </td>
             </ng-container>
             <ng-container matColumnDef="Escuderia">
                 <th mat-header-cell *matHeaderCellDef> Escuderia </th>
-                <td mat-cell *matCellDef="let element"> {{element.escuderia}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.TeamName}} </td>
             </ng-container>
             <ng-container matColumnDef="Equipo">
                 <th mat-header-cell *matHeaderCellDef> Equipo </th>
-                <td mat-cell *matCellDef="let element"> {{element.equipo}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.SubteamName}} </td>
             </ng-container>
             <ng-container matColumnDef="Puntaje">
                 <th mat-header-cell *matHeaderCellDef> Puntaje </th>
-                <td mat-cell *matCellDef="let element"> {{element.puntaje}} </td>
+                <td mat-cell *matCellDef="let element"> {{element.Points}} </td>
             </ng-container>
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
             <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
@@ -43,7 +43,7 @@
     <div class="bottomBar">
         <div class="holder"></div>
         <button class="enterButton" mat-raised-button color="warn" (click)="leavePrivateLeague()">Abandonar Liga</button>
-        <label>{{'Miembros: '+tableDataSource.length+'/'+leagueInfo.maxUser}}</label>
+        <label>{{'Miembros: '+tableDataSource.length/2+'/'+leagueInfo.maxUser}}</label>
     </div>
     
     

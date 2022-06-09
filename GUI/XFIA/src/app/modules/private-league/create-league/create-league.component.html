@@ -2,13 +2,13 @@
     <h1>
         Crear Liga Privada
     </h1>
-    <form class="form">
+    <form class="form" [formGroup]="privateLeagueForm">
         <div class="row">
             <div class="thirty">
                 <label>Nombre</label>
             </div>
             <div class="seventy">
-                <input type="text">
+                <input type="text" formControlName="name">
     
             </div>
         </div>
@@ -17,7 +17,7 @@
                 <label>Numero de Participantes</label>
             </div>
             <div class="seventy">
-                <select size="1" >
+                <select size="1" formControlName="participants">
                     <option *ngFor="let member of memberNumber" value={{member}}>
                         {{member}}
                     </option>
@@ -30,7 +30,7 @@
     <p>
         La liga privada se creará en estado inactivo <br> hasta que haya un mínimo de 5 miembros
     </p>
-    <button  mat-raised-button color="warn" class="createButton">Crear</button>
+    <button  mat-raised-button color="warn" class="createButton" (click)="createLeague()">Crear</button>
    
 
 </div>

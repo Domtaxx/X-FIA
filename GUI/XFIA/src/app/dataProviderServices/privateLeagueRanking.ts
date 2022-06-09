@@ -7,52 +7,82 @@ import { getData } from '../functions/browserDataInfo';
 import { privateLeagueInfo } from '../interface/interfaces';
 import { alertMessage } from '../interface/interfaces';
 import { privateLeagueLeaveError } from '../errorCodeHandler/errorHandler';
+import { SweetAlertService } from '../services/sweet-alert.service';
+import { RouterServiceService } from '../services/router-service.service';
+import { alertMessages } from '../const/messages';
+import { privateLeagueRankingError } from '../errorCodeHandler/errorHandler';
 @Injectable({
   providedIn: 'root'
 })
 export class privateLeagueRankingService {
-    constructor(private backend:NetworkService){}
+    failed=false;
+    constructor(private backend:NetworkService,private swal:SweetAlertService,private router:RouterServiceService){}
 
 
     public getMembers(sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:(member:leagueMemberInterface[])=>void){
-        this.backend.get_request(appSettings.privateLeagueRankingRoute,{}).subscribe(
-            (success:leagueMemberInterface[])=>{
-              sucessCallback(success)
-            },
-            (error)=>{
-              faillureCallback([])
+      const email=getData(localStorageNames.email);
+      //const email='briwag88@hotmail.com'
+      this.backend.get_request(appSettings.privateLeagueRankingRoute,{userEmail:email}).subscribe(
+          (success:leagueMemberInterface[])=>{
+            console.log(success)
+            sucessCallback(success)
+          },
+          (error)=>{
+          const code=error.error;
+          if(code==5 || code==12){
+            this.noInLeagueError(code)
+          }
+          else{ 
+            this.getMembers(sucessCallback,faillureCallback);
+          }
             
-            }
-          )
+          
+          }
+        )
      
     }
     public getPrivateLeagueInfo(sucessCallback:(key:privateLeagueInfo)=>void){
       const email=getData(localStorageNames.email);
-      this.backend.get_request(appSettings.privateLeagueKeyRoute,{email:email}).subscribe(
+      //const email='briwag88@hotmail.com'
+      this.backend.get_request(appSettings.privateLeagueKeyRoute,{userEmail:email}).subscribe(
         (sucess:privateLeagueInfo)=>{
+          console.log(sucess)
           sucessCallback(sucess);
         },
-        ()=>{
-          sucessCallback({
-            key:'',
-            maxUser:0,
-            state:false,
-          });
+        (error)=>{
+          if(this.failed)return;
+          this.getPrivateLeagueInfo(sucessCallback)
         }
       )
     }
     public leaveLeague(sucessCallback:()=>void,faillureCallback:(message:alertMessage)=>void){
       const email=getData(localStorageNames.email);
-      this.backend.get_request(appSettings.privateLeagueLeaveRoute,{email:email}).subscribe(
+      this.backend.delete_request(appSettings.privateLeagueLeaveRoute,{userEmail:email}).subscribe(
         ()=>{
           sucessCallback();
         },
         (code:any)=>{
-          const message=privateLeagueLeaveError(code)
+          console.log(code.error)
+          const message=privateLeagueLeaveError(code.error)
           faillureCallback(message);
         }
       )
     }
+
+    noInLeagueError(code:any){
+      this.failed=true;
+      const message=privateLeagueRankingError(code);
+      this.swal.acceptSwal(message.header,message.body,alertMessages.confirmButtonText)
+      .then(
+        (confirm)=>{
+          if(confirm.isConfirmed){
+            this.router.redirect('publicLeague/ranking')
+          }
+        }
+      );
+
+    }
+    
     
   
 

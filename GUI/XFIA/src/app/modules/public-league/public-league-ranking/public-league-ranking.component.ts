@@ -115,7 +115,7 @@ export class PublicLeagueRankingComponent implements OnInit {
   }
 
   rightPage(){
-    if(this.pageNumber+1<this.maxPage){
+    if(this.pageNumber+1<=this.maxPage){
       this.pageNumber+=1;
       this.getData();
     }

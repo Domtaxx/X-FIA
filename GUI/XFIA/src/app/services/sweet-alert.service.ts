@@ -29,20 +29,39 @@ export class SweetAlertService {
     text: string,
     cancelText: string,
     confirmText: string,
-    dennyText: string
   ) {
+    
     return Swal.fire({
       title: title,
       text: text,
-      showDenyButton: dennyText != '',
-      showCancelButton: cancelText != '',
-      showConfirmButton: confirmText != '',
-
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
       confirmButtonText: confirmText,
-      denyButtonText: dennyText,
-      cancelButtonText: cancelText,
-    });
+      cancelButtonText: cancelText
+ 
+    })
   }
+
+  acceptSwal(
+    title: string,
+    text: string,
+    confirmText: string,
+  ) {
+    
+    return Swal.fire({
+      title: title,
+      text: text,
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: confirmText,
+
+ 
+    })
+  }
+  
 
   htmloptionSwal(
     title: string,

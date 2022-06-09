@@ -4,9 +4,16 @@
       <li><a routerLink="/tournaments/race/create" routerLinkActive="active">Crear Carrera</a></li>
       <li><a routerLink="/auth/register" routerLinkActive="active">Auth</a></li>
       <li><a routerLink="/publicLeague/ranking" routerLinkActive="active">Liga Publica</a></li>
-      <li><a routerLink="/privateLeague/ranking" routerLinkActive="active">Liga Private</a></li>
+      <li><a routerLink="/privateLeague/ranking" routerLinkActive="active">Liga Privada</a></li>
       <li><a routerLink="/privateLeague/create" routerLinkActive="active">Crear Liga Privada</a></li>
       <li><a routerLink="/profile/view" routerLinkActive="active">Perfil</a></li>
 
     </ul>
   </nav>
+
+  <form [formGroup]="LoginForm" >
+    <label>Email</label>
+    <input type="text" formControlName="userEmail">
+  
+    <button (click)="log()">Login</button>
+  </form>

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { leagueMemberInterface } from '../interface/interfaces';
 import { NetworkService } from '../services/network.service';
 import { appSettings } from '../const/appSettings';
-
-
+import { localStorageNames } from '../const/localStorageNames';
+import { getData } from '../functions/browserDataInfo';
 @Injectable({
   providedIn: 'root'
 })
@@ -33,8 +33,8 @@ export class publicLeagueRankingService {
     }
     public getPlayersTeam(sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:()=>void){
         
-      //const user=getData(localStorageNames.email);
-      const user='briwag88@hotmail.com'
+      const user=getData(localStorageNames.email);
+      //const user='briwag88@hotmail.com'
         this.backend.get_request(appSettings.publicLeaguePlayerTeamsRoute,{userEmail:user}).subscribe(
             (success)=>{
               console.log('player team')

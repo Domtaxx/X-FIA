@@ -36,12 +36,75 @@ export function userRegisterMessage(errorCode:any):alertMessage|undefined{
 }
 
 export function privateLeagueLeaveError(errorCode:any){
-    var header:string='';
+    var header:string=alertMessages.rejected;
     var body:string='';
+
+    switch(errorCode){
+        case 5:
+            body=alertMessages.privateLeagueUserNotRegisterBody;
+            break
+        case 12:
+            body=alertMessages.privateLeagueUserDoesntBelongToAnyPrivateLeague;
+            break
+        case 10:
+            body=alertMessages.privateLeagueOwnerCantLeaveThePrivateLeague;
+            break
+        
+        
+    }
     const message:alertMessage={
         header:header,
         body:body
     }
     return message;
     
+}
+
+
+export function privateLeagueCreateError(errorCode:any){
+    var header:string=alertMessages.rejected;
+    var body:string='';
+    switch(errorCode){
+        case 5:
+            body='El Usuario presentado no esta en la base de datos';
+            break;
+        case 3:
+            body='El usuario ya se encuentra en una liga privada, para crear otra debe salir primero de la existente';
+            break;
+        case 1:
+            body='El nombre de la liga privada seleccionado ya ha sido utilizado';
+            break;
+
+            
+
+    }
+    const message:alertMessage={
+        header:header,
+        body:body
+    }
+    return message;
+}
+
+
+
+export function privateLeagueRankingError(errorCode:any){
+    var header:string=alertMessages.rejected;
+    var body:string='';
+    switch(errorCode){
+        case 5:
+            body=alertMessages.privateLeagueUserNotLogRanking;
+            break;
+        case 12:
+            body=alertMessages.privateLeagueUserNotOnPrivateLeague;
+            break;
+     
+
+            
+
+    }
+    const message:alertMessage={
+        header:header,
+        body:body
+    }
+    return message;
 }

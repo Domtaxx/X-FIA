@@ -5,15 +5,42 @@ import { appSettings } from '../const/appSettings';
 import { alertMessages } from '../const/messages';
 import { checkRegex } from '../functions/regex';
 import { localStorageNames } from '../const/localStorageNames';
-import { privateLeagueJoinMember } from '../interface/interfaces';
+import { alertMessage, privateLeagueCreate, privateLeagueInfo, privateLeagueJoinMember } from '../interface/interfaces';
 import { getData } from '../functions/browserDataInfo';
+import { privateLeagueCreateError } from '../errorCodeHandler/errorHandler';
+import { RouterServiceService } from '../services/router-service.service';
 @Injectable({
   providedIn: 'root'
 })
 export class privateLeagueCreateService {
     inputRegex=/^(([a-zA-Z]*[0-9]*)*[a-zA-Z]+([a-zA-Z]*[0-9]*)*[0-9]+([a-zA-Z]*[0-9]*)*)*(([a-zA-Z]*[0-9]*)*[0-9]+([a-zA-Z]*[0-9]*)*[a-zA-Z]+([a-zA-Z]*[0-9]*)*)*$/;
-    constructor(private backend:NetworkService,private swal:SweetAlertService){
+    constructor(private backend:NetworkService,private swal:SweetAlertService,private router:RouterServiceService){
         
+    }
+
+    createLeague(name:string,maxUser:number,sucessCallback:(info:privateLeagueInfo)=>void,faillureCallback:(errorMessage:alertMessage)=>void){
+        const params:privateLeagueCreate={
+            name:name,
+            maxUser:maxUser,
+            ownerEmail:getData(localStorageNames.email)
+
+        }
+        console.log(params)
+        this.backend.post_request(appSettings.privateCreatePrivateLeagueRoute,params).subscribe(
+            (sucess:any)=>{
+                console.log('Exito crear');
+                console.log(sucess);
+                sucessCallback(sucess)
+            },
+            (error:any)=>{
+                console.log(error)
+                const message:alertMessage=privateLeagueCreateError(error.error)
+                faillureCallback(
+                    message
+                )
+
+            }
+        )
     }
 
     joinLeague(){
@@ -26,23 +53,27 @@ export class privateLeagueCreateService {
     }
     private handleRequest(input:string){
         console.log(input);
-        let member:privateLeagueJoinMember={
-            email:getData(localStorageNames.email),
-            code:input
+        let member={
+            userEmail:getData(localStorageNames.email),
+            privateLeagueKey: input
         }
+        
         if(checkRegex(this.inputRegex,input) &&input.length==12){
         
-                /*
+                
             this.backend.post_request(appSettings.privateLeagueJoinRoute,member).subscribe(
 
                 (success)=>{
-                    this.swal.showSuccess(alertMessages.successHeader,alertMessages.privateLeagueCreatedBody);
+                    this.swal.showSuccess(alertMessages.successHeader,alertMessages.privateLeagueCreatedBody)
+                    this.router.redirect('privateLeague/ranking')
                     
                 },
-                (error)=>{}
+                (error)=>{
+                    console.log(error)
+                    this.swal.showError('Ha fallado','No se ha podido agregar')
+                }
             )
-            */
-            this.swal.showSuccess(alertMessages.successHeader,alertMessages.privateLeagueCreatedBody);
+            
         
            
            
