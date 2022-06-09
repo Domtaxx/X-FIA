@@ -97,6 +97,11 @@ export interface privateLeagueInfo{
     state:boolean;
 }
 
+export interface privateLeagueCreate{
+    name:string;
+    ownerEmail:string|null;
+    maxUser:number;
+}
 export interface userInterface{
     Username:string;
     TeamsName:string;

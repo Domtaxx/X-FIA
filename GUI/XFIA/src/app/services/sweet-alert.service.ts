@@ -44,6 +44,25 @@ export class SweetAlertService {
     })
   }
 
+  acceptSwal(
+    title: string,
+    text: string,
+    confirmText: string,
+  ) {
+    
+    return Swal.fire({
+      title: title,
+      text: text,
+      icon: 'warning',
+      showCancelButton: false,
+      confirmButtonColor: '#3085d6',
+      confirmButtonText: confirmText,
+
+ 
+    })
+  }
+  
+
   htmloptionSwal(
     title: string,
     htmltext: string,

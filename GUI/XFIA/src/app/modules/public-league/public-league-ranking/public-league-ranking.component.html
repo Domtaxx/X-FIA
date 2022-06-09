@@ -1,8 +1,8 @@
 <div class="mainDiv">
     <h1 id="leagueTitle">Liga Pública</h1>
     <div class="playerTeamInfo">
-        <label>{{'Puesto Equipo '+playersTeam[0].SubteamName+": " +playersTeam[0].Position}}</label>
-        <label>{{'Puesto Equipo '+playersTeam[1].SubteamName+": " +playersTeam[1].Position}}</label>
+        <label>{{'Puesto '+playersTeam[0].SubteamName+": " +playersTeam[0].Position}}</label>
+        <label>{{'Puesto '+playersTeam[1].SubteamName+": " +playersTeam[1].Position}}</label>
     </div>
     <div class="tableDiv mat-elevation-z8">
         <table class="table" mat-table [dataSource]="tableDataSource">
@@ -51,7 +51,7 @@
 
         </div>
         <div class="playerNumber">
-            <label>{{'Cantidad Participantes: '+userAmount}}</label>
+            <label>{{'Cantidad Equipos: '+userAmount}}</label>
         </div>
     </div>
     

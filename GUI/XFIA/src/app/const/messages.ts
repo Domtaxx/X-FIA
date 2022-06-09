@@ -39,11 +39,22 @@ export class alertMessages{
     public static privateAcceptCreate="Aceptar";
 
     public static privateLeagueCreatedBody="Su liga privada ha sido creada con exito, El código de la liga es"
+    public static privateLeagueJoinBody="Ha ingresado correctamente a la liga privada"
     public static privateLeagueFormatErrorHeader="La llave no cumple con las condiciones"
     public static privateLeagueFormatErrorBody="Recuerde que debe indicar una llave alfanúmerica con 12 digitos de largo"
     public static privateLeagueLeaveSucessBody='Ha abandonado la liga con éxito'
+    public static privateLeagueUserNotRegisterBody='El usuario indicado no se encuentra registrado';
+    public static privateLeagueUserDoesntBelongToAnyPrivateLeague="El usuario no pertenece a ninguna liga privada";
+    public static privateLeagueOwnerCantLeaveThePrivateLeague="El usuario creador no puede dejar la liga privada";
+    public static privateLeagueLeaveQuestion='Quieres Salir?';
+    public static privateLeagueLeaveWarning='Recuerda que al salir perderar el puntaje en la liga';
+    public static privateLeagueUserNotLogRanking="El usuario no se encuentra registrado";
+    public static privateLeagueUserNotOnPrivateLeague='El usuario no es encuentra en una liga privada';
     //File Error
     public static rejectedImageFileHeader="Formato Incompatible"
     public static rejectedImageFileBody="Solo estan permitidos los archivos .jpg y .png"
 
+    //button text
+    public static confirmButtonText='Aceptar';
+    public static cancelButtonText="Cancelar";
 }

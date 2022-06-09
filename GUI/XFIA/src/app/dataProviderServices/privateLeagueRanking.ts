@@ -7,11 +7,16 @@ import { getData } from '../functions/browserDataInfo';
 import { privateLeagueInfo } from '../interface/interfaces';
 import { alertMessage } from '../interface/interfaces';
 import { privateLeagueLeaveError } from '../errorCodeHandler/errorHandler';
+import { SweetAlertService } from '../services/sweet-alert.service';
+import { RouterServiceService } from '../services/router-service.service';
+import { alertMessages } from '../const/messages';
+import { privateLeagueRankingError } from '../errorCodeHandler/errorHandler';
 @Injectable({
   providedIn: 'root'
 })
 export class privateLeagueRankingService {
-    constructor(private backend:NetworkService){}
+    failed=false;
+    constructor(private backend:NetworkService,private swal:SweetAlertService,private router:RouterServiceService){}
 
 
     public getMembers(sucessCallback:(member:leagueMemberInterface[])=>void,faillureCallback:(member:leagueMemberInterface[])=>void){
@@ -23,7 +28,14 @@ export class privateLeagueRankingService {
             sucessCallback(success)
           },
           (error)=>{
+          const code=error.error;
+          if(code==5 || code==12){
+            this.noInLeagueError(code)
+          }
+          else{ 
             this.getMembers(sucessCallback,faillureCallback);
+          }
+            
           
           }
         )
@@ -37,7 +49,8 @@ export class privateLeagueRankingService {
           console.log(sucess)
           sucessCallback(sucess);
         },
-        ()=>{
+        (error)=>{
+          if(this.failed)return;
           this.getPrivateLeagueInfo(sucessCallback)
         }
       )
@@ -49,11 +62,27 @@ export class privateLeagueRankingService {
           sucessCallback();
         },
         (code:any)=>{
-          const message=privateLeagueLeaveError(code)
+          console.log(code.error)
+          const message=privateLeagueLeaveError(code.error)
           faillureCallback(message);
         }
       )
     }
+
+    noInLeagueError(code:any){
+      this.failed=true;
+      const message=privateLeagueRankingError(code);
+      this.swal.acceptSwal(message.header,message.body,alertMessages.confirmButtonText)
+      .then(
+        (confirm)=>{
+          if(confirm.isConfirmed){
+            this.router.redirect('publicLeague/ranking')
+          }
+        }
+      );
+
+    }
+    
     
   
 

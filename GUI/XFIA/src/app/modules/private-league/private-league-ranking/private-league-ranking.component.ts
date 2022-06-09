@@ -70,7 +70,7 @@ export class PrivateLeagueRankingComponent implements OnInit {
 
   leavePrivateLeague(){
 
-    this.swal.optionSwal('Quieres Salir?','Recuerda que al salir perderas el puntaje','Cancelar','Aceptar').then(
+    this.swal.optionSwal(alertMessages.privateLeagueLeaveQuestion,alertMessages.privateLeagueLeaveWarning,alertMessages.cancelButtonText,alertMessages.confirmButtonText).then(
       (result)=>{
         if(!result.isConfirmed)return;
         this.dataManagement.leaveLeague(

@@ -7,7 +7,7 @@ const routes: Routes = [
 {
   path:'register',component:FullRegisterComponent,
 },
-{path:'',redirectTo:'/register'}
+{path:' ',redirectTo:'/register'}
 
 ];
 

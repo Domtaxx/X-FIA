@@ -15,8 +15,7 @@ export class TournamentsComponent implements OnInit {
 
 
   LoginForm:FormGroup=new UntypedFormGroup({
-    userEmail:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
-    password:new UntypedFormControl('',[Validators.required,Validators.email,Validators.maxLength(256)]),
+    userEmail:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)])
 
   })
   

@@ -22,7 +22,7 @@ export class PublicLeagueRankingComponent implements OnInit {
   playersTeam:leagueMemberInterface[]=[];
   constructor(private dataManagement:publicLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService) {
     this.pageNumber=1;
-    this.elementPerPage=1;
+    this.elementPerPage=10;
     this.maxPage=0;
     this.userAmount=0;
     const object={
