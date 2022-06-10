@@ -46,7 +46,7 @@ namespace REST_API_XFIA.Modules.Fetcher
             data.ownerEmail = privateLeague.OwnerEmail;
             data.maxUser = privateLeague.MaxUser;
             data.state = false;
-            if (data.maxUser > 5)
+            if (privateLeague.Users.Count() > 5)
             {
                 data.state = true;
             }
