@@ -18,7 +18,7 @@ export class CreateLeagueComponent implements OnInit {
 
   privateLeagueForm=new UntypedFormGroup({
     name:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
-    participants:new UntypedFormControl('',[Validators.required,Validators.email,Validators.maxLength(256)])
+    participants:new UntypedFormControl('',[Validators.required])
   });
   memberNumber!:number[];
   constructor(private dataProvider:privateLeagueCreateService,private swal:SweetAlertService) { 
@@ -37,6 +37,10 @@ export class CreateLeagueComponent implements OnInit {
   }
 
   createLeague(){
+    if(!this.privateLeagueForm.valid){
+      this.swal.showError(alertMessages.rejected,alertMessages.invalidFieldsBody)
+      return;
+    }
     const name=this.privateLeagueForm.controls['name'].value;
     const participants=this.privateLeagueForm.controls['participants'].value;
     this.dataProvider.createLeague(name,participants,

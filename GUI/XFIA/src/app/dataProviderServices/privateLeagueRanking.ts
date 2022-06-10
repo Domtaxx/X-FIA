@@ -61,6 +61,7 @@ export class privateLeagueRankingService {
       this.backend.delete_request(appSettings.privateLeagueLeaveRoute,{userEmail:email}).subscribe(
         ()=>{
           sucessCallback();
+          this.router.redirect('/publicLeague/ranking')
         },
         (code:any)=>{
           console.log(code)

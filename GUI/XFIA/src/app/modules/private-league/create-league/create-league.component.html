@@ -9,6 +9,12 @@
             </div>
             <div class="seventy">
                 <input type="text" formControlName="name">
+                <div class="warning" *ngIf="privateLeagueForm.get('name')?.hasError('required')">
+                    El nombre de la liga no puede estar vacio
+                </div>
+                <div class="warning" *ngIf="privateLeagueForm.get('name')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
     
             </div>
         </div>
@@ -22,6 +28,10 @@
                         {{member}}
                     </option>
                 </select>
+                <div class="warning" *ngIf="privateLeagueForm.get('participants')?.hasError('required')">
+                    Debe seleccionar el número de participantes
+                </div>
+              
     
             </div>
         </div>

@@ -97,3 +97,10 @@ p{
 option{
     margin-top: 1vh;
 }
+
+.warning{
+    display: block;
+    font-size: 1.5vmin;
+    padding: 2%;
+    color:#991C1C;
+}
