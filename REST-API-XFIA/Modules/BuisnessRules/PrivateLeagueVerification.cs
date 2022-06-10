@@ -38,8 +38,8 @@ namespace REST_API_XFIA.Modules.BuisnessRules
 
         public static bool privateLeagueIsInDatabaseByName(string Name, string tourKey)
         {
-            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Where(PL => PL.Name.Equals(Name) && PL.TournamentKey.Equals(tourKey)).Single();
-            if (privateLeague == null)
+            var privateLeague = Db.Privateleagues.Where(PL => PL.Name.Equals(Name) && PL.TournamentKey.Equals(tourKey)).ToList();
+            if (privateLeague.Count() == 0)
             {
                 return false;
             }
