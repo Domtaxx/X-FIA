@@ -50,6 +50,8 @@ export class alertMessages{
     public static privateLeagueLeaveWarning='Recuerda que al salir perderar el puntaje en la liga';
     public static privateLeagueUserNotLogRanking="El usuario no se encuentra registrado";
     public static privateLeagueUserNotOnPrivateLeague='El usuario no es encuentra en una liga privada';
+    public static privateLeagueUserOnALeague='El usuario ya se encuentra en una liga'
+    public static privateLeagueDoesntExist='La liga privada indicada no existe';
     //File Error
     public static rejectedImageFileHeader="Formato Incompatible"
     public static rejectedImageFileBody="Solo estan permitidos los archivos .jpg y .png"

@@ -7,7 +7,7 @@ import { checkRegex } from '../functions/regex';
 import { localStorageNames } from '../const/localStorageNames';
 import { alertMessage, privateLeagueCreate, privateLeagueInfo, privateLeagueJoinMember } from '../interface/interfaces';
 import { getData } from '../functions/browserDataInfo';
-import { privateLeagueCreateError } from '../errorCodeHandler/errorHandler';
+import { privateLeagueCreateError, privateLeagueJoinError } from '../errorCodeHandler/errorHandler';
 import { RouterServiceService } from '../services/router-service.service';
 @Injectable({
   providedIn: 'root'
@@ -69,8 +69,9 @@ export class privateLeagueCreateService {
                     
                 },
                 (error)=>{
-                    console.log(error)
-                    this.swal.showError('Ha fallado','No se ha podido agregar')
+                    const message=privateLeagueJoinError(error.error);
+
+                    this.swal.showError(message.header,message.body)
                 }
             )
             
