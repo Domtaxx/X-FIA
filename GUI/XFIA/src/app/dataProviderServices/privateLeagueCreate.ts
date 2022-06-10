@@ -18,7 +18,7 @@ export class privateLeagueCreateService {
         
     }
 
-    createLeague(name:string,maxUser:number,sucessCallback:(info:privateLeagueInfo)=>void,faillureCallback:(errorMessage:alertMessage)=>void){
+    createLeague(name:string,maxUser:number,sucessCallback:(info:any)=>void,faillureCallback:(errorMessage:alertMessage)=>void){
         const params:privateLeagueCreate={
             name:name,
             maxUser:maxUser,

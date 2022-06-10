@@ -44,7 +44,7 @@ export class CreateLeagueComponent implements OnInit {
     const name=this.privateLeagueForm.controls['name'].value;
     const participants=this.privateLeagueForm.controls['participants'].value;
     this.dataProvider.createLeague(name,participants,
-      (info:privateLeagueInfo)=>{
+      (info:any)=>{
         this.callSucess(info)
       },
       (message:alertMessage)=>{
@@ -53,8 +53,8 @@ export class CreateLeagueComponent implements OnInit {
         
       )
   }
-  callSucess(info:privateLeagueInfo){
-    this.swal.showSuccess(alertMessages.successHeader,alertMessages.privateLeagueCreatedBody+info.key);
+  callSucess(key:string){
+    this.swal.showSuccess(alertMessages.successHeader,alertMessages.privateLeagueCreatedBody+' '+key);
   }
   callMistake(message:alertMessage){
     this.swal.showError(message.header,message.body);
