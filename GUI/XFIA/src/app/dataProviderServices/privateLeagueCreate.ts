@@ -64,7 +64,7 @@ export class privateLeagueCreateService {
             this.backend.post_request(appSettings.privateLeagueJoinRoute,member).subscribe(
 
                 (success)=>{
-                    this.swal.showSuccess(alertMessages.successHeader,alertMessages.privateLeagueCreatedBody)
+                    this.swal.showSuccess(alertMessages.successHeader,alertMessages.privateLeagueJoinBody)
                     this.router.redirect('privateLeague/ranking')
                     
                 },

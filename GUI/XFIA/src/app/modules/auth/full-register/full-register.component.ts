@@ -73,6 +73,8 @@ export class FullRegisterComponent implements OnInit {
   */
   makeRequest(){
     const requestBody:userRegisterInterface=userRegisterRequest(this.userForm,this.team1,this.team2)//get the data to send the request
+    console.log('body');
+    console.log(requestBody);
     this.backend.post_request_multipart(appSettings.userRegisterRoute,requestBody).subscribe(
       (sucess)=>{this.handleSucess(sucess)},//sucess case
       (error)=>{this.handleMistake(error)} //error case
@@ -97,6 +99,9 @@ export class FullRegisterComponent implements OnInit {
   the specific error code
   */
   handleMistake(result:any){
+    console.log('Error Registro Usuarip')
+    console.log(result);
+
     var message=userRegisterMessage(result.error);
     if(message?.header!=undefined && message.body!=undefined){
       this.swal.showError(message?.header,message?.body)
