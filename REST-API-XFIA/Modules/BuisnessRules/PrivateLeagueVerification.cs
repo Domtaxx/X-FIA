@@ -36,6 +36,20 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             }
         }
 
+        public static bool privateLeagueIsInDatabaseByName(string Name, string tourKey)
+        {
+            SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Where(PL => PL.Name.Equals(Name) && PL.TournamentKey.Equals(tourKey)).Single();
+            if (privateLeague == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+
         public static bool privateLeagueIsActive(string privateLeagueName)
         {
             List<SQL_Model.Models.User> users;
@@ -118,7 +132,7 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             {
                 return 3; //User has already a private league
             }
-            if (PrivateLeagueVerification.privateLeagueIsInDatabase(privateLeague.Name))
+            if (PrivateLeagueVerification.privateLeagueIsInDatabaseByName(privateLeague.Name, privateLeague.TournamentKey))
             {
                 return 1; //Private league name is already in use
             }
