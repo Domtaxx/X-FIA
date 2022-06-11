@@ -1,7 +1,7 @@
 import { checkRegex } from "./regex";
 
 describe("regex suite", function() {
-    it("find repeted element", function() {
+    it("regex prove", function() {
       var regex:RegExp=/^(([a-zA-Z]*[0-9]*)*[a-zA-Z]+([a-zA-Z]*[0-9]*)*[0-9]+([a-zA-Z]*[0-9]*)*)*(([a-zA-Z]*[0-9]*)*[0-9]+([a-zA-Z]*[0-9]*)*[a-zA-Z]+([a-zA-Z]*[0-9]*)*)*$/;
       var expresion:string='luis1234';
       var result:boolean=checkRegex(regex,expresion);
