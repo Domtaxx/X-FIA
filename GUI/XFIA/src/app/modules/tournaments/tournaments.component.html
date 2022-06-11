@@ -12,8 +12,11 @@
   </nav>
 
   <form [formGroup]="LoginForm" >
-    <label>Email</label>
+    <label>Correo</label>
     <input type="text" formControlName="userEmail">
-  
+    <br>
+    <label>Contraseña</label>
+    <input type="password">
+    <br>
     <button (click)="log()">Login</button>
   </form>

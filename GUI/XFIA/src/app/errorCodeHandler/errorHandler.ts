@@ -108,3 +108,28 @@ export function privateLeagueRankingError(errorCode:any){
     }
     return message;
 }
+
+export function privateLeagueJoinError(errorCode:any){
+    var header:string=alertMessages.rejected;
+    var body:string='';
+    switch(errorCode){
+        case 5:
+            body=alertMessages.privateLeagueUserNotLogRanking;
+            break;
+        case 3:
+            body=alertMessages.privateLeagueUserOnALeague;
+            break;
+        case 7:
+            body=alertMessages.privateLeagueDoesntExist;
+            break
+     
+
+            
+
+    }
+    const message:alertMessage={
+        header:header,
+        body:body
+    }
+    return message;
+}
