@@ -40,7 +40,7 @@ namespace REST_API_XFIA.Controllers
                 Db.Privateleagues.Add(toAdd);
                 Db.SaveChanges();
                 string fullPrivateLeagueKey = toAdd.TournamentKey + toAdd.PrivateLeagueKey;
-                return Ok(fullPrivateLeagueKey);
+                return Ok(JsonConvert.SerializeObject(fullPrivateLeagueKey));
             }
             catch(Exception e)
             {
