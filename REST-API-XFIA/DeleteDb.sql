@@ -2,7 +2,7 @@ select * from [SubTeams]
 select * from [User]
 select * from [Has_pilot]
 select * from RealTeams
-select * from Tournament
+select * from PRIVATELEAGUE
 
 Drop Table PilotRace
 Drop Table RealTeamRace

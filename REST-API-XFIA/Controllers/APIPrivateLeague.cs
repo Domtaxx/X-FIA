@@ -27,20 +27,21 @@ namespace REST_API_XFIA.Controllers
         public ActionResult addPrivateLeague([FromBody] Data_structures.PrivateLeague privateLeague)
         {
             try
-            {
+            {   
+                SQL_Model.Models.User user = Db.Users.Find(privateLeague.ownerEmail);
                 SQL_Model.Models.Privateleague toAdd = PrivateLeagueMapper.fillSQLPrivateLeague(privateLeague);
-                int msgCode = PrivateLeagueVerification.isValid(toAdd);
+                int msgCode = PrivateLeagueVerification.isValid(toAdd, user);
                 if (msgCode != 0)
                 {
                     return BadRequest(JsonConvert.SerializeObject(msgCode));
                 }
-                SQL_Model.Models.User user = Db.Users.Find(privateLeague.ownerEmail);
+                
                 user.PrivateLeagueName = privateLeague.name;
                 Db.Update(user);
                 Db.Privateleagues.Add(toAdd);
                 Db.SaveChanges();
                 string fullPrivateLeagueKey = toAdd.TournamentKey + toAdd.PrivateLeagueKey;
-                return Ok(fullPrivateLeagueKey);
+                return Ok(JsonConvert.SerializeObject(fullPrivateLeagueKey));
             }
             catch(Exception e)
             {

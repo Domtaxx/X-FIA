@@ -69,6 +69,7 @@ export class privateLeagueCreateService {
                     
                 },
                 (error)=>{
+                    console.log(error.error)
                     const message=privateLeagueJoinError(error.error);
 
                     this.swal.showError(message.header,message.body)
