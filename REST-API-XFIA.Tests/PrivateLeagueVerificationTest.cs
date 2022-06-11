@@ -63,9 +63,9 @@ namespace REST_API_XFIA.Tests
         public void userBelongsToPrivateLeague()
         {
             init();
-            Assert.True(PrivateLeagueVerification.userAlreadyHasPrivateLeague(u1.Email));
-            Assert.True(PrivateLeagueVerification.userAlreadyHasPrivateLeague(u2.Email));
-            Assert.False(PrivateLeagueVerification.userAlreadyHasPrivateLeague(u3.Email));
+            Assert.True(PrivateLeagueVerification.userAlreadyHasPrivateLeague(u1));
+            Assert.True(PrivateLeagueVerification.userAlreadyHasPrivateLeague(u2));
+            Assert.False(PrivateLeagueVerification.userAlreadyHasPrivateLeague(u3));
         }
         [Fact]
         public void privateLeagueExists()
