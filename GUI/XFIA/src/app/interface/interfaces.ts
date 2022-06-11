@@ -19,8 +19,8 @@ export interface pilotInterface{
     Lastname:string;
     Photo:string;
     Price:number;
-    CountryNameNavigation:pilotContry
-    RealTeamsNameNavigation:pilotTeam
+    CountryNameNavigation:pilotContry|null;
+    RealTeamsNameNavigation:pilotTeam|null
 
 }
 //interface that representest the data navigation of country in the pilot

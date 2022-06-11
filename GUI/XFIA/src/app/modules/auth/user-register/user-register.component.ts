@@ -20,8 +20,8 @@ export class UserRegisterComponent implements OnInit {
     userRegisterForm=new UntypedFormGroup({
     userName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
     email:new UntypedFormControl('',[Validators.required,Validators.email,Validators.maxLength(256)]),
-    password:new UntypedFormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*)*([a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*)*')]),
-    confirmPassword:new UntypedFormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^([a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*)*([a-zA-Z]*[0-9]*[0-9]+[a-zA-Z]*[0-9]*[a-zA-Z]+[a-zA-Z]*[0-9]*)*')]),
+    password:new UntypedFormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^(([a-zA-Z]*[0-9]*)*[a-zA-Z]+([a-zA-Z]*[0-9]*)*[0-9]+([a-zA-Z]*[0-9]*)*)*(([a-zA-Z]*[0-9]*)*[0-9]+([a-zA-Z]*[0-9]*)*[a-zA-Z]+([a-zA-Z]*[0-9]*)*)*')]),
+    confirmPassword:new UntypedFormControl('',[Validators.required,Validators.maxLength(8),Validators.minLength(8),Validators.pattern('^(([a-zA-Z]*[0-9]*)*[a-zA-Z]+([a-zA-Z]*[0-9]*)*[0-9]+([a-zA-Z]*[0-9]*)*)*(([a-zA-Z]*[0-9]*)*[0-9]+([a-zA-Z]*[0-9]*)*[a-zA-Z]+([a-zA-Z]*[0-9]*)*)*')]),
     teamName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
     countryName:new UntypedFormControl('',[Validators.required]),
     image:new UntypedFormControl('',[Validators.required])
