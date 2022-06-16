@@ -141,14 +141,14 @@ namespace REST_API_XFIA.Modules.BuisnessRules
         }
 
 
-        public static int isValid(Data_structures.UserToPrivateLeague userToPrivateLeague)//for adding new member
+        public static int isValid(Data_structures.UserToPrivateLeague userToPrivateLeague, SQL_Model.Models.User user)//for adding new member
         {
             
             if (!PrivateLeagueVerification.userExistsInDB(userToPrivateLeague.userEmail))
             {
                 return 5; //User is not logged in
             }
-            if (PrivateLeagueVerification.userAlreadyHasPrivateLeague(Db.Users.Find(userToPrivateLeague.userEmail)))
+            if (PrivateLeagueVerification.userAlreadyHasPrivateLeague(user))
             {
                 return 3; //User has already a private league
             }

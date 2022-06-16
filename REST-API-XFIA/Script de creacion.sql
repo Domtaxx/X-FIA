@@ -62,8 +62,15 @@ Create Table REALTEAMS(
 Price float not null,
 Photo varchar(MAX) not null,
 Logo varchar(MAX) not null,
-PRIMARY KEY ([Name]),
+PRIMARY KEY ([Name])
 );
+
+Create Table SubteamPoints(
+TournamentKey varchar(6),
+SubTeamId int,
+points int
+PRIMARY KEY (TournamentKey,SubTeamId),
+FOREIGN KEY (TournamentKey) REFERENCES Tournament ([Key]));
 
 Create Table SUBTEAMS(
 ID int NOT NULL,
@@ -120,6 +127,10 @@ FOREIGN KEY ([Name], TournamentKey) REFERENCES RACE([Name],TournamentKey)
 Alter table [USER]
 add constraint PrivateLeague_User_key
 FOREIGN KEY (PrivateLeagueName) REFERENCES [PRIVATELEAGUE]([Name]);
+
+Alter table SubteamPoints
+add constraint SubteamKey
+FOREIGN KEY (SubTeamId) REFERENCES SUBTEAMS(ID);
 
 
 
@@ -323,4 +334,4 @@ begin
 end
 drop table TempTable
 END
-GO
+GO 

@@ -75,12 +75,13 @@ namespace REST_API_XFIA.Controllers
         [Route("User/PrivateLeague/NewMember")]
         public ActionResult addUserToPrivateLeague([FromBody] Data_structures.UserToPrivateLeague userToPrivateLeague)
         {
-            int msgCode = PrivateLeagueVerification.isValid(userToPrivateLeague);
+            SQL_Model.Models.User user = Db.Users.Find(userToPrivateLeague.userEmail);
+            int msgCode = PrivateLeagueVerification.isValid(userToPrivateLeague, user);
             if (msgCode != 0)
             {
                 return BadRequest(JsonConvert.SerializeObject(msgCode));
             }
-            SQL_Model.Models.User user = Db.Users.Find(userToPrivateLeague.userEmail);
+            
             String publickey = userToPrivateLeague.privateLeagueKey.Substring(0, 6);
             String privatekey = userToPrivateLeague.privateLeagueKey.Substring(6, 6);
             SQL_Model.Models.Privateleague privateLeague = Db.Privateleagues.Where(P => P.PrivateLeagueKey == privatekey && P.TournamentKey==publickey).Single();
