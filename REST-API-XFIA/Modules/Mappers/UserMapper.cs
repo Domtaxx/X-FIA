@@ -17,7 +17,7 @@ namespace REST_API_XFIA.Modules.Mappers
             toAdd.Password = user.Password;
             toAdd.Username = user.Username;
             toAdd.Email = user.Email;
-            toAdd.TeamsLogo = _storageService.Upload(user.TeamsLogo);
+            toAdd.TeamsLogo = _storageService.Upload(user.TeamsLogo, user.Email);
             return toAdd;
         }
         public static List<SQL_Model.Models.Subteam> fillSubteams(Data_structures.AllUserInfo userInfo)
@@ -32,8 +32,9 @@ namespace REST_API_XFIA.Modules.Mappers
             team1.RealTeamsName = userInfo.Car1;
             team1.Name = userInfo.NameSubteam1;
             team1.UserEmail = userInfo.Email;
-            team1.CreationHour = ActiveTournament.InitialHour;
-            team1.CreationDate = ActiveTournament.InitialDate;
+            team1.CreationHour = DateTime.Now.TimeOfDay;
+            team1.CreationDate = DateTime.Now.Date;
+            
 
 
 
@@ -41,8 +42,8 @@ namespace REST_API_XFIA.Modules.Mappers
             team2.RealTeamsName = userInfo.Car2;
             team2.Name = userInfo.NameSubteam2;
             team2.UserEmail = userInfo.Email;
-            team2.CreationHour = ActiveTournament.InitialHour;
-            team2.CreationDate = ActiveTournament.InitialDate;
+            team2.CreationHour = DateTime.Now.TimeOfDay;
+            team2.CreationDate = DateTime.Now.Date;
 
             subteams.Add(team1);
             subteams.Add(team2);
@@ -164,9 +165,18 @@ namespace REST_API_XFIA.Modules.Mappers
                 temp.Pilots.Add(pilot5);
                 response.Subteams.Add(temp);
             }
-
             return response;
         }
+        
+        public static void modSubTeams(SQL_Model.Models.Subteam subTeam1, SQL_Model.Models.Subteam subTeam2, Data_structures.AllUserInfo userInfo)
+        {
+            subTeam1.CreationDate = DateTime.Now.Date;
+            subTeam1.CreationHour = DateTime.Now.TimeOfDay;
+
+            subTeam2.CreationDate = DateTime.Now.Date;
+            subTeam2.CreationHour = DateTime.Now.TimeOfDay;
+
+            return;
+        }
     }
-    
 }

@@ -2,6 +2,6 @@
 {
     public interface IStorageService
     {
-        string Upload(IFormFile formFile);
+        string Upload(IFormFile formFile, string name = "");
     }
 }

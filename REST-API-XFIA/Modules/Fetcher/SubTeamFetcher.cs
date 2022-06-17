@@ -28,5 +28,24 @@ namespace REST_API_XFIA.Modules.Fetcher
             subTeams.Add(Tempsubteams[1]);
             return subTeams;
         }
+        public static List<SQL_Model.Models.Subteam> getLatestSubTeam(string userEmail, SQL_Model.Models.Tournament tour)
+        {
+            List<SQL_Model.Models.Subteam> res = new();
+            List<SQL_Model.Models.Subteam>  userSubTeams = Db.Subteams.Include(St => St.SubteamPoints).Where(st => st.UserEmail.Equals(userEmail) && (st.CreationDate < tour.FinalDate || (st.CreationDate == tour.FinalDate && st.CreationHour < tour.FinalHour))).ToList();
+            userSubTeams = userSubTeams.OrderByDescending(St => St.CreationDate).ToList();
+            var tempSubTeamList = new List<SQL_Model.Models.Subteam>();
+            foreach(SQL_Model.Models.Subteam st in userSubTeams)
+            {
+                if (st.CreationDate == userSubTeams[0].CreationDate)
+                {
+                    tempSubTeamList.Add(st);
+                }
+            }tempSubTeamList = tempSubTeamList.OrderByDescending(st => st.CreationHour).ToList();
+
+            res.Add(tempSubTeamList[0]);
+            res.Add(tempSubTeamList[1]);
+            return res;
+        }
     }
+    
 }

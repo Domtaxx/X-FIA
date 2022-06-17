@@ -9,6 +9,7 @@ namespace REST_API_XFIA.SQL_Model.Models
         {
             Privateleagues = new HashSet<Privateleague>();
             Races = new HashSet<Race>();
+            SubteamPoints = new HashSet<SubteamPoint>();
             UserEmails = new HashSet<User>();
         }
 
@@ -23,6 +24,7 @@ namespace REST_API_XFIA.SQL_Model.Models
 
         public virtual ICollection<Privateleague> Privateleagues { get; set; }
         public virtual ICollection<Race> Races { get; set; }
+        public virtual ICollection<SubteamPoint> SubteamPoints { get; set; }
 
         public virtual ICollection<User> UserEmails { get; set; }
     }

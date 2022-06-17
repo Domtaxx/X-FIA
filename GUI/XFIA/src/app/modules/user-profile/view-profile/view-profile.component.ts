@@ -42,6 +42,7 @@ export class ViewProfileComponent implements OnInit {
     this.pilots2=user.Subteams[1].Pilots;
     this.car1=user.Subteams[0].RealTeamsNameNavigation;
     this.car2=user.Subteams[1].RealTeamsNameNavigation;
+    console.log(user.TeamsLogo)
   }
 
   defaultData(){

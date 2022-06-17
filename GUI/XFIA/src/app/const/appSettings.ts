@@ -20,7 +20,7 @@ export class appSettings{
     public static allTournamentsRoute='';
     public static tournamentRaces='';
     public static profileUserGet="Usuario/Unico";
-    public static loginRoute='';
+    public static loginRoute='Usuario/Login';
     public static defaultPilotPhotoRoute="../../../../assets/images/pilotAvatar.png";
     public static defaultTeamPhoto="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzA0-6IViHaCiSlUgHkF0FPlVgwoH2WydjxA&usqp=CAU";
     public static defaultCountryPhoto="http://cdn.onlinewebfonts.com/svg/img_456271.png";

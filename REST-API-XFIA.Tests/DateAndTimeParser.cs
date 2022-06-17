@@ -34,5 +34,4 @@ namespace REST_API_XFIA.Tests
             Assert.True(TimeSpan.Compare(new TimeSpan(12,0,0), test1) == 0);
         }
     }
-
 }
