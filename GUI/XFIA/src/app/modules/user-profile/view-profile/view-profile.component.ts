@@ -3,6 +3,7 @@ import { pilotInterface } from 'src/app/interface/interfaces';
 import { carInterface } from 'src/app/interface/interfaces';
 import { userInterface } from 'src/app/interface/interfaces';
 import { userProfileProviderService } from 'src/app/dataProviderServices/userProfileProvider';
+import { appSettings } from 'src/app/const/appSettings';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
@@ -18,6 +19,7 @@ export class ViewProfileComponent implements OnInit {
   pilots2!:pilotInterface[];
   car1!:carInterface;
   car2!:carInterface;
+  imagePath=appSettings.imageGet;
   constructor(private DataManagement:userProfileProviderService) { }
 
   ngOnInit(): void {

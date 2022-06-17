@@ -11,7 +11,7 @@
         </div>
         <div class="headerSub">
             <div class="logoHeader">
-                <img class='logoImg' [src]="teamLogo">
+                <img class='logoImg' [src]="imagePath+teamLogo">
             </div>
         </div>
 
@@ -23,12 +23,12 @@
                     <div class="card" *ngIf="pilots1[0]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots1[0].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots1[0].CountryNameNavigation.Photo">
                             <h3>{{pilots1[0].Firstname +" "+pilots1[0].Lastname}}</h3>
-                            <img class="logo" [src]="pilots1[0].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots1[0].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots1[0].Photo">
+                        <img class='image' [src]="imagePath+pilots1[0].Photo">
                         
                         
                         <div class="cardDown">
@@ -40,12 +40,12 @@
                     <div class="card" *ngIf="pilots1[1]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots1[1].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots1[1].CountryNameNavigation.Photo">
                             <h3>{{pilots1[1].Firstname +" "+pilots1[1].Lastname}}</h3>
-                            <img class="logo" [src]="pilots1[1].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots1[1].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots1[1].Photo">
+                        <img class='image' [src]="imagePath+pilots1[1].Photo">
                         
                         
                         <div class="cardDown">
@@ -57,12 +57,12 @@
                     <div class="card" *ngIf="pilots1[2]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots1[2].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots1[2].CountryNameNavigation.Photo">
                             <h3>{{pilots1[2].Firstname +" "+pilots1[2].Lastname}}</h3>
-                            <img class="logo" [src]="pilots1[2].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots1[2].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots1[2].Photo">
+                        <img class='image' [src]="imagePath+pilots1[2].Photo">
                         
                         
                         <div class="cardDown">
@@ -79,12 +79,12 @@
                     <div class="card" *ngIf="pilots2[3]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots1[3].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots1[3].CountryNameNavigation.Photo">
                             <h3>{{pilots1[3].Firstname +" "+pilots1[3].Lastname}}</h3>
-                            <img class="logo" [src]="pilots1[3].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots1[3].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots1[3].Photo">
+                        <img class='image' [src]="imagePath+pilots1[3].Photo">
                         
                         
                         <div class="cardDown">
@@ -96,12 +96,12 @@
                     <div class="card" *ngIf="pilots1[4]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots1[4].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots1[4].CountryNameNavigation.Photo">
                             <h3>{{pilots1[4].Firstname +" "+pilots1[4].Lastname}}</h3>
-                            <img class="logo" [src]="pilots1[4].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots1[4].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots1[4].Photo">
+                        <img class='image' [src]="imagePath+pilots1[4].Photo">
                         
                         
                         <div class="cardDown">
@@ -113,12 +113,12 @@
                     <div class="card" *ngIf="pilots1[5]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots1[5].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots1[5].CountryNameNavigation.Photo">
                             <h3>{{pilots1[5].Firstname +" "+pilots1[5].Lastname}}</h3>
-                            <img class="logo" [src]="pilots1[5].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots1[5].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots1[5].Photo">
+                        <img class='image' [src]="imagePath+pilots1[5].Photo">
                         
                         
                         <div class="cardDown">
@@ -135,7 +135,7 @@
                             
                         </div>
                         
-                        <img class='image' [src]="car1.Photo">
+                        <img class='image' [src]="imagePath+car1.Photo">
                         
                         
                         <div class="cardDown">
@@ -156,12 +156,12 @@
                     <div class="card" *ngIf="pilots2[0]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots2[0].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots2[0].CountryNameNavigation.Photo">
                             <h3>{{pilots2[0].Firstname +" "+pilots2[0].Lastname}}</h3>
-                            <img class="logo" [src]="pilots2[0].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots2[0].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots2[0].Photo">
+                        <img class='image' [src]="imagePath+pilots2[0].Photo">
                         
                         
                         <div class="cardDown">
@@ -173,12 +173,12 @@
                     <div class="card" *ngIf="pilots2[1]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots2[1].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots2[1].CountryNameNavigation.Photo">
                             <h3>{{pilots2[1].Firstname +" "+pilots2[1].Lastname}}</h3>
-                            <img class="logo" [src]="pilots2[1].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots2[1].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots2[1].Photo">
+                        <img class='image' [src]="imagePath+pilots2[1].Photo">
                         
                         
                         <div class="cardDown">
@@ -190,12 +190,12 @@
                     <div class="card" *ngIf="pilots2[2]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots2[2].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots2[2].CountryNameNavigation.Photo">
                             <h3>{{pilots2[2].Firstname +" "+pilots2[2].Lastname}}</h3>
-                            <img class="logo" [src]="pilots2[2].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots2[2].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots2[2].Photo">
+                        <img class='image' [src]="imagePath+pilots2[2].Photo">
                         
                         
                         <div class="cardDown">
@@ -212,12 +212,12 @@
                     <div class="card" *ngIf="pilots2[3]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots2[3].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots2[3].CountryNameNavigation.Photo">
                             <h3>{{pilots2[3].Firstname +" "+pilots2[3].Lastname}}</h3>
-                            <img class="logo" [src]="pilots2[3].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots2[3].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots2[3].Photo">
+                        <img class='image' [src]="imagePath+pilots2[3].Photo">
                         
                         
                         <div class="cardDown">
@@ -229,12 +229,12 @@
                     <div class="card" *ngIf="pilots2[4]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots2[4].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots2[4].CountryNameNavigation.Photo">
                             <h3>{{pilots2[4].Firstname +" "+pilots2[4].Lastname}}</h3>
-                            <img class="logo" [src]="pilots2[4].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots2[4].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots2[4].Photo">
+                        <img class='image' [src]="imagePath+pilots2[4].Photo">
                         
                         
                         <div class="cardDown">
@@ -246,12 +246,12 @@
                     <div class="card" *ngIf="pilots2[5]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots2[5].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="imagePath+pilots2[5].CountryNameNavigation.Photo">
                             <h3>{{pilots2[5].Firstname +" "+pilots2[5].Lastname}}</h3>
-                            <img class="logo" [src]="pilots2[5].RealTeamsNameNavigation.Logo">
+                            <img class="logo" [src]="imagePath+pilots2[5].RealTeamsNameNavigation.Logo">
                         </div>
                         
-                        <img class='image' [src]="pilots2[5].Photo">
+                        <img class='image' [src]="imagePath+pilots2[5].Photo">
                         
                         
                         <div class="cardDown">
@@ -268,7 +268,7 @@
                             
                         </div>
                         
-                        <img class='image' [src]="car1.Photo">
+                        <img class='image' [src]="imagePath+car1.Photo">
                         
                         
                         <div class="cardDown">

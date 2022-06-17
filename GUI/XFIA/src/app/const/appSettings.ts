@@ -1,5 +1,6 @@
 export class appSettings{
     public static apiEndpoint='https://localhost:7282/'
+    public static imageGet='https://localhost:7282/Imagenes?path=';
     public static tournamentRoute='admin/Campeonato';
     public static countryRoute='Pais';
     public static adminRaceRoute='Admin/Carreras';
