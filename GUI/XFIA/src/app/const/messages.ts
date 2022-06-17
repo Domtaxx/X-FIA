@@ -62,5 +62,5 @@ export class alertMessages{
 
     //login
     public static sucessLogin="Se ha iniciado sección con exito"
-    public static rejetedLogin="No se ha podido iniciar sección"
+    public static rejectedLogin="No se ha podido iniciar sección"
 }

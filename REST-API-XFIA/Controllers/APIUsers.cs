@@ -78,6 +78,25 @@ namespace REST_API_XFIA.Controllers
             }
         }
 
+        [Route("Login")]
+        [HttpGet]
+        public ActionResult GetUsers(string userEmail, string password)
+        {
+            try
+            {
+                var User = Db.Users.Include(U => U.CountryNameNavigation).Where(U => U.Email == userEmail && U.Password == password).Single();
+                var res = UserMapper.fillUserResponse(User, SubTeamFetcher.getSubTeamsLatest(userEmail));
+
+                return Ok(JsonConvert.SerializeObject(res, Formatting.Indented,
+                            new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore })
+                         );
+            }
+            catch (Exception e)
+            {
+                return BadRequest(4);
+            }
+        }
+
         [Route("SubEquipos")]
         [HttpGet]
         public IActionResult Get(string email)
