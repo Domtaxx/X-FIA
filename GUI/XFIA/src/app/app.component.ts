@@ -14,6 +14,6 @@ export class AppComponent {
   }
   
   redirectMain(){
-    this.router.redirect('auth')
+    this.router.redirect('tournaments')
   }
 }

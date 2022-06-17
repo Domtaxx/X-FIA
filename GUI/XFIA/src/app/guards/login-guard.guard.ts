@@ -17,6 +17,7 @@ export class LoginGuardGuard implements CanActivate, CanActivateChild {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     console.log(isLogged())
     return isLogged();
+    //return true;
   }
   
 }

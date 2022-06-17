@@ -25,6 +25,11 @@ const routes: Routes = [
     path:'profile',
     loadChildren:()=>import('./modules/user-profile/user-profile.module').then(m=>m.UserProfileModule),
     canActivateChild:[LoginGuardGuard]
+  },
+  {
+    path:'results',
+    loadChildren:()=>import('./modules/results/results.module').then(m=>m.ResultsModule),
+    canActivateChild:[LoginGuardGuard]
   }
  
 ];
