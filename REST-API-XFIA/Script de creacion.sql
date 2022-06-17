@@ -88,6 +88,8 @@ ID int NOT NULL IDENTITY,
 Firstname varchar(30) not null,
 Lastname varchar(30) not null,
 Price float not null,
+HotstreakClassification int,
+HotstreakRace int,
 Photo varchar(MAX) not null,
 CountryName varchar(30) not null,
 RealTeamsName varchar(30),
@@ -178,19 +180,19 @@ Insert into RealTeamRace values ('Mclaren', 'Street Circuit', 'QWE123', 6);
 Insert into RealTeamRace values ('Alpine', 'Street Circuit', 'QWE123', 4);
 
 Insert into PILOT
-Values('Fernando', 'Alonso', 2,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
+Values('Fernando', 'Alonso', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
 
 Insert into PILOT
-Values('Sebastian', 'Vettel', 5,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')
+Values('Sebastian', 'Vettel', 5,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')
 
 Insert into PILOT
-Values('Daniel', 'Ricciardo', 2,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren')
+Values('Daniel', 'Ricciardo', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren')
 
 Insert into PILOT
-Values('Sergio', 'Perez', 7,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sergio Perez redbull.png','FRANCIA','Redbull')
+Values('Sergio', 'Perez', 7,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sergio Perez redbull.png','FRANCIA','Redbull')
 
 Insert into PILOT
-Values('Lando', 'Norris', 2,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
+Values('Lando', 'Norris', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
 
 insert into SUBTEAMS
 Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-03-25','00:00:00')
