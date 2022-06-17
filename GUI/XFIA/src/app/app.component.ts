@@ -10,7 +10,7 @@ import { localStorageNames } from './const/localStorageNames';
 export class AppComponent {
   title = 'XFIA';
   constructor(private router:RouterServiceService){
-    deleteKey(localStorageNames.email)
+    //deleteKey(localStorageNames.email)
   }
   
   redirectMain(){
