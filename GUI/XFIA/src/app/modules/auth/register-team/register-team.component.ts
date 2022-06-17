@@ -39,6 +39,7 @@ export class RegisterTeamComponent implements OnInit {
   pilot4Index=3;
   pilot5Index=4;
   carIndex=5;
+  imagePath=appSettings.imageGet;
   teamForm= new UntypedFormGroup({
     teamName:new UntypedFormControl('Equipo',[Validators.required]),
     pilot1:new UntypedFormControl('',[Validators.required]),

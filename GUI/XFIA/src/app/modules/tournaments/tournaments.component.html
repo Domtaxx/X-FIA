@@ -2,7 +2,8 @@
     <ul>
       <li><a routerLink="/tournaments/create" routerLinkActive="active">Crear Campeonato</a></li>
       <li><a routerLink="/tournaments/race/create" routerLinkActive="active">Crear Carrera</a></li>
-      <li><a routerLink="/auth/register" routerLinkActive="active">Auth</a></li>
+      <li><a routerLink="/auth/register" routerLinkActive="active">Register</a></li>
+      <li><a routerLink="/auth/login" routerLinkActive="active">Login</a></li>
       <li><a routerLink="/publicLeague/ranking" routerLinkActive="active">Liga Publica</a></li>
       <li><a routerLink="/privateLeague/ranking" routerLinkActive="active">Liga Privada</a></li>
       <li><a routerLink="/privateLeague/create" routerLinkActive="active">Crear Liga Privada</a></li>
@@ -11,12 +12,5 @@
     </ul>
   </nav>
 
-  <form [formGroup]="LoginForm" >
-    <label>Correo</label>
-    <input type="text" formControlName="userEmail">
-    <br>
-    <label>Contraseña</label>
-    <input type="password">
-    <br>
-    <button (click)="log()">Login</button>
-  </form>
+
+  <button (click)="logOut()">LogOUT</button>

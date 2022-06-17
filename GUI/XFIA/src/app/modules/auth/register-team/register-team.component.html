@@ -62,12 +62,12 @@
                     <div class="card">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="currentCountryImage" *ngIf="memberIndex<carIndex">
+                            <img class="flag" [src]="imagePath+currentCountryImage" *ngIf="memberIndex<carIndex">
                             <h3>{{currentName}}</h3>
-                            <img class="logo" [src]="currentTeamImage" *ngIf="memberIndex<carIndex">
+                            <img class="logo" [src]="imagePath+currentTeamImage" *ngIf="memberIndex<carIndex">
                         </div>
                         
-                        <img class='image' [src]="currentImage">
+                        <img class='image' [src]="imagePath+currentImage">
                         
                         
                         <div class="cardDown">
