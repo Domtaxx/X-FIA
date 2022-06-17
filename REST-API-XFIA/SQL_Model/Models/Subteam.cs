@@ -8,6 +8,7 @@ namespace REST_API_XFIA.SQL_Model.Models
         public Subteam()
         {
             HasPilots = new HashSet<HasPilot>();
+            SubteamPoints = new HashSet<SubteamPoint>();
         }
 
         public int Id { get; set; }
@@ -20,5 +21,6 @@ namespace REST_API_XFIA.SQL_Model.Models
         public virtual Realteam RealTeamsNameNavigation { get; set; } = null!;
         public virtual User UserEmailNavigation { get; set; } = null!;
         public virtual ICollection<HasPilot> HasPilots { get; set; }
+        public virtual ICollection<SubteamPoint> SubteamPoints { get; set; }
     }
 }
