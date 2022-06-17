@@ -16,12 +16,12 @@ namespace REST_API_XFIA.Modules.Fetcher
             foreach (SQL_Model.Models.User user in users)
             {
                 PublicLeagueResponse data;
-                List<SQL_Model.Models.Subteam> subTeams = ;
+                List<SQL_Model.Models.Subteam> subTeams = new();
                 foreach (SQL_Model.Models.Subteam subTeam in subTeams)
                 {
                     data = new PublicLeagueResponse();
                     var pilotsInSub = Db.HasPilots.Where(HP => HP.SubTeamsId == subTeam.Id).ToList();
-                    data.Points = ;
+                    //data.Points = ;
                     data.SubteamName = subTeam.Name;
                     data.TeamName = user.TeamsName;
                     data.UserName = user.Username;

@@ -17,7 +17,7 @@ namespace REST_API_XFIA.Modules.Mappers
             toAdd.Password = user.Password;
             toAdd.Username = user.Username;
             toAdd.Email = user.Email;
-            toAdd.TeamsLogo = _storageService.Upload(user.TeamsLogo);
+            toAdd.TeamsLogo = _storageService.Upload(user.TeamsLogo, user.Email);
             return toAdd;
         }
         public static List<SQL_Model.Models.Subteam> fillSubteams(Data_structures.AllUserInfo userInfo)

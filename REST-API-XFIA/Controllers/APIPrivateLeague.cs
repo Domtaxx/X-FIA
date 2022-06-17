@@ -132,7 +132,24 @@ namespace REST_API_XFIA.Controllers
             {
                 return BadRequest(2);
             }
-
+        }
+        [Route("League/Owner")]
+        [HttpGet]
+        public ActionResult isPrivateLeagueOwner(string userEmail, string PrivateLeagueName)
+        {
+            try
+            {
+                var privateLeague = Db.Privateleagues.Find(PrivateLeagueName);
+                if (privateLeague.OwnerEmail.Equals(userEmail))
+                {
+                    return Ok(JsonConvert.SerializeObject(1));
+                }
+                return Ok(JsonConvert.SerializeObject(0));
+            }
+            catch
+            {
+                return Problem(); 
+            }
         }
     }
 }

@@ -135,13 +135,13 @@ FOREIGN KEY (SubTeamId) REFERENCES SUBTEAMS(ID);
 
 
 INSERT INTO COUNTRY
-VALUES ('FRANCIA','https://xfiaonline.blob.core.windows.net/images/bandera_francia.jpg');
+VALUES ('FRANCIA','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Bandera Francia.png');
 INSERT INTO COUNTRY
-VALUES ('ESPAÑA','https://xfiaonline.blob.core.windows.net/images/bandera_españa.png');
+VALUES ('ESPAÑA','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Bandera_de_España.png');
 INSERT INTO COUNTRY
-VALUES ('PORTUGAL','https://xfiaonline.blob.core.windows.net/images/bandera_portugal.jpg');
+VALUES ('PORTUGAL','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Bandera Portugal.png');
 INSERT INTO COUNTRY
-VALUES ('ARABIA SAUDI','https://xfiaonline.blob.core.windows.net/images/bandera_arabia_saudita.jpg');
+VALUES ('ARABIA SAUDI','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Bandera arabia saudi.jpg');
 
 
 INSERT INTO TOURNAMENT
@@ -156,7 +156,7 @@ INSERT INTO Race
 VALUES ('Street Circuit', 'ARABIA SAUDI',0,'Jeddah', '2022-03-26', '17:00:00', '2022-03-27', '4:00:00', 'QWE123');
 
 INSERT INTO dbo.[User]
-VALUES('Briwag','3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e','briwag88@hotmail.com','Los tornados locos','https://xfiaonline.blob.core.windows.net/images/logo prueba.png','FRANCIA',null)
+VALUES('Briwag','3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e','briwag88@hotmail.com','Los tornados locos','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\briwag88@hotmail.com.png','FRANCIA',null)
 
 Insert into PUBLICLEAGUE
 Values('briwag88@hotmail.com','QWE123')
@@ -167,30 +167,30 @@ Insert into PUBLICLEAGUE
 Values('briwag88@hotmail.com','QWE126')
 
 Insert into REALTEAMS
-Values('Redbull', 6, 'https://xfiaonline.blob.core.windows.net/images/Redbull carro.png','https://xfiaonline.blob.core.windows.net/images/redbull_logo.png')
+Values('Redbull', 6, 'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Redbull carro.png','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Red-Bull-Logo.png')
 Insert into REALTEAMS
-Values('Mclaren', 5, 'https://xfiaonline.blob.core.windows.net/images/Mclaren carro.png','https://xfiaonline.blob.core.windows.net/images/Mclaren_logo.png')
+Values('Mclaren', 5, 'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Mclaren carro.png','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\McLaren-Logo.png')
 Insert into REALTEAMS
-Values('Alpine', 7, 'https://xfiaonline.blob.core.windows.net/images/Alpine carro.png','https://xfiaonline.blob.core.windows.net/images/Alpine_logo.png')
+Values('Alpine', 7, 'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Alpine carro.png','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Alpine Logo.png')
 
 Insert into RealTeamRace values ('Redbull', 'Street Circuit', 'QWE123', 5);
 Insert into RealTeamRace values ('Mclaren', 'Street Circuit', 'QWE123', 6);
 Insert into RealTeamRace values ('Alpine', 'Street Circuit', 'QWE123', 4);
 
 Insert into PILOT
-Values('Fernando', 'Alonso', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
+Values('Fernando', 'Alonso', 2,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
 
 Insert into PILOT
-Values('Sebastian', 'Vettel', 5,'https://xfiaonline.blob.core.windows.net/images/Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')
+Values('Sebastian', 'Vettel', 5,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')
 
 Insert into PILOT
-Values('Daniel', 'Ricciardo', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren')
+Values('Daniel', 'Ricciardo', 2,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren')
 
 Insert into PILOT
-Values('Sergio', 'Perez', 7,'https://xfiaonline.blob.core.windows.net/images/Piloto Sergio Perez redbull.png','FRANCIA','Redbull')
+Values('Sergio', 'Perez', 7,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sergio Perez redbull.png','FRANCIA','Redbull')
 
 Insert into PILOT
-Values('Lando', 'Norris', 2,'https://xfiaonline.blob.core.windows.net/images/Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
+Values('Lando', 'Norris', 2,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
 
 insert into SUBTEAMS
 Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-03-25','00:00:00')

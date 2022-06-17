@@ -1,28 +1,41 @@
 ﻿using Azure.Storage.Blobs;
 using REST_API_XFIA.Modules.Service;
+using System.Reflection;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace REST_API_XFIA.Modules.Service
 {
     public class StorageService : IStorageService
     {
-        private readonly BlobServiceClient _blobServiceClient;
-        private readonly IConfiguration _configuration;
-        public StorageService(BlobServiceClient blobServiceClient, IConfiguration configuration)
+        
+
+        public StorageService()
         {
-            _blobServiceClient = blobServiceClient;
-            _configuration = configuration;
+            
         }
 
-        public string Upload(IFormFile formFile)
+        public string Upload(IFormFile formFile, string name = "")
         {
-            var containerName = _configuration.GetSection("Storage:ContainerName").Value;
+            var FileDic = "Files\\Images";
 
-            var containerClient = _blobServiceClient.GetBlobContainerClient(containerName);
-            var blobClient = containerClient.GetBlobClient(formFile.FileName);
+            string DirPath = Path.Combine(System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), FileDic);
 
-            using var stream = formFile.OpenReadStream();
-            blobClient.Upload(stream, true);
-            return blobClient.Uri.AbsoluteUri;
+            if (!Directory.Exists(DirPath))
+            { 
+                Directory.CreateDirectory(DirPath);
+            }
+            
+            var filePath = Path.Combine(DirPath, formFile.FileName);
+            if (!name.Equals(""))
+            {
+                var FileName = name + "." +formFile.FileName.Split(".")[1];
+                filePath = Path.Combine(DirPath, FileName);
+            }
+            using (Stream fileStream = new FileStream(filePath, FileMode.Create, FileAccess.Write))
+            {
+                formFile.CopyTo(fileStream);
+            }
+            return filePath;
         }
     }
 }

@@ -23,7 +23,7 @@
                     <div class="card" *ngIf="pilots1[0]!=undefined">
                       
                         <div class="cardHeader">
-                            <img class="flag" [src]="pilots1[0].CountryNameNavigation.Photo">
+                            <img class="flag" [src]="'https://localhost:7282/Imagenes?path='+pilots1[0].CountryNameNavigation.Photo">
                             <h3>{{pilots1[0].Firstname +" "+pilots1[0].Lastname}}</h3>
                             <img class="logo" [src]="pilots1[0].RealTeamsNameNavigation.Logo">
                         </div>
