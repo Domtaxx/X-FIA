@@ -1,1 +1,55 @@
-<p>add-resul works!</p>
+
+<div class="mainDiv">
+    <label class="title">Resultados carreras</label>
+    <form [formGroup]="resultForm">
+        <div class="row">
+            <div class="p40">
+                <label class="formFieldLabel">Torneo</label>
+                
+            </div>
+            <div class="p60">
+                <select formControlName="tournament">
+                    <option *ngFor="let tournament of tournaments" value={{tournament.llave}}>
+                        {{tournament.nombreCm+' '+tournament.llave}}
+                    </option>
+                </select>
+                <div class="warning" *ngIf="resultForm.get('tournament')?.hasError('required')">
+                    Se debe seleccionar un torneo
+                </div>
+
+            </div>
+
+        </div>
+        <div class="row" *ngIf="!resultForm.get('tournament')?.hasError('required')">
+            <div class="p40">
+                <label class="formFieldLabel">Carrera</label>
+                
+            </div>
+            <div class="p60">
+                <select formControlName="race">
+                    <option *ngFor="let race of races" value={{race.name}>
+                        {{race.name}}
+                    </option>
+                </select>
+                <div class="warning" *ngIf="resultForm.get('race')?.hasError('required')">
+                    Se debe seleccionar una carrera
+                </div>
+
+            </div>
+
+        </div>
+        <div class="frame">
+            <label id="uploadFileText">Ingrese Archivo</label>
+            
+            <mat-icon id="uploadFileIcon">upload_file</mat-icon>
+            <input class="inputFile" type="file" formControlName="file">
+            
+        </div>
+        <div class="warning" *ngIf="resultForm.get('file')?.hasError('required')">
+            Se debe seleccionar un archivo
+        </div>
+    </form>
+    
+    
+
+</div>

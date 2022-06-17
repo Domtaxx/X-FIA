@@ -12,6 +12,9 @@ export interface tournamentInterface{
     llave:string
     
 }
+export interface raceInterface{
+    name:string;
+}
 //interface that represents the pilot 
 export interface pilotInterface{
     Id:number;
