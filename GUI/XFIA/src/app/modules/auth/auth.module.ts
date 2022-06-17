@@ -14,13 +14,16 @@ import { FullRegisterComponent } from './full-register/full-register.component';
 import {MatStepperModule} from '@angular/material/stepper';
 import { RegisterTeamComponent } from './register-team/register-team.component';
 import {MatButtonModule} from '@angular/material/button';
+import { LoginComponent } from './login/login.component';
+
 
 
 @NgModule({
   declarations: [
     UserRegisterComponent,
     FullRegisterComponent,
-    RegisterTeamComponent
+    RegisterTeamComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,
@@ -35,6 +38,7 @@ import {MatButtonModule} from '@angular/material/button';
     MatInputModule,
     MatStepperModule,
     MatButtonModule,
+
 
   ]
 })

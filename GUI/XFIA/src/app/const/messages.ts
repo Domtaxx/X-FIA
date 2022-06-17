@@ -59,4 +59,8 @@ export class alertMessages{
     //button text
     public static confirmButtonText='Aceptar';
     public static cancelButtonText="Cancelar";
+
+    //login
+    public static sucessLogin="Se ha iniciado sección con exito"
+    public static rejetedLogin="No se ha podido iniciar sección"
 }
