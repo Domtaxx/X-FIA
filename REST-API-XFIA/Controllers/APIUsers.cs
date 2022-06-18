@@ -63,7 +63,7 @@ namespace REST_API_XFIA.Controllers
                 SQL_Model.Models.User toAdd = UserMapper.fillSQLUser(allInfo, _storageService);
                 Db.Users.Add(toAdd);
 
-                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteams(allInfo, TournamentFetcher.GetActiveTournament());
+                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteams(allInfo);
                 Db.Subteams.AddRange(subteams);
                 Db.SaveChanges();
                 
