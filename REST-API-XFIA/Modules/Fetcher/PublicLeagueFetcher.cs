@@ -33,6 +33,7 @@ namespace REST_API_XFIA.Modules.Fetcher
         }
         public static List<PublicLeagueResponse> getUserPublicLeague(SQL_Model.Models.Tournament tournament, string userEmail)
         {
+            PointsFetcher.addPointsForTeam(tournament);
             List<PublicLeagueResponse> AllPublicLeagueRes = getEveryoneInList(tournament);
             List<PublicLeagueResponse> userPos = new List<PublicLeagueResponse>();
             foreach (PublicLeagueResponse response in AllPublicLeagueRes)
