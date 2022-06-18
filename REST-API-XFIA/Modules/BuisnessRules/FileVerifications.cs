@@ -35,16 +35,28 @@
             }return false;
         }
 
-        public static bool CheckIfAllPilotsNotValid(List<SQL_Model.Models.Pilot>pilotsInDoc, List<SQL_Model.Models.Pilot> pilotsInDb)
+        public static bool CheckIfAllPilotsNotValid(List<Data_structures.PilotDocument>pilotsInDoc, List<SQL_Model.Models.Pilot> pilotsInDb)
         {
             foreach(SQL_Model.Models.Pilot pilot in pilotsInDb)
             {
-                var temp = pilotsInDoc.FindAll(P=> P.Id == pilot.Id);
+                var temp = pilotsInDoc.FindAll(P=> P.id == pilot.Id);
                 if(temp.Count > 1 || temp.Count == 0)
                 {
                     return true;
                 }
             }return false;
+        }
+        public static bool CheckIfAllTeamsNotValid(List<Data_structures.TeamDocument> TeamsInDoc, List<SQL_Model.Models.Realteam> TeamsInDb)
+        {
+            foreach (SQL_Model.Models.Realteam team in TeamsInDb)
+            {
+                var temp = TeamsInDoc.FindAll(T => T.name == team.Name);
+                if (temp.Count > 1 || temp.Count == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

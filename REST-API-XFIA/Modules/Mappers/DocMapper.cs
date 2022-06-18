@@ -6,10 +6,11 @@ namespace REST_API_XFIA.Modules.Mappers
 {
     public class DocMapper
     {
-        private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
+        
         public static Data_structures.PilotDocument MapDocPilot(string[] data)
         {
             var pilot = new Data_structures.PilotDocument();
+            pilot.id = data[0];
             pilot.team = data[1];
             pilot.name = data[2].Split(" ")[0];
             pilot.lastName = data[2].Split(" ")[1];

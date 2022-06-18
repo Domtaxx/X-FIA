@@ -17,18 +17,20 @@ namespace REST_API_XFIA.Controllers
         public ActionResult postFile([FromForm] DataUploded dataUploded)
         {
             try
-            {
+            {   List<SQL_Model.Models.Pilot> pilotsInDb = Db.Pilots.ToList();
+                List<SQL_Model.Models.Realteam> teamsInDb = Db.Realteams.ToList();
                 List<PilotDocument> pilotsInDoc = new();
                 List<TeamDocument> teamsInDoc = new();
                 try
                 {
                     pilotsInDoc = getPilotsInfo(dataUploded.file.OpenReadStream());
                     teamsInDoc = getTeamsInfo(dataUploded.file.OpenReadStream());
+                    
                 }catch(InternalDocumentFormatException a)
                 {
                     return BadRequest(1);
                 }
-                List<SQL_Model.Models.Pilot> pilotsInDb = Db.Pilots.ToList();
+                
 
 
 

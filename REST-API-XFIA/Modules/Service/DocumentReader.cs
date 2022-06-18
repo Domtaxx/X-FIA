@@ -1,11 +1,13 @@
 ﻿using REST_API_XFIA.Data_structures;
 using REST_API_XFIA.Modules.BuisnessRules;
 using REST_API_XFIA.Modules.Mappers;
+using REST_API_XFIA.SQL_Model.DB_Context;
 
 namespace REST_API_XFIA.Modules.Service
 {
     public class DocumentReader
     {
+        private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
         public static List<PilotDocument> getPilotsInfo(Stream? stream)
         {
             var pilotsInDoc = new List<PilotDocument>();
@@ -24,6 +26,10 @@ namespace REST_API_XFIA.Modules.Service
                         pilotsInDoc.Add(DocMapper.MapDocPilot(row));
                     }
                 }
+            }
+            if(FileVerifications.CheckIfAllPilotsNotValid(pilotsInDoc, Db.Pilots.ToList()))
+            {
+                throw new InternalDocumentFormatException("Pilotos repetidos o hay pilotos que no estan en la base de datos");
             }
             return pilotsInDoc;
         }
@@ -46,6 +52,10 @@ namespace REST_API_XFIA.Modules.Service
                         teamsInDoc.Add(DocMapper.MapTeams(row));
                     }
                 }
+            }
+            if (FileVerifications.CheckIfAllTeamsNotValid(teamsInDoc, Db.Realteams.ToList()))
+            {
+                throw new InternalDocumentFormatException("Pilotos repetidos o hay pilotos que no estan en la base de datos");
             }
             return teamsInDoc;
         }
