@@ -38,6 +38,7 @@ export class publicLeagueRankingService {
         this.backend.get_request(appSettings.publicLeaguePlayerTeamsRoute,{userEmail:user}).subscribe(
             (success)=>{
               console.log('player team')
+              
               sucessCallback(success)
   
             },

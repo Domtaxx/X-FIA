@@ -86,7 +86,7 @@ export interface leagueMemberInterface{
     TeamName:string;
     SubteamName:string;
     Points:number;
-    Email:string;
+    UserEmail:string;
 }
 
 export interface privateLeagueJoinMember{
