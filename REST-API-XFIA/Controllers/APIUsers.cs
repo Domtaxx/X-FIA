@@ -63,10 +63,37 @@ namespace REST_API_XFIA.Controllers
                 SQL_Model.Models.User toAdd = UserMapper.fillSQLUser(allInfo, _storageService);
                 Db.Users.Add(toAdd);
 
-                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteams(allInfo);
+                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteams(allInfo, TournamentFetcher.GetActiveTournament());
                 Db.Subteams.AddRange(subteams);
                 Db.SaveChanges();
                 
+                var pilotConex = UserMapper.fillHasPilots(allInfo, subteams[0].Id, subteams[1].Id);
+                Db.HasPilots.AddRange(pilotConex);
+                Db.SaveChanges();
+                return Ok(MsgCode);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+        [Route("Modificar/SubEquipos")]
+        [HttpPost]
+        public ActionResult AddSubTeams([FromForm] Data_structures.SubTeamModifierInfo allInfo)
+        {
+            try
+            {
+                Db.ChangeTracker.Clear();
+                int MsgCode = UserVerifications.IsValid(allInfo);
+                if (MsgCode != 0)
+                {
+                    return BadRequest(JsonConvert.SerializeObject(MsgCode));
+                }
+
+                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteams(allInfo, Db.Tournaments.Find(allInfo.tournamentKey));
+                Db.Subteams.AddRange(subteams);
+                Db.SaveChanges();
+
                 var pilotConex = UserMapper.fillHasPilots(allInfo, subteams[0].Id, subteams[1].Id);
                 Db.HasPilots.AddRange(pilotConex);
                 Db.SaveChanges();
