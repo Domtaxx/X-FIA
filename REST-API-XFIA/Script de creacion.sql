@@ -84,7 +84,7 @@ FOREIGN KEY (UserEmail) REFERENCES [USER](Email),
 FOREIGN KEY (RealTeamsName) REFERENCES REALTEAMS([Name]));
 
 Create Table PILOT(
-ID int NOT NULL IDENTITY,
+ID varchar(11) NOT NULL,
 Firstname varchar(30) not null,
 Lastname varchar(30) not null,
 Price float not null,
@@ -99,7 +99,7 @@ FOREIGN KEY (RealTeamsName) REFERENCES REALTEAMS([Name]));
 
 Create Table HAS_PILOT(
 SubTeamsID int NOT NULL,
-PilotID int NOT NULL,
+PilotID varchar(11) NOT NULL,
 dummyData int,
 PRIMARY KEY (SubTeamsID , PilotID),
 FOREIGN KEY (SubTeamsID) REFERENCES SUBTEAMS(id),
@@ -107,7 +107,7 @@ FOREIGN KEY (PilotID) REFERENCES PILOT(id)
 );
 
 Create Table PilotRace(
-PilotID int NOT NULL,
+PilotID varchar(11) NOT NULL,
 [Name] VARCHAR(30) NOT NULL,
 TournamentKey VARCHAR(6) not null,
 points int,
@@ -179,21 +179,6 @@ Insert into RealTeamRace values ('Redbull', 'Street Circuit', 'QWE123', 5);
 Insert into RealTeamRace values ('Mclaren', 'Street Circuit', 'QWE123', 6);
 Insert into RealTeamRace values ('Alpine', 'Street Circuit', 'QWE123', 4);
 
-Insert into PILOT
-Values('Fernando', 'Alonso', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
-
-Insert into PILOT
-Values('Sebastian', 'Vettel', 5,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')
-
-Insert into PILOT
-Values('Daniel', 'Ricciardo', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren')
-
-Insert into PILOT
-Values('Sergio', 'Perez', 7,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sergio Perez redbull.png','FRANCIA','Redbull')
-
-Insert into PILOT
-Values('Lando', 'Norris', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
-
 insert into SUBTEAMS
 Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-03-25','00:00:00')
 
@@ -212,80 +197,92 @@ Values(5,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2030-10
 insert into SUBTEAMS
 Values(6,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2030-10-25','00:00:00')
 
-Insert into PilotRace values (1, 'Street Circuit', 'QWE123', 5);
-Insert into PilotRace values (2, 'Street Circuit', 'QWE123', 4);
-Insert into PilotRace values (3, 'Street Circuit', 'QWE123', 3);
-Insert into PilotRace values (4, 'Street Circuit', 'QWE123', 2);
-Insert into PilotRace values (5, 'Street Circuit', 'QWE123', 1);
+Insert into PILOT
+Values('XFIA-P-1077','Fernando', 'Alonso', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
 
+Insert into PILOT
+Values('XFIA-P-1081','Sebastian', 'Vettel', 5,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')
 
+Insert into PILOT
+Values('XFIA-P-1099','Daniel', 'Ricciardo', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Daniel Ricciardo Mclaren.png','FRANCIA','Mclaren')
 
-insert into HAS_PILOT
-Values(1,1,0)
-insert into HAS_PILOT
-Values(1,2,0)
-insert into HAS_PILOT
-Values(1,3,0)
-insert into HAS_PILOT
-Values(1,4,0)
-insert into HAS_PILOT
-Values(1,5,0)
+Insert into PILOT
+Values('XFIA-P-1043','Sergio', 'Perez', 7,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Sergio Perez redbull.png','FRANCIA','Redbull')
 
-insert into HAS_PILOT
-Values(2,1,0)
-insert into HAS_PILOT
-Values(2,2,0)
-insert into HAS_PILOT
-Values(2,3,0)
-insert into HAS_PILOT
-Values(2,4,0)
-insert into HAS_PILOT
-Values(2,5,0)
+Insert into PILOT
+Values('XFIA-P-1111','Lando', 'Norris', 2,0,0,'C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\Piloto Lando Norris McLaren.png','FRANCIA','Mclaren')
+
+Insert into PilotRace values ('XFIA-P-1077', 'Street Circuit', 'QWE123', 5);
+Insert into PilotRace values ('XFIA-P-1081', 'Street Circuit', 'QWE123', 4);
+Insert into PilotRace values ('XFIA-P-1099', 'Street Circuit', 'QWE123', 3);
+Insert into PilotRace values ('XFIA-P-1043', 'Street Circuit', 'QWE123', 2);
+Insert into PilotRace values ('XFIA-P-1111', 'Street Circuit', 'QWE123', 1);
 
 insert into HAS_PILOT
-Values(3,1,0)
+Values(1,'XFIA-P-1099',0)
 insert into HAS_PILOT
-Values(3,2,0)
+Values(1,'XFIA-P-1081',0)
 insert into HAS_PILOT
-Values(3,3,0)
+Values(1,'XFIA-P-1077',0)
 insert into HAS_PILOT
-Values(3,4,0)
+Values(1,'XFIA-P-1043',0)
 insert into HAS_PILOT
-Values(3,5,0)
+Values(1,'XFIA-P-1111',0)
 
 insert into HAS_PILOT
-Values(4,1,0)
+Values(2,'XFIA-P-1099',0)
 insert into HAS_PILOT
-Values(4,2,0)
+Values(2,'XFIA-P-1081',0)
 insert into HAS_PILOT
-Values(4,3,0)
+Values(2,'XFIA-P-1077',0)
 insert into HAS_PILOT
-Values(4,4,0)
+Values(2,'XFIA-P-1043',0)
 insert into HAS_PILOT
-Values(4,5,0)
+Values(2,'XFIA-P-1111',0)
 
 insert into HAS_PILOT
-Values(5,1,0)
+Values(3,'XFIA-P-1099',0)
 insert into HAS_PILOT
-Values(5,2,0)
+Values(3,'XFIA-P-1081',0)
 insert into HAS_PILOT
-Values(5,3,0)
+Values(3,'XFIA-P-1077',0)
 insert into HAS_PILOT
-Values(5,4,0)
+Values(3,'XFIA-P-1043',0)
 insert into HAS_PILOT
-Values(5,5,0)
+Values(3,'XFIA-P-1111',0)
 
 insert into HAS_PILOT
-Values(6,1,0)
+Values(4,'XFIA-P-1099',0)
 insert into HAS_PILOT
-Values(6,2,0)
+Values(4,'XFIA-P-1081',0)
 insert into HAS_PILOT
-Values(6,3,0)
+Values(4,'XFIA-P-1077',0)
 insert into HAS_PILOT
-Values(6,4,0)
+Values(4,'XFIA-P-1043',0)
 insert into HAS_PILOT
-Values(6,5,0)
+Values(4,'XFIA-P-1111',0)
 
+insert into HAS_PILOT
+Values(5,'XFIA-P-1099',0)
+insert into HAS_PILOT
+Values(5,'XFIA-P-1081',0)
+insert into HAS_PILOT
+Values(5,'XFIA-P-1077',0)
+insert into HAS_PILOT
+Values(5,'XFIA-P-1043',0)
+insert into HAS_PILOT
+Values(5,'XFIA-P-1111',0)
+
+insert into HAS_PILOT
+Values(6,'XFIA-P-1099',0)
+insert into HAS_PILOT
+Values(6,'XFIA-P-1081',0)
+insert into HAS_PILOT
+Values(6,'XFIA-P-1077',0)
+insert into HAS_PILOT
+Values(6,'XFIA-P-1043',0)
+insert into HAS_PILOT
+Values(6,'XFIA-P-1111',0)
 
 go
 Create TRIGGER AfterINSERTUser on [dbo].[USER]
