@@ -10,42 +10,53 @@ namespace REST_API_XFIA.Modules.Fetcher
 
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
 
-        public static void addPointsForTeam(string userEmail, SQL_Model.Models.Tournament tournament)
+        public static void addPointsForTeam(SQL_Model.Models.Tournament tournament)
         {
-            //SQL_Model.Models.User user = Db.Users.Where(U => U.Email.Equals(userEmail)).Single();
-            List<SQL_Model.Models.Subteam> subTeams = SubTeamFetcher.getLatestSubTeam(userEmail,tournament);
-
-            foreach (SQL_Model.Models.Subteam subTeam in subTeams)
+            List<SQL_Model.Models.User> users = tournament.UserEmails.ToList();
+            foreach (SQL_Model.Models.User user in users)
             {
-                SQL_Model.Models.SubteamPoint subteamPoint = new();
-                subteamPoint.TournamentKey = tournament.Key;
-                subteamPoint.SubTeamId = subTeam.Id;
+                List<SQL_Model.Models.Subteam> subTeams = SubTeamFetcher.getLatestSubTeam(user.Email, tournament);
 
-                int totalSubTeamPoints = 0;
-
-                foreach (SQL_Model.Models.HasPilot hasPilot in subTeam.HasPilots)
+                foreach (SQL_Model.Models.Subteam subTeam in subTeams)
                 {
-                    List<SQL_Model.Models.PilotRace> pilotRaces = Db.PilotRaces.
-                                                     Where(P => P.PilotId.Equals(hasPilot.PilotId) 
-                                                     && P.TournamentKey.Equals(tournament.Key)).ToList();
-                    foreach(SQL_Model.Models.PilotRace pilotRace in pilotRaces)
+                    SQL_Model.Models.SubteamPoint subteamPoint = new();
+                    subteamPoint.TournamentKey = tournament.Key;
+                    subteamPoint.SubTeamId = subTeam.Id;
+
+                    int totalSubTeamPoints = 0;
+
+                    foreach (SQL_Model.Models.HasPilot hasPilot in subTeam.HasPilots)
                     {
-                        totalSubTeamPoints += (int) pilotRace.Points;
+                        List<SQL_Model.Models.PilotRace> pilotRaces = Db.PilotRaces.
+                                                         Include(PR => PR.Race).
+                                                         Where( 
+                                                                PR=> (PR.Race.InitialDate>subTeam.CreationDate || (PR.Race.InitialDate == subTeam.CreationDate && PR.Race.InitialHour > subTeam.CreationHour))
+                                                                && PR.PilotId.Equals(hasPilot.PilotId)
+                                                                && PR.TournamentKey.Equals(tournament.Key)
+                                                              ).ToList();
+                        foreach (SQL_Model.Models.PilotRace pilotRace in pilotRaces)
+                        {
+                            totalSubTeamPoints += (int)pilotRace.Points;
+                        }
                     }
+
+                    List<SQL_Model.Models.RealTeamRace> realTeamRaces = Db.RealTeamRaces.
+                                                        Include(RTR => RTR.Race).
+                                                        Where(
+                                                            RTR => (RTR.Race.InitialDate > subTeam.CreationDate || (RTR.Race.InitialDate == subTeam.CreationDate && RTR.Race.InitialHour > subTeam.CreationHour))
+                                                            && RTR.RealTeamName.Equals(subTeam.RealTeamsName)
+                                                            && RTR.TournamentKey.Equals(tournament.Key)
+                                                            ).ToList();
+
+                    foreach (SQL_Model.Models.RealTeamRace realTeamRace in realTeamRaces)
+                    {
+                        totalSubTeamPoints += (int)realTeamRace.Points;
+                    }
+
+                    subteamPoint.Points = totalSubTeamPoints;
+                    Db.SubteamPoints.Add(subteamPoint);
+                    Db.SaveChanges();
                 }
-
-                List<SQL_Model.Models.RealTeamRace> realTeamRaces = Db.RealTeamRaces.
-                                                    Where(RTR => RTR.RealTeamName.Equals(subTeam.RealTeamsName) 
-                                                    && RTR.TournamentKey.Equals(tournament.Key)).ToList();
-
-                foreach (SQL_Model.Models.RealTeamRace realTeamRace in realTeamRaces)
-                {
-                    totalSubTeamPoints += (int) realTeamRace.Points;
-                }
-
-                subteamPoint.Points = totalSubTeamPoints;
-                Db.SubteamPoints.Add(subteamPoint);
-                Db.SaveChanges();
             }
 
 
