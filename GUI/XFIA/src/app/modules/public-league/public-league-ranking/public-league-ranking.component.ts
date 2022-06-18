@@ -3,7 +3,7 @@ import{leagueMemberInterface} from 'src/app/interface/interfaces'
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { publicLeagueRankingService } from 'src/app/dataProviderServices/publicLeagueRanking';
 import { privateLeagueCreateService } from 'src/app/dataProviderServices/privateLeagueCreate';
-
+import { Router } from '@angular/router';
 
 
 
@@ -20,25 +20,11 @@ export class PublicLeagueRankingComponent implements OnInit {
   maxPage!:number;
   userAmount!:number;
   playersTeam:leagueMemberInterface[]=[];
-  constructor(private dataManagement:publicLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService) {
+  constructor(private dataManagement:publicLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService,private router:Router) {
     this.pageNumber=1;
     this.elementPerPage=10;
     this.maxPage=0;
     this.userAmount=0;
-    const object={
-      Position:1,
-      UserName:'Martin',
-      TeamName:'Perritos',
-      SubteamName:'Vida',
-      Points:1000,
-      }
-     
-    for(var i=0;i<100;i++){
-      this.tableDataSource.push(object)
-    }
-    for(var i=0;i<2;i++){
-      this.playersTeam.push(object)
-    }
     this.getData();
     
    }
@@ -126,6 +112,10 @@ export class PublicLeagueRankingComponent implements OnInit {
       this.pageNumber-=1;
       this.getData();
     }
+
+  }
+  redirect(email:string){
+    this.router.navigate(['/profile/view',email])
 
   }
 

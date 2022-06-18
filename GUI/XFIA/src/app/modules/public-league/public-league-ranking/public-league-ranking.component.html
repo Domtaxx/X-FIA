@@ -12,7 +12,7 @@
             </ng-container>
             <ng-container matColumnDef="Usuario">
                 <th mat-header-cell *matHeaderCellDef> Usuario </th>
-                <td mat-cell *matCellDef="let element"> {{element.UserName}} </td>
+                <td mat-cell *matCellDef="let element" (click)="redirect(element.Email)"> {{element.UserName}} </td>
             </ng-container>
             <ng-container matColumnDef="Escuderia">
                 <th mat-header-cell *matHeaderCellDef> Escuderia </th>

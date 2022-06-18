@@ -5,7 +5,7 @@ import { privateLeagueRankingService } from 'src/app/dataProviderServices/privat
 import { privateLeagueCreateService } from 'src/app/dataProviderServices/privateLeagueCreate';
 import { privateLeagueInfo } from 'src/app/interface/interfaces';
 import { alertMessages } from 'src/app/const/messages';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-private-league-ranking',
   templateUrl: './private-league-ranking.component.html',
@@ -16,20 +16,10 @@ export class PrivateLeagueRankingComponent implements OnInit {
   tableDataSource:leagueMemberInterface[]=[];
   displayedColumns=['Posicion','Usuario','Escuderia','Equipo','Puntaje'];
   leagueInfo!:privateLeagueInfo;
-  constructor(private dataManagement:privateLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService) { }
+  constructor(private dataManagement:privateLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService,private router:Router) { }
 
   ngOnInit(): void {
-    const object={
-      Position:1,
-      UserName:'Martin',
-      TeamName:'Perritos',
-      SubteamName:'Vida',
-      Points:1000,
-      }
-      
-    for(var i=0;i<100;i++){
-      this.tableDataSource.push(object)
-    }
+  
     
     this.getData();
     
@@ -90,5 +80,10 @@ export class PrivateLeagueRankingComponent implements OnInit {
   }
   failureMessage(message:alertMessage){
     this.swal.showError(message.header,message.body);
+  }
+
+  redirect(email:string){
+
+    this.router.navigate(['/profile/view',email])
   }
 }

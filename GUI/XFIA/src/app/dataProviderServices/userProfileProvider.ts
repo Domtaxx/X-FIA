@@ -14,8 +14,7 @@ export class userProfileProviderService {
     constructor(private backend:NetworkService,private swal:SweetAlertService){}
     
 
-    getProfileData(callback:(user:userInterface)=>void){
-        const email=getData(localStorageNames.email)
+    getProfileData(email:string,callback:(user:userInterface)=>void){
         this.backend.get_request(appSettings.profileUserGet,{userEmail:email}).subscribe(
             (sucess:userInterface)=>{
                 console.log(sucess)

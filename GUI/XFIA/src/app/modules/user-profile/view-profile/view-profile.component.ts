@@ -4,6 +4,7 @@ import { carInterface } from 'src/app/interface/interfaces';
 import { userInterface } from 'src/app/interface/interfaces';
 import { userProfileProviderService } from 'src/app/dataProviderServices/userProfileProvider';
 import { appSettings } from 'src/app/const/appSettings';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-view-profile',
   templateUrl: './view-profile.component.html',
@@ -20,14 +21,17 @@ export class ViewProfileComponent implements OnInit {
   car1!:carInterface;
   car2!:carInterface;
   imagePath=appSettings.imageGet;
-  constructor(private DataManagement:userProfileProviderService) { }
+  email:string;
+  constructor(private DataManagement:userProfileProviderService,private route:ActivatedRoute) { 
+    this.route.params.subscribe(params=>{this.email=params['email']})
+  }
 
   ngOnInit(): void {
     this.getData();
   }
   getData(){
     this.defaultData();
-    this.DataManagement.getProfileData((user:userInterface)=>{
+    this.DataManagement.getProfileData(this.email,(user:userInterface)=>{
       this.updateData(user);
     })
   }
