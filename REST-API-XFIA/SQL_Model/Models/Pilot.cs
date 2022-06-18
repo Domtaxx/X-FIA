@@ -11,7 +11,7 @@ namespace REST_API_XFIA.SQL_Model.Models
             PilotRaces = new HashSet<PilotRace>();
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; } = null!;
         public string Firstname { get; set; } = null!;
         public string Lastname { get; set; } = null!;
         public double Price { get; set; }
