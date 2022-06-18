@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using REST_API_XFIA.Data_structures;
 using REST_API_XFIA.Modules.Fetcher;
 using REST_API_XFIA.Modules.Mappers;
@@ -37,7 +38,8 @@ namespace REST_API_XFIA.Controllers
                 Db.PilotRaces.AddRange(pilotRaces);
                 Db.RealTeamRaces.AddRange(carRaces);
                 Db.SaveChanges();
-                PointsFetcher.addPointsForTeam(Db.Tournaments.Find(dataUploded.tournamentKey));
+                var tour = Db.Tournaments.Include(T => T.UserEmails).Where(T => T.Key.Equals(dataUploded.tournamentKey)).Single();
+                PointsFetcher.addPointsForTeam(tour);
                 return Ok();
             }
             catch (Exception e)
