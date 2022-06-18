@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using REST_API_XFIA.Data_structures;
+using REST_API_XFIA.Modules.Fetcher;
 using REST_API_XFIA.Modules.Mappers;
 using REST_API_XFIA.Modules.Service;
 using REST_API_XFIA.SQL_Model.DB_Context;
@@ -25,15 +26,18 @@ namespace REST_API_XFIA.Controllers
                 {
                     pilotsInDoc = getPilotsInfo(dataUploded.file.OpenReadStream());
                     teamsInDoc = getTeamsInfo(dataUploded.file.OpenReadStream());
+
                     
                 }catch(InternalDocumentFormatException a)
                 {
                     return BadRequest(1);
                 }
-                
-
-
-
+                List<SQL_Model.Models.PilotRace> pilotRaces = PointsFetcher.getPilotRaces(pilotsInDoc, dataUploded.race, dataUploded.tournamentKey);
+                List<SQL_Model.Models.RealTeamRace> carRaces = PointsFetcher.getRealTeamRaces(teamsInDoc, pilotRaces, dataUploded.race, dataUploded.tournamentKey);
+                Db.PilotRaces.AddRange(pilotRaces);
+                Db.RealTeamRaces.AddRange(carRaces);
+                Db.SaveChanges();
+                PointsFetcher.addPointsForTeam(Db.Tournaments.Find(dataUploded.tournamentKey));
                 return Ok();
             }
             catch (Exception e)

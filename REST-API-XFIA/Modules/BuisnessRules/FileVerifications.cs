@@ -8,11 +8,11 @@
             {
                 return true;
             }
-            if (!data[3].Equals("Piloto") || !data[3].Equals("Constructor"))
+            if (!data[3].Equals("Piloto") && !data[3].Equals("Constructor"))
             {
                 return true;
             }
-            if (!Int32.TryParse(data[4],out int res) || !Int32.TryParse(data[5], out int res1)|| !Int32.TryParse(data[11], out int res2))
+            if (!Int32.TryParse(data[4],out int res) && !Int32.TryParse(data[5], out int res1) && !Int32.TryParse(data[11], out int res2))
             {
                 return true;
             }
@@ -28,7 +28,7 @@
         {
             foreach (string s in list)
             {
-                if(!s.Equals("Y")|| !s.Equals("Y")|| !s.Equals("N/A"))
+                if(!s.Equals("Y") && !s.Equals("N") && !s.Equals("N/A"))
                 {
                     return true;
                 }

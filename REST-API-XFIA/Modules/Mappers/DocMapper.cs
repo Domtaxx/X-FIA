@@ -14,7 +14,7 @@ namespace REST_API_XFIA.Modules.Mappers
             pilot.team = data[1];
             pilot.name = data[2].Split(" ")[0];
             pilot.lastName = data[2].Split(" ")[1];
-            pilot.price = Int32.Parse(data[4]);
+            pilot.price = double.Parse(data[4], System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
             pilot.classificationPos = Int32.Parse(data[5]);
             pilot.racePos = Int32.Parse(data[11]);
             if (data[6].Equals("Y"))
@@ -61,7 +61,7 @@ namespace REST_API_XFIA.Modules.Mappers
             var team = new Data_structures.TeamDocument();
             team.id = data[1];
             team.name = data[2];
-            team.price = Int32.Parse(data[4]);
+            team.price = double.Parse(data[4], System.Globalization.NumberStyles.AllowDecimalPoint, System.Globalization.NumberFormatInfo.InvariantInfo);
             return team;
         }
     }

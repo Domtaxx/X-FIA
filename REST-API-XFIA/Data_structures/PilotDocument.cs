@@ -6,7 +6,7 @@
         {
             team = "";
             name = "";
-            price = -1;
+            price = -1.0;
             classificationPos = -1;
             Q1 = false;
             Q2 = false;
@@ -24,7 +24,7 @@
         public string team { get; set; }
         public string name { get; set; }
         public string lastName { get; set; }
-        public int price { get; set; }
+        public double price { get; set; }
         public int classificationPos{ get; set; }
         public bool Q1 { get; set; }
         public bool Q2 { get; set; }

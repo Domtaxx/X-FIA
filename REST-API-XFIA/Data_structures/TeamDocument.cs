@@ -6,10 +6,10 @@
         {
             id = "";
             name = "";
-            price = -1;
+            price = -1.0;
         }
         public string id { get; set; }
         public string name { get; set; }
-        public int price { get; set; }
+        public double price { get; set; }
     }
 }

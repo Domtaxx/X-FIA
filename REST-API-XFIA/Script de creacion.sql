@@ -156,6 +156,8 @@ VALUES ('QWE126','GP de Francia',  '2030-10-25', '00:00:00', '2030-12-27', '9:00
 
 INSERT INTO Race
 VALUES ('Street Circuit', 'ARABIA SAUDI',0,'Jeddah', '2022-03-26', '17:00:00', '2022-03-27', '4:00:00', 'QWE123');
+INSERT INTO Race
+VALUES ('Street Circuit 2', 'FRANCIA',0,'Paris', '2022-10-26', '4:00:00', '2022-10-26', '16:00:00', 'QWE125');
 
 INSERT INTO dbo.[User]
 VALUES('Briwag','3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e','briwag88@hotmail.com','Los tornados locos','C:\Users\briwa\Documents\Github\X-FIA\REST-API-XFIA\bin\Debug\net6.0\Files\Images\briwag88@hotmail.com.png','FRANCIA',null)

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using REST_API_XFIA.Data_structures;
 using REST_API_XFIA.SQL_Model.DB_Context;
-
+using REST_API_XFIA.SQL_Model.Models;
 
 namespace REST_API_XFIA.Modules.Fetcher
 {
@@ -9,7 +9,6 @@ namespace REST_API_XFIA.Modules.Fetcher
     {
 
         private static RESTAPIXFIA_dbContext Db = new RESTAPIXFIA_dbContext();
-
         public static void addPointsForTeam(SQL_Model.Models.Tournament tournament)
         {
             List<SQL_Model.Models.User> users = tournament.UserEmails.ToList();
@@ -59,17 +58,70 @@ namespace REST_API_XFIA.Modules.Fetcher
                 }
             }
         }
+
+        internal static List<RealTeamRace> getRealTeamRaces(List<TeamDocument> teamsInDoc, List<SQL_Model.Models.PilotRace> pilotPoints, string race, string tournamentKey)
+        {
+            var CarPoints = new List<RealTeamRace>();
+            foreach (TeamDocument TD in teamsInDoc)
+            {
+                var temp = new RealTeamRace();
+                var team = Db.Realteams.Include(RT=> RT.Pilots).Where(RT => RT.Name == TD.name).Single();
+                team.Price = TD.price;
+                temp.RealTeamName = team.Name;
+                temp.Name = race;
+                temp.TournamentKey = tournamentKey;
+                temp.Points = 0;
+                foreach(Pilot P in team.Pilots)
+                {
+                    temp.Points += pilotPoints.Find(PP => PP.PilotId == P.Id).Points;
+                }
+                CarPoints.Add(temp);
+                Db.Realteams.Update(team);
+                Db.SaveChanges();
+            }
+            return CarPoints;
+        }
+
         public static List<SQL_Model.Models.PilotRace> getPilotRaces(List<PilotDocument> pilotInfo, string raceName, string tourKey)
         {
             var res = new List<SQL_Model.Models.PilotRace>();
             foreach (PilotDocument PD in pilotInfo)
             {
                 var temp = new SQL_Model.Models.PilotRace();
+                var pilot = Db.Pilots.Where(P => P.Id == PD.id).Single();
                 temp.Name = raceName;
                 temp.TournamentKey = tourKey;
                 temp.PilotId = PD.id;
+                if (PD.classificationPos <= 10)
+                {
+                    pilot.HotstreakClassification += 1;
+                }
+                else
+                {
+                    pilot.HotstreakClassification = 0;
+                }
+                if (PD.racePos <= 10)
+                {
+                    pilot.HotstreakRace += 1;
+                }
+                else
+                {
+                    pilot.HotstreakRace = 0;
+                }
+                temp.Points = getPoints(PD);
+                if (pilot.HotstreakRace > 1)
+                {
+                    temp.Points += pilot.HotstreakRace * 5;
+                }
+                if (pilot.HotstreakClassification > 1)
+                {
+                    temp.Points += pilot.HotstreakRace * 2;
+                }
+                pilot.Price = PD.price;
+                Db.Pilots.Update(pilot);
+                Db.SaveChanges();
+                res.Add(temp);
             }
-
             return res;
         }
         public static int getPoints(PilotDocument pilot)
@@ -160,4 +212,3 @@ namespace REST_API_XFIA.Modules.Fetcher
         }
     }
 }
-    }
