@@ -34,9 +34,6 @@ namespace REST_API_XFIA.Modules.Mappers
             team1.UserEmail = userInfo.Email;
             team1.CreationHour = DateTime.Now.TimeOfDay;
             team1.CreationDate = DateTime.Now.Date;
-            
-
-
 
             team2.Id = lastId[0].Id + 2;
             team2.RealTeamsName = userInfo.Car2;

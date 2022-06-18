@@ -4,9 +4,13 @@ namespace REST_API_XFIA.Data_structures
 {
     public class DataUploded
     {
+        public string tournamentKey { get; set; }
+        public string race { get; set; }
+        
         [Required(ErrorMessage = "Please select a file.")]
         [AllowedExtensions(new string[] { ".csv"})]
         public IFormFile file { get; set; }
+        
 
     }
     public class AllowedExtensionsAttribute : ValidationAttribute

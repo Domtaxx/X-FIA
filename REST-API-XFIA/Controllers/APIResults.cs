@@ -1,5 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using REST_API_XFIA.Data_structures;
+using REST_API_XFIA.Modules.Mappers;
+using REST_API_XFIA.Modules.Service;
 using REST_API_XFIA.SQL_Model.DB_Context;
+using static REST_API_XFIA.Modules.Service.DocumentReader;
 
 namespace REST_API_XFIA.Controllers
 {
@@ -10,26 +14,29 @@ namespace REST_API_XFIA.Controllers
 
 
         [HttpPost]
-        public ActionResult postFile([FromForm] Data_structures.DataUploded dataUploded)
+        public ActionResult postFile([FromForm] DataUploded dataUploded)
         {
             try
             {
-                using (var fileStream = dataUploded.file.OpenReadStream())
-                using (var reader = new StreamReader(fileStream))
+                List<PilotDocument> pilotsInDoc = new();
+                List<TeamDocument> teamsInDoc = new();
+                try
                 {
-                    string data;
-                    while ((data = reader.ReadLine()) != null)
-                    {
-                        var row = data.Split(',');
-
-                    }
+                    pilotsInDoc = getPilotsInfo(dataUploded.file.OpenReadStream());
+                    teamsInDoc = getTeamsInfo(dataUploded.file.OpenReadStream());
+                }catch(InternalDocumentFormatException a)
+                {
+                    return BadRequest(1);
                 }
+                List<SQL_Model.Models.Pilot> pilotsInDb = Db.Pilots.ToList();
 
-                return Ok(Db.Countries.ToList());
+
+
+                return Ok();
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem("Error del servidor");
             }
         }
     }
