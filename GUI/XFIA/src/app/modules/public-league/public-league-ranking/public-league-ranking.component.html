@@ -1,8 +1,8 @@
 <div class="mainDiv">
     <h1 id="leagueTitle">Liga Pública</h1>
     <div class="playerTeamInfo">
-        <label>{{'Puesto '+playersTeam[0].SubteamName+": " +playersTeam[0].Position}}</label>
-        <label>{{'Puesto '+playersTeam[1].SubteamName+": " +playersTeam[1].Position}}</label>
+        <label *ngIf="this.playersTeam.length>=1">{{'Puesto '+playersTeam[0].SubteamName+": " +playersTeam[0].Position}}</label>
+        <label *ngIf="this.playersTeam.length>=2">{{'Puesto '+playersTeam[1].SubteamName+": " +playersTeam[1].Position}}</label>
     </div>
     <div class="tableDiv mat-elevation-z8">
         <table class="table" mat-table [dataSource]="tableDataSource">
@@ -12,7 +12,7 @@
             </ng-container>
             <ng-container matColumnDef="Usuario">
                 <th mat-header-cell *matHeaderCellDef> Usuario </th>
-                <td mat-cell *matCellDef="let element"> {{element.UserName}} </td>
+                <td mat-cell *matCellDef="let element" (click)="redirect(element.UserEmail)"> {{element.UserName}} </td>
             </ng-container>
             <ng-container matColumnDef="Escuderia">
                 <th mat-header-cell *matHeaderCellDef> Escuderia </th>
