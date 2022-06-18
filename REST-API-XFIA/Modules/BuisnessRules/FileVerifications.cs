@@ -34,5 +34,17 @@
                 }
             }return false;
         }
+
+        public static bool CheckIfAllPilotsNotValid(List<SQL_Model.Models.Pilot>pilotsInDoc, List<SQL_Model.Models.Pilot> pilotsInDb)
+        {
+            foreach(SQL_Model.Models.Pilot pilot in pilotsInDb)
+            {
+                var temp = pilotsInDoc.FindAll(P=> P.Id == pilot.Id);
+                if(temp.Count > 1 || temp.Count == 0)
+                {
+                    return true;
+                }
+            }return false;
+        }
     }
 }

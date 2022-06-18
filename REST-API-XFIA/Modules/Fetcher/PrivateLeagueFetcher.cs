@@ -21,7 +21,12 @@ namespace REST_API_XFIA.Modules.Fetcher
                 {
                     data = new PublicLeagueResponse();
                     var pilotsInSub = Db.HasPilots.Where(HP => HP.SubTeamsId == subTeam.Id).ToList();
-                    data.Points = (int)Db.SubteamPoints.Where(STP => STP.SubTeamId == subTeam.Id && STP.TournamentKey == tournament.Key).Single().Points;
+                    var SubTeamPoints = Db.SubteamPoints.Where(STP => STP.SubTeamId == subTeam.Id && STP.TournamentKey == tournament.Key).ToList();
+                    data.Points = 0;
+                    if (SubTeamPoints.Count > 0)
+                    {
+                        data.Points = (int)SubTeamPoints[0].Points;
+                    }
                     data.SubteamName = subTeam.Name;
                     data.TeamName = user.TeamsName;
                     data.UserName = user.Username;
