@@ -67,7 +67,6 @@ namespace REST_API_XFIA.Controllers
                 {
                     return BadRequest(1);
                 }
-
                 int amount = 0;
                 int residue = 0;
                 amount = (tour.UserEmails.Count()*2) / amountByPage;
@@ -103,7 +102,5 @@ namespace REST_API_XFIA.Controllers
                 return BadRequest(4);
             }
         }
-        
-
     }
 }
