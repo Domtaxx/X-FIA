@@ -27,7 +27,7 @@ namespace REST_API_XFIA.Controllers
                 return Problem();
             }
         }
-        [Route("Admin/Tournament/Carreras")]
+        [Route("Admin/Torneo/Carreras")]
         [HttpGet]
         public ActionResult listAllRacesInTournament(string tournamentKey)
         {

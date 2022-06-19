@@ -47,7 +47,7 @@ namespace REST_API_XFIA.Modules.Mappers
 
             return subteams;
         }
-        public static List<SQL_Model.Models.Subteam> fillSubteams(Data_structures.SubTeamModifierInfo userInfo, SQL_Model.Models.Tournament tournament)
+        public static List<SQL_Model.Models.Subteam> fillSubteams(Data_structures.AllUserInfo userInfo, SQL_Model.Models.Tournament tournament)
         {
             List<SQL_Model.Models.Subteam> subteams = new List<SQL_Model.Models.Subteam>();
             SQL_Model.Models.Subteam team1 = new SQL_Model.Models.Subteam();
@@ -127,61 +127,6 @@ namespace REST_API_XFIA.Modules.Mappers
 
             return PilotConex;
         }
-        public static List<SQL_Model.Models.HasPilot> fillHasPilots(Data_structures.SubTeamModifierInfo userInfo, int subTeam1, int subTeam2)
-        {
-            List<SQL_Model.Models.HasPilot> PilotConex = new List<SQL_Model.Models.HasPilot>();
-            var pilot1 = new SQL_Model.Models.HasPilot();
-            var pilot2 = new SQL_Model.Models.HasPilot();
-            var pilot3 = new SQL_Model.Models.HasPilot();
-            var pilot4 = new SQL_Model.Models.HasPilot();
-            var pilot5 = new SQL_Model.Models.HasPilot();
-
-            var pilot6 = new SQL_Model.Models.HasPilot();
-            var pilot7 = new SQL_Model.Models.HasPilot();
-            var pilot8 = new SQL_Model.Models.HasPilot();
-            var pilot9 = new SQL_Model.Models.HasPilot();
-            var pilot10 = new SQL_Model.Models.HasPilot();
-
-            pilot1.PilotId = userInfo.pilot1Subteam1;
-            pilot2.PilotId = userInfo.pilot2Subteam1;
-            pilot3.PilotId = userInfo.pilot3Subteam1;
-            pilot4.PilotId = userInfo.pilot4Subteam1;
-            pilot5.PilotId = userInfo.pilot5Subteam1;
-
-            pilot6.PilotId = userInfo.pilot1Subteam2;
-            pilot7.PilotId = userInfo.pilot2Subteam2;
-            pilot8.PilotId = userInfo.pilot3Subteam2;
-            pilot9.PilotId = userInfo.pilot4Subteam2;
-            pilot10.PilotId = userInfo.pilot5Subteam2;
-
-            pilot1.SubTeamsId = subTeam1;
-            pilot2.SubTeamsId = subTeam1;
-            pilot3.SubTeamsId = subTeam1;
-            pilot4.SubTeamsId = subTeam1;
-            pilot5.SubTeamsId = subTeam1;
-
-            pilot6.SubTeamsId = subTeam2;
-            pilot7.SubTeamsId = subTeam2;
-            pilot8.SubTeamsId = subTeam2;
-            pilot9.SubTeamsId = subTeam2;
-            pilot10.SubTeamsId = subTeam2;
-
-
-            PilotConex.Add(pilot1);
-            PilotConex.Add(pilot2);
-            PilotConex.Add(pilot3);
-            PilotConex.Add(pilot4);
-            PilotConex.Add(pilot5);
-            PilotConex.Add(pilot6);
-            PilotConex.Add(pilot7);
-            PilotConex.Add(pilot8);
-            PilotConex.Add(pilot9);
-            PilotConex.Add(pilot10);
-
-            return PilotConex;
-        }
-
-
 
         public static Data_structures.UserResponse fillUserResponse(SQL_Model.Models.User user, List<SQL_Model.Models.Subteam> subteams)
         {
