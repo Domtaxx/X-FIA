@@ -3,15 +3,28 @@ import { CommonModule } from '@angular/common';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { UserProfileRoutingModule } from './user-profile-routing.module';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { EditProfileInfoComponent } from './edit-profile-info/edit-profile-info.component';
+import { EditProfileTeamComponent } from './edit-profile-team/edit-profile-team.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSelectModule } from '@angular/material/select';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatStepperModule} from '@angular/material/stepper';
 @NgModule({
   declarations: [
-    ViewProfileComponent
+    ViewProfileComponent,
+    EditProfileComponent,
+    EditProfileInfoComponent,
+    EditProfileTeamComponent
   ],
   imports: [
     CommonModule,
     UserProfileRoutingModule,
-    MatTabsModule
+    MatTabsModule,
+    MatIconModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatStepperModule
   ]
 })
 export class UserProfileModule { }
