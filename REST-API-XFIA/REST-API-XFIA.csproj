@@ -35,6 +35,7 @@
 
   <ItemGroup>
     <Folder Include="SQL_Model\Models\" />
+    <Folder Include="Files\Images\" />
   </ItemGroup>
 
 </Project>

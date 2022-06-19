@@ -24,7 +24,21 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
+            }
+        }
+        [Route("Admin/Tournament/Carreras")]
+        [HttpGet]
+        public ActionResult listAllRacesInTournament(string tournamentKey)
+        {
+            try
+            {
+                var races = Db.Races.Where(R => R.TournamentKey == tournamentKey).ToList();
+                return Ok(races);
+            }
+            catch (Exception e)
+            {
+                return Problem();
             }
         }
 
@@ -43,7 +57,7 @@ namespace REST_API_XFIA.Controllers
                 return Ok(JsonConvert.SerializeObject(MsgCode));// Added succesfully
             }catch(Exception e)
             {
-                return BadRequest(JsonConvert.SerializeObject(4));//Server failed
+                return Problem();//Server failed
             }
         }
     }
