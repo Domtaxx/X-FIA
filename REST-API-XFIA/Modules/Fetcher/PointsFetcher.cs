@@ -18,9 +18,7 @@ namespace REST_API_XFIA.Modules.Fetcher
 
                 foreach (SQL_Model.Models.Subteam subTeam in subTeams)
                 {
-                    SQL_Model.Models.SubteamPoint subteamPoint = new();
-                    subteamPoint.TournamentKey = tournament.Key;
-                    subteamPoint.SubTeamId = subTeam.Id;
+                    
 
                     int totalSubTeamPoints = 0;
 
@@ -51,9 +49,24 @@ namespace REST_API_XFIA.Modules.Fetcher
                     {
                         totalSubTeamPoints += (int)realTeamRace.Points;
                     }
-
-                    subteamPoint.Points = totalSubTeamPoints;
-                    Db.SubteamPoints.Add(subteamPoint);
+                    SQL_Model.Models.SubteamPoint subteamPoint = Db.SubteamPoints.Where(
+                                                                                STP=> STP.TournamentKey.Equals(tournament.Key) 
+                                                                                && STP.SubTeamId.Equals(subTeam.Id)
+                                                                                ).Single();
+                    if(subteamPoint.TournamentKey == null)
+                    {
+                        subteamPoint = new();
+                        subteamPoint.Points = totalSubTeamPoints;
+                        subteamPoint.TournamentKey = tournament.Key;
+                        subteamPoint.SubTeamId = subTeam.Id;
+                        Db.SubteamPoints.Add(subteamPoint);
+                    }
+                    else
+                    {
+                        
+                        subteamPoint.Points = totalSubTeamPoints;
+                        Db.SubteamPoints.Update(subteamPoint);
+                    }
                     Db.SaveChanges();
                 }
             }
