@@ -55,7 +55,7 @@ export class alertMessages{
     //File Error
     public static rejectedImageFileHeader="Formato Incompatible"
     public static rejectedImageFileBody="Solo estan permitidos los archivos .jpg y .png"
-    public static rejectedCSVFileBody='Solo se aceptan archivos .csv'
+    public static rejectedCSVFileBody='Solo se aceptan archivos .csv';
     //button text
     public static confirmButtonText='Aceptar';
     public static cancelButtonText="Cancelar";

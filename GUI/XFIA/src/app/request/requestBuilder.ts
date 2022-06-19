@@ -6,6 +6,8 @@ import { EditProfileTeamComponent } from "../modules/user-profile/edit-profile-t
 import { EditProfileInfoComponent } from "../modules/user-profile/edit-profile-info/edit-profile-info.component";
 import { sha256, sha224 } from 'js-sha256';
 import { profileEditInterface } from "../interface/interfaces";
+import { getData } from "../functions/browserDataInfo";
+import { localStorageNames } from "../const/localStorageNames";
 export function userRegisterRequest(user:UserRegisterComponent,team1:RegisterTeamComponent,team2:RegisterTeamComponent):userRegisterInterface{
     const userForm:UntypedFormGroup=user.userRegisterForm;
     const team1Form:UntypedFormGroup=team1.teamForm;
@@ -43,6 +45,7 @@ export function userEditRequest(user:EditProfileInfoComponent,team1:EditProfileT
     const team2Form:UntypedFormGroup=team2.teamForm;
     var registerRequest:profileEditInterface={
         Username:userForm.controls['userName'].value,
+        Email:getData(localStorageNames.email),
         TeamsName:userForm.controls['teamName'].value,
         TeamsLogo:user.imageFile,
         CountryName:userForm.controls['countryName'].value,

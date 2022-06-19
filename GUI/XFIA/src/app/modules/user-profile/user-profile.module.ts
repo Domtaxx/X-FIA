@@ -10,6 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatStepperModule} from '@angular/material/stepper';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ViewProfileComponent,
@@ -24,7 +25,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatIconModule,
     MatSelectModule,
     ReactiveFormsModule,
-    MatStepperModule
+    MatStepperModule,
+    FormsModule
   ]
 })
 export class UserProfileModule { }

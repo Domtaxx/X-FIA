@@ -29,32 +29,32 @@
                         <mat-label>{{inputHintArray[memberIndex]}}
                         </mat-label>
                         <mat-select *ngIf="memberIndex==pilot1Index"  formControlName="pilot1" (valueChange)="onChangedInput($event)" >
-                          <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                          <mat-option *ngFor='let pilot of availablePilots' [value]="pilot.Id" >
                             {{pilot.Firstname+" "+pilot.Lastname}}
                           </mat-option>
                         </mat-select>
                         <mat-select *ngIf="memberIndex==pilot2Index" formControlName="pilot2" (valueChange)="onChangedInput($event)">
-                            <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                            <mat-option *ngFor='let pilot of availablePilots' [value]="pilot.Id" >
                               {{pilot.Firstname+" "+pilot.Lastname}}
                             </mat-option>
                           </mat-select>
                           <mat-select *ngIf="memberIndex==pilot3Index" formControlName="pilot3" (valueChange)="onChangedInput($event)">
-                            <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                            <mat-option *ngFor='let pilot of availablePilots'[value]="pilot.Id" >
                               {{pilot.Firstname+" "+pilot.Lastname}}
                             </mat-option>
                           </mat-select>
                           <mat-select *ngIf="memberIndex==pilot4Index" formControlName="pilot4" (valueChange)="onChangedInput($event)">
-                            <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                            <mat-option *ngFor='let pilot of availablePilots' [value]="pilot.Id" >
                               {{pilot.Firstname+" "+pilot.Lastname}}
                             </mat-option>
                           </mat-select>
                           <mat-select *ngIf="memberIndex==pilot5Index" formControlName="pilot5" (valueChange)="onChangedInput($event)">
-                            <mat-option *ngFor='let pilot of availablePilots' value={{pilot.Id}} >
+                            <mat-option *ngFor='let pilot of availablePilots' [value]="pilot.Id" >
                               {{pilot.Firstname+" "+pilot.Lastname}}
                             </mat-option>
                           </mat-select>
                           <mat-select *ngIf="memberIndex==carIndex" formControlName="car" (valueChange)="onChangedInput($event)">
-                            <mat-option *ngFor='let car of availableCars' value={{car.Name}} >
+                            <mat-option *ngFor='let car of availableCars' [value]="car.Name">
                               {{car.Name}}
                             </mat-option>
                           </mat-select>

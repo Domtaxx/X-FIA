@@ -110,6 +110,8 @@ export class EditProfileInfoComponent implements OnInit {
   resetImage(){
     this.userRegisterForm.controls['image'].reset();
     this.fileUploaded=false;
+    this.image=''
+    this.imageFile=null;
   }
   /*
   input:none
@@ -134,6 +136,14 @@ export class EditProfileInfoComponent implements OnInit {
     this.getCountries()
      this.image="";
     this.imageFile=undefined;
+  }
+  setInitialData(userName:string,TeamName:string,TeamLogo:string){
+    this.userRegisterForm.controls['userName'].setValue(userName);
+    this.userRegisterForm.controls['teamName'].setValue(TeamName);
+    //this.userRegisterForm.controls['image'].setValue(TeamLogo);
+    this.setImage(TeamLogo);
+    this.fileUploaded=true;
+
   }
 
 

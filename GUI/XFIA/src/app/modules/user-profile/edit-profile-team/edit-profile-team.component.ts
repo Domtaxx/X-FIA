@@ -10,6 +10,7 @@ import { appColor } from 'src/app/const/appSettings';
 import { pilotsDoesntMatch } from 'src/app/validations/customFieldValidations';
 import{overBudget} from 'src/app/validations/customFieldValidations'
 import { totalBudget } from 'src/app/interface/interfaces';
+import { MatPaginatorDefaultOptions } from '@angular/material/paginator';
 @Component({
   selector: 'app-edit-profile-team',
   templateUrl: './edit-profile-team.component.html',
@@ -95,7 +96,7 @@ export class EditProfileTeamComponent implements OnInit {
     */
   ngOnInit(): void {
     this.resetData()
-
+    
   }
   /*
   input:none
@@ -193,6 +194,7 @@ export class EditProfileTeamComponent implements OnInit {
       (sucess)=>{
         this.cost.budget=sucess;
         this.cost.leftBudget=sucess;
+        this.updateBudget();
         
       }
     )
@@ -225,6 +227,9 @@ export class EditProfileTeamComponent implements OnInit {
   updateBudget(){
    var currentValue=budgedCalc.calculateTeamCost(this.selectedPilots,this.selectedCar);
    var leftBudget=this.cost?.budget-currentValue;
+   console.log('budget')
+   console.log(this.cost.budget)
+   console.log(leftBudget)
    this.outBudget=leftBudget<0;
    this.cost.leftBudget=leftBudget;
   }
@@ -270,17 +275,22 @@ export class EditProfileTeamComponent implements OnInit {
 
   resetData(){
     this.memberIndex=0;
-    this.selectedPilots=new Map()
-    this.selectedCar=undefined;
     this.getBudget()
     this.getCars()
     this.getRunners()
-    this.currentImage=appSettings.defaultPilotPhotoRoute;
-    this.currentCountryImage=appSettings.defaultCountryPhoto;
-    this.currentTeamImage=appSettings.defaultTeamPhoto;
-    this.currentName=appSettings.defaultPilotName;
-    this.currentPrice=0;
-    this.outBudget=false;
+    this.updateMetadata();
+  }
+  setInitial(pilots:pilotInterface[],car:carInterface,teamName:string){
+    this.selectedPilots=new Map();
+    for(var i=0;i<pilots.length;i++){
+      this.selectedPilots.set(i,pilots[i])
+      this.teamForm.controls['pilot'+(i+1)].setValue(pilots[i].Id)
+    }
+    this.selectedCar=car;
+    this.teamForm.controls['car'].setValue(car.Name);
+    this.teamForm.controls['teamName'].setValue(teamName)
+    this.resetData()
+
   }
 
 }

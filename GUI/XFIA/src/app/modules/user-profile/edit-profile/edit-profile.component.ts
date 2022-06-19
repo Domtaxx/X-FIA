@@ -3,13 +3,16 @@ import { EditProfileInfoComponent } from '../edit-profile-info/edit-profile-info
 import { EditProfileTeamComponent } from '../edit-profile-team/edit-profile-team.component';
 import { MatStepper } from '@angular/material/stepper';
 import { userEditRequest } from 'src/app/request/requestBuilder';
-import { profileEditInterface, userRegisterInterface } from 'src/app/interface/interfaces';
+import { profileEditInterface, userInterface, userRegisterInterface } from 'src/app/interface/interfaces';
 import { NetworkService } from 'src/app/services/network.service';
 import { SweetAlertService } from 'src/app/services/sweet-alert.service';
 import { appSettings } from 'src/app/const/appSettings';
 import { userRegisterMessage } from 'src/app/errorCodeHandler/errorHandler';
 import { alertMessage } from 'src/app/interface/interfaces';
 import { alertMessages } from 'src/app/const/messages';
+import { userProfileProviderService } from 'src/app/dataProviderServices/userProfileProvider';
+import { getData } from 'src/app/functions/browserDataInfo';
+import { localStorageNames } from 'src/app/const/localStorageNames';
 
 @Component({
   selector: 'app-edit-profile',
@@ -22,7 +25,15 @@ export class EditProfileComponent implements OnInit {
   @ViewChild('team1') team1!:EditProfileTeamComponent;
   @ViewChild('team2') team2!:EditProfileTeamComponent;
   @ViewChild('stepper')stepper!:MatStepper;
-  constructor(private swal:SweetAlertService,private backend:NetworkService) { }
+  constructor(private swal:SweetAlertService,private backend:NetworkService,private dataProvider:userProfileProviderService) {
+    dataProvider.getProfileData(getData(localStorageNames.email),
+    (user:userInterface)=>{
+      
+      this.userForm.setInitialData(user.Username,user.TeamsName,appSettings.imageGet+user.TeamsLogo);
+      this.team1.setInitial(user.Subteams[0].Pilots,user.Subteams[0].RealTeamsNameNavigation,user.Subteams[0].Name);
+      this.team2.setInitial(user.Subteams[1].Pilots,user.Subteams[1].RealTeamsNameNavigation,user.Subteams[1].Name);
+    })
+   }
 
   ngOnInit(): void {
   }

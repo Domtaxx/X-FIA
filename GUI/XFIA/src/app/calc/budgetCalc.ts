@@ -8,6 +8,8 @@ export class budgedCalc{
     */
     public static calculateTeamCost(pilots:Map<number,pilotInterface>,car?:carInterface):number{
         var totalCost=0;
+        console.log(pilots)
+        console.log(car);
         const pilotIterator=pilots.values();
         var done=false;
         var current;
@@ -26,6 +28,7 @@ export class budgedCalc{
         if(car!=undefined){
             totalCost+=car.Price;
         }
+        console.log(totalCost)
         return totalCost
 
     }

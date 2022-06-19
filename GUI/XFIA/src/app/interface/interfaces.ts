@@ -81,6 +81,7 @@ export interface userRegisterInterface{
 }
 export interface profileEditInterface{
     Username:string;
+    Email:string;
     TeamsName:string;
     TeamsLogo?:File;
     CountryName:string;
