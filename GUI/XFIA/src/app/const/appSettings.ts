@@ -17,8 +17,9 @@ export class appSettings{
     public static privateLeagueKeyRoute='User/PrivateLeague/League';
     public static privateCreatePrivateLeagueRoute='User/PrivateLeague';
     public static privateLeagueLeaveRoute='User/PrivateLeague';
-    public static allTournamentsRoute='';
-    public static tournamentRaces='';
+    public static allTournamentsRoute='admin/Campeonato';
+    public static tournamentRaces='Admin/Carreras';
+    public static publishResults='Resultados';
     public static profileUserGet="Usuario/Unico";
     public static loginRoute='Usuario/Login';
     public static defaultPilotPhotoRoute="../../../../assets/images/pilotAvatar.png";

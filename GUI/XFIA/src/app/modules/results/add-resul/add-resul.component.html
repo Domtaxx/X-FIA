@@ -3,14 +3,14 @@
     <label class="title">Resultados carreras</label>
     <form [formGroup]="resultForm">
         <div class="row">
-            <div class="p40">
+            <div class="p30">
                 <label class="formFieldLabel">Torneo</label>
                 
             </div>
-            <div class="p60">
+            <div class="p70">
                 <select formControlName="tournament">
-                    <option *ngFor="let tournament of tournaments" value={{tournament.llave}}>
-                        {{tournament.nombreCm+' '+tournament.llave}}
+                    <option *ngFor="let tournament of tournaments" value={{tournament.key}}>
+                        {{tournament.name+' '+tournament.key}}
                     </option>
                 </select>
                 <div class="warning" *ngIf="resultForm.get('tournament')?.hasError('required')">
@@ -21,11 +21,11 @@
 
         </div>
         <div class="row" *ngIf="!resultForm.get('tournament')?.hasError('required')">
-            <div class="p40">
+            <div class="p30">
                 <label class="formFieldLabel">Carrera</label>
                 
             </div>
-            <div class="p60">
+            <div class="p70">
                 <select formControlName="race">
                     <option *ngFor="let race of races" value={{race.name}>
                         {{race.name}}
@@ -48,6 +48,7 @@
         <div class="warning" *ngIf="resultForm.get('file')?.hasError('required')">
             Se debe seleccionar un archivo
         </div>
+        <button class="confirmButton" (click)="submitResults()">Subir Resultados</button>
     </form>
     
     

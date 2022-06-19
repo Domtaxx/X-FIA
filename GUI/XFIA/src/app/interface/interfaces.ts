@@ -8,8 +8,8 @@ export interface alertMessage{
 
 //interface the represents the tournament with the information needed
 export interface tournamentInterface{
-    nombreCm:string;
-    llave:string
+    name:string;
+    key:string
     
 }
 export interface raceInterface{

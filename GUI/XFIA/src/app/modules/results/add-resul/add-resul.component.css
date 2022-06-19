@@ -4,7 +4,7 @@ div{
 }
 .title{
     font-size: 4vh;
-    margin-top: 2vh;
+    margin-top: 4vh;
 
 }
 .mainDiv{
@@ -42,7 +42,7 @@ form{
     font-size: 3vh;
 }
 .row{
-    width: 90%;
+    width: 70%;
     height: 15%;
     display: flex;
 	flex-direction: row;
@@ -53,7 +53,7 @@ form{
 
 
 }
-.p40,.p60{
+.p30,.p70{
     display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -62,13 +62,13 @@ form{
 	align-content: center;
     
 }
-.p40{
-    width: 40%;
+.p30{
+    width: 30%;
     background-color: white;
     height: 50%;
 }
-.p60{
-    width: 60%;
+.p70{
+    width: 70%;
 
     height: 80%;
 }
@@ -83,7 +83,7 @@ select{
     font-weight: bold;
 }
 .frame{
-    width: 40%;
+    width: 30%;
     height: 50%;
     background-color: white;
     display: block;
@@ -109,14 +109,14 @@ select{
 #uploadFileText{
     position:absolute;
     top:10%;
-    right: 30%
+    right: 25%
   
     
 }
 #uploadFileIcon{
     position: absolute;
-    top:45%;
-    right: 50%;
+    top:39%;
+    right: 52%;
     font-size: 10vh;
 }
 .warning{
@@ -124,4 +124,17 @@ select{
     font-size: 1.5vmin;
     padding: 2%;
     color:#991C1C;
+}
+.confirmButton{
+    width: 30%;
+    font-size: 3vh;
+    background-color: red;
+    border-radius: 25px;
+    border-color: gray;
+    border-style: solid;
+    color: white;
+    padding: 1.5vh;
+    margin-bottom: 3vh;
+
+
 }

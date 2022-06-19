@@ -38,5 +38,11 @@ export class AddResulComponent implements OnInit {
     })
 
   }
+  submitResults(){
+    const tournamentKey:string=this.resultForm.controls['tournament'].value;
+    const race:string=this.resultForm.controls['race'].value;
+    const file:File=this.resultForm.controls['file'].value;
+    this.dataProvider.uploadResults(tournamentKey,race,file);
+  }
 
 }
