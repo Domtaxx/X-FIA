@@ -133,3 +133,22 @@ export function privateLeagueJoinError(errorCode:any){
     }
     return message;
 }
+
+export function resultsUploadError(errorCode){
+    var header:string=alertMessages.rejected;
+    var body:string='';
+    switch(errorCode){
+        case 1:
+            body=alertMessages.wrongFormatResultsError;
+            break;
+     
+
+            
+
+    }
+    const message:alertMessage={
+        header:header,
+        body:body
+    }
+    return message;
+}

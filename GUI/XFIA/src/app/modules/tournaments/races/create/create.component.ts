@@ -51,11 +51,8 @@ export class CreateRaceComponent implements OnInit {
       
       for(var i=0;i<response.length;i++){
         console.log(response[i])
-        console.log(response[i].nombreCm)
-        var tourn={nombreCm: response[i].name,
-          llave:response[i].key
-        }
-        this.tournaments.push(tourn)//updates input values
+        console.log(response[i].name)
+        this.tournaments.push(response[i])//updates input values
       }
       this.tournaments = [...this.tournaments]
     },(error)=>{

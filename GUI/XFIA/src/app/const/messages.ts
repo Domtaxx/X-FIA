@@ -63,4 +63,7 @@ export class alertMessages{
     //login
     public static sucessLogin="Se ha iniciado sección con exito"
     public static rejectedLogin="No se ha podido iniciar sección"
+    //upload results 
+    public static wrongFormatResultsError='Existen errores en el formato del archivo'
+    public static sucessResultsFile='Se ha subido el archivo con éxito';
 }

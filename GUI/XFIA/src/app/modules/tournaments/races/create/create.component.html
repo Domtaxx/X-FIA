@@ -31,10 +31,10 @@
                         <div class="p75">
                             <select class="form-control" formControlName="tournamentName">
                                 
-                                <option *ngFor="let pick of tournaments" [value]="pick.llave" [ngValue]="pick.llave">
-                                    <label>{{pick.nombreCm}}</label>
+                                <option *ngFor="let pick of tournaments" [value]="pick.key" [ngValue]="pick.key">
+                                    <label>{{pick.name}}</label>
                                     <label> | </label>
-                                    <span>{{pick.llave}}</span>
+                                    <span>{{pick.key}}</span>
                                     
                                 </option>
 
