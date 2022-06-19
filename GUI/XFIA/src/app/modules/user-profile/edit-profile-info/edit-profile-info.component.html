@@ -1,0 +1,116 @@
+<h1>Registro Usuario
+
+</h1>
+<div class="container">
+   
+    <form class ="registerForm"(ngSubmit)="submit()"  [formGroup]="userRegisterForm" >
+
+
+        
+        <div class="form-group">
+            
+            
+            <div class="p25">
+                <label>Nombre Usuario</label>
+            </div>
+            <div class="p75">
+                
+                <input type="text" name="Name" class="form-control" formControlName="userName" >
+                <div class="warning" *ngIf="userRegisterForm.get('userName')?.hasError('required')">
+                    El nombre de usuario no puede ser vacio
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('userName')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+            </div>
+            
+            
+        </div>
+        
+        <pre></pre>
+        
+        <pre></pre>
+        <div class="form-group">
+            
+            
+            <div class="p25">
+                <label>Nombre Escuderia</label>
+            </div>
+            <div class="p75">
+                
+                <input type="text" name="Name" class="form-control" formControlName="teamName" >
+                <div class="warning" *ngIf="userRegisterForm.get('teamName')?.hasError('required')">
+                    El nombre de la escuderia no puede ser vacio
+                </div>
+                <div class="warning" *ngIf="userRegisterForm.get('teamName')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+            </div>
+
+           
+            
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+                        
+            <div class="p25">
+                <label>Pais</label>
+            </div>
+            <div class="p75">
+                <select class="form-control" formControlName="countryName">
+                   
+                    <option class="selectOption" *ngFor="let pick of countries" [value]="pick" [ngValue]="pick">
+                        {{ pick }}
+                    </option>
+
+                </select>
+                <div class="warning" *ngIf="userRegisterForm.get('countryName')?.hasError('required')">
+                    Debe seleccionar algun Pais
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="fileCenter">
+            <div class="verticalFormGroup">
+            
+                
+                <label>Suba un archivo</label>
+                <div class="inputSpace">
+  
+                   
+                    <input *ngIf="!fileUploaded" type="file" name="Name" (change)="onFileUploaded($event)" formControlName="image" class="inputImage" accept=".png,.jpg">
+                    <img *ngIf="fileUploaded" src={{image}}>
+                   
+                    
+        
+                </div>
+                <button (click)="resetImage()"id="resetButton" *ngIf="fileUploaded" > reiniciar</button>
+                <div class="warning" *ngIf="userRegisterForm.get('image')?.hasError('required')">
+                    Se debe de agregar el archivo
+                </div>
+                
+                
+               
+               
+    
+               
+                
+                
+            </div>
+
+
+        </div>
+       
+        <pre></pre>
+        
+       
+        
+        
+    </form>
+   
+
+</div>

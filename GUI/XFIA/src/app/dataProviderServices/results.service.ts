@@ -29,6 +29,9 @@ export class ResultsService {
     )
   }
   uploadResults(tournamentKey:string,raceName:string,file:File){
+    console.log(tournamentKey);
+    console.log(raceName);
+    console.log(file)
     this.backend.post_request_multipart(
       appSettings.publishResults,{
         tournamentKey:tournamentKey,

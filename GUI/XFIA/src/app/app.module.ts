@@ -9,9 +9,11 @@ import { TournamentsModule } from './modules/tournaments/tournaments.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NetworkService } from './services/network.service';
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
