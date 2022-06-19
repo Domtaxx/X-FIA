@@ -28,7 +28,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
             }
         }
         [Route("Unico")]
@@ -46,7 +46,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
             }
         }
         [Route("Agregar")]
@@ -74,7 +74,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return Problem();
             }
         }
         [Route("Modificar/Usuario")]
@@ -108,7 +108,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return Problem();
             }
         }
 
@@ -127,10 +127,30 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
             }
         }
+        [Route("Usuario/VerificarLiderazgoDeLiga")]
+        [HttpGet]
+        public IActionResult VerifyIfPrivateLeagueOwner(string email)
+        {
+            try
+            {
+                int res = 0;
+                var privateLeagues = Db.Privateleagues.Where(PL=>PL.OwnerEmail.Equals(email)).ToList();
+                if(privateLeagues.Count > 0)
+                {
+                    res = 1;
+                }
 
+                return Ok(JsonConvert.SerializeObject(res));
+            }
+            catch (Exception e)
+            {
+                return Problem();
+            }
+
+        }
         [Route("SubEquipos")]
         [HttpGet]
         public IActionResult Get(string email)
@@ -144,7 +164,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
             }
             
         }
