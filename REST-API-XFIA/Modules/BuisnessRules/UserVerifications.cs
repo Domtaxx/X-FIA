@@ -50,5 +50,34 @@ namespace REST_API_XFIA.Modules.BuisnessRules
                 return 3;
             }return 0;
         }
+        public static int IsValidForModification(AllUserInfo user)
+        {
+            if (!VerifyIfUserHasAccount(user))
+            {
+                return 1;
+            }
+            if (VerifyIfTeamNameIsRepeated(user))
+            {
+                return 2;
+            }
+            if (VerifyIfSubTeamsNamesAreRepeated(user))
+            {
+                return 3;
+            }
+            if (RacesActive())
+            {
+                return 4;
+            }
+            return 0;
+        }
+
+        private static bool RacesActive()
+        {
+            var races = Db.Races.Where(R => R.State == 1).ToList();
+            if (races.Count > 0)
+            {
+                return true;
+            }return false;
+        }
     }
 }

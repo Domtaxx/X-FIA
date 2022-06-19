@@ -3,6 +3,7 @@ using REST_API_XFIA.SQL_Model.DB_Context;
 using REST_API_XFIA.Modules.Service;
 using REST_API_XFIA.Modules.Fetcher;
 using REST_API_XFIA.Data_structures;
+using REST_API_XFIA.SQL_Model.Models;
 
 namespace REST_API_XFIA.Modules.Mappers
 {
@@ -47,8 +48,11 @@ namespace REST_API_XFIA.Modules.Mappers
 
             return subteams;
         }
-        public static List<SQL_Model.Models.Subteam> fillSubteams(Data_structures.AllUserInfo userInfo, SQL_Model.Models.Tournament tournament)
+        public static List<SQL_Model.Models.Subteam> fillSubteamsForMod(Data_structures.AllUserInfo userInfo)
         {
+            var tour = TournamentFetcher.GetActiveTournament();
+            var lastSubTeams = SubTeamFetcher.getLatestSubTeam(userInfo.Email, tour);
+            
             List<SQL_Model.Models.Subteam> subteams = new List<SQL_Model.Models.Subteam>();
             SQL_Model.Models.Subteam team1 = new SQL_Model.Models.Subteam();
             SQL_Model.Models.Subteam team2 = new SQL_Model.Models.Subteam();
@@ -71,6 +75,30 @@ namespace REST_API_XFIA.Modules.Mappers
             subteams.Add(team1);
             subteams.Add(team2);
 
+            Db.Subteams.AddRange(subteams);
+            Db.SaveChanges();
+            if (lastSubTeams.Count > 0)
+            {
+                var Team1LastPoints = Db.SubteamPoints.Where(STP => STP.SubTeamId == lastSubTeams[0].Id && STP.TournamentKey == tour.Key).ToList();
+                var Team2LastPoints = Db.SubteamPoints.Where(STP => STP.SubTeamId == lastSubTeams[1].Id && STP.TournamentKey == tour.Key).ToList();
+                if (Team1LastPoints.Count > 0 && Team2LastPoints.Count > 0) 
+                {
+                    var Subteam1Points = new SubteamPoint();
+                    var Subteam2Points = new SubteamPoint();
+
+                    Subteam1Points.SubTeamId = team1.Id;
+                    Subteam1Points.TournamentKey = tour.Key;
+                    Subteam1Points.Points = Team1LastPoints[0].Points;
+
+                    Subteam2Points.SubTeamId = team2.Id;
+                    Subteam2Points.TournamentKey = tour.Key;
+                    Subteam2Points.Points = Team2LastPoints[0].Points;
+
+                    Db.SubteamPoints.Add(Subteam1Points);
+                    Db.SubteamPoints.Add(Subteam2Points);
+                    Db.SaveChanges();
+                }
+            }
             return subteams;
         }
 
