@@ -28,7 +28,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
             }
         }
         [Route("Unico")]
@@ -46,7 +46,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
             }
         }
         [Route("Agregar")]
@@ -74,34 +74,41 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return Problem();
             }
         }
-        [Route("Modificar/SubEquipos")]
+        [Route("Modificar/Usuario")]
         [HttpPost]
         public ActionResult AddSubTeams([FromForm] Data_structures.AllUserInfo allInfo)
         {
             try
             {
                 Db.ChangeTracker.Clear();
-                int MsgCode = UserVerifications.IsValid(allInfo);
+                int MsgCode = UserVerifications.IsValidForModification(allInfo);
                 if (MsgCode != 0)
                 {
                     return BadRequest(JsonConvert.SerializeObject(MsgCode));
                 }
-
-                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteams(allInfo);
-                Db.Subteams.AddRange(subteams);
+                var user = Db.Users.Find(allInfo.Email);
+                user.CountryName = allInfo.CountryName;
+                user.TeamsName = allInfo.TeamsName;
+                user.Username = allInfo.Username;
+                user.Password = allInfo.Password;
+                if(allInfo.TeamsLogo != null){ 
+                    user.TeamsLogo = _storageService.Upload(allInfo.TeamsLogo, allInfo.Email);
+                }
+                Db.Users.Update(user);
                 Db.SaveChanges();
-
+                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteamsForMod(allInfo);
                 var pilotConex = UserMapper.fillHasPilots(allInfo, subteams[0].Id, subteams[1].Id);
+
                 Db.HasPilots.AddRange(pilotConex);
                 Db.SaveChanges();
                 return Ok(MsgCode);
             }
             catch (Exception e)
             {
-                return BadRequest(e.Message);
+                return Problem();
             }
         }
 
@@ -120,10 +127,30 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
             }
         }
+        [Route("VerificarLiderazgoDeLiga")]
+        [HttpGet]
+        public IActionResult VerifyIfPrivateLeagueOwner(string email)
+        {
+            try
+            {
+                int res = 0;
+                var privateLeagues = Db.Privateleagues.Where(PL=>PL.OwnerEmail.Equals(email)).ToList();
+                if(privateLeagues.Count > 0)
+                {
+                    res = 1;
+                }
 
+                return Ok(JsonConvert.SerializeObject(res));
+            }
+            catch (Exception e)
+            {
+                return Problem();
+            }
+
+        }
         [Route("SubEquipos")]
         [HttpGet]
         public IActionResult Get(string email)
@@ -137,7 +164,7 @@ namespace REST_API_XFIA.Controllers
             }
             catch (Exception e)
             {
-                return BadRequest(4);
+                return Problem();
             }
             
         }

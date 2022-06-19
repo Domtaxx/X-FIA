@@ -35,7 +35,7 @@ namespace REST_API_XFIA.Modules.Service
             {
                 formFile.CopyTo(fileStream);
             }
-            return filePath;
+            return Path.Combine(FileDic, formFile.FileName); ;
         }
     }
 }
