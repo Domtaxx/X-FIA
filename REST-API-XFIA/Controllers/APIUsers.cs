@@ -130,7 +130,7 @@ namespace REST_API_XFIA.Controllers
                 return Problem();
             }
         }
-        [Route("Usuario/VerificarLiderazgoDeLiga")]
+        [Route("VerificarLiderazgoDeLiga")]
         [HttpGet]
         public IActionResult VerifyIfPrivateLeagueOwner(string email)
         {
