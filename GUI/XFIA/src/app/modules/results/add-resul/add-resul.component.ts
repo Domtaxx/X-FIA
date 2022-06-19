@@ -28,8 +28,16 @@ export class AddResulComponent implements OnInit {
         this.tournamentUpdate();
       }
     )
+    this.getTournaments();
   }
-
+  getTournaments(){
+    this.dataProvider.getTournaments(
+      (tournaments:tournamentInterface[])=>{
+        this.tournaments=tournaments;
+        this.tournaments=[...this.tournaments];
+      }
+    )
+  }
   tournamentUpdate(){
     const key=this.resultForm.controls['tournament'].value;
     this.dataProvider.getRaces(key,(races:raceInterface[])=>{

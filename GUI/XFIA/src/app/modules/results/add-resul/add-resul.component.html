@@ -10,7 +10,7 @@
             <div class="p70">
                 <select formControlName="tournament">
                     <option *ngFor="let tournament of tournaments" value={{tournament.key}}>
-                        {{tournament.name+' '+tournament.key}}
+                        {{tournament.name+' | '+tournament.key}}
                     </option>
                 </select>
                 <div class="warning" *ngIf="resultForm.get('tournament')?.hasError('required')">
