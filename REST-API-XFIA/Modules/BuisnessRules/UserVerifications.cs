@@ -50,10 +50,5 @@ namespace REST_API_XFIA.Modules.BuisnessRules
                 return 3;
             }return 0;
         }
-
-        internal static int IsValid(SubTeamModifierInfo allInfo)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

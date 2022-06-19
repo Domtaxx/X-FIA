@@ -79,7 +79,7 @@ namespace REST_API_XFIA.Controllers
         }
         [Route("Modificar/SubEquipos")]
         [HttpPost]
-        public ActionResult AddSubTeams([FromForm] Data_structures.SubTeamModifierInfo allInfo)
+        public ActionResult AddSubTeams([FromForm] Data_structures.AllUserInfo allInfo)
         {
             try
             {
@@ -90,7 +90,7 @@ namespace REST_API_XFIA.Controllers
                     return BadRequest(JsonConvert.SerializeObject(MsgCode));
                 }
 
-                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteams(allInfo, Db.Tournaments.Find(allInfo.tournamentKey));
+                List<SQL_Model.Models.Subteam> subteams = UserMapper.fillSubteams(allInfo);
                 Db.Subteams.AddRange(subteams);
                 Db.SaveChanges();
 

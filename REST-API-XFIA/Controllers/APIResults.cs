@@ -16,7 +16,7 @@ namespace REST_API_XFIA.Controllers
 
 
         [HttpPost]
-        public ActionResult postFile([FromForm] DataUploded dataUploded)
+        public ActionResult postFile([FromForm] DataUploded dataUploaded)
         {
             try
             {   List<SQL_Model.Models.Pilot> pilotsInDb = Db.Pilots.ToList();
@@ -25,20 +25,24 @@ namespace REST_API_XFIA.Controllers
                 List<TeamDocument> teamsInDoc = new();
                 try
                 {
-                    pilotsInDoc = getPilotsInfo(dataUploded.file.OpenReadStream());
-                    teamsInDoc = getTeamsInfo(dataUploded.file.OpenReadStream());
+                    if (!dataUploaded.file.ContentType.Substring(dataUploaded.file.ContentType.Length - 3).Equals("csv"))
+                    {
+                        throw (new InternalDocumentFormatException("Formato Invalido de archivo"));
+                    }
+                    pilotsInDoc = getPilotsInfo(dataUploaded.file.OpenReadStream());
+                    teamsInDoc = getTeamsInfo(dataUploaded.file.OpenReadStream());
 
                     
                 }catch(InternalDocumentFormatException a)
                 {
                     return BadRequest(1);
                 }
-                List<SQL_Model.Models.PilotRace> pilotRaces = PointsFetcher.getPilotRaces(pilotsInDoc, dataUploded.race, dataUploded.tournamentKey);
-                List<SQL_Model.Models.RealTeamRace> carRaces = PointsFetcher.getRealTeamRaces(teamsInDoc, pilotRaces, dataUploded.race, dataUploded.tournamentKey);
+                List<SQL_Model.Models.PilotRace> pilotRaces = PointsFetcher.getPilotRaces(pilotsInDoc, dataUploaded.race, dataUploaded.tournamentKey);
+                List<SQL_Model.Models.RealTeamRace> carRaces = PointsFetcher.getRealTeamRaces(teamsInDoc, pilotRaces, dataUploaded.race, dataUploaded.tournamentKey);
                 Db.PilotRaces.AddRange(pilotRaces);
                 Db.RealTeamRaces.AddRange(carRaces);
                 Db.SaveChanges();
-                var tour = Db.Tournaments.Include(T => T.UserEmails).Where(T => T.Key.Equals(dataUploded.tournamentKey)).Single();
+                var tour = Db.Tournaments.Include(T => T.UserEmails).Where(T => T.Key.Equals(dataUploaded.tournamentKey)).Single();
                 PointsFetcher.addPointsForTeam(tour);
                 return Ok();
             }
