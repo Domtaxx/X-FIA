@@ -28,16 +28,19 @@ export class ResultsService {
       }
     )
   }
-  uploadResults(tournamentKey:string,raceName:string,file:File){
+  uploadResults(tournamentKey:string,raceName:string,files:File){
+    console.log('Estoy en el servicio de envio para resultados')
     console.log(tournamentKey);
     console.log(raceName);
-    console.log(file)
+    console.log(files)
+    const params={
+      tournamentKey:tournamentKey,
+      race:raceName,
+      file:files
+    }
+    console.log(params)
     this.backend.post_request_multipart(
-      appSettings.publishResults,{
-        tournamentKey:tournamentKey,
-        race:raceName,
-        file:file
-      }
+      appSettings.publishResults,params
     ).subscribe(
       ()=>{
         this.swal.showSuccess(alertMessages.successHeader,alertMessages.sucessResultsFile);

@@ -42,7 +42,7 @@
             <label id="uploadFileText">Ingrese Archivo</label>
             
             <mat-icon id="uploadFileIcon">upload_file</mat-icon>
-            <input class="inputFile" type="file" formControlName="file">
+            <input class="inputFile" type="file" formControlName="file" accept=".csv" (change)="onFileUploaded($event)">
             
         </div>
         <div class="warning" *ngIf="resultForm.get('file')?.hasError('required')">
