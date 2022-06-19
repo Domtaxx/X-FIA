@@ -62,18 +62,18 @@ export interface userRegisterInterface{
     CountryName:string;
     NameSubteam1:string;
     Car1:string;
-    pilot1Subteam1:number;
-    pilot2Subteam1:number;
-    pilot3Subteam1:number;
-    pilot4Subteam1:number;
-    pilot5Subteam1:number;
+    pilot1Subteam1:string;
+    pilot2Subteam1:string;
+    pilot3Subteam1:string;
+    pilot4Subteam1:string;
+    pilot5Subteam1:string;
     NameSubteam2:string;
     Car2:string;
-    pilot1Subteam2:number;
-    pilot2Subteam2:number;
-    pilot3Subteam2:number;
-    pilot4Subteam2:number;
-    pilot5Subteam2:number;
+    pilot1Subteam2:string;
+    pilot2Subteam2:string;
+    pilot3Subteam2:string;
+    pilot4Subteam2:string;
+    pilot5Subteam2:string;
 
 
 
@@ -86,18 +86,18 @@ export interface profileEditInterface{
     CountryName:string;
     NameSubteam1:string;
     Car1:string;
-    pilot1Subteam1:number;
-    pilot2Subteam1:number;
-    pilot3Subteam1:number;
-    pilot4Subteam1:number;
-    pilot5Subteam1:number;
+    pilot1Subteam1:string;
+    pilot2Subteam1:string;
+    pilot3Subteam1:string;
+    pilot4Subteam1:string;
+    pilot5Subteam1:string;
     NameSubteam2:string;
     Car2:string;
-    pilot1Subteam2:number;
-    pilot2Subteam2:number;
-    pilot3Subteam2:number;
-    pilot4Subteam2:number;
-    pilot5Subteam2:number;
+    pilot1Subteam2:string;
+    pilot2Subteam2:string;
+    pilot3Subteam2:string;
+    pilot4Subteam2:string;
+    pilot5Subteam2:string;
 }
 
 export interface leagueMemberInterface{
