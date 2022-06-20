@@ -7,6 +7,7 @@ export class appSettings{
     public static everyPilotRoute='Pilotos/Todos';
     public static carsRoute='Escuderias/Todos';
     public static userRegisterRoute='Usuario/Agregar';
+    public static userEditRoute='Usuario/Modificar/Usuario';
     public static currentBudgetRoute='Admin/Campeonato/Admin/Campeonato/Budget';
     public static publicLeagueRankingRoute="PublicLeague";
     public static privateLeagueRankingRoute="User/PrivateLeague";

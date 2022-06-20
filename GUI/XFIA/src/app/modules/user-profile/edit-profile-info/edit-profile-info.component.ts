@@ -9,6 +9,8 @@ import { fileValidations } from 'src/app/validations/fileValidation';
 import { matchPassword } from 'src/app/validations/customFieldValidations';
 import { fileProcessFuncion } from 'src/app/functions/fileprocess';
 import { country } from 'src/app/interface/interfaces';
+import { getFileFromUrl } from 'src/app/functions/fileprocess';
+import { getExtension } from 'src/app/functions/fileprocess';
 @Component({
   selector: 'app-edit-profile-info',
   templateUrl: './edit-profile-info.component.html',
@@ -140,9 +142,19 @@ export class EditProfileInfoComponent implements OnInit {
   setInitialData(userName:string,TeamName:string,TeamLogo:string){
     this.userRegisterForm.controls['userName'].setValue(userName);
     this.userRegisterForm.controls['teamName'].setValue(TeamName);
-    //this.userRegisterForm.controls['image'].setValue(TeamLogo);
-    this.setImage(TeamLogo);
-    this.fileUploaded=true;
+    console.log('_____________________________________________')
+    console.log(TeamLogo)
+    const extension=getExtension(TeamLogo)
+    getFileFromUrl(TeamLogo,'file','image/'+extension).then(
+      (file:File)=>{
+        this.userRegisterForm.controls['image'].setValue(file);
+        this.imageFile=file;
+        this.setImage(TeamLogo);
+        this.fileUploaded=true;
+      }
+    )
+    
+    
 
   }
 

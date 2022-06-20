@@ -19,3 +19,12 @@ export function fileProcessFuncion(file:File,setUrl:(url:string)=>void){
     }
     
 }
+export async function getFileFromUrl(url:string,fileName:string,type:string):Promise<File>{
+    let file:File = await fetch(url).then(r => r.blob()).then(blobFile => new File([blobFile], fileName, { type: type }));
+    return file;
+}
+
+export function getExtension(url:string){
+    const partArray=url.split('.');
+    return partArray[partArray.length-1]
+}

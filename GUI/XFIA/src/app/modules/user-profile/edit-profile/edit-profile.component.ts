@@ -87,7 +87,7 @@ export class EditProfileComponent implements OnInit {
     const requestBody:profileEditInterface=userEditRequest(this.userForm,this.team1,this.team2)//get the data to send the request
     console.log('body');
     console.log(requestBody);
-    this.backend.post_request_multipart(appSettings.userRegisterRoute,requestBody).subscribe(
+    this.backend.post_request_multipart(appSettings.userEditRoute,requestBody).subscribe(
       (sucess)=>{this.handleSucess(sucess)},//sucess case
       (error)=>{this.handleMistake(error)} //error case
     )
