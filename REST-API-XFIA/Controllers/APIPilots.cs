@@ -34,7 +34,8 @@ namespace REST_API_XFIA.Controllers
             try
             {
                 List<SQL_Model.Models.Pilot> pilotList = PilotFetcher.getPilotSubList(Db.Pilots.ToList(), page, amountByPage);
-                return Ok(JsonConvert.SerializeObject(pilotList));
+                return Ok(JsonConvert.SerializeObject(pilotList, Formatting.Indented,
+                            new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore }));
             }
             catch (Exception e)
             {
