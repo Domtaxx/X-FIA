@@ -62,7 +62,7 @@ export class PrivateLeagueRankingComponent implements OnInit {
   getOwnership(){
     this.dataManagement.isOwner(
       (state:boolean)=>{
-        this.isOwner=true;
+        this.isOwner=state;
       }
     )
   }
