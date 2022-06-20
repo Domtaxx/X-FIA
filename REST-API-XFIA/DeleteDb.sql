@@ -1,8 +1,12 @@
 select * from [SubTeams]
 select * from [User]
 select * from [Has_pilot]
+select * from PILOT
 select * from RealTeams
 select * from PRIVATELEAGUE
+select * from SUBTEAMS
+select * from RACE
+select * from SubteamPoints
 
 ALTER TABLE SubteamPoints DROP Constraint SubteamKey;
 Drop Table SubteamPoints

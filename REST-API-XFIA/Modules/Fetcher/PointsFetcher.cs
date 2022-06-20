@@ -53,7 +53,7 @@ namespace REST_API_XFIA.Modules.Fetcher
                                                                                 STP=> STP.TournamentKey.Equals(tournament.Key) 
                                                                                 && STP.SubTeamId.Equals(subTeam.Id)
                                                                                 ).Single();
-                    if(subteamPoint.TournamentKey == null)
+                    if(subteamPoint == null)
                     {
                         subteamPoint = new();
                         subteamPoint.Points = totalSubTeamPoints;
@@ -63,7 +63,6 @@ namespace REST_API_XFIA.Modules.Fetcher
                     }
                     else
                     {
-                        
                         subteamPoint.Points = totalSubTeamPoints;
                         Db.SubteamPoints.Update(subteamPoint);
                     }
