@@ -1,14 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { EditProfileTeamComponent } from './edit-profile-team.component';
-
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 describe('EditProfileTeamComponent', () => {
   let component: EditProfileTeamComponent;
   let fixture: ComponentFixture<EditProfileTeamComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EditProfileTeamComponent ]
+      declarations: [ EditProfileTeamComponent ],
+      imports:[HttpClientTestingModule]
     })
     .compileComponents();
 

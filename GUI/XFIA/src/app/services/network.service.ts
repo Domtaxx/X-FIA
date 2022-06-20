@@ -43,4 +43,8 @@ export class NetworkService {
 
     return this.http.post(this.serverIp + url, form_data);
   }
+  setIp(ip:string){
+    this.serverIp=ip;
+
+  }
 }

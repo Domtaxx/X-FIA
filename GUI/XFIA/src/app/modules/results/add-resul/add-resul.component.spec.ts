@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddResulComponent } from './add-resul.component';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('AddResulComponent', () => {
   let component: AddResulComponent;
@@ -8,7 +9,8 @@ describe('AddResulComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AddResulComponent ]
+      declarations: [ AddResulComponent ],
+      imports:[HttpClientTestingModule]
     })
     .compileComponents();
 
@@ -20,4 +22,6 @@ describe('AddResulComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+  
+
 });
