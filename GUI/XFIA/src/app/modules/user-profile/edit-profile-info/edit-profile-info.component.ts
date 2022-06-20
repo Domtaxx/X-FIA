@@ -22,7 +22,7 @@ export class EditProfileInfoComponent implements OnInit {
     userName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
     teamName:new UntypedFormControl('',[Validators.required,Validators.maxLength(30)]),
     countryName:new UntypedFormControl('',[Validators.required]),
-    image:new UntypedFormControl('',[Validators.required])
+    image:new UntypedFormControl('',[])
   });
  
   fileUploaded=false;
@@ -92,6 +92,7 @@ export class EditProfileInfoComponent implements OnInit {
    
    fileProcessFuncion(file,(value)=>{
      this.setImage(value);
+     this.updateFileValidator();
    })
 
   }
@@ -147,15 +148,22 @@ export class EditProfileInfoComponent implements OnInit {
     const extension=getExtension(TeamLogo)
     getFileFromUrl(TeamLogo,'file','image/'+extension).then(
       (file:File)=>{
-        this.userRegisterForm.controls['image'].setValue(file);
-        this.imageFile=file;
+        this.loadFile(file)
         this.setImage(TeamLogo);
-        this.fileUploaded=true;
+        
       }
     )
     
     
 
+  }
+  updateFileValidator(){
+    if(this.fileUploaded){
+      this.userRegisterForm.controls['image'].setValidators(null)
+    }
+    else{
+      this.userRegisterForm.controls['image'].setValidators([Validators.required])
+    }
   }
 
 
