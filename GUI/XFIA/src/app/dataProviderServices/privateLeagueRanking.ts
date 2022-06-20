@@ -56,6 +56,30 @@ export class privateLeagueRankingService {
         }
       )
     }
+    public isOwner(callback:(state:boolean)=>void){
+      const email=getData(localStorageNames.email);
+      this.backend.get_request(appSettings.privateLeagueIsOwner,
+        {
+          email:email
+        }).subscribe(
+          (value:number)=>{
+            console.log('El owner ship de la liga es');
+            console.log(value)
+            switch(value){
+              case 0:
+                callback(false);
+                break
+              default:
+                callback(true);
+                break
+            }
+          },
+          ()=>{
+            if(this.failed)return;
+            this.isOwner(callback);
+          }
+        )
+    }
     public leaveLeague(sucessCallback:()=>void,faillureCallback:(message:alertMessage)=>void){
       const email=getData(localStorageNames.email);
       this.backend.delete_request(appSettings.privateLeagueLeaveRoute,{userEmail:email}).subscribe(
@@ -109,6 +133,7 @@ export class privateLeagueRankingService {
 
         })
     }
+
     
     
   

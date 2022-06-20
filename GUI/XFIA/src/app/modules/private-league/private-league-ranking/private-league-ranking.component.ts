@@ -16,6 +16,7 @@ export class PrivateLeagueRankingComponent implements OnInit {
   tableDataSource:leagueMemberInterface[]=[];
   displayedColumns=['Posicion','Usuario','Escuderia','Equipo','Puntaje'];
   leagueInfo!:privateLeagueInfo;
+  isOwner:boolean=false;
   constructor(private dataManagement:privateLeagueRankingService,private swal:SweetAlertService,private privateLeagueService:privateLeagueCreateService,private router:Router) { }
 
   ngOnInit(): void {
@@ -32,7 +33,8 @@ export class PrivateLeagueRankingComponent implements OnInit {
       maxUser:600,
       state: true
     }
-    this.getLeagueInfo()
+    this.getLeagueInfo();
+    this.getOwnership();
     
   }
 
@@ -57,6 +59,13 @@ export class PrivateLeagueRankingComponent implements OnInit {
       }
     )
   }
+  getOwnership(){
+    this.dataManagement.isOwner(
+      (state:boolean)=>{
+        this.isOwner=true;
+      }
+    )
+  }
 
   leavePrivateLeague(){
 
@@ -74,6 +83,16 @@ export class PrivateLeagueRankingComponent implements OnInit {
       }
     )
    
+  }
+  deletePrivateLeagueMember(){
+    this.dataManagement.deleteFromLeague(
+      (message:alertMessage)=>{
+        this.sucessMessage(message.header,message.body)
+      },
+      (message:alertMessage)=>{
+        this.failureMessage(message)
+      }
+    )
   }
   sucessMessage(header:string,body:string){
     this.swal.showSuccess(header,body);
