@@ -52,7 +52,7 @@ namespace REST_API_XFIA.Controllers
         [HttpDelete]
         public ActionResult deleteUserFromPrivateLeague(string userEmail)
         {
-            SQL_Model.Models.User user = Db.Users.Find(userEmail);
+            SQL_Model.Models.User user = Db.Users.Where(U => U.Email == userEmail || U.TeamsName == userEmail).FirstOrDefault();
             SQL_Model.Models.Privateleague privateLeague;
             int msgCode = PrivateLeagueVerification.isValidDelete(user);
             if (msgCode != 0)
