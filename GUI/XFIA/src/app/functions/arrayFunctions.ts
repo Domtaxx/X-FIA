@@ -4,7 +4,7 @@ export function orderNumberArray(array:number[]):number[]{
     );
     return array
 }
-export function repitedElement(array:number[]):boolean{
+export function repitedElement(array:any[]):boolean{
     const sortedArray=orderNumberArray(array);
     for(var i=0;i<sortedArray.length-1;i++){
         if(sortedArray[i]==sortedArray[i+1])return true;

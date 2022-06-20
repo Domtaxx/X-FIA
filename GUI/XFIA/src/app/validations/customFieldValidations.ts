@@ -11,9 +11,9 @@ export function matchPassword(fieldName1:string,fieldName2:string){
 }
 export function pilotsDoesntMatch(numberOfPilots:number){
     return (control:AbstractControl)=>{
-        const pilotArray:number[]=[];
+        const pilotArray:string[]=[];
         for(var i=1;i<=numberOfPilots;i++){
-            pilotArray.push(Number.bind(null,control.get('pilot'+i)?.value)())
+            pilotArray.push(String.bind(null,control.get('pilot'+i)?.value)())
         }
         if(repitedElement(pilotArray)){
             return{repitedPilot:true}
