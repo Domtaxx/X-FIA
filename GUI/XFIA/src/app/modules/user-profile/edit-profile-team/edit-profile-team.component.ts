@@ -95,7 +95,7 @@ export class EditProfileTeamComponent implements OnInit {
     description: function called when the view starts, ask the network module to get data required to show
     */
   ngOnInit(): void {
-    this.resetData()
+    //this.resetData()
     
   }
   /*
@@ -279,6 +279,7 @@ export class EditProfileTeamComponent implements OnInit {
     this.getCars()
     this.getRunners()
     this.updateMetadata();
+    this.updateBudget();
   }
   setInitial(pilots:pilotInterface[],car:carInterface,teamName:string){
     this.selectedPilots=new Map();
@@ -290,6 +291,10 @@ export class EditProfileTeamComponent implements OnInit {
     this.teamForm.controls['car'].setValue(car.Name);
     this.teamForm.controls['teamName'].setValue(teamName)
     this.resetData()
+    console.log('Pilotos Seleccionados')
+    console.log(this.selectedPilots)
+    console.log('Selected Car')
+    console.log(this.selectedCar)
 
   }
 
