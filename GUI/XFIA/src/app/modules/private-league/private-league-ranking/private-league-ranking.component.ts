@@ -88,6 +88,7 @@ export class PrivateLeagueRankingComponent implements OnInit {
     this.dataManagement.deleteFromLeague(
       (message:alertMessage)=>{
         this.sucessMessage(message.header,message.body)
+        this.getData();
       },
       (message:alertMessage)=>{
         this.failureMessage(message)

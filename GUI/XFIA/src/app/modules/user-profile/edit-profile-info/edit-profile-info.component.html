@@ -89,7 +89,7 @@
         
                 </div>
                 <button (click)="resetImage()"id="resetButton" *ngIf="fileUploaded" > reiniciar</button>
-                <div class="warning" *ngIf="userRegisterForm.get('image')?.hasError('required')">
+                <div class="warning" *ngIf="!fileUploaded">
                     Se debe de agregar el archivo
                 </div>
                 
