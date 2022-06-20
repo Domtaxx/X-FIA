@@ -22,6 +22,10 @@ namespace REST_API_XFIA.Modules.BuisnessRules
             var invalidTeams = Db.Users.Where(U => U.TeamsName == userInfo.TeamsName).ToList();
             if (invalidTeams.Count > 0)
             {
+                if (invalidTeams[0].Email == userInfo.Email)
+                {
+                    return false;
+                }
                 return true;
             }
             return false;
