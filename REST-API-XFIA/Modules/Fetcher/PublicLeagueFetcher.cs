@@ -33,7 +33,6 @@ namespace REST_API_XFIA.Modules.Fetcher
         }
         public static List<PublicLeagueResponse> getUserPublicLeague(SQL_Model.Models.Tournament tournament, string userEmail)
         {
-            PointsFetcher.addPointsForTeam(tournament);
             List<PublicLeagueResponse> AllPublicLeagueRes = getEveryoneInList(tournament);
             List<PublicLeagueResponse> userPos = new List<PublicLeagueResponse>();
             foreach (PublicLeagueResponse response in AllPublicLeagueRes)
@@ -49,6 +48,7 @@ namespace REST_API_XFIA.Modules.Fetcher
 
         private static List<PublicLeagueResponse> getEveryoneInList(SQL_Model.Models.Tournament tournament)
         {
+            var DBO = new SQL_Model.DB_Context.RESTAPIXFIA_dbContext();
             List<PublicLeagueResponse> AllPublicLeagueRes = new List<PublicLeagueResponse>();
             List<SQL_Model.Models.User> users = tournament.UserEmails.ToList();
             foreach (SQL_Model.Models.User user in users)
@@ -58,8 +58,8 @@ namespace REST_API_XFIA.Modules.Fetcher
                 foreach (SQL_Model.Models.Subteam subTeam in subTeamsInTour)
                 {
                     data = new PublicLeagueResponse();
-                    var pilotsInSub = Db.HasPilots.Where(HP => HP.SubTeamsId == subTeam.Id).ToList();
-                    var SubTeamPoints = Db.SubteamPoints.Where(STP => STP.SubTeamId == subTeam.Id && STP.TournamentKey == tournament.Key).ToList();
+                    var pilotsInSub = DBO.HasPilots.Where(HP => HP.SubTeamsId == subTeam.Id).ToList();
+                    var SubTeamPoints = DBO.SubteamPoints.Where(STP => STP.SubTeamId == subTeam.Id && STP.TournamentKey == tournament.Key).ToList();
                     data.Points = 0;
                     if (SubTeamPoints.Count > 0)
                     {

@@ -49,22 +49,22 @@ namespace REST_API_XFIA.Modules.Fetcher
                     {
                         totalSubTeamPoints += (int)realTeamRace.Points;
                     }
-                    SQL_Model.Models.SubteamPoint subteamPoint = Db.SubteamPoints.Where(
-                                                                                STP=> STP.TournamentKey.Equals(tournament.Key) 
-                                                                                && STP.SubTeamId.Equals(subTeam.Id)
-                                                                                ).Single();
-                    if(subteamPoint == null)
+                    var subteamPoint = Db.SubteamPoints.Where( 
+                                                                STP=> STP.TournamentKey.Equals(tournament.Key) 
+                                                                && STP.SubTeamId.Equals(subTeam.Id)
+                                                             ).ToList();
+                    if(subteamPoint.Count == 0)
                     {
-                        subteamPoint = new();
-                        subteamPoint.Points = totalSubTeamPoints;
-                        subteamPoint.TournamentKey = tournament.Key;
-                        subteamPoint.SubTeamId = subTeam.Id;
-                        Db.SubteamPoints.Add(subteamPoint);
+                        var temp = new SQL_Model.Models.SubteamPoint();
+                        temp.Points = totalSubTeamPoints;
+                        temp.TournamentKey = tournament.Key;
+                        temp.SubTeamId = subTeam.Id;
+                        Db.SubteamPoints.Add(temp);
                     }
                     else
                     {
-                        subteamPoint.Points = totalSubTeamPoints;
-                        Db.SubteamPoints.Update(subteamPoint);
+                        subteamPoint[0].Points = totalSubTeamPoints;
+                        Db.SubteamPoints.Update(subteamPoint[0]);
                     }
                     Db.SaveChanges();
                 }

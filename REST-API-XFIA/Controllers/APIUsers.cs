@@ -54,7 +54,6 @@ namespace REST_API_XFIA.Controllers
         public ActionResult AddUser([FromForm]Data_structures.AllUserInfo allInfo) {
             try
             {
-                Db.ChangeTracker.Clear();
                 int MsgCode = UserVerifications.IsValid(allInfo);
                 if (MsgCode != 0)
                 {
@@ -83,7 +82,6 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                Db.ChangeTracker.Clear();
                 int MsgCode = UserVerifications.IsValidForModification(allInfo);
                 if (MsgCode != 0)
                 {

@@ -10,9 +10,10 @@ namespace REST_API_XFIA.Modules.Fetcher
 
         public static List<PublicLeagueResponse> getEveryoneInList(string privateLeagueName, SQL_Model.Models.Tournament tournament)
         {
+            var DBO = new RESTAPIXFIA_dbContext();
             List<PublicLeagueResponse> AllPrivateLeagueRes = new List<PublicLeagueResponse>();
             List<SQL_Model.Models.User> users;
-            users = Db.Users.Where(U => U.PrivateLeagueName == privateLeagueName).ToList();
+            users = DBO.Users.Where(U => U.PrivateLeagueName == privateLeagueName).ToList();
             foreach (SQL_Model.Models.User user in users)
             {
                 PublicLeagueResponse data;
@@ -20,8 +21,8 @@ namespace REST_API_XFIA.Modules.Fetcher
                 foreach (SQL_Model.Models.Subteam subTeam in subTeams)
                 {
                     data = new PublicLeagueResponse();
-                    var pilotsInSub = Db.HasPilots.Where(HP => HP.SubTeamsId == subTeam.Id).ToList();
-                    var SubTeamPoints = Db.SubteamPoints.Where(STP => STP.SubTeamId == subTeam.Id && STP.TournamentKey == tournament.Key).ToList();
+                    var pilotsInSub = DBO.HasPilots.Where(HP => HP.SubTeamsId == subTeam.Id).ToList();
+                    var SubTeamPoints = DBO.SubteamPoints.Where(STP => STP.SubTeamId == subTeam.Id && STP.TournamentKey == tournament.Key).ToList();
                     data.Points = 0;
                     if (SubTeamPoints.Count > 0)
                     {
@@ -43,7 +44,8 @@ namespace REST_API_XFIA.Modules.Fetcher
         }
         public static Data_structures.PrivateLeague GetPrivateleagueData(string userEmail)
         {
-            SQL_Model.Models.Privateleague privateLeague = Db.Users.Include(U => U.PrivateLeagueNameNavigation).ThenInclude(PRL => PRL.Users).Where(U => U.Email.Equals(userEmail)).Single().PrivateLeagueNameNavigation;
+            var DBO = new RESTAPIXFIA_dbContext();
+            SQL_Model.Models.Privateleague privateLeague = DBO.Users.Include(U => U.PrivateLeagueNameNavigation).ThenInclude(PRL => PRL.Users).Where(U => U.Email.Equals(userEmail)).Single().PrivateLeagueNameNavigation;
             var data = new Data_structures.PrivateLeague();
 
             data.name = privateLeague.Name;

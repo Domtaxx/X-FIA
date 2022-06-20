@@ -13,6 +13,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddAzureClients(b => {
     b.AddBlobServiceClient("DefaultEndpointsProtocol=https;AccountName=xfiaonline;AccountKey=GaMRXj40jLfqHarY9UMbvh/Oi/qmOkUGHLu2bFw8zPQDuy5HZkwkvo+S6yhkmMxTGmwLGizMq7uz+AStyVSVPQ==;EndpointSuffix=core.windows.net");});
 builder.Services.AddTransient<IStorageService,StorageService>();
+builder.Services.AddDbContext<REST_API_XFIA.SQL_Model.DB_Context.RESTAPIXFIA_dbContext>(ServiceLifetime.Transient);
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: MyAllowSpecificOrigins,
