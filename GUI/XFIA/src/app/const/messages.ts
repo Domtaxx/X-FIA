@@ -66,4 +66,8 @@ export class alertMessages{
     //upload results 
     public static wrongFormatResultsError='Existen errores en el formato del archivo'
     public static sucessResultsFile='Se ha subido el archivo con éxito';
+
+    //delete user from private league
+    public static privateLeagueDeleteMember='Ingrese el nombre de la escuderia a eliminar';
+    public static privateLeagueDeleteMemberSucess='El usuario indicado ha sido eliminado de la liga privada'
 }

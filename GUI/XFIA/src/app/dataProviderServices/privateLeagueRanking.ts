@@ -84,6 +84,31 @@ export class privateLeagueRankingService {
       );
 
     }
+
+    deleteFromLeague(sucessCall:(message:alertMessage)=>void,faillureCall:(message:alertMessage)=>void){
+      this.swal.inputTextSwal(alertMessages.privateLeagueDeleteMember,alertMessages.confirmButtonText,
+        (teamName:string)=>{
+          this.backend.delete_request(appSettings.privateLeagueLeaveRoute,
+            {
+              userEmail:teamName
+            }
+            ).subscribe(
+              ()=>{
+                const message:alertMessage={
+                  body:alertMessages.privateLeagueDeleteMemberSucess,
+                  header:alertMessages.successHeader
+                }
+                sucessCall(message);
+
+              },
+              (code)=>{
+                const message=privateLeagueLeaveError(code.error);
+                faillureCall(message);
+              }
+            )
+
+        })
+    }
     
     
   
