@@ -18,6 +18,7 @@ export class appSettings{
     public static privateLeagueKeyRoute='User/PrivateLeague/League';
     public static privateCreatePrivateLeagueRoute='User/PrivateLeague';
     public static privateLeagueLeaveRoute='User/PrivateLeague';
+    public static privateLeagueIsOwner='Usuario/VerificarLiderazgoDeLiga'
     public static allTournamentsRoute='admin/Campeonato';
     public static tournamentRaces='Admin/Torneo/Carreras';
     public static publishResults='Resultados';

@@ -42,7 +42,8 @@
     </div>
     <div class="bottomBar">
         <div class="holder"></div>
-        <button class="enterButton" mat-raised-button color="warn" (click)="leavePrivateLeague()">Abandonar Liga</button>
+        <button class="enterButton" mat-raised-button color="warn" (click)="leavePrivateLeague()" *ngIf="!isOwner">Abandonar Liga</button>
+        <button class="enterButton" mat-raised-button color="warn" (click)="deletePrivateLeagueMember()" *ngIf="isOwner">Eliminar Miembro</button>
         <label>{{'Miembros: '+tableDataSource.length/2+'/'+leagueInfo.maxUser}}</label>
     </div>
     
