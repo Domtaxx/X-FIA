@@ -149,19 +149,19 @@ VALUES ('ARABIA SAUDI','Files\Images\Bandera arabia saudi.jpg');
 INSERT INTO TOURNAMENT
 VALUES ('QWE123','GP de ARABIA SAUDI',  '2022-03-25', '00:00:00', '2022-03-27', '9:00:00',1000, 'Ver reglas');
 INSERT INTO TOURNAMENT
-VALUES ('QWE125','GP de Francia',  '2022-10-25', '00:00:00', '2022-12-27', '9:00:00',23, 'Ver reglas');
+VALUES ('QWE125','GP de Francia',  '2022-10-25', '00:00:00', '2022-12-27', '9:00:00',2300, 'Ver reglas');
 
 INSERT INTO TOURNAMENT
-VALUES ('QWE126','GP de Francia',  '2030-10-25', '00:00:00', '2030-12-27', '9:00:00',23, 'Ver reglas');
+VALUES ('QWE126','GP de Francia',  '2030-10-25', '00:00:00', '2030-12-27', '9:00:00',2300, 'Ver reglas');
 
 INSERT INTO Race
 VALUES ('Street Circuit', 'ARABIA SAUDI',0,'Jeddah', '2022-03-26', '17:00:00', '2022-03-27', '4:00:00', 'QWE123');
 INSERT INTO Race
-VALUES ('Street Circuit', 'FRANCIA',0,'Paris', '2022-10-26', '4:00:00', '2022-10-26', '16:00:00', 'QWE125');
+VALUES ('Street Circuit France', 'FRANCIA',0,'Paris', '2022-10-26', '4:00:00', '2022-10-26', '16:00:00', 'QWE125');
 INSERT INTO Race
-VALUES ('Street Circuit 2', 'FRANCIA',0,'Paris', '2022-11-26', '4:00:00', '2022-11-26', '16:00:00', 'QWE125');
+VALUES ('Street Circuit France 2', 'FRANCIA',0,'Paris', '2022-11-26', '4:00:00', '2022-11-26', '16:00:00', 'QWE125');
 INSERT INTO Race
-VALUES ('Street Circuit 3', 'FRANCIA',0,'Paris', '2022-12-26', '4:00:00', '2022-12-26', '8:00:00', 'QWE125');
+VALUES ('Street Circuit France 3', 'FRANCIA',0,'Paris', '2022-12-26', '4:00:00', '2022-12-26', '8:00:00', 'QWE125');
 
 INSERT INTO dbo.[User]
 VALUES('Briwag','3f21a8490cef2bfb60a9702e9d2ddb7a805c9bd1a263557dfd51a7d0e9dfa93e','briwag88@hotmail.com','Los tornados locos','Files\Images\briwag88@hotmail.com.png','FRANCIA',null)
@@ -197,7 +197,7 @@ Insert into PILOT
 Values('XFIA-P-1077','Fernando', 'Alonso', 2,0,0,'Files\Images\Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
 
 Insert into PILOT
-Values('XFIA-P-1009','Esteban', 'Ocon', 1,0,0,'\Files\Images\Esteban Ocon.jpg', 'FRANCIA','Alpine')
+Values('XFIA-P-1009','Esteban', 'Ocon', 1,0,0,'Files\Images\Esteban Ocon.jpg', 'FRANCIA','Alpine')
 
 Insert into PILOT
 Values('XFIA-P-1081','Sebastian', 'Vettel', 5,0,0,'Files\Images\Piloto Sebastian vettel Redbull.png','FRANCIA','Redbull')

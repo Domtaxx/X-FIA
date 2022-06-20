@@ -40,9 +40,9 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                
+                var DBO = new SQL_Model.DB_Context.RESTAPIXFIA_dbContext();
                 SQL_Model.Models.Tournament tour = TournamentFetcher.GetTournament(tournamentKey);
-                var errCode = PublicLeagueVerification.verifyUserPublicLeagueValid(tour, userEmail, Db.Users.ToList());
+                var errCode = PublicLeagueVerification.verifyUserPublicLeagueValid(tour, userEmail, DBO.Users.ToList());
                 if (errCode != 0)
                 {
                     return BadRequest(errCode);
