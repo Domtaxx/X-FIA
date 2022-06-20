@@ -93,7 +93,6 @@ namespace REST_API_XFIA.Controllers
                 user.CountryName = allInfo.CountryName;
                 user.TeamsName = allInfo.TeamsName;
                 user.Username = allInfo.Username;
-                user.Password = allInfo.Password;
                 if(allInfo.TeamsLogo != null){ 
                     user.TeamsLogo = _storageService.Upload(allInfo.TeamsLogo, allInfo.Email);
                 }

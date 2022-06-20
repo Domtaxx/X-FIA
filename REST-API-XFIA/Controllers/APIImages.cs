@@ -15,7 +15,7 @@ namespace REST_API_XFIA.Controllers
         {
             try
             {
-                string DirPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+ path;
+                string DirPath = System.IO.Path.GetDirectoryName(Assembly.GetEntryAssembly().Location)+'\\'+ path;
 
                 var contentType = "image/" + path.Substring(path.Length - 3);
                 var stream = System.IO.File.OpenRead(DirPath);
