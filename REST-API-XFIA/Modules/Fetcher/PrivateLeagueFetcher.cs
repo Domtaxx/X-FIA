@@ -16,7 +16,7 @@ namespace REST_API_XFIA.Modules.Fetcher
             foreach (SQL_Model.Models.User user in users)
             {
                 PublicLeagueResponse data;
-                List<SQL_Model.Models.Subteam> subTeams = new();
+                List<SQL_Model.Models.Subteam> subTeams = SubTeamFetcher.getLatestSubTeam(user.Email, tournament);
                 foreach (SQL_Model.Models.Subteam subTeam in subTeams)
                 {
                     data = new PublicLeagueResponse();
