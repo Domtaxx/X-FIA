@@ -140,9 +140,10 @@ export class EditProfileInfoComponent implements OnInit {
      this.image="";
     this.imageFile=undefined;
   }
-  setInitialData(userName:string,TeamName:string,TeamLogo:string){
+  setInitialData(userName:string,TeamName:string,TeamLogo:string,countryName:string){
     this.userRegisterForm.controls['userName'].setValue(userName);
     this.userRegisterForm.controls['teamName'].setValue(TeamName);
+    this.userRegisterForm.controls['countryName'].setValue(countryName);
     console.log('_____________________________________________')
     console.log(TeamLogo)
     const extension=getExtension(TeamLogo)

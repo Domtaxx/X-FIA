@@ -29,7 +29,7 @@ export class EditProfileComponent implements OnInit {
     dataProvider.getProfileData(getData(localStorageNames.email),
     (user:userInterface)=>{
       
-      this.userForm.setInitialData(user.Username,user.TeamsName,appSettings.imageGet+user.TeamsLogo);
+      this.userForm.setInitialData(user.Username,user.TeamsName,appSettings.imageGet+user.TeamsLogo,user.CountryName);
       this.team1.setInitial(user.Subteams[0].Pilots,user.Subteams[0].RealTeamsNameNavigation,user.Subteams[0].Name);
       this.team2.setInitial(user.Subteams[1].Pilots,user.Subteams[1].RealTeamsNameNavigation,user.Subteams[1].Name);
     })

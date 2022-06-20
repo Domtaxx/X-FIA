@@ -131,6 +131,7 @@ export interface userInterface{
     Username:string;
     TeamsName:string;
     TeamsLogo:string;
+    CountryName:string;
     Subteams:subTeam[];
 }
 
