@@ -7,6 +7,7 @@ select * from PRIVATELEAGUE
 select * from SUBTEAMS
 select * from RACE
 select * from SubteamPoints
+select * from PilotRace
 
 ALTER TABLE SubteamPoints DROP Constraint SubteamKey;
 Drop Table SubteamPoints

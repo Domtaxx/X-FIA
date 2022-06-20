@@ -191,17 +191,7 @@ Values(1,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-03
 insert into SUBTEAMS
 Values(2,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2022-03-25','00:00:00')
 
-insert into SUBTEAMS
-Values(3,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2022-10-25','00:00:00')
 
-insert into SUBTEAMS
-Values(4,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2022-10-25','00:00:00')
-
-insert into SUBTEAMS
-Values(5,'Equipo Supermega Corredor', 'briwag88@hotmail.com', 'Redbull','2030-10-25','00:00:00')
-
-insert into SUBTEAMS
-Values(6,'Equipo Malos Corredores', 'briwag88@hotmail.com', 'Alpine','2030-10-25','00:00:00')
 
 Insert into PILOT
 Values('XFIA-P-1077','Fernando', 'Alonso', 2,0,0,'Files\Images\Piloto Fernando Alonso Alpine.png', 'FRANCIA','Alpine')
@@ -250,49 +240,6 @@ Values(2,'XFIA-P-1043',0)
 insert into HAS_PILOT
 Values(2,'XFIA-P-1111',0)
 
-insert into HAS_PILOT
-Values(3,'XFIA-P-1099',0)
-insert into HAS_PILOT
-Values(3,'XFIA-P-1081',0)
-insert into HAS_PILOT
-Values(3,'XFIA-P-1077',0)
-insert into HAS_PILOT
-Values(3,'XFIA-P-1043',0)
-insert into HAS_PILOT
-Values(3,'XFIA-P-1111',0)
-
-insert into HAS_PILOT
-Values(4,'XFIA-P-1099',0)
-insert into HAS_PILOT
-Values(4,'XFIA-P-1081',0)
-insert into HAS_PILOT
-Values(4,'XFIA-P-1077',0)
-insert into HAS_PILOT
-Values(4,'XFIA-P-1043',0)
-insert into HAS_PILOT
-Values(4,'XFIA-P-1111',0)
-
-insert into HAS_PILOT
-Values(5,'XFIA-P-1099',0)
-insert into HAS_PILOT
-Values(5,'XFIA-P-1081',0)
-insert into HAS_PILOT
-Values(5,'XFIA-P-1077',0)
-insert into HAS_PILOT
-Values(5,'XFIA-P-1043',0)
-insert into HAS_PILOT
-Values(5,'XFIA-P-1111',0)
-
-insert into HAS_PILOT
-Values(6,'XFIA-P-1099',0)
-insert into HAS_PILOT
-Values(6,'XFIA-P-1081',0)
-insert into HAS_PILOT
-Values(6,'XFIA-P-1077',0)
-insert into HAS_PILOT
-Values(6,'XFIA-P-1043',0)
-insert into HAS_PILOT
-Values(6,'XFIA-P-1111',0)
 
 go
 Create TRIGGER AfterINSERTUser on [dbo].[USER]
