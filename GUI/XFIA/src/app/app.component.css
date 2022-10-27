@@ -1,0 +1,56 @@
+
+.header{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	align-items: center;
+	align-content: flex-end;
+    background-color: #e10600;
+    padding: 15px;
+    height: 10%;
+    
+}
+.contentDiv{
+    height: 90%;
+    width: 100%;
+    background-color: #FAFAFA;
+    display:block;
+    margin:auto;
+    overflow-y: scroll;
+}
+.XFIAIcon{
+    min-height: 30px;
+    max-height: 50px;
+    height: 100%;
+    width: auto;
+}
+.menuBar{
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: center;
+	align-content: stretch;
+    height: 100%;
+    flex-basis: 10%;
+    
+    
+}
+.accountBar{
+    background-color:#e10600;
+    display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+	align-items: stretch;
+	align-content: stretch;
+    flex-basis: 10%;
+   
+    
+    
+}
+.barIcon{
+    transform:scale(1.3);
+ 
+}

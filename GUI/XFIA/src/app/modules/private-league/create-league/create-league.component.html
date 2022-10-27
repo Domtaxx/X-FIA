@@ -1,0 +1,46 @@
+<div class="mainDiv">
+    <h1>
+        Crear Liga Privada
+    </h1>
+    <form class="form" [formGroup]="privateLeagueForm">
+        <div class="row">
+            <div class="thirty">
+                <label>Nombre</label>
+            </div>
+            <div class="seventy">
+                <input type="text" formControlName="name">
+                <div class="warning" *ngIf="privateLeagueForm.get('name')?.hasError('required')">
+                    El nombre de la liga no puede estar vacio
+                </div>
+                <div class="warning" *ngIf="privateLeagueForm.get('name')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+    
+            </div>
+        </div>
+        <div class="row">
+            <div class="thirty">
+                <label>Numero de Participantes</label>
+            </div>
+            <div class="seventy">
+                <select size="1" formControlName="participants">
+                    <option *ngFor="let member of memberNumber" value={{member}}>
+                        {{member}}
+                    </option>
+                </select>
+                <div class="warning" *ngIf="privateLeagueForm.get('participants')?.hasError('required')">
+                    Debe seleccionar el número de participantes
+                </div>
+              
+    
+            </div>
+        </div>
+    </form>
+    <mat-icon style="font-size: 6vh;"class="material-symbols-outlined">warning</mat-icon>
+    <p>
+        La liga privada se creará en estado inactivo <br> hasta que haya un mínimo de 5 miembros
+    </p>
+    <button  mat-raised-button color="warn" class="createButton" (click)="createLeague()">Crear</button>
+   
+
+</div>

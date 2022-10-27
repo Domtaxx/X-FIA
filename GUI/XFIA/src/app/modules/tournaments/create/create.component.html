@@ -1,0 +1,123 @@
+<h1>NUEVO CAMPEONATO</h1>
+<div class="container">
+   
+    <form class ="raceForm"(ngSubmit)="submit()" [formGroup]="tournamentForm" >
+        
+        <div class="form-group">
+            
+            
+            <div class="p25">
+                <label>Nombre Campeonato</label>
+            </div>
+            <div class="p75">
+                
+                <input type="text" name="Name" class="form-control" formControlName="tournamentName" >
+                <div class="warning" *ngIf="tournamentForm.get('tournamentName')?.hasError('required')">
+                    El nombre del campeonato no puede ser vacio
+                </div>
+                <div class="warning" *ngIf="tournamentForm.get('tournamentName')?.hasError('maxlength')">
+                    Se ha superado el largo máximo
+                </div>
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+            <div class="p25">
+                <label>Fecha Inicio</label>
+            </div>
+            <div class="p75">
+                <input type="date" name="dateI" class="form-control" formControlName="initialDate">
+                <div class="warning" *ngIf="tournamentForm.get('initialDate')?.hasError('required')">
+                    Es necesario que ingrese la fecha inicial
+                </div>
+                
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+           <div class="p25">
+                <label>Fecha Final</label>
+            </div>
+           <div class="p75">
+            <input type="date" name="dateE" class="form-control" formControlName="finalDate">
+            <div class="warning" *ngIf="tournamentForm.get('finalDate')?.hasError('required')">
+                Es necesario que ingrese la fecha final.
+            </div>
+           </div>
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+            <div class="p25">
+                <label>Hora Inicio</label>
+            </div>
+            <div class="p75">
+                <input type="time" name="timeS" class="form-control" formControlName="initialTime">
+                <div class="warning" *ngIf="tournamentForm.get('initialTime')?.hasError('required')">
+                    Es necesario que ingrese la hora inicial.
+                </div>
+            </div>
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+            <div class="p25">
+                <label>Hora Final</label>
+            </div>
+            <div class="p75">
+                <input type="time" name="timeE" class="form-control" formControlName="finalTime">
+                <div class="warning" *ngIf="tournamentForm.get('finalTime')?.hasError('required')">
+                    Es necesario que ingrese la hora final.
+                </div>
+            </div>
+
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+            <div class="p25">
+                <label>Presupuesto</label>
+            </div>
+            <div class="p75">
+                <input type="number" name="budget" class="form-control" formControlName="budget" placeholder="valor en millones">
+                <div class="warning" *ngIf="tournamentForm.get('budget')?.hasError('required')">
+                    Debe determinar un presupuesto
+                </div>
+                <div class="warning" *ngIf="tournamentForm.get('budget')?.hasError('min')">
+                    El presupuesto debe ser mayor de cero
+                </div>
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="form-group">
+            <div class="p25">
+                <label>Reglas Campeonato</label>
+            </div>
+            <div class="p75">
+                <textarea name="rules" class="form-control" id="rules" formControlName="rules"></textarea>
+                <div class="warning" *ngIf="tournamentForm.get('rules')?.hasError('required')">
+                    Se debe indicar las reglas
+                </div>
+                <div class="warning" *ngIf="tournamentForm.get('rules')?.hasError('maxlength')">
+                    Se ha excedido el máximo de 1000 caracteres
+                </div>
+            </div>
+            
+            
+        </div>
+        <pre></pre>
+        <div class="buttonContainer">
+            <button type="submit" class="formButton" >Crear</button>
+        </div>
+        
+        
+    </form>
+   
+
+</div>

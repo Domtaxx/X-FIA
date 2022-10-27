@@ -1,0 +1,57 @@
+<div class="mainDiv">
+    <label class="mainTitle">Iniciar Sesion</label>
+    <form class="column" [formGroup]="loginForm">
+        <div class="row">
+            <div class="p40">
+                <label class="inputLabel">Correo</label>
+
+            </div>
+            <div class="p60">
+                <div class="warningList">
+                    <input type="email" formControlName="email">
+                    <div class="warning" *ngIf="loginForm.get('email')?.hasError('required')">
+                        El correo no puede ser vacio
+                    </div>
+                    <div class="warning" *ngIf="loginForm.get('email')?.hasError('maxlength')">
+                        Se ha superado el largo máximo
+                    </div>
+                    <div class="warning" *ngIf="loginForm.get('email')?.hasError('email')">
+                        El valor ingresado no es un valor valido
+                    </div> 
+                </div>
+                
+    
+            </div>
+        </div>
+         
+        <div class="row">
+            <div class="p40">
+                <label class="inputLabel">Contraseña</label>
+
+            </div>
+            <div class="p60">
+                <div class="warningList">
+                    <input type="password" formControlName="password">
+                    <div class="warning" *ngIf="loginForm.get('password')?.hasError('required')">
+                        La contraseña no puede ser vacia
+                    </div>
+                    <div class="warning" *ngIf="loginForm.get('password')?.hasError('maxlength')">
+                        Se ha superado el largo máximo
+                    </div>
+                    <div class="warning" *ngIf="loginForm.get('password')?.hasError('minlength')">
+                        No se ha alcanzado el limite minimo
+                    </div>
+                    <div class="warning" *ngIf="loginForm.get('password')?.hasError('pattern')">
+                        Solo se permiten caracteres alfanumericos
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+           
+        <div class="row">
+            <button (click)="log()">Ingresar</button>
+        </div>
+    </form>
+
+</div>
